@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+       <ImageView 
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/iv_hint_dialog"
+       android:contentDescription="@null"
+           android:layout_margin="5dp"
+       android:src="@drawable/vote_bg"
+       /> 
+
+   <com.greattone.greattone.widget.MyTextView   android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      android:id="@+id/tv_hint_dialog"
+      android:layout_below="@+id/iv_hint_dialog"
+      android:layout_marginLeft="30dp" 
+      android:layout_marginEnd="30dp" 
+      android:layout_marginStart="30dp" 
+      android:layout_marginRight="30dp" 
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      android:layout_marginBottom="10dp"
+      android:textSize="16sp"
+      />
+   <View android:id="@+id/line"
+       android:layout_below="@+id/tv_hint_dialog"
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/gray_7e7c7d"/>
+      <com.greattone.greattone.widget.MyTextView
+          android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+      android:id="@+id/tv_hint_dialog_btn"
+      android:gravity="center"
+      android:layout_below="@+id/line"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      android:layout_marginBottom="10dp"
+      android:textSize="16sp"
+      />
+             <ImageView 
+       android:layout_width="30dp"
+       android:layout_height="30dp"
+       android:id="@+id/iv_cancel"
+                 android:contentDescription="@null"
+       android:src="@drawable/vote_cancel"
+                 android:layout_alignTop="@+id/tv_hint_dialog_btn"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentEnd="true" />
+</RelativeLayout>

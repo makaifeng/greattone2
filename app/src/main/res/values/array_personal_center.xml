@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="personal_center_items1">
+        <item>@string/friend_dynamics</item>
+        <item>@string/我的发帖</item>
+        <item>@string/通讯录</item>
+        <item>@string/我的账户</item>
+        <item>@string/我的问答</item>
+<!--         <item>@string/我的收藏</item> -->
+        <item>@string/我的活动</item>
+        <item>@string/我的老师</item>
+        <item>@string/我的教室</item>
+<!--         <item>我的订单</item> -->
+        <item>@string/正在上传</item>
+        <item>@string/退出登录</item>
+    </string-array>
+    <string-array name="personal_center_items3">
+        <item>@string/friend_dynamics</item>
+        <item>@string/我的发帖</item>
+        <item>@string/通讯录</item>
+        <item>@string/我的账户</item>
+        <item>@string/我的问答</item>
+        <item>@string/我的课程</item>
+        <item>@string/我的活动</item>
+                <item>@string/内部公告</item>
+<!--         <item>@string/我的收藏</item> -->
+<!--         <item>我的订单</item> -->
+        <item>@string/学生管理</item>
+        <item>@string/推荐管理</item>
+        <item>@string/我的课表</item>
+        <item>@string/我的教室</item>
+                        <item>@string/正在上传</item>
+        <item>@string/退出登录</item>
+    </string-array>
+    <string-array name="personal_center_items4">
+        <item>@string/friend_dynamics</item>
+        <item>@string/我的发帖</item>
+        <item>@string/通讯录</item>
+        <item>@string/我的账户</item>
+<!--         <item>@string/我的收藏</item> -->
+<!--         <item>我的教室</item> -->
+        <item>@string/我的问答</item>
+<!--         <item>教室订单</item> -->
+        <item>@string/room_lease</item>
+        <item>@string/我的课程</item>
+        <item>@string/音乐活动</item>
+        <item>@string/内部公告</item>
+        <item>@string/学生管理</item>
+        <item>@string/教师管理</item>
+        <item>@string/推荐管理</item>
+                <item>@string/正在上传</item>
+        <item>@string/退出登录</item>
+    </string-array>
+    <string-array name="personal_center_items5">
+        <item>@string/friend_dynamics</item>
+        <item>@string/我的发帖</item>
+        <item>@string/通讯录</item>
+        <item>@string/我的账户</item>
+        <item>@string/品牌介绍</item>
+        <item>@string/产品中心</item>
+        <item>@string/公司新闻</item>
+        <item>@string/销售渠道</item>
+        <item>@string/留言板</item>
+        <item>@string/联系我们</item>
+                <item>@string/正在上传</item>
+        <item>@string/退出登录</item>
+    </string-array>
+</resources>

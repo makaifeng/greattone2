@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+        <LinearLayout
+            android:id="@+id/ll_cidll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:background="@drawable/login_border"
+            android:orientation="horizontal"
+            android:paddingBottom="8.0dip"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="10.0dip"
+            android:paddingTop="8.0dip" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="类型"
+                android:textColor="@color/gray_8f8f8f"
+                android:textSize="14.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_cid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="优秀视频"
+                android:textColor="@color/gray_8f8f8f"
+                android:textSize="14.0sp" />
+
+            <ImageView
+                android:layout_width="15.0dip"
+                android:layout_height="15.0dip"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_next" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="*"
+                android:textColor="@color/red_c30000"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:background="@drawable/login_border"
+            android:orientation="horizontal"
+            android:paddingBottom="8.0dip"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="10.0dip"
+            android:paddingTop="8.0dip" >
+
+            <com.greattone.greattone.widget.MyEditText
+                android:id="@+id/et_key"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@null"
+                android:hint="排序"
+                android:textColor="@color/gray_8f8f8f"
+                android:textSize="14.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/red_c30000"
+                android:textSize="16.0sp" />
+        </LinearLayout>
+
+        <com.greattone.greattone.widget.MyButton
+            android:id="@+id/btn_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="100.0dip"
+            android:background="@color/red_c30000"
+            android:text="确定"
+            android:textColor="@color/white" />
+
+</LinearLayout>

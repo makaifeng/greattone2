@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10.0dip" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="5.0dip"
+            android:text="" />
+
+        <com.greattone.greattone.widget.MyGridView
+            android:id="@+id/gv_content"
+            android:layout_width="100.0dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:numColumns="2"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="100.0dip"
+            android:layout_height="80.0dip"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="5.0dip"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="5.0dip"
+            android:layout_toEndOf="@+id/iv_icon"
+            android:layout_toRightOf="@+id/iv_icon"
+            android:text=""
+            android:textSize="16.0sp" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toEndOf="@+id/iv_icon"
+            android:layout_toRightOf="@+id/iv_icon"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text=""
+            android:textSize="14.0sp" />
+    </RelativeLayout>
+
+</LinearLayout>

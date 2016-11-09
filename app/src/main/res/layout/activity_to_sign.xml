@@ -1,0 +1,152 @@
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" 
+    >
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" />
+<!--     <LinearLayout  -->
+<!--                 android:id="@+id/ll_pay_menth" -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:background="@drawable/login_border" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" > -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="fill_parent" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="1.0" -->
+<!--                     android:background="@null" -->
+<!--                     android:padding="10.0dip" -->
+<!--                     android:text="支付方式" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:id="@+id/activity_pay_paystate" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:gravity="center_vertical" -->
+<!--                     android:padding="10.0dip" -->
+<!--                     android:text="支付宝" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <ImageView -->
+<!--                     android:layout_width="30.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:src="@drawable/icon_next" /> -->
+
+<!--             </LinearLayout> -->
+<!-- <LinearLayout android:id="@+id/ll_sign_up" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:orientation="horizontal" > -->
+
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_cost" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="match_parent" -->
+<!--             android:background="@drawable/select_button_bg" -->
+<!--             android:gravity="center" -->
+<!--             android:layout_weight="2" -->
+<!--             android:text="@string/activity_cost" /> -->
+     
+
+        
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_sign_up" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:background="@color/red_b90006" -->
+<!--             android:gravity="center" -->
+<!--             android:padding="20dp" -->
+<!--                    android:layout_weight="1" -->
+<!--                    android:textSize="18sp" -->
+<!--             android:text="签  约" -->
+<!--             android:textColor="@color/white" /> -->
+<!--     </LinearLayout> -->
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_f3f3f3"
+    android:layout_margin="15dp"
+    android:orientation="vertical"
+    >
+    <com.greattone.greattone.widget.MyTextView 
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="立刻充值\n成为认证琴行教室会员"/>
+    <com.greattone.greattone.widget.MyTextView 
+                android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+                android:textSize="20sp"
+                        android:textStyle="bold"
+        android:text="享受会员10大权益"/>
+        <LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="15dp"
+    >
+    <CheckBox android:id="@+id/cb_agreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:textSize="16sp"
+        android:textColor="#fa0104"
+        android:drawablePadding="15dp"
+       android:paddingStart="15dp" 
+        android:paddingLeft="15dp"
+        android:paddingRight="2dp"
+        android:paddingEnd="2dp"
+        android:button="@drawable/checked_button_bg2"
+        android:text="我已阅读"
+        />
+    <com.greattone.greattone.widget.MyTextView 
+                android:id="@+id/tv_agreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:textSize="16sp"
+        android:textColor="#fa0104"
+        android:text="《琴行教室认证协议》"/>
+</LinearLayout>
+</LinearLayout>
+        <com.greattone.greattone.widget.MyTextView 
+            android:id="@+id/tv_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+                android:textSize="18sp"
+                    android:textColor="#fa0104"
+        android:text="认证费用：￥3000/年"/>
+        
+                <com.greattone.greattone.widget.MyTextView 
+                    android:id="@+id/tv_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg4"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+        android:text="立即认证"/>
+</LinearLayout>
+    
+</ScrollView>

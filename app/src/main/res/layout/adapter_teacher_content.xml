@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+<ImageView  android:id="@+id/iv_icon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scaleType="fitXY"
+android:contentDescription="@null"/>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<com.greattone.greattone.widget.MyTextView  android:id="@+id/tv_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:textSize="18sp"
+    android:textStyle="bold"
+  android:singleLine="true"
+  android:textColor="#5bd4cf"
+  android:text="***名字"/>
+<com.greattone.greattone.widget.MyTextView  android:id="@+id/tv_identity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:textSize="15sp"
+  android:singleLine="true"
+  android:text="**老师|*级"/>
+<ImageView  android:id="@+id/iv_level"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:padding="5dp"
+  android:singleLine="true"
+ android:contentDescription="@null"/>
+</LinearLayout>
+<com.greattone.greattone.widget.MyTextView  
+    android:id="@+id/tv_introduction1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:textSize="15sp"
+    android:singleLine="true"
+    android:text="***学校"
+  />
+<com.greattone.greattone.widget.MyTextView  
+    android:id="@+id/tv_introduction2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:textSize="15sp"
+    android:maxLines="5"
+    android:text="好琴声讯 时近岁末，国际钢琴巨星李云迪接连斩获“最具才情艺术家榜样”和“年度先生”两项大奖，暂告一段落的“肖邦传奇”中国巡演也取得了前所未有的成功，其超一流的琴艺屡屡惊艳乐迷。昨日李云迪抵达香港，接受中联办副主任仇鸿女士委任成为香港全国青联委员协进会副主席，并获香港特别行政区行政长官梁振英亲自接见，再次成为各界关注的焦点。"
+  />
+
+</LinearLayout>

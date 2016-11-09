@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="100.0dip"
+            android:layout_height="100.0dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="钟听"
+                android:textSize="16.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_cname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:text=""
+                android:textColor="@color/gray_8f8f8f" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:text=""
+                android:textColor="@color/gray_8f8f8f" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_btn1"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@color/red_c30000"
+                    android:gravity="center"
+                    android:padding="8.0dip"
+                    android:text="同意"
+                    android:textColor="@color/white" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_btn2"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:padding="8.0dip"
+                    android:text="拒绝"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:background="@drawable/icon_del03"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

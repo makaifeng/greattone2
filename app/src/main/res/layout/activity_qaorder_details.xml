@@ -1,0 +1,282 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".QAOrderDetails" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_eeeeee"
+                android:padding="10dp"
+                android:text="产品列表"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_color_d1d1d1" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="12312123"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/activity_qaorder_details_head"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/act_qaorder_detail_problem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="问题：的说法就是方便嗯哼的ed"
+                        android:textColor="@color/edit_himi"
+                        android:textSize="@dimen/bigtext" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" >
+
+                        <com.greattone.greattone.widget.MyTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="价格:"
+                            android:textColor="@color/edit_himi"
+                            android:textSize="@dimen/bigtext" />
+
+                        <com.greattone.greattone.widget.MyTextView
+                            android:id="@+id/act_qaorder_detail_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="￥15.80"
+                            android:textColor="@color/red_c30000"
+                            android:textSize="@dimen/bigtext" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_eeeeee"
+                android:padding="10dp"
+                android:text="购买人信息"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_color_d1d1d1" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="收货人：周广敏"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="手机号码：123123414"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_mark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="备注信息：上海市徐汇区漕宝路400号"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_eeeeee"
+                android:padding="10dp"
+                android:text="订单信息"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_color_d1d1d1" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_ids"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="订单编号：123123123"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="下单时间：2012-12-12"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="订单总额：￥120.0"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_paystatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="支付方式：支付宝"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="订单状态：已取消"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray_eeeeee"
+                android:padding="10dp"
+                android:text="当前状态"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_color_d1d1d1" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/act_qaorder_detail_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/button_border_white"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="以完成"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/act_qaorder_detail_manages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_eeeeee"
+                    android:padding="10dp"
+                    android:text="管理操作"
+                    android:textColor="@color/edit_himi"
+                    android:textSize="@dimen/bigtext" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_color_d1d1d1" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/act_qaorder_detail_manage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/button_border"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="去支付"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="6.0dip"
+    android:paddingLeft="10.0dip"
+    android:paddingRight="10.0dip"
+    android:paddingTop="6.0dip" >
+
+    <com.greattone.greattone.widget.MyRoundImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="50.0dip"
+        android:layout_height="50.0dip"
+        android:scaleType="centerCrop" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+                android:layout_marginLeft="8.0dip"
+        android:layout_marginStart="8.0dip"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:layout_marginTop="5.0dip"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="阿什顿飞将北京人"
+        android:textSize="@dimen/midtext" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_icon"
+        android:ellipsize="end"
+        android:text="严禹豪远程天使的发生纠纷的贷款方k"
+        android:textColor="@color/black"
+        android:textSize="@dimen/bigtext" />
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginStart="8.0dip"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@+id/iv_icon"
+            android:text="2012-12-12"
+            android:textColor="@color/edit_himi"
+            android:textSize="@dimen/midtext" />
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_content"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginStart="8.0dip"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:orientation="horizontal" >
+
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_replay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end|right"
+            android:text="回复"
+            android:textColor="@color/blue_037bff" />
+    </LinearLayout>
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_repText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:lineSpacingExtra="2dp"
+        android:padding="2dp"
+        android:text="zhansan："
+        android:textColor="@color/blue_037bff"
+        android:layout_below="@+id/ll_top"
+        android:textSize="12sp" 
+        android:visibility="gone"/>
+
+</RelativeLayout>

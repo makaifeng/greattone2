@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_eeeeee"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_my_activity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8.0dip"
+            android:drawableRight="@drawable/area_selector"
+            android:drawableEnd="@drawable/area_selector" 
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textStyle="bold" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_post_activity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="8.0dip"
+            android:drawableRight="@drawable/area_selector"
+            android:drawableEnd="@drawable/area_selector" 
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- <FrameLayout -->
+    <!-- android:id="@+id/frament" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="fill_parent" /> -->
+
+    <com.greattone.greattone.widget.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.SwipeMenu.SwipeMenuListView
+            android:id="@+id/lv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:listSelector="@android:color/transparent"
+            android:scrollingCache="false" >
+        </com.greattone.greattone.SwipeMenu.SwipeMenuListView>
+    </com.greattone.greattone.widget.PullToRefreshView>
+
+</LinearLayout>

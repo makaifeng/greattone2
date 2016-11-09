@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_eeeeee"
+    android:orientation="vertical" >
+
+    <com.greattone.greattone.widget.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/lv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@null"
+            android:scrollbars="none" />
+    </com.greattone.greattone.widget.PullToRefreshView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff5f5f7"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="10.0dip" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_voice"
+            android:layout_width="30.0dip"
+            android:layout_height="30.0dip"
+            android:background="@drawable/icon_voice"
+            android:gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center" >
+
+            <com.greattone.greattone.widget.MyEditText
+                android:id="@+id/et_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_white"
+                android:gravity="top"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:maxLines="5"
+                android:minHeight="30.0dip"
+                android:padding="3.0dip" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_voice_press"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_white"
+                android:gravity="center"
+                android:minHeight="40.0dip"
+                android:text="按住说话"
+                android:textColor="@color/blue"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_chat_phiz"
+            android:layout_width="30.0dip"
+            android:layout_height="30.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:background="@drawable/icon_chat_face"
+            android:gravity="center" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_chat_show"
+            android:layout_width="30.0dip"
+            android:layout_height="30.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:background="@drawable/icon_chat_show"
+            android:gravity="center" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_chat_send"
+            android:layout_width="40.0dip"
+            android:layout_height="30.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:background="@drawable/shape_btn_yellow"
+            android:gravity="center"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:textSize="14.0sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <com.greattone.greattone.widget.MyEmojiView
+        android:id="@+id/myEmojiView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone" />
+
+</LinearLayout>

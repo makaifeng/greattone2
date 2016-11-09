@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10.0dip"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10.0dip" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:text="呢称"
+                    android:textColor="@color/edit_himi"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/frag_account_nickname"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.0"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#ffb80008" />
+            </LinearLayout>
+
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:background="@drawable/login_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10.0dip" 
+                android:visibility="gone">
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:text="用户名"
+                    android:textColor="@color/edit_himi"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/frag_account_username"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.0"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#ffb80008" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:background="@drawable/login_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10.0dip" >
+<!-- 手机号 -->
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.0"
+                    android:text="手机号"
+                    android:textColor="@color/edit_himi"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/frag_account_mobile"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.0"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#ffb80008" />
+            </LinearLayout>
+<View android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"/>
+            <com.greattone.greattone.widget.MyButton
+                android:id="@+id/frag_account_bandphone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@color/gray_e0e0e0"
+                android:text="修改手机号码" />
+
+<!--             <LinearLayout -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_marginTop="10.0dip" -->
+<!--                 android:background="@drawable/login_border" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" -->
+<!--                 android:padding="10.0dip" > -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="0.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="2.0" -->
+<!--                     android:text="旧密码：" -->
+<!--                     android:textColor="@color/edit_himi" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyEditText -->
+<!--                     android:id="@+id/frag_account_pwd" -->
+<!--                     android:layout_width="0.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="3.0" -->
+<!--                     android:background="@null" -->
+<!--                     android:ellipsize="end" -->
+<!--                     android:password="true" -->
+<!--                     android:singleLine="true" -->
+<!--                     android:textColor="@color/black" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:text="*" -->
+<!--                     android:textColor="#ffb80008" /> -->
+<!--             </LinearLayout> -->
+
+<!--             <LinearLayout -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_marginTop="10.0dip" -->
+<!--                 android:background="@drawable/login_border" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" -->
+<!--                 android:padding="10.0dip" > -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="0.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="2.0" -->
+<!--                     android:text="新密码" -->
+<!--                     android:textColor="@color/edit_himi" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyEditText -->
+<!--                     android:id="@+id/frag_account_newpwd" -->
+<!--                     android:layout_width="0.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="3.0" -->
+<!--                     android:background="@null" -->
+<!--                     android:ellipsize="end" -->
+<!--                     android:password="true" -->
+<!--                     android:singleLine="true" -->
+<!--                     android:textColor="@color/black" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:text="*" -->
+<!--                     android:textColor="#ffb80008" /> -->
+<!--             </LinearLayout> -->
+
+<!--             <LinearLayout -->
+<!--                 android:layout_width="fill_parent" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_marginTop="10.0dip" -->
+<!--                 android:background="@drawable/login_border" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" -->
+<!--                 android:padding="10.0dip" > -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="0.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="2.0" -->
+<!--                     android:text="确认密码" -->
+<!--                     android:textColor="@color/edit_himi" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyEditText -->
+<!--                     android:id="@+id/frag_account_newpwds" -->
+<!--                     android:layout_width="0.0dip" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_weight="3.0" -->
+<!--                     android:background="@null" -->
+<!--                     android:ellipsize="end" -->
+<!--                     android:password="true" -->
+<!--                     android:singleLine="true" -->
+<!--                     android:textColor="@color/black" -->
+<!--                     android:textSize="@dimen/bigtext" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:text="*" -->
+<!--                     android:textColor="#ffb80008" /> -->
+<!--             </LinearLayout> -->
+
+            <com.greattone.greattone.widget.MyButton
+                android:id="@+id/fragment_personal_account_commit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25.0dip"
+                android:background="@color/red_b90006"
+                android:text="修改密码"
+                android:textColor="@color/white"
+                android:textSize="@dimen/largetext" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

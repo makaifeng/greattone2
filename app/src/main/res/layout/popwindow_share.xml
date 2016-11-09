@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_eeeeee"
+    android:orientation="vertical" >
+
+    <com.greattone.greattone.widget.MyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="17dp"
+        android:text="分享"
+        android:textColor="@color/red_c30000"
+        android:textSize="17sp" />
+
+     <GridView android:id="@+id/gv_share"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:numColumns="4"
+         android:scrollingCache="false"></GridView>
+<!--     <LinearLayout -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:paddingTop="2dp" > -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_share_to_weixin" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:drawableTop="@drawable/umeng_socialize_wechat" -->
+<!--             android:gravity="center_horizontal" -->
+<!--             android:text="微信" -->
+            
+<!--             android:drawablePadding="10dp" -->
+<!--             android:textColor="@color/red_c30000" /> -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_share_to_weixin_pyq" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:drawableTop="@drawable/umeng_socialize_wxcircle" -->
+<!--             android:gravity="center_horizontal" -->
+<!--             android:text="微信朋友圈" -->
+<!--             android:drawablePadding="10dp" -->
+<!--             android:textColor="@color/red_c30000" -->
+<!--             android:textColorHint="@color/red_c30000" /> -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_share_to_qq" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:drawableTop="@drawable/umeng_socialize_qq_on" -->
+<!--             android:gravity="center_horizontal" -->
+<!--             android:text="QQ" -->
+<!--             android:drawablePadding="10dp" -->
+<!--             android:textColor="@color/red_c30000" /> -->
+        
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_share_to_fb" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:drawableTop="@drawable/umeng_socialize_facebook" -->
+<!--             android:gravity="center_horizontal" -->
+<!--             android:text="facebook" -->
+<!--             android:drawablePadding="10dp" -->
+<!--             android:textColor="@color/red_c30000" /> -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_share_to_sina" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:drawableTop="@drawable/sina" -->
+<!--             android:gravity="center_horizontal"  -->
+<!--             android:text="新浪微博" -->
+<!--             android:drawablePadding="10dp" -->
+<!--             android:textColor="@color/red_c30000" -->
+<!--             android:visibility="gone" /> -->
+
+<!--     </LinearLayout> -->
+
+    <com.greattone.greattone.widget.MyTextView       android:id="@+id/tv_share_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/red_b90006"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="取消分享"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

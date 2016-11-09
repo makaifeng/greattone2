@@ -1,0 +1,172 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" 
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center_horizontal"
+           android:background="@drawable/l_pic"
+           android:contentDescription="@null"
+               />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_gravity="center_horizontal"
+           android:background="@drawable/l_logo"
+           android:contentDescription="@null"
+               />
+
+
+            <LinearLayout
+                android:id="@+id/email_login_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:background="@drawable/edit_bg" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/user" />
+
+<!--                     <com.greattone.greattone.widget.MyTextView -->
+<!--                         android:layout_width="wrap_content" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:layout_marginLeft="5dp" -->
+<!--                         android:layout_marginStart="5dp" -->
+<!--                         android:text="@string/account_number" -->
+<!--                         android:textSize="15sp" /> -->
+
+                    <com.greattone.greattone.widget.MyEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:hint="@string/account_number_hint"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                     android:background="@drawable/edit_bg" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/user" />
+
+<!--                     <com.greattone.greattone.widget.MyTextView -->
+<!--                         android:layout_width="wrap_content" -->
+<!--                         android:layout_height="wrap_content" -->
+<!--                         android:layout_marginLeft="5dp" -->
+<!--                         android:layout_marginStart="5dp" -->
+<!--                         android:text="@string/password" -->
+<!--                         android:textSize="15sp" /> -->
+
+                    <com.greattone.greattone.widget.MyEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:inputType="textPassword"
+                        android:hint="@string/password_hint"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                          android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <com.greattone.greattone.widget.MyButton
+                    android:id="@+id/btn_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_bg"
+                    android:text="@string/登录"
+                    android:textColor="@color/white" 
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <com.greattone.greattone.widget.MyTextView android:id="@+id/tv_free_registration"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:text="@string/free_registration"
+                        android:textSize="15sp" />
+
+                    <com.greattone.greattone.widget.MyTextView android:id="@+id/tv_forget_password"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="@string/forget_password"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                
+                <com.greattone.greattone.widget.MyTextView android:id="@+id/tv_WX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/button_bg3"
+                        android:text="微信登录"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

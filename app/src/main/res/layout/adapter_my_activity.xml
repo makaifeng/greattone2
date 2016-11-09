@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10.0dip" >
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:scaleType="fitXY" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="不列塔尼交响乐sdsadsa团"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bigtext" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_descr"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="时间：2013-03-03\u0009内蒙"
+            android:textColor="@color/edit_himi"
+            android:textSize="@dimen/midtext" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/gray_eeeeee"
+    android:orientation="vertical" >
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5.0dip" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+<!-- 我的发送界面 -->
+        <LinearLayout
+            android:id="@+id/my_talk_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:padding="5.0dip"
+            android:visibility="visible" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/rl_my_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="55.0dip"
+                    android:layout_marginLeft="30.0dip"
+                    android:layout_marginRight="55.0dip"
+                    android:layout_marginStart="30.0dip"
+                    android:background="@drawable/my_talk"
+                    android:minHeight="40.0dip" >
+<!-- 我发送的文字 -->
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/my_talk_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="5.0dip"
+                        android:text="sdfsd"
+                        android:textColor="@color/black"
+                        android:textIsSelectable="true"
+                        android:textSize="16.0dip" />
+<!-- 我发送语音的界面 -->
+                    <LinearLayout
+                        android:id="@+id/ll_right_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:visibility="gone" >
+<!-- 我发送语音的时间 -->
+                        <com.greattone.greattone.widget.MyTextView
+                            android:id="@+id/my_talk_voice_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="5.0dip"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_marginRight="5.0dip"
+                            android:layout_marginStart="10.0dip"
+                            android:text="0"
+                            android:textColor="@color/white" />
+<!-- 我发送语音的图标 -->
+                        <ImageView
+                            android:id="@+id/iv_my_video"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:src="@drawable/right_viedo_animation" />
+                    </LinearLayout>
+<!-- 我发送的图片 -->
+                    <ImageView
+                        android:id="@+id/my_talk_pic"
+                        android:layout_width="80.0dip"
+                        android:layout_height="80.0dip"
+                        android:contentDescription="@null"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
+                </RelativeLayout>
+<!-- 我的头像 -->
+                <com.greattone.greattone.widget.MyRoundImageView
+                    android:id="@+id/my_talk_head"
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="5.0dip"
+                    android:layout_marginRight="5.0dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/you_talk_line"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <com.greattone.greattone.widget.MyRoundImageView
+                    android:id="@+id/you_talk_head"
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginStart="5.0dip" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/you_talk_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginStart="5.0dip"
+                    android:maxLength="5"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12.0dip"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60.0dip"
+                android:layout_marginRight="60.0dip"
+                android:background="@drawable/you_talk"
+                android:minHeight="40.0dip" >
+
+                <ImageView
+                    android:id="@+id/iv_talk_he_image"
+                    android:layout_width="80.0dip"
+                    android:layout_height="80.0dip"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_left_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:id="@+id/iv_friend_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/left_viedo_animation" />
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/you_talk_voice_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5.0dip"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_marginRight="5.0dip"
+                        android:layout_marginStart="10.0dip"
+                        android:text="0"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/you_talk_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="10.0dip"
+                    android:text="sdfsd"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="16.0dip"
+                    android:visibility="visible" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

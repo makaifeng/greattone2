@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".MarkThePriceAct" >
+
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/act_mark_price_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_border"
+        android:hint="请输入问题价格"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:padding="8dp"
+        android:layout_margin="12dp" />
+    <com.greattone.greattone.widget.MyTextView 
+        android:id="@+id/act_mark_price_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/red_c30000"
+        android:text="提交"/>
+
+</LinearLayout>

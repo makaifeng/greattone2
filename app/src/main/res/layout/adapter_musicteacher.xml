@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:paddingLeft="3.0dip"
+        android:paddingRight="3.0dip" >
+
+        <com.greattone.greattone.widget.MyRoundImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="60.0dip"
+            android:layout_height="60.0dip"
+            android:layout_gravity="center"
+            android:layout_marginTop="4.0dip"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="8.0dip"
+                android:paddingTop="8.0dip" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="sdds"
+                    android:textColor="@color/black"
+                    android:textSize="14.0sp" />
+
+                <ImageView
+                    android:id="@+id/iv_isvip"
+                    android:layout_width="13.0dip"
+                    android:layout_height="13.0dip"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_v" />
+            </LinearLayout>
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="asdadsa"
+                android:textColor="@color/edit_himi"
+                android:textSize="12.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_identity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="asdadsa"
+                android:textColor="@color/edit_himi"
+                android:textSize="12.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="asdadsa"
+                android:textColor="@color/edit_himi"
+                android:textSize="12.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginTop="10.0dip"
+        android:background="@color/line_color_d1d1d1" />
+
+</LinearLayout>

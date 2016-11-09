@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+  <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_eeeeee"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" 
+       >
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/checked_button_bg"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="总部管理"
+            android:textColor="@color/recommend_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/checked_button_bg"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="增加分支"
+            android:textColor="@color/recommend_textcolor" />
+
+    </RadioGroup>
+    
+    <ScrollView android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10.0dip"
+            android:orientation="vertical"
+				>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_border"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="总部名称"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="联系电话"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="@dimen/bigtext" >
+
+                </com.greattone.greattone.widget.MyEditText>
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="电子邮箱"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="@dimen/bigtext" >
+
+                </com.greattone.greattone.widget.MyEditText>
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+            
+			<LinearLayout android:id="@+id/ll_url"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/et_url"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="官方网站"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="@dimen/bigtext" >
+
+                </com.greattone.greattone.widget.MyEditText>
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+
+            </LinearLayout>
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15.0dip"
+    android:background="@drawable/login_border"
+    android:orientation="horizontal" >
+
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/et_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:background="@null"
+        android:hint="详细地址"
+        android:lines="1"
+        android:padding="10.0dip"
+        android:textSize="@dimen/bigtext" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:text="*"
+        android:textColor="#ffb90206"
+        android:textSize="20.0sp" />
+</LinearLayout>
+
+<LinearLayout android:id="@+id/ll_pic_name"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15.0dip"
+    android:background="@drawable/login_border"
+    android:orientation="horizontal" >
+
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/et_pic_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:background="@null"
+        android:hint="二维码名称"
+        android:lines="1"
+        android:padding="10.0dip"
+        android:textSize="@dimen/bigtext" >
+
+        <requestFocus />
+    </com.greattone.greattone.widget.MyEditText>
+
+    <com.greattone.greattone.widget.MyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10.0dip"
+        android:layout_marginRight="10.0dip"
+        android:text="*"
+        android:textColor="#ffb90206"
+        android:textSize="20.0sp" />
+</LinearLayout>
+<include 
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_margin="15dp"
+     layout="@layout/adapter_post_pic"/>
+<!-- <ImageView  -->
+<!--     android:id="@+id/iv_pic" -->
+<!--     android:layout_width="80dp" -->
+<!--     android:layout_height="80dp" -->
+<!--     android:layout_margin="15dp" -->
+    
+<!--     android:contentDescription="@null"/> -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginStart="10.0dip"
+                    android:drawablePadding="5.0dip"
+                    android:gravity="center_vertical"
+                    android:text="二维码图片"
+                    android:textSize="@dimen/smalltext" />
+            <com.greattone.greattone.widget.MyButton
+                android:id="@+id/btn_commit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@color/red_b90006"
+                android:text="提交"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+<LinearLayout android:id="@+id/ll_sign"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:visibility="gone">
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:background="@drawable/login_border"
+        android:gravity="center"
+        android:text="销售渠道功能仅向签约用户开放，在这里可以编辑并展示您的线下销售渠道，扩大您品牌的知名度并引导用户前往您的线下销售渠道购买产品！"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btn_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="签约" />
+
+</LinearLayout>
+</LinearLayout>

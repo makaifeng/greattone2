@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:layout_marginTop="15.0dip"
+                    android:text="组别1："
+                    android:padding="10.0dip"
+                    android:singleLine="true"
+                    android:textSize="@dimen/bigtext" />
+
+
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_sign_up1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请选择"
+                    android:padding="10.0dip"
+                           android:layout_marginTop="15.0dip"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:singleLine="true"
+                       android:background="@drawable/login_border"
+                    android:textSize="@dimen/bigtext" />
+                                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:layout_marginTop="15.0dip"
+                    android:text="组别2："
+                    android:padding="10.0dip"
+                    android:singleLine="true"
+                    android:textSize="@dimen/bigtext" />
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_sign_up2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请选择"
+                           android:layout_marginTop="15.0dip"
+                    android:padding="10.0dip"
+                                        android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:singleLine="true"
+                       android:background="@drawable/login_border"
+                    android:textSize="@dimen/bigtext" />
+                <com.greattone.greattone.widget.MyButton
+                    android:id="@+id/btn_sign_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/button_bg"
+                    android:text="确定"
+                    android:textColor="@color/white" 
+                    android:textStyle="bold" />
+</LinearLayout>

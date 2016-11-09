@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8.0dip" >
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="8.0dip" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="吉祥如意" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4.0dip"
+                android:text="钢琴达人"
+                android:textColor="@color/gray_8f8f8f" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

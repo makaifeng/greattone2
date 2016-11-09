@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+ <color name="bg_floder_press">#bdbdbd</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="blue">#0000FF</color>
+    <color name="red">#ff0000</color>
+        <color name="image_selected_color">#7f000000</color>
+    <color name="white_e7e7e7">#e7e7e7</color>
+    <color name="white_f3f3f3">#f3f3f3</color>
+    <color name="red_b90006">#b90006</color>
+    <color name="gray_aaaaaa">#aaaaaa</color>
+    <color name="gray_eeeeee">#eeeeee</color>
+    <color name="gray_7e7c7d">#ff7e7c7d</color>
+    <color name="gray_7f060005">#7f060005</color>
+    <color name="yellow_ffa200">#ffa200</color>
+    <color name="news_subtitle_color1_f25e84">#f25e84</color>
+    <color name="news_subtitle_color2_b677dd">#b677dd</color>
+    <color name="news_subtitle_color3_47b9e9">#47b9e9</color>
+    <color name="news_subtitle_color4_728be7">#728be7</color>
+    <color name="news_subtitle_color5_35c977">#35c977</color>
+    <color name="news_subtitle_color6_ea5fba">#ea5fba</color>
+    <color name="news_subtitle_color7_ff8901">#ff8901</color>
+    <color name="news_subtitle_color8_ed5656">#ed5656</color>
+    
+  <color name="edit_himi">#ff959595</color>
+     <color name="line_color_d1d1d1">#ffd1d1d1</color>
+     <color name="gray_e0e0e0">#ffe0e0e0</color>
+     <color name="gray_8f8f8f">#ff8f8f8f</color>
+     <color name="gray_a5a5a5">#ffa5a5a5</color>
+     <color name="blue_037bff">#ff037bff</color>
+     <color name="blue_2971c5">#ff2971c5</color>
+     <color name="red_c30000">#ffc30000</color>
+         <color name="discuss_first">#f85007</color>
+    <color name="discuss_second">#32ceff</color>
+    <color name="discuss_third">#88c508</color>
+    <color name="discuss_fourth">#fdc30a</color>
+    <color name="discuss_fifth">#a820ff</color>
+    <color name="discuss_sixth">#ff74b8</color>
+    <color name="discuss_seventh">#7b54ff</color>
+    <color name="discuss_eighth">#1eff61</color>
+ <color name="dialogTxtColor">#0048fc</color>
+ <color name="dialog_orange">#FF7B02</color>
+ <color name="dialog_gray">#e6e6e6</color>
+     <color name="dialogColor">#f0ffffff</color>
+        <color name="home_seach">#fff2f2f2</color>
+          <color name="popu_on">#99ffffff</color>
+          <color name="popu_">#00ffffff</color>
+            <!--WXPayEntryActivity  -->
+     <color name="navpage">#FFE1E8EB</color>
+
+         <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+</resources>

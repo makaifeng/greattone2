@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_eeeeee"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:visibility="visible" >
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/checked_button_bg"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:padding="10dp"
+                  android:textSize="12sp"
+            android:singleLine="true"
+            android:text="全部"
+            android:textColor="@color/recommend_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+              android:singleLine="true"
+            android:layout_weight="1"
+            android:background="@drawable/checked_button_bg"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:padding="10dp"
+                  android:textSize="12sp"
+            android:text="视频"
+            android:textColor="@color/recommend_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+              android:singleLine="true"
+            android:layout_weight="1"
+            android:background="@drawable/checked_button_bg"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="音乐"
+                  android:textSize="12sp"
+            android:textColor="@color/recommend_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/checked_button_bg"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+              android:singleLine="true"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:text="图片"
+            android:textColor="@color/recommend_textcolor" />
+    </RadioGroup>
+<LinearLayout android:id="@+id/ll_search"
+    android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:orientation="horizontal"
+   android:background="@drawable/login_border"
+   android:layout_margin="15dp"
+   android:visibility="gone">
+    <com.greattone.greattone.widget.MyTextView android:id="@+id/tv_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="8dp"
+        />
+<ImageView android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_gravity="center_vertical"
+    android:src="@drawable/icon_down02"
+    android:layout_marginRight="15dp"
+    android:layout_marginEnd="15dp"
+    android:contentDescription="@null"/>
+</LinearLayout>
+    <com.greattone.greattone.widget.MyTextView
+         android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:visibility="gone"
+        />
+    <com.greattone.greattone.widget.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <com.greattone.greattone.SwipeMenu.SwipeMenuListView
+            android:id="@+id/lv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none" />
+    </com.greattone.greattone.widget.PullToRefreshView>
+
+</LinearLayout>

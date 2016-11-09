@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false"><shape android:shape="oval">
+
+            <!-- oval是绘制一个圆形图 -->
+            <size android:height="10dp" android:width="10dp" />
+
+            <stroke android:width="1dp" android:color="@color/red_b90006" />
+
+            <solid android:color="@color/white" />
+        </shape></item>
+    <item android:state_enabled="true"><shape android:shape="oval">
+
+            <!-- oval是绘制一个圆形图 -->
+            <size android:height="10dp" android:width="10dp" />
+
+            <stroke android:width="1dp" android:color="@color/red_b90006" />
+
+            <solid android:color="@color/red_b90006" />
+        </shape></item>
+
+</selector>

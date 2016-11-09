@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AnswerPriceAct" >
+    
+
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/act_answer_price_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="8"
+        android:hint="内容"
+        android:gravity="top"
+        android:padding="10dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/login_border" />
+
+</LinearLayout>

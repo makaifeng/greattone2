@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <LinearLayout android:id="@+id/ll_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_bg"
+    android:layout_margin="10dp"
+    android:orientation="horizontal">
+        <com.greattone.greattone.widget.MyEditText android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+          android:padding="5dp"
+          android:hint="@string/search_content"
+            android:inputType="text"/>
+        <ImageView android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_seach02"/>
+    
+</LinearLayout>
+    <RadioGroup android:orientation="horizontal" android:id="@+id/activity_musicteachert_radiogroup" android:background="@color/gray_eeeeee" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:id="@+id/activity_musicteacher_radiobutton1_ll" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <com.greattone.greattone.widget.MyTextView android:gravity="center" android:id="@+id/tv_location" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@null" android:text="地区筛选" android:drawableRight="@drawable/area_selector" android:drawablePadding="8.0dip" />
+        </LinearLayout>
+        <View android:background="#66000000" android:layout_width="0.5dip" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center" android:id="@+id/activity_musicteacher_radiobutton2_ll" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <com.greattone.greattone.widget.MyTextView android:gravity="center" android:id="@+id/tv_sort" android:paddingTop="10.0dip" android:paddingBottom="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@null" android:text="智能排序" android:drawableRight="@drawable/area_selector" android:drawablePadding="8.0dip" />
+        </LinearLayout>
+    </RadioGroup>
+<!--     <LinearLayout -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:orientation="horizontal" > -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_location" -->
+<!--             android:layout_width="0dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:paddingBottom="5dp" -->
+<!--             android:paddingTop="5dp"  -->
+<!--             android:gravity="center"  -->
+<!--             android:textStyle="bold" -->
+<!--             android:text="@string/near_by"/> -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:id="@+id/tv_sort" -->
+<!--             android:layout_width="0dp" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_weight="1" -->
+<!--             android:paddingBottom="5dp" -->
+<!--             android:paddingTop="5dp"  -->
+<!--                 android:gravity="center" -->
+<!--                 android:textStyle="bold" -->
+<!--             android:text="@string/intelligent_sorting"/> -->
+<!--     </LinearLayout> -->
+
+    <com.greattone.greattone.widget.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:listSelector="@android:color/transparent"
+            android:scrollingCache="false" >
+        </ListView>
+    </com.greattone.greattone.widget.PullToRefreshView>
+
+</LinearLayout>

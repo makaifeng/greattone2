@@ -1,0 +1,252 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_above="@+id/ll_botton">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+
+            <com.greattone.greattone.widget.MyBanner
+                android:id="@+id/mybanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </com.greattone.greattone.widget.MyBanner>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+<!--                 <RatingBar -->
+<!--                     android:id="@+id/ratingbar" -->
+<!--                     style="?android:attr/ratingBarStyleSmall" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:numStars="5" -->
+<!--                     android:rating="5" -->
+<!--                     android:stepSize="0.5" /> -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <!-- 服务 -->
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/tv_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                    <!-- 环境 -->
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/tv_environment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                    <!-- 教学质量 -->
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/tv_quality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <!-- 电话 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_telphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                  >
+
+                    <!-- 地址 -->
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/tv_see_map"
+                        android:layout_toStartOf="@+id/tv_see_map"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
+                       />
+                    <!-- 查看地图 -->
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/tv_see_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_address"
+                        android:layout_alignParentRight="true"
+                         android:layout_alignParentEnd="true" 
+                        android:drawableLeft="@drawable/post_location"
+                        android:drawableStart="@drawable/post_location"
+                        android:text="@string/see_map" />
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 介绍评论 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_comments"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/classroom_comments" />
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 推荐视频 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_recommended_video"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recommended_video" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 课程中心 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_course_center"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/course_center" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 琴房租赁 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_room_lease"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/room_lease" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 音乐老师 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_teacher"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/misic_teacher" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 全部学员 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_student"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/misic_student" 
+                    android:visibility="gone"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 活动公告 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_announcements"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/announcements" />
+                                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 讨论区 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_tlq"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tlq" 
+                    android:visibility="gone"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout android:id="@+id/ll_botton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <!-- 私信 -->
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_talk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/select_button_bg"
+            android:gravity="center"
+            android:text="@string/letter" />
+        <!-- 关注 -->
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_focus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/select_button_bg"
+            android:gravity="center"
+            android:text="@string/guanzhu" />
+    </LinearLayout>
+
+</RelativeLayout>

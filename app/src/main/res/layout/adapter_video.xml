@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout  android:baselineAligned="false"  android:orientation="horizontal" android:paddingTop="12.0dip" android:paddingBottom="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginStart="10.0dip">
+        <RelativeLayout android:layout_width="140.0dip" android:layout_height="80.0dip">
+            <ImageView android:id="@+id/iv_icon" android:contentDescription="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+            <ImageView android:id="@+id/iv_play" android:contentDescription="@null" android:layout_width="60.0dip" android:layout_height="60.0dip" android:src="@drawable/icon_video" android:scaleType="centerCrop" android:layout_centerInParent="true" />
+        </RelativeLayout>
+        <LinearLayout android:gravity="top" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginLeft="5.0dip" android:layout_weight="3.0">
+            <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/bigtext" android:textColor="@color/black" android:ellipsize="end" android:id="@+id/tv_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="不列塔尼交响乐团推荐" android:lines="1" />
+            <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/bigtext" android:textColor="@color/edit_himi" android:id="@+id/tv_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="朱彩云（钢琴达人）" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="6.0dip">
+                <com.greattone.greattone.widget.MyTextView android:textSize="14.0sp" android:textColor="@color/red_b90006" android:gravity="center|start" android:id="@+id/tv_plays" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="1424"  android:drawableLeft="@drawable/icon_bf" android:drawableStart="@drawable/icon_bf"   android:drawablePadding="4.0dip" android:layout_weight="1.0" />
+                <com.greattone.greattone.widget.MyTextView android:textSize="14.0sp" android:textColor="@color/red_b90006" android:gravity="center|start" android:id="@+id/tv_commnum" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="1424"  android:drawableLeft="@drawable/icon_pl" android:drawableStart="@drawable/icon_pl"  android:drawablePadding="4.0dip" android:layout_weight="1.0" />
+                <com.greattone.greattone.widget.MyTextView android:textColor="@color/edit_himi" android:id="@+id/tv_vote_num" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:text="1029票" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

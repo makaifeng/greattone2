@@ -1,0 +1,177 @@
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+<ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="0dp" 
+    android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/edit_bg"
+            android:orientation="horizontal" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/title"
+                android:textSize="14sp" />
+
+            <com.greattone.greattone.widget.MyEditText
+                android:id="@+id/et_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout 
+            android:id="@+id/ll_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@drawable/edit_bg"
+            android:orientation="horizontal" >
+
+            <com.greattone.greattone.widget.MyTextView
+                     android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/type"
+                android:textSize="14sp" />
+
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/icon_next"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/icon_next"
+                android:gravity="center_vertical"
+                android:text="@string/select_please"
+                android:textSize="14sp" />
+        </LinearLayout>
+<LinearLayout 
+            android:id="@+id/ll_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@drawable/edit_bg"
+            android:orientation="horizontal" >
+
+            <com.greattone.greattone.widget.MyTextView
+                     android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/style"
+                android:textSize="14sp" />
+
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/icon_next"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/icon_next"
+                android:gravity="center_vertical"
+                android:text="@string/select_please"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@drawable/edit_bg"
+            android:orientation="horizontal" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/author"
+                android:textSize="14sp" />
+
+            <com.greattone.greattone.widget.MyEditText
+                android:id="@+id/et_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <com.greattone.greattone.widget.MyEditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@drawable/edit_bg"
+            android:gravity="start|top" 	
+            android:hint="@string/content"
+            android:inputType="textMultiLine"
+            android:padding="5dp"
+            android:textSize="14sp" />
+
+        <LinearLayout android:id="@+id/ll_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.greattone.greattone.widget.MyGridView
+                android:id="@+id/gv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:listSelector="@android:color/transparent"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="4"
+                android:scrollingCache="false" >
+            </com.greattone.greattone.widget.MyGridView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+        <ImageView android:id="@+id/iv_gg"
+     android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_gravity="bottom"
+/>
+    </LinearLayout>

@@ -1,0 +1,168 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+
+<!--     <ScrollView -->
+<!--         android:id="@+id/sv_add_friend" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="match_parent" > -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/gray_eeeeee"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/white" >
+
+                    <com.greattone.greattone.widget.MyEditText
+                        android:id="@+id/et_friend_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@android:color/transparent"
+                        android:hint="用户名/手机号"
+                        android:imeOptions="actionSearch"
+                        android:paddingLeft="8dp"
+                        android:singleLine="true"
+                        android:textSize="@dimen/midtext" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_search"
+                    android:layout_width="48dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/red_c30000"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/icon_seach02" />
+                </LinearLayout>
+            </LinearLayout>
+
+<!--             <LinearLayout -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="50dp" -->
+<!--                 android:background="@color/white" -->
+<!--                 android:gravity="center" -->
+<!--                 android:orientation="horizontal" > -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:text="我的账号：123456" -->
+<!--                     android:textSize="16sp" /> -->
+
+<!--                 <ImageView -->
+<!--                     android:layout_width="24dp" -->
+<!--                     android:layout_height="24dp" -->
+<!--                     android:paddingLeft="8dp" -->
+<!--                     android:src="@drawable/myquickmark" /> -->
+<!--             </LinearLayout> -->
+
+<!--             <View -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="1px" -->
+<!--                 android:background="@color/line_color_d1d1d1" /> -->
+
+<!--             <LinearLayout -->
+<!--                 android:id="@+id/ll_phoneman" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" -->
+<!--                 android:padding="10dp" > -->
+
+<!--                 <ImageView -->
+<!--                     android:layout_width="36dp" -->
+<!--                     android:layout_height="36dp" -->
+<!--                     android:src="@drawable/phoneman" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:paddingLeft="8dp" -->
+<!--                     android:text="手机联系人" -->
+<!--                     android:textSize="16sp" /> -->
+<!--             </LinearLayout> -->
+
+<!--             <View -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="1px" -->
+<!--                 android:background="@color/line_color_d1d1d1" /> -->
+
+<!--             <LinearLayout -->
+<!--                 android:id="@+id/ll_sys" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:gravity="center_vertical" -->
+<!--                 android:orientation="horizontal" -->
+<!--                 android:padding="10dp" > -->
+
+<!--                 <ImageView -->
+<!--                     android:layout_width="36dp" -->
+<!--                     android:layout_height="36dp" -->
+<!--                     android:src="@drawable/saoyisao" /> -->
+
+<!--                 <com.greattone.greattone.widget.MyTextView -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:paddingLeft="8dp" -->
+<!--                     android:text="扫一扫" -->
+<!--                     android:textSize="16sp" /> -->
+<!--             </LinearLayout> -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_color_d1d1d1" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/result"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:lines="2"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/qrcode_bitmap"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
+<!--     </ScrollView> -->
+
+    <com.greattone.greattone.widget.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ListView
+            android:id="@+id/lv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" >
+        </ListView>
+    </com.greattone.greattone.widget.PullToRefreshView>
+
+</LinearLayout>

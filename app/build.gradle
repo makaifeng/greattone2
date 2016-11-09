@@ -1,0 +1,76 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'haoqingsheng'
+            keyPassword 'hqs123'
+            storeFile file('F:/资料/好琴声/apk/keystore/greattone.keystore')
+            storePassword 'greattone'
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion "24.0.2"
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    defaultConfig {
+        applicationId "com.greattone.greattone"
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 8
+        versionName "3.09"
+        multiDexEnabled true
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    dexOptions {
+        javaMaxHeapSize "2g"
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
+        release {
+            signingConfig signingConfigs.config
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.squareup:otto:1.3.8'
+    compile 'joda-time:joda-time:2.9.1'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+}
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex'
+        // 设置multidex.keep文件中class为第一个dex文件中包含的class，如果没有下一项设置此项无作用
+        dx.additionalParameters += "--main-dex-list=$projectDir/multidex.keep".toString()
+        //此项添加后第一个classes.dex文件只能包含-main-dex-list列表中class
+        dx.additionalParameters += '--minimal-main-dex'
+    }
+
+}

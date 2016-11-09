@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<!--         <com.baidu.mapapi.map.MapView -->
+<!--         android:id="@+id/bmapView" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="fill_parent" -->
+        
+<!--         android:clickable="true" /> -->
+<!--   <RelativeLayout -->
+<!--             android:id="@+id/rl_bmapView" -->
+<!--             android:layout_width="match_parent" -->
+<!--             android:layout_height="match_parent" /> -->
+    <com.amap.api.maps2d.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.amap.api.maps2d.MapView>
+<!--         <ImageView -->
+<!--             android:id="@+id/iv_add_address_locationIcon" -->
+<!--             android:layout_width="30dp" -->
+<!--             android:layout_height="60dp" -->
+<!--             android:layout_centerInParent="true" -->
+<!--             android:contentDescription="@null" -->
+<!--             android:paddingBottom="30dp" -->
+<!--             android:src="@drawable/icon_gcoding" /> -->
+
+<!--         <ImageView -->
+<!--             android:id="@+id/iv_bmapView_enlarge" -->
+<!--             android:layout_width="30dp" -->
+<!--             android:layout_height="30dp" -->
+<!--             android:layout_above="@+id/iv_bmapView_narrow" -->
+<!--             android:layout_alignParentEnd="true" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:layout_marginBottom="15dp" -->
+<!--             android:layout_marginEnd="15dp" -->
+<!--             android:layout_marginRight="15dp" -->
+<!--             android:contentDescription="@null" -->
+<!--             android:src="@drawable/address_enlarge" /> -->
+
+<!--         <ImageView -->
+<!--             android:id="@+id/iv_bmapView_narrow" -->
+<!--             android:layout_width="30dp" -->
+<!--             android:layout_height="30dp" -->
+<!--             android:layout_alignParentBottom="true" -->
+<!--             android:layout_alignParentEnd="true" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:layout_marginBottom="15dp" -->
+<!--             android:layout_marginEnd="15dp" -->
+<!--             android:layout_marginRight="15dp" -->
+<!--             android:contentDescription="@null" -->
+<!--             android:src="@drawable/address_narrow" /> -->
+
+<!--         <ImageView -->
+<!--             android:id="@+id/iv_bmapView_location" -->
+<!--             android:layout_width="30dp" -->
+<!--             android:layout_height="30dp" -->
+<!--             android:layout_alignParentBottom="true" -->
+<!--             android:layout_marginBottom="15dp" -->
+<!--             android:layout_marginLeft="15dp" -->
+<!--             android:layout_marginStart="15dp" -->
+<!--             android:contentDescription="@null" -->
+<!--             android:src="@drawable/address_my_loaction" /> -->
+    
+</LinearLayout>

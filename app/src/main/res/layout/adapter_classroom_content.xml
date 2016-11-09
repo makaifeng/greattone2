@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+     >
+
+    <com.greattone.greattone.widget.MyRoundImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:contentDescription="@null"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_camera"
+        android:scaleType="fitXY" />
+
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toEndOf="@+id/iv_icon"
+        android:layout_toRightOf="@+id/iv_icon" 
+    android:orientation="vertical">
+
+
+<LinearLayout android:id="@+id/ll_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+      <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+                android:layout_gravity="center_vertical"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:minWidth="80dp"
+        android:text="tv_name"
+        android:textStyle="bold" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_isvip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/red_corner_padding"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:contentDescription="@null"
+        android:layout_gravity="center_vertical"
+        android:text="认证" 
+        android:textColor="@color/white"
+        android:visibility="gone"/>
+</LinearLayout>
+  
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+             android:text="tv_distance"
+      />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:maxLines="2"
+                android:text="tv_address"
+        />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_telphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+          android:text="tv_telphone"
+      />
+    
+</LinearLayout>
+<View android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_below="@+id/iv_icon"
+    android:layout_height="1dp"
+    android:background="@color/gray_aaaaaa"
+    android:layout_alignParentBottom="true"/>
+</RelativeLayout>

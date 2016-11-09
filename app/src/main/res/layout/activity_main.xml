@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+      android:id="@+id/slidingLayout">
+<!--     <RelativeLayout -->
+<!--         android:id="@+id/lift_menu" -->
+<!--         android:layout_width="270dip" -->
+<!--         android:layout_height="fill_parent" -->
+<!--         android:layout_alignParentLeft="true" -->
+<!--         android:layout_alignParentStart="true" -->
+<!--         android:background="#00ccff" -->
+<!--         android:visibility="visible" > -->
+
+<!--         <com.greattone.greattone.widget.MyTextView -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_centerInParent="true" -->
+<!--             android:text="This is menu" -->
+<!--             android:textColor="#000000" -->
+<!--             android:textSize="28sp" /> -->
+        
+<!--     </RelativeLayout> -->
+        <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="#e9e9e9"
+        android:orientation="vertical"
+        android:visibility="visible" >
+    <FrameLayout
+        android:id="@+id/framre_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:id="@+id/tab_rg_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/tab_rb_1"
+            style="@style/RadioButtonStyleBase"
+            android:background="@drawable/main_check_bg"
+            android:drawableTop="@drawable/rb_title"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="5dp"
+            android:text="@string/main_page"
+            android:textColor="@color/main_check_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/tab_rb_2"
+            style="@style/RadioButtonStyleBase"
+            android:background="@drawable/main_check_bg"
+            android:drawableTop="@drawable/rb_to_post"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="5dp"
+            android:text="@string/to_post"
+            android:textColor="@color/main_check_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/tab_rb_3"
+            style="@style/RadioButtonStyleBase"
+            android:background="@drawable/main_check_bg"
+            android:drawableTop="@drawable/rb_personal_center"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="5dp"
+            android:text="@string/personal_center"
+            android:textColor="@color/main_check_textcolor" />
+           
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/tab_rb_4"
+            style="@style/RadioButtonStyleBase"
+            android:background="@drawable/main_check_bg"
+            android:drawableTop="@drawable/rb_my_message"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="5dp"
+            android:text="@string/my_message"
+            android:textColor="@color/main_check_textcolor" />
+
+        <com.greattone.greattone.widget.MyRadioButton
+            android:id="@+id/tab_rb_5"
+            style="@style/RadioButtonStyleBase"
+            android:background="@drawable/main_check_bg"
+            android:drawableTop="@drawable/rb_new_activity"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingTop="5dp"
+            android:text="@string/new_activity"
+            android:textColor="@color/main_check_textcolor" />
+    </LinearLayout>
+    </LinearLayout>
+                        
+</RelativeLayout>

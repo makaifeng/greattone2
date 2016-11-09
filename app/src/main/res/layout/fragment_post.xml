@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <LinearLayout 
+            android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical" >
+<!--     <GridView android:id="@+id/gv_content" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:numColumns="2"></GridView> -->
+    <LinearLayout 	 android:id="@+id/rl_post"
+android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:baselineAligned="false"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        
+    <LinearLayout
+        android:id="@+id/ll_video"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_send_video"
+            android:gravity="center"
+             android:drawablePadding="10dp"
+            android:text="@string/video" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_music"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+  		android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_music"
+              android:gravity="center"
+                       android:drawablePadding="10dp"
+            android:text="@string/music" />
+    </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+    <LinearLayout
+        android:id="@+id/ll_picture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+  android:layout_weight="1"       
+   android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_pic"
+              android:gravity="center"
+                       android:drawablePadding="10dp"
+            android:text="@string/picture" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_yuepu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+          android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_yuepu"
+            android:drawablePadding="10dp"
+              android:gravity="center"
+            android:text="@string/yuepu" />
+    </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
+    </LinearLayout>
+
+<ImageView android:id="@+id/iv_gg"
+     android:layout_width="match_parent"
+    android:layout_height="80dp"/>
+</LinearLayout>

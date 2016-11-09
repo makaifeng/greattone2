@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="120.0dip"
+            android:layout_height="90.0dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:scaleType="centerCrop" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:ellipsize="end"
+            android:maxEms="8"
+            android:singleLine="true"
+            android:text="钢琴课学习十节课十节课钢琴课学习十节课十节课"
+            android:textSize="14.0sp" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:singleLine="true"
+            android:text="¥1699"
+            android:textColor="@color/red_b90006"
+            android:textSize="14.0sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:orientation="horizontal"
+            android:paddingBottom="10.0dip" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_edit"
+                android:drawablePadding="10.0dip"
+                android:text="编辑"
+                android:textColor="#55000000"
+                android:textSize="14.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:drawableLeft="@drawable/icon_del03"
+                android:drawablePadding="10.0dip"
+                android:text="删除"
+                android:textColor="#55000000"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10.0dip"
+            android:background="@drawable/icon_next" />
+    </RelativeLayout>
+
+</LinearLayout>

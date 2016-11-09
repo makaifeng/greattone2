@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#11000000" >
+<!-- 订单id -->
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:text="2014100818105" />
+<!-- 状态 -->
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:text="已完成"
+            android:textColor="@color/red_b90006" />
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#11000000" >
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+<!-- 金额: -->
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginStart="10.0dip"
+                android:layout_marginTop="10.0dip"
+                android:text="金额:" />
+<!-- 价格 -->
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0dip"
+                android:layout_marginStart="10.0dip"
+                android:layout_marginTop="10.0dip"
+                android:text="￥12580"
+                android:textColor="@color/red_b90006" />
+        </LinearLayout>
+<!-- 标题 -->
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="" 
+            />
+        <!-- 内容 -->
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="内容:金沙萨晒得很哦阿斯顿奥神队傲视啥的吧" />
+<!--             android:maxEms="10" -->
+<!-- 时间 -->
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginStart="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:singleLine="true"
+            android:text="2014-02-23 10:23" />
+    </LinearLayout>
+           <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20.0dip"
+                        android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="20.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@color/red_b90006"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:text="去支付" />
+</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:scaleType="centerCrop" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:text="不列他呢交响乐团不列他呢交响乐团"
+                android:textColor="@color/black"
+                android:textSize="@dimen/bigtext" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:gravity="bottom"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_price_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程价格："
+                    android:textColor="@color/edit_himi"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥1900"
+                    android:textColor="@color/red_b90006"
+                    android:textSize="@dimen/bigtext" />
+
+
+                    <com.greattone.greattone.widget.MyTextView
+                        android:id="@+id/tv_old_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                            android:layout_marginLeft="10.0dip"
+                        android:text="￥9000.0"
+                        android:textColor="@color/edit_himi"
+                        android:textSize="@dimen/midtext" 
+                        android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:text="课时：10节"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:drawablePadding="8.0dip"
+                android:drawableRight="@drawable/icon_addresson"
+                android:text="地址：宝隆花园酒店"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dip"
+                android:layout_marginBottom="15.0dip"
+                android:layout_marginTop="15.0dip"
+                android:background="@color/line_color_d1d1d1" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="课程介绍："
+                android:textColor="@color/red_b90006"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20.0dip"
+                android:layout_marginTop="15.0dip"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/act_course_apply"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_7f060005"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.0"
+            android:orientation="vertical"
+            android:paddingBottom="5.0dip"
+            android:paddingLeft="15.0dip"
+            android:paddingTop="5.0dip" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="课程价格"
+                android:textColor="@color/black"
+                android:textSize="18.0sp" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_pay_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥19000"
+                android:textColor="@color/red_b90006"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_bm"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="2.0"
+            android:background="@color/red_b90006"
+            android:gravity="center"
+            android:text="我要报名"
+            android:textColor="@color/white"
+            android:textSize="22.0sp" />
+    </LinearLayout>
+
+</LinearLayout>

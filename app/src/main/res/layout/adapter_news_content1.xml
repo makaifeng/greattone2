@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" >
+    </RelativeLayout>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:background="@color/yellow_ffa200"
+     android:orientation="horizontal">
+    
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="15sp" 
+     />
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="15sp" 
+        android:text="@string/more"
+        android:drawableRight="@drawable/icon_next"
+        android:drawableEnd="@drawable/icon_next"
+        android:drawablePadding="5dp"
+     />
+
+</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" >
+    </RelativeLayout>
+
+    <com.greattone.greattone.widget.MyGridView
+        android:id="@+id/gv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollingCache="false"
+        >
+    </com.greattone.greattone.widget.MyGridView>
+
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--     android:id="@+id/RelativeLayout1" -->
+<!--     android:layout_width="wrap_content" -->
+<!--     android:layout_height="wrap_content" -->
+<!--     android:descendantFocusability="blocksDescendants" -->
+<!--     android:gravity="center" -->
+<!--     android:padding="2dp" > -->
+
+<!--     <RelativeLayout -->
+<!--         android:id="@+id/photo_frame" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:background="@drawable/image_chose_selector" -->
+<!--         android:gravity="center" -->
+<!--         android:padding="1dp" > -->
+
+      
+
+<!--         <com.greattone.greattone.widget.SquareImageView -->
+<!--             android:id="@+id/imgQueue" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:contentDescription="@string/app_name" -->
+<!--             android:scaleType="centerCrop" /> -->
+<!--     </RelativeLayout> -->
+<!--   <ImageView -->
+<!--             android:id="@+id/iv_play" -->
+<!--             android:layout_width="30.0dip" -->
+<!--             android:layout_height="30.0dip" -->
+<!--             android:layout_centerInParent="true" -->
+<!--             android:contentDescription="@null" -->
+<!--             android:scaleType="centerCrop" -->
+<!--             android:src="@drawable/icon_video" /> -->
+<!--     <RelativeLayout -->
+<!--         android:id="@+id/v_selected_frame" -->
+<!--         android:layout_width="110dp" -->
+<!--         android:layout_height="110dp" -->
+<!--         android:layout_margin="1dp" > -->
+
+<!--         <ImageView -->
+<!--             android:id="@+id/cb_select_tag" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:layout_alignParentEnd="true" -->
+<!--             android:layout_alignParentTop="true" -->
+<!--             android:background="@null" -->
+<!--             android:contentDescription="@string/app_name" -->
+<!--             android:focusable="false" -->
+<!--             android:padding="6dp" -->
+<!--             android:src="@drawable/btn_select_selector" /> -->
+<!--     </RelativeLayout> -->
+
+<!-- </RelativeLayout> -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wrap_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.greattone.greattone.widget.SquareImageView
+        android:id="@+id/imgQueue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"/>
+
+    <View
+        android:id="@+id/mask"
+        android:visibility="gone"
+        android:background="#88000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+  <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="30.0dip"
+            android:layout_height="30.0dip"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_video" />
+    <ImageView
+        android:id="@+id/cb_select_tag"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="5.5dp"
+        android:layout_marginRight="5.5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/btn_select_selector"/>
+</FrameLayout>

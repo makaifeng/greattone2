@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.greattone.greattone.widget.PullToRefreshView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pull_to_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.greattone.greattone.SwipeMenu.SwipeMenuListView
+        android:id="@+id/lv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:scrollingCache="false" >
+    </com.greattone.greattone.SwipeMenu.SwipeMenuListView>
+
+</com.greattone.greattone.widget.PullToRefreshView>

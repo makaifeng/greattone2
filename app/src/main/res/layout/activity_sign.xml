@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:background="@drawable/login_border"
+        android:gravity="center"
+        android:text="销售渠道功能仅向签约用户开放，在这里可以编辑并展示您的线下销售渠道，扩大您品牌的知名度并引导用户前往您的线下销售渠道购买产品！"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btn_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="签约" />
+
+</LinearLayout>

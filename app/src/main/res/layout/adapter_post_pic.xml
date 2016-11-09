@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:padding="5.0dip" 
+    android:id="@+id/rl_view">
+
+    <com.greattone.greattone.widget.MyRoundImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" 
+        android:contentDescription="@null"/>
+    <ImageView
+        android:id="@+id/iv_play"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY" 
+        android:layout_centerInParent="true"
+        android:src="@drawable/icon_video"
+        android:contentDescription="@null"/>
+    <ImageView
+        android:id="@+id/iv_del"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="centerCrop" 
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="1dp"
+        android:paddingBottom="9dp"
+        android:paddingRight="1dp"
+        android:paddingEnd="1dp"
+        android:paddingStart="9dp"
+        android:paddingLeft="9dp"
+                android:src="@drawable/img_cancel"
+        android:contentDescription="@null"/>
+
+
+
+</RelativeLayout>

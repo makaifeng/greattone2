@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10.0dip"
+            android:orientation="vertical"
+				>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_border"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                 >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/activity_apply_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="姓名"
+                    android:singleLine="true"
+                    android:padding="10.0dip"
+                    android:textColor="@color/gray_a5a5a5"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_border"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                 >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/activity_apply_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="电话"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:padding="10.0dip"
+                    android:textColor="@color/gray_a5a5a5"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_border"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/activity_apply_song"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="参赛曲目"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:padding="10.0dip"
+                    android:textColor="@color/gray_a5a5a5"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+        
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="支付金额:"
+                    android:padding="10.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="20.0sp"
+                    android:textStyle="bold" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/activity_apply_paymoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="￥1200.00"
+                    android:textColor="@color/red_b90006"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+
+
+            <com.greattone.greattone.widget.MyButton
+                android:id="@+id/activity_apply_commit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@color/red_b90006"
+                android:text="提交"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

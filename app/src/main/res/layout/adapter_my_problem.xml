@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_my_problem_ll"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10.0dip" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:text="提问问题：吉祥如意"
+            android:textColor="@color/edit_himi"
+            android:textSize="@dimen/bigtext" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待回答"
+            android:textColor="@color/red_c30000"
+            android:textSize="@dimen/bigtext" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="@color/line_color_d1d1d1" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10.0dip"
+        android:text=""
+        android:textColor="@color/edit_himi"
+        android:textSize="@dimen/bigtext" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10.0dip"
+        android:text="2013-12-03 12:30"
+        android:textColor="@color/edit_himi"
+        android:textSize="@dimen/bigtext" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="20.0dip"
+        android:background="@color/gray_eeeeee" />
+
+</LinearLayout>

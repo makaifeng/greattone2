@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_qa_order_ll"
+    android:layout_width="fill_parent"
+    android:layout_height="200.0dip"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="5.0"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_num"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:paddingLeft="10.0dip"
+            android:paddingRight="10.0dip"
+            android:paddingTop="10.0dip"
+            android:text="23414245"
+            android:textColor="@color/edit_himi"
+            android:textSize="@dimen/bigtext" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="@color/line_color_d1d1d1" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="2.0"
+            android:orientation="vertical"
+            android:paddingLeft="15.0dip"
+            android:paddingTop="10.0dip" >
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_type"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="订单类型：Q&amp;A订单"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="提问问题：才能舒服频道卡斯欧斯达的时间大家我去额asdasdad "
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="下单日期：2013-05-32 "
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/edit_himi"
+                android:textSize="@dimen/bigtext" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="15.0dip"
+            android:background="@color/gray_eeeeee" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical" >
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_status"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ff99cc01"
+            android:gravity="center"
+            android:text="已完成"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_price"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ffb90006"
+            android:gravity="center"
+            android:text="￥570"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_del"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ffffcc00"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_del" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="15.0dip"
+            android:background="@color/gray_eeeeee" />
+    </LinearLayout>
+
+</LinearLayout>

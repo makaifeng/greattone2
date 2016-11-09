@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="10.0dip">
+        <com.greattone.greattone.widget.MyTextView android:textSize="16.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="教学质量：" />
+        <RatingBar android:scrollbarStyle="insideOverlay" android:id="@+id/adapter_teacher_comment_rating1" android:layout_width="wrap_content" android:layout_height="15.0dip" android:layout_marginLeft="10.0dip" android:numStars="5" android:rating="5.0" style="@style/MyRatingBar" android:stepSize="1"/>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/ll_comment_rating2" android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="10.0dip">
+        <com.greattone.greattone.widget.MyTextView android:textSize="16.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="环境评分：" />
+        <RatingBar android:scrollbarStyle="insideOverlay" android:id="@+id/adapter_teacher_comment_rating2" android:layout_width="wrap_content" android:layout_height="15.0dip" android:layout_marginLeft="10.0dip" android:numStars="5" android:rating="5.0" style="@style/MyRatingBar" android:stepSize="1"/>
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="10.0dip">
+        <com.greattone.greattone.widget.MyTextView android:textSize="16.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="服务评分：" />
+        <RatingBar android:scrollbarStyle="insideOverlay" android:id="@+id/adapter_teacher_comment_rating3" android:layout_width="wrap_content" android:layout_height="15.0dip" android:layout_marginLeft="10.0dip" android:numStars="5" android:rating="5.0" style="@style/MyRatingBar" android:stepSize="1"/>
+    </LinearLayout>
+<!--     <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="10.0dip"> -->
+<!--         <com.greattone.greattone.widget.MyTextView android:textSize="16.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="总  评  分：" /> -->
+<!--         <RatingBar android:scrollbarStyle="insideOverlay" android:id="@+id/adapter_teacher_comment_rating4" android:layout_width="wrap_content" android:layout_height="15.0dip" android:layout_marginLeft="10.0dip" android:numStars="5" android:rating="4.0" style="@style/MyRatingBar" /> -->
+<!--     </LinearLayout> -->
+    <com.greattone.greattone.widget.MyEditText android:textSize="14.0sp" android:gravity="left" android:id="@+id/act_grade_edit" android:background="@drawable/login_border" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="10.0dip" android:hint="具体评论..." android:minLines="5" />
+    <com.greattone.greattone.widget.MyTextView android:textSize="18.0sp" android:textColor="@color/white" android:gravity="center" android:id="@+id/act_grade_send" android:background="@color/red_c30000" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginTop="20.0dip" android:layout_marginRight="10.0dip" android:text="发布" />
+</LinearLayout>

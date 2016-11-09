@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+            android:background="@android:color/white"
+ >
+
+    <ImageView android:id="@+id/iv_frist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/frist"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:spacing="3dp" />
+<!--     <com.greattone.greattone.widget.MyButton  android:id="@+id/bt_sure" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignParentBottom="true" -->
+<!--         android:layout_margin="20dp" -->
+<!--         android:background="@android:color/transparent" -->
+<!--         android:visibility="gone" -->
+<!--         /> -->
+<com.greattone.greattone.widget.MyTextView android:id="@+id/tv_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentTop="true"
+    android:textColor="@color/red"
+    android:layout_margin="20dp"/>
+</RelativeLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:gravity="center_vertical|center_horizontal"
+android:background="@drawable/popupwondow_radius_red_translucent_bg"
+    >
+   <ImageView 
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:id="@+id/iv_popupwindow"
+       android:contentDescription="@null"
+       /> 
+   <com.greattone.greattone.widget.MyTextView   android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+      android:id="@+id/tv_popupwindow"
+      android:layout_marginLeft="30dp" 
+      android:layout_marginEnd="30dp" 
+      android:layout_marginStart="30dp" 
+      android:layout_marginRight="30dp" 
+      android:gravity="center_horizontal"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:layout_marginTop="10dp"/>
+</LinearLayout>

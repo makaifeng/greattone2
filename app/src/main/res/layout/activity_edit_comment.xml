@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/et_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15.0dip"
+        android:background="@drawable/login_border"
+        android:gravity="center|start|top"
+        android:hint="请输入评论内容"
+        android:minLines="7"
+        android:padding="5.0dip"
+        android:textSize="@dimen/bigtext" />
+
+    <com.greattone.greattone.widget.MyButton
+        android:id="@+id/btn_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="10.0dip"
+        android:background="@color/red_b90006"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="22.0sp" />
+
+</LinearLayout>

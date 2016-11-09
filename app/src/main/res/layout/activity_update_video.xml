@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_all"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible" >
+
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/progressBar1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/center_post" />
+    <TextView
+        android:id="@+id/tv_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+                android:layout_alignParentTop="true"
+                  android:layout_marginTop="15dp" 
+        android:text="" 
+        android:visibility="gone"/>
+    
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+
+      />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_title"
+         android:layout_toLeftOf="@+id/tv_state"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/iv_title"
+        android:text="MyTextView" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_title"
+       
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="10dp"
+        android:text="MyTextView" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_title"
+        android:layout_alignBottom="@+id/tv_title"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:text="MyTextView" />
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/iv_title"
+        android:background="@color/red_b90006"
+        android:textColor="@color/white"
+        android:padding="5dp"
+        android:visibility="visible"
+        android:text="@string/update" />
+
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff9e9"
+    android:orientation="vertical" >
+    <View  android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+            android:background="#fff9e9"
+        android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+         android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:button="@null"
+                android:text="1"
+                 />
+
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_sleep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="4.0dip"
+                android:layout_below="@+id/tv_date"
+                                android:gravity="center"
+                android:text="休息"
+                android:visibility="gone"
+                 />
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_entry1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_date"
+                android:paddingTop="4.0dip"
+                android:background="#92f894"
+                                android:gravity="center"
+                                      android:singleLine="true"
+                                android:textSize="11sp"
+                android:text="钢琴基础"
+                 />
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_entry2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                                android:layout_below="@+id/tv_entry1"
+                android:paddingTop="4.0dip"
+                android:singleLine="true"
+                                android:gravity="center"
+                                 android:textSize="11sp"
+                android:background="#ffa5a5"
+                android:text="钢琴基础"
+                 />
+           
+</RelativeLayout>

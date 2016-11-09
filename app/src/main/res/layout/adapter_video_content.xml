@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+<ImageView  android:id="@+id/iv_icon"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scaleType="fitXY"
+android:contentDescription="@null"/>
+<ImageView  android:id="@+id/iv_play"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/biz_video_list_icon"
+    android:scaleType="fitXY"
+android:contentDescription="@null"/>
+    </RelativeLayout>
+<com.greattone.greattone.widget.MyTextView  
+    android:id="@+id/tv_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:textSize="15sp"
+    android:singleLine="true"
+  />
+
+</LinearLayout>

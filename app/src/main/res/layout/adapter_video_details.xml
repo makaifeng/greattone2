@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:paddingLeft="10.0dip" android:paddingTop="6.0dip" android:paddingRight="10.0dip" android:paddingBottom="6.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <com.greattone.greattone.widget.MyRoundImageView android:id="@+id/adapter_video_details_pic" android:layout_width="50.0dip" android:layout_height="50.0dip" android:scaleType="centerCrop"  />
+        <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/midtext" android:gravity="center" android:id="@+id/adapter_video_details_name" android:layout_width="50.0dip" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:singleLine="true" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip">
+        <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/marginrl" android:textColor="@color/black" android:id="@+id/adapter_video_details_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="严禹豪远程天使" android:minLines="2" />
+        <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/midtext" android:textColor="@color/edit_himi" android:layout_gravity="bottom" android:id="@+id/adapter_video_details_time" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="2012-12-12" />
+        <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/midtext" android:textColor="@color/edit_himi" android:id="@+id/adapter_video_details_replay" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" />
+    </LinearLayout>
+</LinearLayout>
