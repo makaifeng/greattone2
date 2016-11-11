@@ -1,19 +1,5 @@
 package com.kf_test.picselect;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.greattone.greattone.R;
-import com.greattone.greattone.Listener.PhotoCallBack;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.data.Constants;
-import com.greattone.greattone.dialog.MyHintPopupWindow;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.FileUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -34,6 +20,21 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.greattone.greattone.Listener.PhotoCallBack;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.data.Constants;
+import com.greattone.greattone.dialog.MyHintPopupWindow;
+import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.FileUtil;
+import com.greattone.greattone.util.Permission;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressLint("Override")
 public class GalleryActivity extends BaseActivity {
@@ -151,7 +152,7 @@ public class GalleryActivity extends BaseActivity {
 						.requestPermissions(
 								this,
 								new String[] { Manifest.permission.CAMERA },
-								Constants. REQUEST_CODE_CAMERA);
+								Permission. REQUEST_CODE_CAMERA);
 				return;
 			}
 		}
@@ -192,7 +193,7 @@ public class GalleryActivity extends BaseActivity {
 						.requestPermissions(
 								this,
 								new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-								Constants. REQUEST_CODE_READ_EXTERNAL_STORAGE);
+								Permission. REQUEST_CODE_READ_EXTERNAL_STORAGE);
 				return;
 			}
 		}
@@ -335,18 +336,18 @@ public class GalleryActivity extends BaseActivity {
 	  @Override
 	  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 	      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-	      if (requestCode == Constants. REQUEST_CODE_READ_EXTERNAL_STORAGE) {
+	      if (requestCode == Permission. REQUEST_CODE_READ_EXTERNAL_STORAGE) {
 	          if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 	        		getImages();
 	          } else {
-	            toast("无法打开相册");
+	            toast("无法打开相机,读写文件功能关闭，请打开权限");
 	            finish();
 	          }
-	      }else if (requestCode == Constants. REQUEST_CODE_CAMERA) {
+	      }else if (requestCode == Permission. REQUEST_CODE_CAMERA) {
 	          if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 	             toCamera();
 	          } else {
-	        	  toast("无法打开相机");
+	        	  toast("无法打开相机,拍照功能关闭，请打开权限");
 	          }
 		}
 	  }

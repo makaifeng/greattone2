@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.dodola.rocoofix.RocooFix;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.greattone.greattone.util.ActivityUtil;
@@ -43,5 +44,6 @@ public static MyApplication getInstance() {
 	protected void attachBaseContext(Context base) {
 		super.attachBaseContext(base);
 		MultiDex.install(base);
+		RocooFix.init(this);
 	}
 }

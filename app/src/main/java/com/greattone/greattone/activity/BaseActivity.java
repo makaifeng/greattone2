@@ -1,22 +1,11 @@
 package com.greattone.greattone.activity;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.greattone.greattone.R;
-import com.greattone.greattone.Listener.ActivityBackListener;
-import com.greattone.greattone.data.Constants;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.util.ActiivtyStack;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.analytics.MobclickAgent;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -29,6 +18,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.greattone.greattone.Listener.ActivityBackListener;
+import com.greattone.greattone.Listener.OnRequestPermissionsBackListener;
+import com.greattone.greattone.R;
+import com.greattone.greattone.data.Constants;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.util.ActiivtyStack;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
+
 import cn.jpush.android.api.JPushInterface;
 
 public class BaseActivity extends FragmentActivity {
@@ -50,7 +53,9 @@ public class BaseActivity extends FragmentActivity {
 	private ImageView back;
 	public Toast toast;
 	private ActivityBackListener activityBackListener;
-	 private  String mPageName; 
+	 private  String mPageName;
+	private OnRequestPermissionsBackListener onRequestPermissionsBackListener;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -252,6 +257,19 @@ protected void onResume() {
 			activityBackListener.activityBack(arg0, arg1, arg2);
 		}
 	}
+	/**
+	 * 监听onActivityResult返回
+	 */
+	public void setOnRequestPermissionsBack(OnRequestPermissionsBackListener onRequestPermissionsBackListener) {
+		this.onRequestPermissionsBackListener=onRequestPermissionsBackListener;
+	}
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (onRequestPermissionsBackListener!=null)
+			onRequestPermissionsBackListener.onRequestPermissionsBack(requestCode, permissions, grantResults);
+	}
+
 	@Override
 	public void finish() {
 		closeKeyBoard();

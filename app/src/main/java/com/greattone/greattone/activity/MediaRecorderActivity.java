@@ -97,7 +97,6 @@ public class MediaRecorderActivity extends BaseActivity implements Callback {
 					Toast.LENGTH_LONG).show();
 		}
 	}
-
 	// OnClickListener changOnCliclListener=new OnClickListener() {
 	//
 	// @Override
@@ -139,13 +138,11 @@ public class MediaRecorderActivity extends BaseActivity implements Callback {
 				mediaRecorder = new MediaRecorder();
 				mediaRecorder.reset();
 				mediaRecorder.setCamera(mCamera);
-				mediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+				mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 				mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-				mediaRecorder
-						.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-//				mediaRecorder
-//						.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-				 mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+				mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//				mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+				 mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 				mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
 //				 mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
 

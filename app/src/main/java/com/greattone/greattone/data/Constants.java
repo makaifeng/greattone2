@@ -26,8 +26,7 @@ public class Constants  {
 		public final static String PREFERENCES_NAME_USER = "greattone_user_sp";
 		public final static String NO_CONNECTION_ERROR = "com.android.volley.NoConnectionError: java.io.EOFException";
 		
-		final public static int REQUEST_CODE_READ_EXTERNAL_STORAGE = 123;
-		final public static int REQUEST_CODE_CAMERA = 124;
+
 		/**
 		 * 发送广播的参数
 		 */

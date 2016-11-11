@@ -51,7 +51,6 @@ import com.greattone.greattone.activity.teacher.MyTeacherActivity;
 import com.greattone.greattone.activity.teacher.TeacherManageActivity;
 import com.greattone.greattone.activity.timetable.TimeTablesActivity;
 import com.greattone.greattone.activity2.MyRecomendationActivity;
-import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyIosDialog;
 import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
@@ -66,6 +65,7 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.MessageUtil;
+import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
 
 import java.io.File;
@@ -543,7 +543,7 @@ public class PersonalCenterFragment extends BaseFragment {
 					Manifest.permission.CAMERA);
 			if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
 				ActivityCompat.requestPermissions((Activity) getContext(), new String[] { Manifest.permission.CAMERA },
-						Constants.REQUEST_CODE_CAMERA);
+						Permission.REQUEST_CODE_CAMERA);
 				toast("无权限使用，请打开权限");
 				return;
 			}
@@ -562,7 +562,7 @@ public class PersonalCenterFragment extends BaseFragment {
 			if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
 				ActivityCompat.requestPermissions((Activity) getContext(),
 						new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-						Constants.REQUEST_CODE_READ_EXTERNAL_STORAGE);
+						Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE);
 				toast("无权限使用，请打开权限");
 				return;
 			}
@@ -644,13 +644,13 @@ public class PersonalCenterFragment extends BaseFragment {
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		if (requestCode == Constants.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
+		if (requestCode == Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				toAlbum();
 			} else {
 				toast("无法打开相册");
 			}
-		} else if (requestCode == Constants.REQUEST_CODE_CAMERA) {
+		} else if (requestCode == Permission.REQUEST_CODE_CAMERA) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				toCamera();
 			} else {

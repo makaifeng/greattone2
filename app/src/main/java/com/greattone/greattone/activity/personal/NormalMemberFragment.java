@@ -1,10 +1,5 @@
 package com.greattone.greattone.activity.personal;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,11 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
-import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.dialog.CitySelectDialog;
 import com.greattone.greattone.dialog.MyIosDialog;
 import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
@@ -42,7 +36,13 @@ import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 注册
@@ -260,7 +260,7 @@ public class NormalMemberFragment extends BaseFragment {
 						.requestPermissions(
 								(Activity) getContext(),
 								new String[] { Manifest.permission.CAMERA },
-								Constants. REQUEST_CODE_CAMERA);
+								Permission. REQUEST_CODE_CAMERA);
 				toast("无权限使用，请打开权限");
 				return;
 			}			
@@ -284,7 +284,7 @@ public class NormalMemberFragment extends BaseFragment {
 						.requestPermissions(
 								(Activity) getContext(),
 								new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-								Constants. REQUEST_CODE_READ_EXTERNAL_STORAGE);
+								Permission. REQUEST_CODE_READ_EXTERNAL_STORAGE);
 				toast("无权限使用，请打开权限");
 				return;
 			}
@@ -573,13 +573,13 @@ public class NormalMemberFragment extends BaseFragment {
 	  @Override
 	  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 	      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-	      if (requestCode == Constants. REQUEST_CODE_READ_EXTERNAL_STORAGE) {
+	      if (requestCode ==  	Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
 	          if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 	        	  toAlbum();
 	          } else {
 	            toast("无法打开相册");
 	          }
-	      }else if (requestCode ==Constants.  REQUEST_CODE_CAMERA) {
+	      }else if (requestCode ==  	Permission.REQUEST_CODE_CAMERA) {
 	          if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 	             toCamera();
 	          } else {

@@ -1,17 +1,5 @@
 package com.greattone.greattone.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.data.Constants;
-import com.greattone.greattone.dialog.SelectPictureDialog;
-import com.greattone.greattone.entity.Picture;
-import com.kf_test.picselect.GalleryActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentUris;
@@ -30,21 +18,38 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.data.Constants;
+import com.greattone.greattone.dialog.SelectPictureDialog;
+import com.greattone.greattone.entity.Picture;
+import com.kf_test.picselect.GalleryActivity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class BitmapUtil {
 
 	/** 选择图片 
-	 * @param postGridAdapter */
-	public static void getPictures(Context context,String imgName, int maxSize,ArrayList<Picture> pathList) {
-		Intent intent = new Intent(context, GalleryActivity.class);
-		intent.putExtra(Constants.EXTRA_PHOTO_LIMIT, maxSize);// 最大选择数
-		intent.putExtra(Constants.EXTRA_SELECTED_PICTURES, getList(pathList));//已选择的图片
-		intent.putExtra("type", GalleryActivity.TYPE_PICTURE);// 选择类型
-		((Activity) context).startActivityForResult(intent, 1);
+	 * @param  */
+	public static void getPictures(final Context context,String imgName, final int maxSize,final ArrayList<Picture> pathList) {
+		boolean hasPermission = new Permission().hasPermission_READ_EXTERNAL_STORAGE((BaseActivity) context);
+		if(hasPermission){
+			Intent intent = new Intent(context, GalleryActivity.class);
+			intent.putExtra(Constants.EXTRA_PHOTO_LIMIT, maxSize);// 最大选择数
+			intent.putExtra(Constants.EXTRA_SELECTED_PICTURES, getList(pathList));//已选择的图片
+			intent.putExtra("type", GalleryActivity.TYPE_PICTURE);// 选择类型
+			((Activity) context).startActivityForResult(intent, 1);
+		}else{
+			((BaseActivity) context).toast("无法打开相册");
+		}
 //		new SelectPictureDialog(context,  imgName,GalleryActivity.TYPE_PICTURE,maxSize,pathList).show();
 		
 	}
 	/** 选择视频 
-	 * @param postGridAdapter */
+	 * @param  */
 	public static void getVideos(Context context, int maxSize) {
 		new SelectPictureDialog(context,  GalleryActivity.TYPE_VIDEO,maxSize).show();
 		

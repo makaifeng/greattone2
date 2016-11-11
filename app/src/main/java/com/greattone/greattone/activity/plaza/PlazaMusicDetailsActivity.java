@@ -662,7 +662,7 @@ private WebView wv_music_play;
 	protected void onPause() {
 //		chromeClient.onCloseWindow(wv_music_play);
 		if (wv_music_play!=null) {
-			wv_music_play.loadUrl("javascript:pauseMusic()");
+			wv_music_play.reload();
 		}
 		super.onPause();
 	}

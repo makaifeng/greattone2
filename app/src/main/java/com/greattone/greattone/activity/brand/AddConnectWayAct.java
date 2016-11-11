@@ -1,28 +1,5 @@
 package com.greattone.greattone.activity.brand;
 
-import java.io.File;
-import java.util.HashMap;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.activity.personal.ToSignActivity;
-import com.greattone.greattone.data.Constants;
-import com.greattone.greattone.data.Data;
-import com.greattone.greattone.dialog.MyIosDialog;
-import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.ConnectWay;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.util.BitmapUtil;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.FileUtil;
-import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
-import com.greattone.greattone.util.ImageLoaderUtil;
-import com.greattone.greattone.util.PhotoUtil;
-import com.greattone.greattone.widget.MyRoundImageView;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -45,6 +22,29 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.personal.ToSignActivity;
+import com.greattone.greattone.data.Data;
+import com.greattone.greattone.dialog.MyIosDialog;
+import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.entity.ConnectWay;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.util.BitmapUtil;
+import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.FileUtil;
+import com.greattone.greattone.util.HttpUtil;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.Permission;
+import com.greattone.greattone.util.PhotoUtil;
+import com.greattone.greattone.widget.MyRoundImageView;
+
+import java.io.File;
+import java.util.HashMap;
 
 /**
  * 添加或修改联系方式
@@ -377,7 +377,7 @@ public class AddConnectWayAct extends BaseActivity {
 					Manifest.permission.CAMERA);
 			if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
 				ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA },
-						Constants.REQUEST_CODE_CAMERA);
+						Permission.REQUEST_CODE_CAMERA);
 				toast("无权限使用，请打开权限");
 				return;
 			}
@@ -395,7 +395,7 @@ public class AddConnectWayAct extends BaseActivity {
 					Manifest.permission.WRITE_EXTERNAL_STORAGE);
 			if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
 				ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-						Constants.REQUEST_CODE_READ_EXTERNAL_STORAGE);
+						Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE);
 				toast("无权限使用，请打开权限");
 				return;
 			}
@@ -407,13 +407,13 @@ public class AddConnectWayAct extends BaseActivity {
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		if (requestCode == Constants.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
+		if (requestCode == Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				toAlbum();
 			} else {
 				toast("无法打开相册");
 			}
-		} else if (requestCode == Constants.REQUEST_CODE_CAMERA) {
+		} else if (requestCode == Permission.REQUEST_CODE_CAMERA) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 				toCamera();
 			} else {

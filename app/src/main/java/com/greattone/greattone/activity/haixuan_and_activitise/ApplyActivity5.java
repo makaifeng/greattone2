@@ -1,37 +1,5 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONException;
-import com.greattone.greattone.R;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.activity.UpdateVideoAct;
-import com.greattone.greattone.adapter.PostGridAdapter;
-import com.greattone.greattone.data.Constants;
-import com.greattone.greattone.data.Data;
-import com.greattone.greattone.dialog.MyIosDialog;
-import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.HaiXuanFilter;
-import com.greattone.greattone.entity.Label;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.BitmapUtil;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.FileUtil;
-import com.greattone.greattone.util.HttpProxyUtil;
-import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
-import com.greattone.greattone.util.PhotoUtil;
-import com.greattone.greattone.widget.CheckBoxListView;
-import com.greattone.greattone.widget.MyGridView;
-import com.kf_test.picselect.GalleryActivity;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -47,11 +15,42 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.UpdateVideoAct;
+import com.greattone.greattone.adapter.PostGridAdapter;
+import com.greattone.greattone.data.Data;
+import com.greattone.greattone.dialog.MyIosDialog;
+import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.entity.HaiXuanFilter;
+import com.greattone.greattone.entity.Label;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.entity.Picture;
+import com.greattone.greattone.util.BitmapUtil;
+import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.FileUtil;
+import com.greattone.greattone.util.HttpProxyUtil;
+import com.greattone.greattone.util.HttpUtil;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.Permission;
+import com.greattone.greattone.util.PhotoUtil;
+import com.greattone.greattone.widget.CheckBoxListView;
+import com.greattone.greattone.widget.MyGridView;
+import com.kf_test.picselect.GalleryActivity;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** 海选报名-乐器品牌 */
 public class ApplyActivity5 extends BaseActivity {
@@ -470,7 +469,7 @@ private void toCamera() {
 				Manifest.permission.CAMERA);
 		if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA },
-					Constants.REQUEST_CODE_CAMERA);
+					Permission.REQUEST_CODE_CAMERA);
 			toast("无权限使用，请打开权限");
 			return;
 		}
@@ -489,7 +488,7 @@ private void toAlbum() {
 		if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
 			ActivityCompat.requestPermissions(this,
 					new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-					Constants.REQUEST_CODE_READ_EXTERNAL_STORAGE);
+					Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE);
 			toast("无权限使用，请打开权限");
 			return;
 		}
@@ -500,13 +499,13 @@ private void toAlbum() {
 @Override
 public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 	super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-	if (requestCode == Constants.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
+	if (requestCode == Permission.REQUEST_CODE_READ_EXTERNAL_STORAGE) {
 		if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			toAlbum();
 		} else {
 			toast("无法打开相册");
 		}
-	} else if (requestCode == Constants.REQUEST_CODE_CAMERA) {
+	} else if (requestCode == Permission.REQUEST_CODE_CAMERA) {
 		if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			toCamera();
 		} else {
