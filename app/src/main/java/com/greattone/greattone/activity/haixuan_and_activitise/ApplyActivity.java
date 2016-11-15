@@ -1,16 +1,20 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.UpdateVideoAct;
 import com.greattone.greattone.adapter.PostGridAdapter;
@@ -27,20 +31,16 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** 海选报名-中华好琴声 */
 public class ApplyActivity extends BaseActivity {
 //	private ArrayList<String> videoFileList = new ArrayList<String>();
-	private String price;
+	private String price,originalPrice;
 	private String id;
 	private TextView tv_price;
 	private TextView tv_sing_up1;
@@ -71,7 +71,7 @@ public static HaiXuanFilter haiXuanFilter = new HaiXuanFilter();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_apply);
 		this.id = getIntent().getStringExtra("id");
-		this.price = getIntent().getStringExtra("price");
+		this.originalPrice = getIntent().getStringExtra("price");
 		this.bitype = getIntent().getStringExtra("bitype");//货币类型
 String		type = getIntent().getStringExtra("baotype");//报名上传类型
 		 baotype= getBaoType(type);//报名上传类型
@@ -164,7 +164,7 @@ private void getGroup() {
 		}else if (baotype==0){//上传视频
 			showUpdateVideo();
 		}
-
+		price=originalPrice;
 		if (bitype.endsWith("人民币")) {
 			this.tv_price.setText(price);
 		}else{
@@ -266,6 +266,16 @@ private void getGroup() {
 							tv_sing_up1.setText(groupList1
 									.get(position));
 							groupList2=map.get(tv_sing_up1.getText().toString().trim());
+							//修改价格
+							if (bitype.endsWith("人民币")) {
+								price=JSON.parseObject(haiXuanFilter.getRMB()).getString(text);
+								if (price.equals("0")) price=originalPrice;
+								tv_price.setText(price);
+							}else{
+								price=JSON.parseObject(haiXuanFilter.getNTC()).getString(text);
+								if (price.equals("0")) price=originalPrice;
+								tv_price.setText(bitype+"$" +price);
+							}
 							popu2.dismisss();
 						}
 					});

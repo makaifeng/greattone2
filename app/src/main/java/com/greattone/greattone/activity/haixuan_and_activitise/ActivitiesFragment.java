@@ -211,7 +211,7 @@ public class ActivitiesFragment extends BaseFragment {
 	private void getActivities() {
 		// MyProgressDialog.show(context);
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "info/list2");
+		map.put("api", "info/list");
 		map.put("classid", ClassId.音乐活动_ID+"");
 		map.put("extra", "dizhi");
 		map.put("address", province);
