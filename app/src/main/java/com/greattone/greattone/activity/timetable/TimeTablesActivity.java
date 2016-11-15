@@ -30,12 +30,14 @@ import java.util.Map;
 public class TimeTablesActivity extends BaseActivity {
 	private Map<String,List<TimeTable_Month>> map=new HashMap<>();
 	private TimeTableLinlayout ll_timetable;
+	private String userid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timetable);
 		initView();
+		userid=getIntent().getStringExtra("userid");
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
 		String month=simpleDateFormat.format( new Date());
 		 getData(month);
@@ -45,12 +47,14 @@ public class TimeTablesActivity extends BaseActivity {
 
 	private void initView() {
 		setHead("课程表", true, true);
-		setOtherText("发布课表", new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(new Intent(context,AddTimeTableAct.class));
-			}
-		});
+		if (userid==null) {
+			setOtherText("发布课表", new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					startActivity(new Intent(context, AddTimeTableAct.class));
+				}
+			});
+		}
 		ll_timetable=(TimeTableLinlayout)findViewById(R.id.ll_timetable);
 		ll_timetable.setOnDateClickListener(onDateClickListener);
 		ll_timetable.setBackgroundColor(Color.rgb(255, 255, 255));
@@ -60,7 +64,7 @@ public class TimeTablesActivity extends BaseActivity {
 		@Override
 		public void OnDateClick(String year, String month, String day, long selectDate) {
 //			toast(year+"-"+month+"-"+day);
-			startActivity(new Intent(context, TimeTablesForDayActivity.class).putExtra("date", selectDate));
+			startActivity(new Intent(context, TimeTablesForDayActivity.class).putExtra("date", selectDate).putExtra("userid", userid));
 		}
 	};
 
@@ -70,12 +74,11 @@ public class TimeTablesActivity extends BaseActivity {
      */
 	private void getData(String month) {
 		MyProgressDialog.show(context);
-		HttpProxyUtil.getCourseMonthList(context, month, new HttpUtil.ResponseListener() {
+		HttpProxyUtil.getCourseMonthList(context, userid,month, new HttpUtil.ResponseListener() {
 			@Override
 			public void setResponseHandle(Message2 message) {
 				if (message!=null&&message.getData()!=null&&message.getData().startsWith("{")){
 					ll_timetable.setData(message.getData());
-
 				}
 				MyProgressDialog.Cancel();
 			}

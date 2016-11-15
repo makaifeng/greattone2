@@ -154,23 +154,7 @@
   
 
 
-                <!-- 全部学员 -->
 
-                <com.greattone.greattone.widget.MyTextView
-                    android:id="@+id/tv_student"
-                    style="@style/TeacherOrClassRoomItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/misic_student" 
-                    android:visibility="gone"/>
-                        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@color/gray_eeeeee" />
         <com.greattone.greattone.widget.MyTextView
             android:id="@+id/tv_announcements"
             style="@style/TeacherOrClassRoomItem"
@@ -186,6 +170,41 @@
             android:layout_marginRight="10dp"
             android:layout_marginStart="10dp"
             android:background="@color/gray_eeeeee" />
+
+       <!-- 全部学员 -->
+
+       <com.greattone.greattone.widget.MyTextView
+           android:id="@+id/tv_student"
+           style="@style/TeacherOrClassRoomItem"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/misic_student"
+           android:visibility="visible"/>
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:layout_marginEnd="10dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:layout_marginStart="10dp"
+           android:background="@color/gray_eeeeee" />
+
+       <!-- 课程表 -->
+       <com.greattone.greattone.widget.MyTextView
+           android:id="@+id/tv_table"
+           style="@style/TeacherOrClassRoomItem"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/timetable"
+           android:visibility="visible"/>
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:layout_marginEnd="10dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:layout_marginStart="10dp"
+           android:background="@color/gray_eeeeee" />
                         <!-- 讨论区 -->
 
                 <com.greattone.greattone.widget.MyTextView
@@ -194,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/tlq" 
-                    android:visibility="gone"/>
+                    android:visibility="visible"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

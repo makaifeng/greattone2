@@ -38,11 +38,13 @@ public class TimeTablesForDayActivity extends BaseActivity {
     private WeekCalendar weekCalendar;
     long dateMillis;
     private CourseView courseView;
+    private String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetable_for_day);
+        userid=getIntent().getStringExtra("userid");
         dateMillis = getIntent().getLongExtra("date",0);
         init();
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
@@ -127,7 +129,7 @@ public class TimeTablesForDayActivity extends BaseActivity {
      */
     private void getData(String date) {
         MyProgressDialog.show(context);
-        HttpProxyUtil.getCourseDateList(context, date, new HttpUtil.ResponseListener() {
+        HttpProxyUtil.getCourseDateList(context, userid,date, new HttpUtil.ResponseListener() {
             @Override
             public void setResponseHandle(Message2 message) {
                 if (message!=null&&message.getData()!=null&&message.getData().startsWith("[")){

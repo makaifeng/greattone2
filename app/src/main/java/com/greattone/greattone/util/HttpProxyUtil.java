@@ -240,34 +240,36 @@ public class HttpProxyUtil {
 				responseListener, errorResponseListener));
 	}
 	/**
-	 * 获取课表的某天的数据
+	 * 获取某人课表的某天的数据
 	 * @param context
 	 * @param date  日期  格式为2016-10-01
 	 * @param responseListener
 	 * @param errorResponseListener
      */
-	public static void getCourseDateList(Context context,String date,ResponseListener responseListener,
+	public static void getCourseDateList(Context context,String userid,String date,ResponseListener responseListener,
 								ErrorResponseListener errorResponseListener) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "kebiao/getDateList");
 		map.put("date", date);// 日期  格式为2016-10-01
+		map.put("userid", userid);//用户id
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
 	/**
-	 * 获取课表的某月的数据
+	 * 获取某人课表的某月的数据
 	 * @param context
 	 * @param month  月份  格式为2016-10-01 必须带日期
 	 * @param responseListener
 	 * @param errorResponseListener
      */
-	public static void getCourseMonthList(Context context,String month,ResponseListener responseListener,
+	public static void getCourseMonthList(Context context,String userid,String month,ResponseListener responseListener,
 								ErrorResponseListener errorResponseListener) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "kebiao/getMonthList");
 		map.put("month", month);//月份  格式为2016-10-01 必须带日期
+		map.put("userid", userid);//用户id
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,

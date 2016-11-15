@@ -1,8 +1,6 @@
 package com.greattone.greattone.activity.timetable;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -29,12 +27,14 @@ public class TimeTableDetailAct extends BaseActivity{
     private TextView tv_location;
     private TextView tv_state;
     private TextView tv_remark;
+    private String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetable_detail);
         id=getIntent().getStringExtra("id");
+        userid=getIntent().getStringExtra("userid");
         initView();
         getData();
     }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -138,14 +137,14 @@ import java.util.List;
         canvas.drawText("开始："+TimeCouse.getStarttime(),courseX+dip2px(20),centerY-textPaint.descent(),textPaint);
         //结束时间
         canvas.drawText("结束："+TimeCouse.getStoptime(),courseX+dip2px(20),(centerY+ (int) ((Math.ceil(textPaint.descent() - textPaint.ascent()) + 2))),textPaint);
-        //状态
-        String text="";
-        if (TimeCouse.getState()==0)  text="已完成";
-        else if (TimeCouse.getState()==1)  text="未开始";
-        else if (TimeCouse.getState()==2) text="已取消";
-        Rect Rect=new Rect();
-        textPaint.getTextBounds(text,0,text.length()-1,Rect);
-        canvas.drawText(text,courseEndX-dip2px(20)-textPaint.measureText(text),centerY,textPaint);
+//        //状态
+//        String text="";
+//        if (TimeCouse.getState()==0)  text="已完成";
+//        else if (TimeCouse.getState()==1)  text="未开始";
+//        else if (TimeCouse.getState()==2) text="已取消";
+//        Rect Rect=new Rect();
+//        textPaint.getTextBounds(text,0,text.length()-1,Rect);
+//        canvas.drawText(text,courseEndX-dip2px(20)-textPaint.measureText(text),centerY,textPaint);
 
     }
 

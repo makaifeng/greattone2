@@ -1,5 +1,13 @@
 package com.greattone.greattone.activity.teacher;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -11,6 +19,7 @@ import com.greattone.greattone.activity.classroom.NoticeActivity;
 import com.greattone.greattone.activity.classroom.TlqActivity;
 import com.greattone.greattone.activity.course.CourseCenterActivity;
 import com.greattone.greattone.activity.qa.AskQuestionActivity;
+import com.greattone.greattone.activity.timetable.TimeTablesActivity;
 import com.greattone.greattone.activity2.RecommendedVideoActivity;
 import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
@@ -22,14 +31,6 @@ import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
-
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 /** 老师详情 */
 @SuppressWarnings("deprecation")
@@ -66,6 +67,7 @@ public class TeacherActivity extends BaseActivity {
 	protected  UserInfo people;
 	private TextView tv_student;
 	private TextView tv_tlq;
+	private TextView tv_table;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,9 @@ public class TeacherActivity extends BaseActivity {
 		tv_student = (TextView) findViewById(R.id.tv_student);
 		tv_student.setCompoundDrawables(null, null, drawable, null);
 		tv_student.setOnClickListener(lis);
+		tv_table = (TextView) findViewById(R.id.tv_table);
+		tv_table.setCompoundDrawables(null, null, drawable, null);
+		tv_table.setOnClickListener(lis);
 		comments = (TextView) findViewById(R.id.tv_comments);
 		comments.setCompoundDrawables(null, null, drawable, null);
 		comments.setOnClickListener(lis);
@@ -153,6 +158,14 @@ public class TeacherActivity extends BaseActivity {
 				Intent intent = new Intent(context, NoticeActivity.class);
 				intent.putExtra("userid", people.getUserid());
 				startActivity(intent);
+			} else if (v == tv_table) {// 课程表
+				if (people.getIsstudent()== 1) {
+				Intent intent = new Intent(context,TimeTablesActivity.class);
+				intent.putExtra("userid", people.getUserid());
+				startActivity(intent);
+				}else{
+					toast("你不是本老师下的学生，无法查看!");
+				}
 			} else if (v == tv_tlq) {// 讨论区
 				if (people.getIsstudent()== 1) {
 				Intent intent = new Intent(context,TlqActivity.class);
