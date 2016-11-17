@@ -205,10 +205,10 @@ public class TimeTableAdapter extends BaseAdapter {
 			case 0://没课程
 				break;
 			case 2://有课程 ,有多节
-				entry2.setText(mlist.get(1).getCouname());
+				entry2.setText(mlist.get(1).getStuname());
 				entry2.setVisibility(View.VISIBLE);
 			case 1://有课程 ,只有一节
-				entry1.setText(mlist.get(0).getCouname());
+				entry1.setText(mlist.get(0).getStuname());
 				entry1.setVisibility(View.VISIBLE);
 				break;
 			default:
@@ -295,8 +295,8 @@ public class TimeTableAdapter extends BaseAdapter {
 		}
 
 		String abc = "";
-		for (int i = 0; i < dayNumber.length; i++) {
-			abc = abc + dayNumber[i] + ":";
+		for (String day:dayNumber) {
+			abc = abc + day+ ":";
 		}
 //		Log.d("DAYNUMBER", abc);
 

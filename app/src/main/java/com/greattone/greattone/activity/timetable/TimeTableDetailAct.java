@@ -1,6 +1,11 @@
 package com.greattone.greattone.activity.timetable;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -28,6 +33,9 @@ public class TimeTableDetailAct extends BaseActivity{
     private TextView tv_state;
     private TextView tv_remark;
     private String userid;
+    private Button btn_update;
+    private Button btn_delete;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,8 @@ public class TimeTableDetailAct extends BaseActivity{
         tv_location=    (TextView)findViewById(R.id.tv_location);
         tv_state=    (TextView)findViewById(R.id.tv_state);
         tv_remark=    (TextView)findViewById(R.id.tv_remark);
+        btn_update=    (Button)findViewById(R.id.btn_update);
+        btn_delete=    (Button)findViewById(R.id.btn_delete);
     }
     private void initViewData() {
         tv_name.setText(timeTable.getCouname());
@@ -60,7 +70,71 @@ public class TimeTableDetailAct extends BaseActivity{
         if (timeTable.getState()==1)   state="未开始";
         tv_state.setText(state);
         tv_remark.setText(timeTable.getRemarks());
+        if (userid==null){
+            btn_update.setVisibility(View.VISIBLE);
+            btn_delete.setVisibility(View.VISIBLE);
+            btn_update.setOnClickListener(lis);
+            btn_delete.setOnClickListener(lis);
+        }else {
+            btn_update.setVisibility(View.GONE);
+            btn_delete.setVisibility(View.GONE);
+        }
     }
+    private View.OnClickListener lis=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_update:
+                    startActivityForResult(new Intent(context,EditTimeTableAct.class).putExtra("data",timeTable),1);
+                    break;
+                case R.id.btn_delete:
+                    showDeleteDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 显示是否删除选择框
+     */
+    private void showDeleteDialog() {
+        new AlertDialog.Builder(context)
+                .setTitle("确定要删除吗？")
+                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        delete();
+                    }
+                }).setNeutralButton("取消",null).show();
+    }
+
+    /**
+     * 删除
+     */
+    private void delete() {
+        MyProgressDialog.show(context);
+        HttpProxyUtil.deleteCourse(context, id, new HttpUtil.ResponseListener() {
+            @Override
+            public void setResponseHandle(Message2 message) {
+                setResult(RESULT_OK);
+                MyProgressDialog.Cancel();
+                finish();
+            }
+        }, new HttpUtil.ErrorResponseListener() {
+            @Override
+            public void setServerErrorResponseHandle(Message2 message) {
+
+            }
+
+            @Override
+            public void setErrorResponseHandle(VolleyError error) {
+
+            }
+        });
+    }
+
     /**
      * 获取数据
      */
@@ -86,5 +160,16 @@ public class TimeTableDetailAct extends BaseActivity{
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (resultCode){
+            case RESULT_OK:
+                getData();
+                break;
+        }
     }
 }

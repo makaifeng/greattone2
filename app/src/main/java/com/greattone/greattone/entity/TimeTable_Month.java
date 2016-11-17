@@ -1,6 +1,7 @@
 package com.greattone.greattone.entity;
 
 /**
+ * 课表每月信息
  * Created by Administrator on 2016/11/1.
  */
 public class TimeTable_Month {
@@ -8,9 +9,18 @@ public class TimeTable_Month {
     String tearid;
     String ddid;
     String couname;
+    String stuname;
     String starttime;
     String stoptime;
     String state;
+
+    public String getStuname() {
+        return stuname;
+    }
+
+    public void setStuname(String stuname) {
+        this.stuname = stuname;
+    }
 
     public String getId() {
         return id;

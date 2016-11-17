@@ -68,7 +68,7 @@ public class TimeTablesForDayActivity extends BaseActivity {
         courseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                startActivity(new Intent(context,TimeTableDetailAct.class).putExtra("id",courseList.get(position).getId()));
+                startActivityForResult(new Intent(context,TimeTableDetailAct.class).putExtra("id",courseList.get(position).getId()).putExtra("userid",userid),1);
 //                Toast.makeText(context,courseList.get(position).getCouname(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -152,5 +152,16 @@ public class TimeTablesForDayActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (resultCode){
+            case RESULT_OK:
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+                String date=simpleDateFormat.format( new Date(dateMillis));
+                getData(date);
+                break;
+        }
+    }
 }
 

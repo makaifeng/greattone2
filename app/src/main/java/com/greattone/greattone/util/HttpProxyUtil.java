@@ -296,4 +296,37 @@ public class HttpProxyUtil {
 		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
+	/**
+	 * 课程表的修改
+     */
+	public static void editCourse(Context context,String id,String couname,String location,String classtime,String starttime,String stoptime,String stuname,String remarks,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "kebiao/editor");
+		map.put("id", id);//id
+		map.put("couname", couname);//课程名称
+		map.put("location", location);//上课地点
+		map.put("classtime", classtime);//开始日期  格式2016-11-01
+		map.put("starttime", starttime);//开始时间  	格式08:15
+		map.put("stoptime", stoptime);//结束时间   	格式08:15
+		map.put("stuname", stuname);//学生姓名
+		map.put("remarks", remarks);//备注信息
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 课程表的删除
+     */
+	public static void deleteCourse(Context context,String id,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "kebiao/delete");
+		map.put("id", id);
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
 }

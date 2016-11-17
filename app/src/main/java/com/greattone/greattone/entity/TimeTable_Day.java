@@ -1,9 +1,12 @@
 package com.greattone.greattone.entity;
 
+import java.io.Serializable;
+
 /**
+ * 课表每日
  * Created by Administrator on 2016/11/2.
  */
-public class TimeTable_Day {
+public class TimeTable_Day implements Serializable {
     String id;
     String tearid;
     String ddid;

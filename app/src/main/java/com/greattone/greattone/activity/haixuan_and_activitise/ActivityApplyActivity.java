@@ -90,11 +90,12 @@ private TextView tv_price;
 			toast("请输入参赛曲目");
 			return;
 		}
+		MyProgressDialog.show(context);
 		 post2(name, phone,title);
 	}
 	/**	报名*/
 	protected void post2(String name, String phone,String title) {
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map = new HashMap<>();
 		map.put("api", "post/ecms_bm");
 		map.put("mid", mid);
 		map.put("enews", "MAddInfo");
