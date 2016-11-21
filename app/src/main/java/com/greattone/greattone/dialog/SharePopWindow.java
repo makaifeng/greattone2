@@ -488,7 +488,7 @@ private GridView gv_share;
 
 class MyAdapter extends BaseAdapter{
 
-	String []names=new String[]{"微信","微信朋友圈","QQ","FaceBook"};
+	String []names=new String[]{"微信","朋友圈","QQ","FaceBook"};
 	int []resIds=new int[]{R.drawable.umeng_socialize_wechat,R.drawable.umeng_socialize_wxcircle,R.drawable.umeng_socialize_qq_on,R.drawable.umeng_socialize_facebook};
 
 	@Override

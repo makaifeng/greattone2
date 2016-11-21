@@ -108,8 +108,8 @@ public class MyHintDialog {
 		dialog.show();
 		return dialog;
 	}
-	
-	
+
+
 //	/**
 //	 * 实现一个按钮，2个按钮
 //	 * @param mContext 上下文

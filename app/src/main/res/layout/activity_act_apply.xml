@@ -33,7 +33,6 @@
                     android:hint="姓名"
                     android:singleLine="true"
                     android:padding="10.0dip"
-                    android:textColor="@color/gray_a5a5a5"
                     android:textSize="@dimen/bigtext" />
 
                 <com.greattone.greattone.widget.MyTextView
@@ -63,7 +62,6 @@
                     android:inputType="phone"
                     android:singleLine="true"
                     android:padding="10.0dip"
-                    android:textColor="@color/gray_a5a5a5"
                     android:textSize="@dimen/bigtext" />
 
                 <com.greattone.greattone.widget.MyTextView
@@ -92,7 +90,6 @@
                     android:inputType="phone"
                     android:singleLine="true"
                     android:padding="10.0dip"
-                    android:textColor="@color/gray_a5a5a5"
                     android:textSize="@dimen/bigtext" />
 
                 <com.greattone.greattone.widget.MyTextView

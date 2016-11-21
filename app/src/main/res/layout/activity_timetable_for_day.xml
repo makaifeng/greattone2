@@ -10,11 +10,18 @@
         android:id="@+id/weekCalendar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/colorPrimary"
-        app:dayNameLength="threeLetters"
+        android:background="@color/white"
+        app:dayNameLength="singleLetter"
         app:numOfPages="150"
+        app:daysBackgroundColor="@color/white"
+        app:daysTextColor="@color/black"
+        app:weekBackgroundColor="@color/white"
+        app:weekTextColor="@color/black"
         />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_eeeeee"/>
     <ScrollView
         android:layout_below="@+id/weekCalendar"
         android:layout_width="match_parent"

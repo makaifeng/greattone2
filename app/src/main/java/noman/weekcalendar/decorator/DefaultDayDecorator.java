@@ -67,8 +67,10 @@ public class DefaultDayDecorator implements DayDecorator {
             if (selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) {
 //                if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate()))
                     dayTextView.setBackground(solidCircle);
+                dayTextView.setTextColor(Color.WHITE);
             } else {
                 dayTextView.setBackground(null);
+                dayTextView.setTextColor(textColor);
             }
         }
 
@@ -76,7 +78,7 @@ public class DefaultDayDecorator implements DayDecorator {
 //            dayTextView.setBackground(solidCircle);
 //            dayTextView.setTextColor(Color.WHITE);
 //        }
-        dayTextView.setTextColor(textColor);
+//        dayTextView.setTextColor(textColor);
         float size = textSize;
         if (size == -1)
             size = dayTextView.getTextSize();

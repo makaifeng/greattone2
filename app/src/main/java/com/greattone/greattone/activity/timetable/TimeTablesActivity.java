@@ -13,6 +13,7 @@ import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.TimeTable_Month;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
+import com.kf_test.kfcalendar.CalendarListener;
 import com.kf_test.kfcalendar.CalendarListener.OnDateClickListener;
 
 import java.text.SimpleDateFormat;
@@ -57,6 +58,7 @@ public class TimeTablesActivity extends BaseActivity {
 		}
 		ll_timetable=(TimeTableLinlayout)findViewById(R.id.ll_timetable);
 		ll_timetable.setOnDateClickListener(onDateClickListener);
+		ll_timetable.setMonthChangeListener(monthChangeListener);
 		ll_timetable.setBackgroundColor(Color.rgb(255, 255, 255));
 	}
 	OnDateClickListener onDateClickListener=new OnDateClickListener() {
@@ -67,7 +69,12 @@ public class TimeTablesActivity extends BaseActivity {
 			startActivity(new Intent(context, TimeTablesForDayActivity.class).putExtra("date", selectDate).putExtra("userid", userid));
 		}
 	};
-
+	CalendarListener.MonthChangeListener monthChangeListener =new CalendarListener.MonthChangeListener() {
+		@Override
+		public void MonthChange(String month) {
+			getData(month);
+		}
+	};
 	/**
 	 *
 	 * @param month

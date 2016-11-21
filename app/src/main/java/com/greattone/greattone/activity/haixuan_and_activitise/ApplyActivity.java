@@ -158,7 +158,7 @@ private void getGroup() {
 	private void initViewData() {
 		if (baotype==2) {
 			radiogroup.setVisibility(View.VISIBLE);
-			radiogroup.check(R.id.radioButton1);
+			radiogroup.check(R.id.radioButton2);
 		}else if (baotype==1){//上传图片
 			showUpdatePicture();
 		}else if (baotype==0){//上传视频
@@ -205,6 +205,7 @@ private void getGroup() {
 		ll_desc.setVisibility(View.GONE);
 		tv_upload.setText("上传参赛视频");
 		et_music.setHint("活动曲目");
+		et_music.setVisibility(View.VISIBLE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_VIDEO,1);
 		gv_pic.setAdapter(adapter);
 	}
@@ -214,8 +215,8 @@ private void getGroup() {
 	private void showUpdatePicture() {
 		isShowPic=true;
 		ll_desc.setVisibility(View.VISIBLE);
-		tv_upload.setText("选择图片");
-		et_music.setHint("图片主题");
+		tv_upload.setText("选择个人照片");
+		et_music.setVisibility(View.GONE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_PICTURE,9);
 		gv_pic.setAdapter(adapter);
 	}

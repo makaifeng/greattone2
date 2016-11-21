@@ -327,7 +327,9 @@ public class TimeTableLinlayout extends LinearLayout {
 		calendar.set(Calendar.YEAR, stepYear);
 		calendar.set(Calendar.MONTH, stepMonth);
 		if (changeListener != null) {
-			changeListener.MonthChange(monthFormat.format(calendar.getTime()));
+			SimpleDateFormat monthFormat2 = new SimpleDateFormat("yyyy-MM-dd",
+					Locale.CHINA);
+			changeListener.MonthChange(monthFormat2.format(calendar.getTime()));
 		}
 		view.setText(monthFormat.format(calendar.getTime()));
 	}

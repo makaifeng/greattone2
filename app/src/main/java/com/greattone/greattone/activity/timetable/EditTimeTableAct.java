@@ -1,5 +1,7 @@
 package com.greattone.greattone.activity.timetable;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,19 +9,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.greattone.greattone.EditTextActivity;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.dialog.MyIosDialog;
+import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.MyTimePickerPopWindow;
 import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.entity.PersonList;
 import com.greattone.greattone.entity.TimeTable_Day;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,7 +31,7 @@ import java.util.List;
  * Created by Administrator on 2016/11/2.
  */
 public class EditTimeTableAct extends BaseActivity{
-    private TextView tv_name,tv_location,tv_starttime,tv_stoptime,tv_student,tv_state;
+    private TextView tv_name,tv_location,tv_starttime,tv_stoptime,tv_student;
     private EditText et_remark;
     private  final int Result_Name=1;
     private  final int Result_Location=2;
@@ -35,12 +39,47 @@ public class EditTimeTableAct extends BaseActivity{
     private int state=-1;
     TimeTable_Day timeTable;
     private int year,month,day,hour,minute;
+//    private List<PersonList> personList=new ArrayList<>();
+    private String[] students;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_timetable);
         timeTable= (TimeTable_Day) getIntent().getSerializableExtra("data");
         initView();
+        getStudents();
+    }
+
+    /**
+     * 获取学生
+     */
+    private void getStudents() {
+        MyProgressDialog.show(context);
+    HashMap<String, String> map = new HashMap<String, String>();
+    map.put("api", "my/invite/list");
+    map.put("pageIndex", 1 + "");
+    map.put("pageSize", 500 + "");
+    map.put("loginuid", Data.user.getUserid());
+    map.put("logintoken", Data.user.getToken());
+    addRequest(HttpUtil.httpConnectionByPost(context, map,
+               new HttpUtil.ResponseListener() {
+
+        @Override
+        public void setResponseHandle(Message2 message) {
+            if (message.getData() != null
+                    && message.getData().startsWith("[")) {
+                List<PersonList> mList = JSON.parseArray(
+                        message.getData(), PersonList.class);
+                students=new String[mList.size()];
+                for (int i=0;i<mList.size();i++) {
+                    students[i]=mList.get(i).getUsername();
+                }
+            }
+            MyProgressDialog.Cancel();
+        }
+    }, null));
     }
 
     private void initView() {
@@ -58,7 +97,7 @@ public class EditTimeTableAct extends BaseActivity{
        findViewById(R.id.tv_repick).setVisibility(View.GONE);
        findViewById(R.id.tv_repick_hint).setVisibility(View.GONE);
         tv_student=(TextView)findViewById(R.id.tv_student);
-        tv_state=(TextView)findViewById(R.id.tv_state);
+//        tv_state=(TextView)findViewById(R.id.tv_state);
         et_remark=(EditText)findViewById(R.id.et_remark);
 
         tv_name.setOnClickListener(lis);
@@ -66,7 +105,7 @@ public class EditTimeTableAct extends BaseActivity{
         tv_starttime.setOnClickListener(lis);
         tv_stoptime.setOnClickListener(lis);
         tv_student.setOnClickListener(lis);
-        tv_state.setOnClickListener(lis);
+//        tv_state.setOnClickListener(lis);
         initViewData();
     }
 
@@ -171,34 +210,47 @@ public class EditTimeTableAct extends BaseActivity{
                          }
                      });
                      break;
-                 case R.id.tv_student:
-                     String student=tv_student.getText().toString().trim();
-                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","学生名称").putExtra("text",student),Result_student);
+                 case R.id.tv_student://学生
+//                     String student=tv_student.getText().toString().trim();
+//                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","学生名称").putExtra("text",student),Result_student);
+                     showListSelectDialog();
                      break;
-                 case R.id.tv_state:
-                     showStateDialog();
-
-                     break;
+//                 case R.id.tv_state://状态
+//                     showStateDialog();
+//                     break;
                  default:
                      break;
              }
          }
      };
 
-    private void showStateDialog() {
-        List<String>       mlist=new ArrayList<>();
-        mlist.add("未开始");
-        mlist.add("已完成");
-        MyIosDialog.ShowListDialog(context,"课程状态" , mlist, new MyIosDialog.DialogItemClickListener() {
-            @Override
-            public void itemClick(String result, int position) {
-                tv_state.setText(result);
-                state=position+1;
-            }
-        });
+//    private void showStateDialog() {
+//        List<String>       mlist=new ArrayList<>();
+//        mlist.add("未开始");
+//        mlist.add("已完成");
+//        MyIosDialog.ShowListDialog(context,"课程状态" , mlist, new MyIosDialog.DialogItemClickListener() {
+//            @Override
+//            public void itemClick(String result, int position) {
+//                tv_state.setText(result);
+//                state=position+1;
+//            }
+//        });
+//    }
+
+    public  void showListSelectDialog( ){
+        if (students!=null) {
+             new AlertDialog.Builder(context)
+//                .setTitle(R.string.title)
+                    .setItems(students, new DialogInterface.OnClickListener() { // 列表内容和点击事件
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int whichPlace) {
+                            //String[] place = getResources().getStringArray(R.array.place);
+                            tv_student.setText(students[whichPlace]);
+                        }
+                    }).show();
+        }
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

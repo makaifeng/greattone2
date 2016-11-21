@@ -103,7 +103,6 @@ public class WeekPager extends ViewPager {
         else
             adapter.swipeBack();
         setCurrentItem(getCurrentItem() + event.getDirection());
-
     }
 
     @Subscribe
