@@ -1,7 +1,5 @@
 package com.greattone.greattone.activity.post;
 
-import java.util.HashMap;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +15,8 @@ import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Notice;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+
+import java.util.HashMap;
 /**发布公告*/
 public class PostNoticeActivity extends BaseActivity {
 	private EditText et_name;
@@ -34,19 +34,19 @@ public class PostNoticeActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		setHead("发布公告", true, true);
+		setHead("发布动态", true, true);
 
 		this.et_name = ((EditText) findViewById(R.id.et_name));
-		this.	et_name.setHint("公告名称");
+		this.	et_name.setHint("动态名称");
 		findViewById(R.id.ll_price).setVisibility(View.GONE);
 		findViewById(R.id.ll_phone).setVisibility(View.GONE);
 		findViewById(R.id.ll_num).setVisibility(View.GONE);
 		this.et_content = ((EditText) findViewById(R.id.et_content));
-		this.et_content.setHint("公告内容");
+		this.et_content.setHint("动态内容");
 	findViewById(R.id.ll_pic).setVisibility(View.GONE);
 		findViewById(R.id.btn_commit).setOnClickListener(lis);
 		if (null!=type&&type.equals("edit")) {//编辑公告
-			setHead("编辑公告", true, true);
+			setHead("编辑动态", true, true);
 	(	(Button)	findViewById(R.id.btn_commit)).setText("编辑");
 			 notice=(Notice) getIntent().getSerializableExtra("notice");
 			et_name.setText(notice.getTitle());

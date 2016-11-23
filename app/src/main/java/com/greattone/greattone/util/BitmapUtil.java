@@ -24,9 +24,10 @@ import com.greattone.greattone.dialog.SelectPictureDialog;
 import com.greattone.greattone.entity.Picture;
 import com.kf_test.picselect.GalleryActivity;
 
+import net.bither.util.NativeUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -330,8 +331,8 @@ public class BitmapUtil {
     }
     public static  Bitmap getVideoPic(String videoPath,
     		int kind) {
-    	if (new File(videoPath).exists()) {
-			
+    	if (!new File(videoPath).exists()) {
+			new File(videoPath).mkdir();
 		}
     	return ThumbnailUtils.createVideoThumbnail(videoPath, kind);
     }
@@ -391,8 +392,8 @@ public class BitmapUtil {
 		return b;
 	}
     /** 获取指定路径的图片压缩的路径 */
-    public static File getFileFromBitmapThumb(String filePath) {
-    	return getFileFromBitmapThumb(filePath, 800);
+    public static File getFileFromBitmapThumb(Context context,String filePath) {
+    	return getFileFromBitmapThumb(context,filePath, 800);
     }
 	/**
 	 *  获取指定路径的图片压缩的bytes
@@ -400,7 +401,7 @@ public class BitmapUtil {
 	 * @param maxWidth 宽高的最大值
 	 * @return
 	 */
-	public static File getFileFromBitmapThumb(String filePath,int maxWidth) {
+	public static File getFileFromBitmapThumb(Context context,String filePath,int maxWidth) {
 		Bitmap bitmap = null;
 		BitmapFactory.Options options = new BitmapFactory.Options();  
 		options.inJustDecodeBounds = true;  
@@ -418,32 +419,44 @@ public class BitmapUtil {
 			if(be <= 0)  
 				be =1;  
 			options.inSampleSize =be;  
-			bitmap = BitmapFactory.decodeFile(filePath,options);  
+			bitmap = BitmapFactory.decodeFile(filePath,options);
 		}
-		File file=saveBitmap(bitmap,filePath);
+		String s[]=filePath.split("\\.");
+		String file=FileUtil.getLocalImageUrl(context,System.currentTimeMillis()+"."+ s[s.length-1]);
+		File file1=	new File(file).getAbsoluteFile();
+		File file2=file1.getParentFile();
+		if (!file2.exists()){
+			file2.mkdir();
+		}
+		NativeUtil.compressBitmap(bitmap, 90,
+				file, true);
+//		File file=saveBitmap(bitmap,filePath);
 		//回收图片资源，否则加载多张之后会报内存不足错误
 		if (!bitmap.isRecycled()) {
 			bitmap.recycle();
 			System.gc() ; //提醒系统及时回收
 		}
-		return file;
+		return file1;
 	}
 
-	public static File saveBitmap(Bitmap bm,String filePath){
-		String s[]=filePath.split("\\.");
-        File file2= new File(FileUtil.getDownloadCacheDirectory(System.currentTimeMillis()+"."+ s[s.length-1]));  
-        try {  
-         FileOutputStream out = new FileOutputStream(file2);  
-         if(bm.compress(Bitmap.CompressFormat.PNG, 100, out)){  
-             out.flush();  
-             out.close();  
-             return file2;
-         }  
-     } catch (Exception e) {  
-         // TODO: handle exception  
-     }  
-        return null;
-	}
+//	public static File saveBitmap(Bitmap bm, String filePath){
+//		String s[]=filePath.split("\\.");
+//        File file2= new File(FileUtil.getDownloadCacheDirectory(System.currentTimeMillis()+"."+ s[s.length-1]));
+//        try {
+//			if (file2.exists()){
+//				file2.mkdir();
+//			}
+//         FileOutputStream out = new FileOutputStream(file2);
+//         if(bm.compress(Bitmap.CompressFormat.PNG, 100, out)){
+//             out.flush();
+//             out.close();
+//             return file2;
+//         }
+//     } catch (Exception e) {
+//         // TODO: handle exception
+//     }
+//        return null;
+//	}
 	public static byte[] Bitmap2Bytes(Bitmap bm) {
 		byte[]    data = new byte[]{};
           ByteArrayOutputStream baos = new ByteArrayOutputStream();

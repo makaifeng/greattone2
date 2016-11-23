@@ -1,9 +1,14 @@
 package com.greattone.greattone.activity.classroom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -26,15 +31,10 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class NoticeActivity extends BaseActivity {
 	private SwipeMenuListView lv_content;
@@ -49,7 +49,7 @@ public class NoticeActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		setHead(getResources().getString(R.string.活动公告), true, true);//活动公告
+		setHead(getResources().getString(R.string.活动公告), true, true);//我的动态
 		
 		setOtherText("发布", lis);
 		lv_content = (SwipeMenuListView) findViewById(R.id.lv_content);

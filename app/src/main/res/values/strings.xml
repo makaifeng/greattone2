@@ -140,7 +140,7 @@
     <string name="介绍评论">介绍评论</string>
     <string name="教室评论">教室评论</string>
     <string name="老师评论">老师评论</string>
-    <string name="活动公告">活动公告</string>
+    <string name="活动公告">我的动态</string>
     <string name="课程中心详情">课程中心详情</string>
     <string name="我的课程">我的课程</string>
     <string name="讨论专区">讨论专区</string>
@@ -298,7 +298,7 @@
     <string name="我的课表">我的课表</string>
     <string name="教师管理">教师管理</string>
     <string name="正在上传">正在上传</string>
-    <string name="内部公告">内部公告</string>
+    <string name="内部公告">我的动态</string>
     <string name="教室管理">教室管理</string>
     <string name="退出登录">退出登录</string>
     <string name="品牌介绍">品牌介绍</string>

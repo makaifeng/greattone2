@@ -165,7 +165,7 @@ private ImageView iv_gg;
 		preferences.edit().putString("updateTitle", title)
 		.putString("updateContent", newstext)
 		.putString("updateClassid", classid)
-		.putString("updatePicUrl", picUrl)
+		.putString("updateUrl", picUrl)
 		.putString("updatePath", videoFileList.get(0).getPicUrl())
 		.putInt("updateState", 0).commit();
 		Intent intent=new Intent(context, UpdateVideoAct.class);

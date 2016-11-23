@@ -226,7 +226,7 @@ public class PersonalCenterFragment extends BaseFragment {
 				startActivity(new Intent(context, TeacherManageActivity.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.正在上传))) {// 正在上传
 				startActivity(new Intent(context, UpdateVideoAct.class));
-			} else if (names[listPosition].equals(getResources().getString(R.string.内部公告))) {// 内部公告
+			} else if (names[listPosition].equals(getResources().getString(R.string.内部公告))) {// 我的动态
 				if (Data.myinfo.getCked() != 1&&Data.myinfo.getGroupid()==4) {// 未认证教室
 					toast("未签约用户不能使用该功能");
 					return;

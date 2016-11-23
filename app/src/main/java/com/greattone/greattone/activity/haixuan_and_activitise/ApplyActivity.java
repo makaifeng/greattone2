@@ -66,6 +66,8 @@ private EditText et_desc;
 private View ll_desc;
 private TextView tv_upload;
 public static HaiXuanFilter haiXuanFilter = new HaiXuanFilter();
+	private View ll_apply_music;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,6 +129,7 @@ private void getGroup() {
 		ll_game_area=findViewById(R.id.ll_apply_game_area);
 		ll_game_area	.setOnClickListener(lis);
 		ll_sing_up=findViewById(R.id.ll_apply_sign_up);
+		ll_apply_music=findViewById(R.id.ll_apply_music);
 		findViewById(R.id.activity_apply_commit).setOnClickListener(lis);
 		findViewById(R.id.ll_apply_sign_up).setOnClickListener(lis);
 		findViewById(R.id.ll_apply_game_area).setOnClickListener(lis);
@@ -205,7 +208,7 @@ private void getGroup() {
 		ll_desc.setVisibility(View.GONE);
 		tv_upload.setText("上传参赛视频");
 		et_music.setHint("活动曲目");
-		et_music.setVisibility(View.VISIBLE);
+		ll_apply_music.setVisibility(View.VISIBLE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_VIDEO,1);
 		gv_pic.setAdapter(adapter);
 	}
@@ -216,7 +219,7 @@ private void getGroup() {
 		isShowPic=true;
 		ll_desc.setVisibility(View.VISIBLE);
 		tv_upload.setText("选择个人照片");
-		et_music.setVisibility(View.GONE);
+		ll_apply_music.setVisibility(View.GONE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_PICTURE,9);
 		gv_pic.setAdapter(adapter);
 	}
@@ -383,9 +386,11 @@ private void getGroup() {
 			toast(getResources().getString(R.string.请填写详细地址));
 			return;
 		}
-		if (TextUtils.isEmpty(music)) {
-			toast(getResources().getString(R.string.请填写活动曲目));
-			return;
+		if (!isShowPic){
+			if (TextUtils.isEmpty(music)) {
+				toast(getResources().getString(R.string.请填写活动曲目));
+				return;
+			}
 		}
 		if (TextUtils.isEmpty(teach)) {
 			toast(getResources().getString(R.string.请填写推荐老师));
@@ -407,10 +412,16 @@ private void getGroup() {
 			toast("请填写图片描述");
 			return;
 		}
+
 		if (videoFileList.size()==0) {
-			toast(getResources().getString(R.string.请选择上传视频));
+			if(isShowPic){
+				toast("请选择上传图片");
+			}else{
+				toast(getResources().getString(R.string.请选择上传视频));
+			}
 			return;
 		}
+
 		 filepass = System.currentTimeMillis() + "";
 		 String [] msg={name,phone,area,address,music,teach,teach_tel,game_area,sing_up1,age,sing_up2,desc};
 //		 post(msg,videoFileList);
@@ -473,8 +484,8 @@ private void getGroup() {
 	 */
 	private void updateVideo(String [] msg,  ArrayList<Picture> videoFileList, String imgUrl) {
 		preferences.edit().putString("updateTitle", msg[0])//选手姓名
-		.putString("updateUrl", imgUrl)
-		.putString("updatePath", videoFileList.get(0).getPicUrl())
+		.putString("updateUrl", imgUrl)//上传完的视频缩略图路径
+		.putString("updatePath", videoFileList.get(0).getPicUrl())//本地视频路径
 		.putString("updateContent", msg[4])
 		.putString("updateClassid", classid)
 		.putString("updateId", id)

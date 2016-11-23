@@ -36,6 +36,8 @@ public class ClassId {
 	public static final int 电声老师_ID = 30;
 	public static final int 音乐教室_ID = 5;
 	public static final int 音乐海选_ID = 6;
+	public static final int 音乐海选_视频_ID = 73;
+	public static final int 音乐海选_图片_ID = 104;
 	public static final int 中华好琴声_ID = 32;
 	public static final int 城市音乐会_ID = 33;
 	public static final int 两岸大师班_ID = 34;

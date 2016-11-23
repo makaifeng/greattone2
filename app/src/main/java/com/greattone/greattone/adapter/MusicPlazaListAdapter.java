@@ -30,6 +30,7 @@ import com.greattone.greattone.activity.classroom.ClassRoomActivity;
 import com.greattone.greattone.activity.haixuan_and_activitise.VoteDetailsActivity;
 import com.greattone.greattone.activity.plaza.ShowPictureActivity;
 import com.greattone.greattone.activity.teacher.TeacherActivity;
+import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.ReplayDialog;
@@ -239,7 +240,19 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 			// Locale.CHINA);
 			// time.setText(format.format(new Date(blogsList.get(position)
 			// .getCtime() * 1000)));
-			if (blogsList.get(position).getCanvote() == 1) {// 海选投票
+			if (blogsList.get(position).getClassid()== ClassId.音乐海选_图片_ID) {// 海选图片报名
+				ll_pic.setVisibility(View.VISIBLE);
+				ll_pic.removeAllViews();
+				if (blogsList.get(position).getMorepic() != null) {
+					addPic(JSON.parseArray(
+							blogsList.get(position).getMorepic(), Pic.class));
+				}
+				vote.setVisibility(View.VISIBLE);
+				vote.setOnClickListener(lis);
+				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				content.setText(blogsList.get(position).getHai_petition());
+			}else
+			if (blogsList.get(position).getClassid()== ClassId.音乐海选_视频_ID) {// 海选视频报名
 				ll_video.setVisibility(View.VISIBLE);
 				vote.setVisibility(View.VISIBLE);
 				ImageLoaderUtil.getInstance().setImagebyurl(
@@ -257,16 +270,16 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 			ll_zf.setOnClickListener(lis);
 			ll_collect.setOnClickListener(lis);
 			ll_share.setOnClickListener(lis);
-			if (blogsList.get(position).getClassname().equals("视频")) {// 视频
+			if (blogsList.get(position).getClassid()== ClassId.音乐广场_视频_ID) {// 视频
 				ll_video.setVisibility(View.VISIBLE);
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getThumbnail(), video);
-			} else if (blogsList.get(position).getClassname().equals("音乐")) {// 音乐
+			} else if (blogsList.get(position).getClassid()== ClassId.音乐广场_音乐_ID) {// 音乐
 				title.setText(blogsList.get(position).getTitle());
 				ll_music.setVisibility(View.VISIBLE);
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getThumbnail(), music);
-			} else if (blogsList.get(position).getClassname().equals("图片")) {// 图片
+			} else if (blogsList.get(position).getClassid()== ClassId.音乐广场_图片_ID) {// 图片
 				ll_pic.setVisibility(View.VISIBLE);
 				ll_pic.removeAllViews();
 				if (blogsList.get(position).getMorepic() != null) {

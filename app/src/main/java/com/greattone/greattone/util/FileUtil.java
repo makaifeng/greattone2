@@ -1,12 +1,5 @@
 package com.greattone.greattone.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Environment;
@@ -15,8 +8,15 @@ import android.text.TextUtils;
 
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.data.HttpConstants2;
-import com.kf_test.picselect.ImageBean;
 import com.kf_test.Mp3Info;
+import com.kf_test.picselect.ImageBean;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FileUtil {
 	/**
@@ -44,13 +44,6 @@ public class FileUtil {
 	 */
 	public static String getLocalImageUrl(Context context, String imageName) {
 		return getLocalImageFile(context) + "/" + imageName;
-	}
-	/**
-	 * 获取本地图片缓存地址
-	 * 
-	 */
-	public static String getDownloadCacheDirectory(String imageName) {
-		return Environment.getDownloadCacheDirectory() + "/" + imageName;
 	}
 
 	/**
@@ -322,8 +315,6 @@ public class FileUtil {
 	 * 
 	 * @param filePath
 	 *            文件路径
-	 * @param sizeType
-	 *            获取大小的类型1为B、2为KB、3为MB、4为GB
 	 * @return double值的大小
 	 */
 	public static String getFileOrFilesSize(String filePath) {
@@ -344,7 +335,6 @@ public class FileUtil {
 	/**
 	 * 获取指定文件大小
 	 * 
-	 * @param f
 	 * @return
 	 * @throws Exception
 	 */

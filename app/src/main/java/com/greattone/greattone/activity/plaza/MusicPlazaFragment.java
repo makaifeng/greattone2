@@ -207,7 +207,7 @@ void initResponse(Message2 message){
 			if (blogsList.get(position).getCanvote() == 1) {//海选
 				Intent intent = new Intent(context, VoteDetailsActivity.class);
 				intent.putExtra("id", blogsList.get(position).getId() + "");
-				intent.putExtra("classid", "73");
+				intent.putExtra("classid",  blogsList.get(position).getClassid()+"");
 				context.startActivity(intent);
 			} else {//帖子
 				Intent intent = new Intent(context,

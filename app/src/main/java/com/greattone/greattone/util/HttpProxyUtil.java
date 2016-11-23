@@ -81,7 +81,7 @@ public class HttpProxyUtil {
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		HashMap<String, File> file = new HashMap<String, File>();
-		file.put("file", BitmapUtil.getFileFromBitmapThumb(picPath));
+		file.put("file", BitmapUtil.getFileFromBitmapThumb(context,picPath));
 		HttpUtil.httpConnectionByPostFile(context, map,file,false,
 				responseListener, errorResponseListener);
 	}
