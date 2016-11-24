@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -16,8 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.ActivityBackListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.VideoPlayActivity;
 import com.greattone.greattone.activity.plaza.ShowPictureActivity;
@@ -29,6 +27,8 @@ import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
 
 public class PostGridAdapter extends BaseAdapter {
 	private Context context;
@@ -173,9 +173,9 @@ public class PostGridAdapter extends BaseAdapter {
 				if (pathList.get(position).getType()==1) {//网络图片
 					ImageLoaderUtil.getInstance().setImagebyurl(
 							 pathList.get(position).getPicUrl(), iv_pic);
-				}else		//本地图片
+				}else	{	//本地图片
 				ImageLoaderUtil.getInstance().setImagebyurl(
-						"file://" + pathList.get(position).getPicUrl(), iv_pic);
+						"file://" + pathList.get(position).getPicUrl(), iv_pic);}
 			} else if (type == 1) {// 语音
 			} else if (type == 2) {// 视频
 				iv_play.setVisibility(View.VISIBLE);
@@ -264,8 +264,9 @@ public class PostGridAdapter extends BaseAdapter {
 			for (Picture pic : pathList) {
 				if (pic.getType()==1) {
 					mList.add(pic.getPicUrl());
-				}else
-				mList.add("file://"+pic);
+				}else{
+				 mList.add("file://"+pic.getPicUrl());
+				}
 			}
 			Intent intent=new Intent(context, ShowPictureActivity.class);
 			intent.putStringArrayListExtra("uriList", mList);

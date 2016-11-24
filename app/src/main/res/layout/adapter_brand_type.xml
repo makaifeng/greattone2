@@ -50,7 +50,7 @@
     <com.greattone.greattone.widget.MyTextView
         android:id="@+id/tv_telphone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/tv_address"
         android:padding="2dp"
         android:textSize="12sp" />
@@ -63,7 +63,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tv_telphone"
         android:padding="2dp"
-        android:text="等级："
+        android:text=""
         android:textSize="12sp" />
 
     <!-- <ImageView -->
@@ -78,7 +78,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/tv_distance"
+        android:layout_below="@+id/tv_telphone"
         android:background="@color/gray_eeeeee" />
 
 </RelativeLayout>

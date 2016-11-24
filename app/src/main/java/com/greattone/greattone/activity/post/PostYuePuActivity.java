@@ -1,8 +1,13 @@
 package com.greattone.greattone.activity.post;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -22,14 +27,9 @@ import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class PostYuePuActivity extends BaseActivity {
 	private EditText et_theme;
@@ -156,10 +156,10 @@ public class PostYuePuActivity extends BaseActivity {
 			toast("请填写标题");
 			return;
 		}
-		if (newstext.isEmpty()) {
-			toast(getResources().getString(R.string.请填写内容));
-			return;
-		}
+//		if (newstext.isEmpty()) {
+//			toast(getResources().getString(R.string.请填写内容));
+//			return;
+//		}
 		if (TextUtils.isEmpty(style)) {
 			toast("请选择风格");
 			return;

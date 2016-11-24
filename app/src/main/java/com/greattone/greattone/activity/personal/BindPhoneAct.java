@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.personal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -20,6 +16,10 @@ import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**修改绑定手机*/
 public class BindPhoneAct extends BaseActivity {
 	private EditText m_mobile;
@@ -114,7 +114,7 @@ public class BindPhoneAct extends BaseActivity {
 
 	/** 提交 */
 	protected void commit() {
-		String str1 = this.m_mobile.getText().toString();
+	final 	String str1 = this.m_mobile.getText().toString();
 		if (str1.isEmpty()) {
 			toast(getResources().getString(R.string.请输入手机号));
 			return;
@@ -140,6 +140,7 @@ public class BindPhoneAct extends BaseActivity {
 
 					@Override
 					public void setResponseHandle(Message2 message) {
+						Data.myinfo.setPhone(str1);
 						toast(message.getInfo());
 						MyProgressDialog.Cancel();
 						finish();

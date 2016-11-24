@@ -890,6 +890,10 @@
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".activity.haixuan_and_activitise.ActivitiyDetailsActivityCenter"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

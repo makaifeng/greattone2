@@ -36,7 +36,7 @@ private void addFragment() {
 String titles[]=getResources().getStringArray(R.array.title_names);
 	if (type.equals(titles[0])) {//音乐广场
 		fragment=new MusicPlazaFragment();Bundle bundle=new Bundle();
-		bundle.putString("type",data);
+		bundle.putString("keyboard",data);
 		fragment.setArguments(bundle);
 	} else if (type.equals(titles[1])) {//音乐资讯
 		fragment=(new NewsFragment());

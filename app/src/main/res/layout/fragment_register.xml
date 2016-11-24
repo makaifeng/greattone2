@@ -113,6 +113,7 @@
                 android:ellipsize="end"
                 android:hint="手机号"
                 android:inputType="phone"
+                android:maxLength="15"
 				android:singleLine="true"
                 android:padding="10.0dip"
                 android:text=""

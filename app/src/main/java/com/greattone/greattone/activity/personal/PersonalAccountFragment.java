@@ -1,5 +1,6 @@
 package com.greattone.greattone.activity.personal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -65,8 +66,8 @@ public class PersonalAccountFragment extends BaseFragment {
 //				commit();
 				startActivity(new Intent(context, ChangPasswordActivity.class));
 				break;
-			case R.id.frag_account_bandphone:
-				 startActivity(new Intent(context, BindPhoneAct.class));
+			case R.id.frag_account_bandphone://修改手机号
+				 startActivityForResult(new Intent(context, BindPhoneAct.class),22);
 				break;
 			default:
 				break;
@@ -74,5 +75,11 @@ public class PersonalAccountFragment extends BaseFragment {
 		}
 	};
 
-	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode==22&&resultCode== Activity.RESULT_OK){
+			initViewData();
+		}
+	}
 }
