@@ -204,6 +204,7 @@ private void getGroup() {
  * 上传视频
  */
 	private void showUpdateVideo() {
+		classid="73";
 		isShowPic=false;
 		ll_desc.setVisibility(View.GONE);
 		tv_upload.setText("上传参赛视频");
@@ -216,10 +217,12 @@ private void getGroup() {
 	 * 上传图片
 	 */
 	private void showUpdatePicture() {
+		classid="104";
 		isShowPic=true;
 		ll_desc.setVisibility(View.VISIBLE);
+		et_music.setHint("活动曲目");
 		tv_upload.setText("选择个人照片");
-		ll_apply_music.setVisibility(View.GONE);
+//		ll_apply_music.setVisibility(View.GONE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_PICTURE,9);
 		gv_pic.setAdapter(adapter);
 	}
@@ -386,12 +389,12 @@ private void getGroup() {
 			toast(getResources().getString(R.string.请填写详细地址));
 			return;
 		}
-		if (!isShowPic){
+//		if (!isShowPic){
 			if (TextUtils.isEmpty(music)) {
 				toast(getResources().getString(R.string.请填写活动曲目));
 				return;
 			}
-		}
+//		}
 		if (TextUtils.isEmpty(teach)) {
 			toast(getResources().getString(R.string.请填写推荐老师));
 			return;

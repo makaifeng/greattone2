@@ -230,8 +230,7 @@ UpdateFileListener listener=new UpdateFileListener() {
 		public void onUploadSucceed(UploadFileInfo info) {
 			status = Flag_Done;
 			preferences.edit().putInt("updateState", status).commit();
-			Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
-			sendBroadcast(intent);
+
 			if (preferences.getString("updateClassid", "11").equals("11")) {// 广场发帖
 				String videoUrl = endpoint.replace("http://", "http://" + testBucket
 				+ ".")
@@ -308,6 +307,8 @@ UpdateFileListener listener=new UpdateFileListener() {
 
 					@Override
 					public void setResponseHandle(Message2 message) {
+						Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
+						sendBroadcast(intent);
 						Toast.makeText(getApplicationContext(),
 								"发帖成功，请等待审核", Toast.LENGTH_LONG).show();
 						MyProgressDialog.Cancel();
@@ -349,6 +350,8 @@ UpdateFileListener listener=new UpdateFileListener() {
 
 					@Override
 					public void setResponseHandle(Message2 message) {
+						Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
+						sendBroadcast(intent);
 						Toast.makeText(getApplicationContext(),
 								"报名成功，请等待审核",
 								Toast.LENGTH_LONG).show();
@@ -380,6 +383,8 @@ UpdateFileListener listener=new UpdateFileListener() {
 
 					@Override
 					public void setResponseHandle(Message2 message) {
+						Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
+						sendBroadcast(intent);
 						Toast.makeText(getApplicationContext(),
 								message.getInfo(), Toast.LENGTH_LONG).show();
 					}
