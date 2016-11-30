@@ -132,7 +132,7 @@ private void getGroup() {
 		ll_apply_music=findViewById(R.id.ll_apply_music);
 		findViewById(R.id.activity_apply_commit).setOnClickListener(lis);
 		findViewById(R.id.ll_apply_sign_up).setOnClickListener(lis);
-		findViewById(R.id.ll_apply_game_area).setOnClickListener(lis);
+//		findViewById(R.id.ll_apply_game_area).setOnClickListener(lis);
 		this.tv_price = ((TextView) findViewById(R.id.activity_apply_paymoney));
 		this.tv_sing_up1 = ((TextView) findViewById(R.id.activity_apply_sign_up1));
 		tv_sing_up1	.setOnClickListener(lis);
@@ -188,7 +188,7 @@ private void getGroup() {
 		this.et_music.setText("");
 		this.et_teach.setText("");
 		this.et_teach_tel.setText("");
-//		this.tv_game_area.setText("全国");
+		this.tv_game_area.setText(getIntent().getStringExtra("title"));
 //		this.tv_sing_up.setText("钢琴");
 		
 	}

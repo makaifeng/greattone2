@@ -1,11 +1,5 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,6 +28,12 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** 海选报名-好琴师*/
 public class ApplyActivity3 extends BaseActivity {
@@ -164,7 +164,7 @@ private void getGroup() {
 		this.et_phone.setText(Data.myinfo.getPhone());
 		this.et_address.setText(Data.myinfo.getAddres());
 		this.et_music.setText("");
-		
+		this.tv_game_area.setText(getIntent().getStringExtra("title"));
 	}
 /**
  * 上传视频

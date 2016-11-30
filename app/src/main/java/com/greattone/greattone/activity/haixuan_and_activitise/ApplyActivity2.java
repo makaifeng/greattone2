@@ -1,10 +1,14 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
@@ -25,15 +29,11 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /** 海选报名-音乐精灵 */
 public class ApplyActivity2 extends BaseActivity {
@@ -159,6 +159,7 @@ private void getGroup() {
 		this.et_phone.setText(Data.myinfo.getPhone());
 		this.et_address.setText(Data.myinfo.getAddres());
 		this.et_music.setText("");
+		this.tv_game_area.setText(getIntent().getStringExtra("title"));
 		
 	}
 /**
