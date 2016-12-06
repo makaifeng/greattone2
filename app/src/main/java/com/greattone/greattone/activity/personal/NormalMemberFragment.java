@@ -425,7 +425,9 @@ public class NormalMemberFragment extends BaseFragment {
 							map.put("phone", str5);
 							map.put("smscode", str7);
 //						}
-						map.put("groupid", groupid+"");
+						if (groupid==1) {
+							map.put("putong_shenfen","爱乐人");
+						}
 						map.put("address", province);
 						map.put("address1", city);
 						map.put("address2", district);
