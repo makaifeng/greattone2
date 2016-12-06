@@ -4,6 +4,7 @@
         android:bottom="5dp"
         android:left="5dp"
         android:right="5dp"/>
+    <corners android:radius="4dp"/>
     <solid android:color="@color/red_b90006"/>
 
 </shape>

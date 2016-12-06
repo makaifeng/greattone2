@@ -1,6 +1,13 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -9,15 +16,7 @@ import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
+import java.util.List;
 @SuppressWarnings("deprecation")
 public class ClassRoomContentGridAdapter extends BaseAdapter {
 	private Context context;
@@ -60,6 +59,8 @@ public class ClassRoomContentGridAdapter extends BaseAdapter {
 					.findViewById(R.id.tv_telphone);//
 			holder.distance = (TextView) convertView
 					.findViewById(R.id.tv_distance);//
+			holder.fans = (TextView) convertView
+					.findViewById(R.id.tv_fans);//
 			Drawable drawable = context.getResources().getDrawable(
 					R.drawable.icon_jl);
 			drawable.setBounds(0, 0, DisplayUtil.dip2px(context, 10),
@@ -93,6 +94,8 @@ public class ClassRoomContentGridAdapter extends BaseAdapter {
 		TextView telphone;
 		/** 距离 */
 		TextView distance;
+		/** 粉丝数*/
+		TextView fans;
 		/** 头像 */
 		MyRoundImageView icon;
 		/** v符号 */
@@ -123,6 +126,7 @@ public class ClassRoomContentGridAdapter extends BaseAdapter {
 				}
 				distance.setText(userInfo.getDistance());
 //				icon.setOnClickListener(lis);
+				fans.setText("粉丝数："+userInfo.getFollownum());
 				if (userInfo.getVerification() == 1) {
 					vip.setVisibility(View.VISIBLE);
 				} else {

@@ -1,21 +1,20 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.Blog;
-import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class ActivitiesGridAdapter extends BaseAdapter {
 	private Context context;
@@ -53,10 +52,12 @@ public class ActivitiesGridAdapter extends BaseAdapter {
 			holder.name = (TextView) convertView.findViewById(R.id.tv_name);//
 			holder.introduction = (TextView) convertView
 					.findViewById(R.id.tv_introduction);//
+			holder.address = (TextView) convertView
+					.findViewById(R.id.tv_text3);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			LayoutParams params = new LayoutParams(
-					(screenWidth - DisplayUtil.dip2px(context, 10)),
-					(screenWidth - DisplayUtil.dip2px(context, 10)) * 3 / 4);
+					((screenWidth )* 2 / 5),
+					(screenWidth ) * 3* 2 / 5 / 4);
 			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {
@@ -69,6 +70,7 @@ public class ActivitiesGridAdapter extends BaseAdapter {
 	class ViewHolder {
 		TextView name;
 		TextView introduction;
+		TextView address;
 		ImageView icon;
 
 		public void setPosition(int position) {
@@ -89,7 +91,8 @@ public class ActivitiesGridAdapter extends BaseAdapter {
 			// Locale.CHINA);
 			name.setText(activitiesList.get(position).getTitle());
 			introduction.setText(activitiesList.get(position).getHuodong_1()+"-"+activitiesList.get(position).getHuodong_2()
-					+ "\n" + activitiesList.get(position).getDizhi());
+					);
+			address.setText(activitiesList.get(position).getDizhi());
 		}
 	}
 

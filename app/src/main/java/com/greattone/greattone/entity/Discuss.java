@@ -7,7 +7,35 @@ public class Discuss {
 	  private String url;
 	  private String content;
 	  private String classid;
-	  
+	  private String userinfo;
+	  private String newstime;
+	  private String onclick;
+	  private int ismember;
+
+	public int getIsmember() {
+		return ismember;
+	}
+
+	public void setIsmember(int ismember) {
+		this.ismember = ismember;
+	}
+
+	public String getOnclick() {
+		return onclick;
+	}
+
+	public void setOnclick(String onclick) {
+		this.onclick = onclick;
+	}
+
+	public String getNewstime() {
+		return newstime;
+	}
+
+	public void setNewstime(String newstime) {
+		this.newstime = newstime;
+	}
+
 	public String getClassid() {
 		return classid;
 	}
@@ -44,5 +72,12 @@ public class Discuss {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	  
+
+	public String getUserinfo() {
+		return userinfo;
+	}
+
+	public void setUserinfo(String userinfo) {
+		this.userinfo = userinfo;
+	}
 }

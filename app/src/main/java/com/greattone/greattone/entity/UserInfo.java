@@ -70,6 +70,7 @@ public class UserInfo implements Serializable {
 	String telephone;//
 	String postnum;//
 	String plnum;//
+	String shareurl;//分享链接
 	String fuzeren;//负责人
 	int sign;//是否完善资料
 	int cked;//是否认证
@@ -79,7 +80,14 @@ public class UserInfo implements Serializable {
 	int isfriend;//是否是好友
 	int isstudent;//是否是他的学生
 
-	
+	public String getShareurl() {
+		return shareurl;
+	}
+
+	public void setShareurl(String shareurl) {
+		this.shareurl = shareurl;
+	}
+
 	public int getCked() {
 		return cked;
 	}

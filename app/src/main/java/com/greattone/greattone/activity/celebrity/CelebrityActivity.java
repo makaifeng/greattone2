@@ -22,6 +22,7 @@ import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.MessageUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 import com.greattone.greattone.widget.PullToRefreshView;
 
@@ -187,7 +188,7 @@ public class CelebrityActivity extends BaseActivity   {
 				iv_icon);
 //		ImageLoaderUtil.getInstance()
 //				.setImagebyurl(people.getLevel().getPic(), iv_level);
-		tv_identity.setText(people.getGroupname()+"  |  "+people.getLevel().getName());
+		tv_identity.setText( MessageUtil.getIdentity(people)+"  |  "+people.getLevel().getName());
 		tv_fans.setText(getResources().getString(R.string.关注_hint) + people.getFeednum() + "  |  "+getResources().getString(R.string.粉丝数_hint)
 				+ people.getFollownum());//关注：1 | 粉丝数：0
 		if ( people.getIsfeed()==1) {

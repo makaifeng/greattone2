@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,7 +28,6 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.dialog.MyHintPopupWindow;
 import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.Permission;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
@@ -162,7 +162,7 @@ public class GalleryActivity extends BaseActivity {
 			// 指定开启系统相机的Action
 			intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 			intent.addCategory(Intent.CATEGORY_DEFAULT);
-			FILE_PATH = FileUtil.getLocalImageUrl(context, imgName);
+			FILE_PATH = getLocalImageFile(context) + "/" + imgName;
 			// 根据文件地址创建文件
 			File file = new File(FILE_PATH);
 			// 设置系统相机拍摄照片完成后图片文件的存放地址
@@ -179,11 +179,24 @@ public class GalleryActivity extends BaseActivity {
 	
 		
 	}
-
+	/**
+	 * 获取本地图片所在的目录
+	 *
+	 */
+	public  String getLocalImageFile(Context context) {
+		String path = null;
+		path = Environment.getExternalStorageDirectory()+"/"+context.getPackageName()+"/p2";
+		File file = new File(path);
+		if (!file.exists()) {
+			file.mkdirs();// 创建文件目录
+		}
+		return path;
+	}
 	/**
 	 * 获取图片或者视频数据
 	 */
 	private void getImages() {
+		//检查权限
 		if (Build.VERSION.SDK_INT >= 23) {
 			int checkCallPhonePermission = ContextCompat.checkSelfPermission(
 					getApplicationContext(),
@@ -214,12 +227,12 @@ public class GalleryActivity extends BaseActivity {
 			initAdapter();
 		}
 	};
-
+	ImageGridAdapter mAdapter;
+	ImageGridAdapter2 mAdapter2;
 	private void initAdapter() {
 		limit = getIntent().getIntExtra(Constants.EXTRA_PHOTO_LIMIT,
 				Integer.MAX_VALUE);
-		 ImageGridAdapter mAdapter;
-		 ImageGridAdapter2 mAdapter2;
+
 		if (type==TYPE_VIDEO) {
 			mAdapter2 = new ImageGridAdapter2(context, true, type, selectedCount);
 			mAdapter2.setChoseImageListener(mViewImageListener);
@@ -328,7 +341,31 @@ public class GalleryActivity extends BaseActivity {
 		// 相机拍照完成后，返回图片路径
 		if (requestCode == 0) {
 			if (resultCode == Activity.RESULT_OK) {
-				getImages();
+				if (type == TYPE_VIDEO) {
+					getImages();
+				}else 	if (type == TYPE_PICTURE){
+					if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+						//将图片注册到相册
+					Uri localUri = Uri.fromFile(new File(FILE_PATH));
+					Intent localIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, localUri);
+					sendBroadcast(localIntent);
+					}
+					getImages();
+//					//将图片注册到相册
+//					Uri localUri = Uri.fromFile(new File(FILE_PATH));
+//					Intent localIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, localUri);
+//					sendBroadcast(localIntent);
+//					//添加到集合
+//					ImageBean imageBean=new ImageBean();
+//					imageBean.setPath("file://" +FILE_PATH);
+//					imageBean.setSeleted(false);
+//					ArrayList<ImageBean> mImages2=new ArrayList<>();
+//					mImages2.addAll(mImages);
+//					mImages=new ArrayList<>();
+//					mImages.add(imageBean);
+//					mImages.addAll(mImages2);
+//					mAdapter.swapDatas(mImages);
+				}
 			} else {
 			}
 		}

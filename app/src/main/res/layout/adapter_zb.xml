@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="5dp"
     android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@null"
-        android:src="@drawable/ic_camera"/>
+        android:scaleType="fitXY" />
 
     <com.greattone.greattone.widget.MyTextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iv_icon"
-        android:layout_toEndOf="@+id/iv_icon"
         android:padding="5dp"
         android:singleLine="true"
         android:textSize="15sp"
@@ -28,9 +25,6 @@
         android:id="@+id/tv_introduction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iv_icon"
-        android:layout_toEndOf="@+id/iv_icon"
-        android:layout_below="@+id/tv_name"
         android:padding="5dp"
         android:singleLine="true"
         android:textSize="15sp" />
@@ -38,12 +32,8 @@
         android:id="@+id/tv_text3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iv_icon"
-        android:layout_toEndOf="@+id/iv_icon"
-        android:layout_below="@+id/tv_introduction"
         android:padding="5dp"
-        android:maxLines="2"
-        android:textSize="15sp" 
-        android:visibility="visible"/>
+        android:textSize="15sp"
+        android:visibility="gone"/>
 
-</RelativeLayout>
+</LinearLayout>

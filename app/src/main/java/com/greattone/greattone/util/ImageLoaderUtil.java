@@ -1,12 +1,10 @@
 package com.greattone.greattone.util;
 
-import java.io.File;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ImageView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.data.Constants;
@@ -22,6 +20,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+import java.io.File;
 
 public class ImageLoaderUtil {
 	// private String cacheDirName = "/ImageLoader/cache";

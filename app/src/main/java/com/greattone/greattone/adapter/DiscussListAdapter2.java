@@ -8,21 +8,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.entity.Discuss;
-import com.greattone.greattone.entity.UserInfo;
-import com.greattone.greattone.util.ImageLoaderUtil;
-import com.greattone.greattone.util.LanguageUtil;
-import com.greattone.greattone.util.Textutil;
 
 import java.util.List;
 
-public class DiscussListAdapter extends BaseAdapter {
+public class DiscussListAdapter2 extends BaseAdapter {
 	private Context context;
 	private List<Discuss> list;
 
-	public DiscussListAdapter(Context context, List<Discuss> list) {
+	public DiscussListAdapter2(Context context, List<Discuss> list) {
 		this.list = list;
 		this.context = context;
 	}
@@ -73,53 +68,14 @@ public class DiscussListAdapter extends BaseAdapter {
 		private TextView time;
 		private TextView onclick;
 		private ImageView icon;
-		UserInfo userInfo;
    private  void setPosition(int position ){
+		   name.setVisibility(View.GONE);
+		   level.setVisibility(View.GONE);
+		   time.setVisibility(View.GONE);
+		   onclick.setVisibility(View.GONE);
+
 	   content.setText(list.get(position).getTitle());
-	   if (list.get(position).getIsmember()==0){
-		   name.setVisibility(View.GONE);
-		   level.setVisibility(View.GONE);
-		   time.setVisibility(View.GONE);
-		   onclick.setVisibility(View.GONE);
-		   return;
-	   }
-	   if (list.get(position).getUserinfo()!=null&&list.get(position).getUserinfo().startsWith("{")){
-		    userInfo= JSON.parseObject(list.get(position).getUserinfo(),UserInfo.class);
-		   name.setText(getLanguageText("作者：")+userInfo.getUsername());
-		   level.setText(userInfo.getLevel().getName());
-		   time.setText(getLanguageText("发帖时间：")+list.get(position).getNewstime());
-		   onclick.setText(getLanguageText("点击量：")+list.get(position).getOnclick());
-		   ImageLoaderUtil.getInstance().setImagebyurl(userInfo.getUserpic(),icon);
-	   }else {
-		   name.setVisibility(View.GONE);
-		   level.setVisibility(View.GONE);
-		   time.setVisibility(View.GONE);
-		   onclick.setVisibility(View.GONE);
-	   }
-
-	   //		if (list.get(position).getContent()==null||list.get(position).getContent().equals("")) {
-//			holder.content.setVisibility(View.GONE);
-//		}else {
-//			holder.content.setVisibility(View.VISIBLE);
-//			holder.content.setText(list.get(position).getContent());
-//		}
-//	   if (position != 0) {
-//		   content.setVisibility(View.GONE);
-//	   }
-
-
+	   icon.setImageResource(R.drawable.icon_next);
    }
-		private CharSequence getLanguageText(CharSequence text){
-			try {
-				if (LanguageUtil.getLanguage().equals("TW")) {
-                    if (text!=null&&text!="") {
-                        text= Textutil.Sim2Tra(text);
-                    }
-                }
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return text;
-		}
 	}
 }

@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.discuss;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +17,7 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
 import com.greattone.greattone.activity.WebActivity;
-import com.greattone.greattone.adapter.DiscussListAdapter;
+import com.greattone.greattone.adapter.DiscussListAdapter2;
 import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
@@ -35,6 +31,10 @@ import com.greattone.greattone.widget.MyListView;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /** 论坛主页 */
 public class DiscussFragment extends BaseFragment {
@@ -95,7 +95,7 @@ public class DiscussFragment extends BaseFragment {
 		gv_content = (MyGridView) rootView.findViewById(R.id.gv_content);//
 		gv_content.setOnItemClickListener(listener);
 		isInitView = true;
-		lv_content.setAdapter(new DiscussListAdapter(context, mList));
+		lv_content.setAdapter(new DiscussListAdapter2(context, mList));
 		gv_content.setAdapter(new DiscussGridAdapter(context));
 		// pull_to_refresh.setOnHeaderRefreshListener(headerRefreshListener);
 		// pull_to_refresh.setOnFooterRefreshListener(footerRefreshListener);
@@ -127,7 +127,7 @@ public class DiscussFragment extends BaseFragment {
 						// JSON.parseObject(message.getData()).getString(
 						// "bbscate"), BBSCate.class);
 						if (isInitView) {
-							lv_content.setAdapter(new DiscussListAdapter(
+							lv_content.setAdapter(new DiscussListAdapter2(
 									context, mList));
 							gv_content.setAdapter(new DiscussGridAdapter(
 									context));

@@ -32,7 +32,12 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/iv_icon"
                 android:layout_toRightOf="@+id/iv_icon" />
-
+            <ImageView android:id="@+id/iv_share"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/user_share"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"/>
             <com.greattone.greattone.widget.MyTextView
                 android:id="@+id/tv_identity"
                 android:layout_width="wrap_content"

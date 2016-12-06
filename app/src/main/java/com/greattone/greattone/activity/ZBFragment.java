@@ -1,21 +1,5 @@
 package com.greattone.greattone.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
-import com.greattone.greattone.adapter.ZBContentListAdapter;
-import com.greattone.greattone.data.Data;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.HaiXuanZB;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
-import com.greattone.greattone.widget.PullToRefreshView;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +15,22 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+
+import com.alibaba.fastjson.JSON;
+import com.greattone.greattone.R;
+import com.greattone.greattone.adapter.ZBContentListAdapter;
+import com.greattone.greattone.data.Data;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.entity.HaiXuanZB;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.HttpUtil;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.widget.PullToRefreshView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 直播
@@ -74,7 +74,7 @@ public class ZBFragment extends BaseFragment {
 //	private String orderby;
 	int orderbyposition;
 private RadioGroup radiogroup;
-private int fillter;
+private int fillter=2;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,11 +104,12 @@ private int fillter;
 //			}
 //		});
 		radiogroup = (RadioGroup) rootView.findViewById(R.id.radiogroup);
-		((RadioButton)rootView.findViewById(R.id.radioButton1)).setText("正在直播");
+		((RadioButton)rootView.findViewById(R.id.radioButton1)).setText("历史回顾");
 		((RadioButton)rootView.findViewById(R.id.radioButton2)).setText("直播预告");
-		((RadioButton)rootView.findViewById(R.id.radioButton3)).setText("历史回顾");
+		((RadioButton)rootView.findViewById(R.id.radioButton3)).setText("正在直播");
 		((RadioButton)rootView.findViewById(R.id.radioButton4)).setVisibility(View.GONE);
 		radiogroup.check(R.id.radioButton1);
+
 		radiogroup.setOnCheckedChangeListener(listener);
 		pull_to_refresh = (PullToRefreshView)rootView. findViewById(R.id.pull_to_refresh);//
 		lv_content = (ListView)rootView. findViewById(R.id.lv_content);
@@ -125,13 +126,13 @@ private int fillter;
 		public void onCheckedChanged(RadioGroup group, int checkedId) {
 			switch (checkedId) {
 			case R.id.radioButton1:
-				fillter=0;
+				fillter=2;
 				break;
 			case R.id.radioButton2:
 				fillter=1;
 				break;
 			case R.id.radioButton3:
-				fillter=2;
+				fillter=0;
 				break;
 
 			default:

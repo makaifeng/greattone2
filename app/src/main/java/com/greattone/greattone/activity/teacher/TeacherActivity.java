@@ -24,12 +24,14 @@ import com.greattone.greattone.activity2.RecommendedVideoActivity;
 import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.SharePopWindow;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.UserInfo;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.MessageUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 
 /** 老师详情 */
@@ -68,6 +70,7 @@ public class TeacherActivity extends BaseActivity {
 	private TextView tv_student;
 	private TextView tv_tlq;
 	private TextView tv_table;
+	private ImageView iv_share;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,8 @@ public class TeacherActivity extends BaseActivity {
 
 		icon = (MyRoundImageView) findViewById(R.id.iv_icon);
 		name = (TextView) findViewById(R.id.tv_name);
+		iv_share = (ImageView) findViewById(R.id.iv_share);
+		iv_share.setOnClickListener(lis);
 		identity = (TextView) findViewById(R.id.tv_identity);
 //		level = (ImageView) findViewById(R.id.iv_level);
 		level = (TextView) findViewById(R.id.tv_level);
@@ -208,6 +213,11 @@ public class TeacherActivity extends BaseActivity {
 					intent.putExtra("id", people.getUserid() + "");
 					intent.putExtra("groupid",people.getGroupid());
 				context.startActivity(intent);
+			} else if (v == iv_share) {// 分享
+				SharePopWindow.build(context).setTitle(people.getUsername() +"的空间——好琴声，音乐人的交流平台！")
+						.setContent(people.getUsername() +"的空间")
+						.setTOargetUrl(people.getShareurl())
+						.setIconPath(people.getUserpic()).show();
 			}
 		}
 	};
@@ -235,7 +245,7 @@ public class TeacherActivity extends BaseActivity {
 		// 名字
 		name.setText(people.getUsername());
 		// 身份
-		identity.setText(getResources().getString(R.string.identity)+ people.getGroupname());
+		identity.setText(getResources().getString(R.string.identity)+ MessageUtil.getIdentity(people));
 		// 等级
 //		ImageLoaderUtil.getInstance().setImagebyurl(people.getLevel().getPic(), level);
 		level.setText(getResources().getString(R.string.level_hint)+ people.getLevel().getName());

@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,8 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.HaiXuanZB;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class ZBContentListAdapter extends BaseAdapter {
 	private Context context;
@@ -49,7 +49,7 @@ public class ZBContentListAdapter extends BaseAdapter {
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.adapter_activities, group, false);
+					R.layout.adapter_zb, group, false);
 			holder.title = (TextView) convertView.findViewById(R.id.tv_name);//
 			holder.name = (TextView) convertView
 					.findViewById(R.id.tv_introduction);//

@@ -1,16 +1,5 @@
 package com.greattone.greattone.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.ref.WeakReference;
-import java.util.LinkedList;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-
-import libcore.io.DiskLruCache;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -22,6 +11,18 @@ import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.greattone.greattone.MyApplication;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.ref.WeakReference;
+import java.util.LinkedList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+
+import libcore.io.DiskLruCache;
 
 /**
  * @Class: ImageLoader
@@ -263,6 +264,7 @@ public class ImageLoader {
             if(bitmap == null) {
                 bitmap = decodeSampledBitmapFromFile(path, params[0],
                         params[1]);
+                if(bitmap != null)
                 BITMAP_CACHE_EXECUTOR.execute(new DiskCacheThread(path, bitmap));
             }
             mPoolSemaphore.release();

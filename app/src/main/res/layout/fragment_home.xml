@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5.0dip"
                         android:gravity="center_horizontal"
-                        android:text="直播课堂"
+                        android:text="直播中心"
                         android:textColor="@color/white"
                           android:textSize="16.0sp"    />
                 </LinearLayout>

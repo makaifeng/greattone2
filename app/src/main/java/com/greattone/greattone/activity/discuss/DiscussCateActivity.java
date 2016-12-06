@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.discuss;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -25,11 +21,15 @@ import com.greattone.greattone.entity.Discuss;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**讨论专区列表*/
 public class DiscussCateActivity extends BaseActivity {
 	private PullToRefreshView pull_to_refresh;

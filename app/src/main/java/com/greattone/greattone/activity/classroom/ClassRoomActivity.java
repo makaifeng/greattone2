@@ -1,7 +1,13 @@
 package com.greattone.greattone.activity.classroom;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -15,21 +21,15 @@ import com.greattone.greattone.activity2.RecommendedVideoActivity;
 import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.SharePopWindow;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.UserInfo;
-import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyBanner;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
 /** 教室详情 */
 @SuppressWarnings("deprecation")
@@ -39,13 +39,13 @@ public class ClassRoomActivity extends BaseActivity {
 	/** 名字 */
 	private TextView name;
 	/** 推荐视频 */
-	private TextView recommended_video;
+	private View recommended_video;
 	/** 课程中心 */
-	private TextView course_center;
+	private View course_center;
 	/** 介绍评论 */
-	private TextView comments;
+	private View comments;
 	/** 活动公告 */
-	private TextView announcements;
+	private View announcements;
 	/** 私信 */
 	private TextView talk;
 	/** 关注 */
@@ -65,13 +65,14 @@ public class ClassRoomActivity extends BaseActivity {
 	/** 查看地图 */
 	private TextView tv_see_map;
 	/** 音乐老师 */
-	private TextView tv_teacher;
+	private View tv_teacher;
 	/** 琴房租赁 */
-	private TextView tv_room_lease;
+	private View tv_room_lease;
 	/** 轮播控件 */
 	private MyBanner mybanner;
-	private TextView tv_student;
-	private TextView tv_tlq;
+	private View tv_student;
+	private View tv_tlq;
+	private ImageView iv_share;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,8 @@ public class ClassRoomActivity extends BaseActivity {
 		mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth,
 				screenWidth * 3 / 5));
 		name = (TextView) findViewById(R.id.tv_name);
+		iv_share = (ImageView) findViewById(R.id.iv_share);
+		iv_share.setOnClickListener(lis);
 //		ratingbar = (RatingBar) findViewById(R.id.ratingbar);
 		tv_service = (TextView) findViewById(R.id.tv_company);
 		tv_environment = (TextView) findViewById(R.id.tv_environment);
@@ -102,33 +105,22 @@ public class ClassRoomActivity extends BaseActivity {
 		tv_see_map = (TextView) findViewById(R.id.tv_see_map);
 		tv_see_map.setOnClickListener(lis);
 
-		recommended_video = (TextView) findViewById(R.id.tv_recommended_video);
-		Drawable drawable = getResources().getDrawable(R.drawable.icon_next);
-		drawable.setBounds(0, 0, DisplayUtil.dip2px(context, 15),
-				DisplayUtil.dip2px(context, 15));
-		recommended_video.setCompoundDrawables(null, null, drawable, null);
+		recommended_video =  findViewById(R.id.tv_recommended_video);
 		recommended_video.setOnClickListener(lis);
-		course_center = (TextView) findViewById(R.id.tv_course_center);
-		course_center.setCompoundDrawables(null, null, drawable, null);
+		course_center =  findViewById(R.id.tv_course_center);
 		course_center.setOnClickListener(lis);
-		tv_room_lease = (TextView) findViewById(R.id.tv_room_lease);
-		tv_room_lease.setCompoundDrawables(null, null, drawable, null);
+		tv_room_lease =  findViewById(R.id.tv_room_lease);
 		tv_room_lease.setOnClickListener(lis);
-		tv_student = (TextView) findViewById(R.id.tv_student);
-		tv_student.setCompoundDrawables(null, null, drawable, null);
+		tv_student =  findViewById(R.id.tv_student);
 		tv_student.setOnClickListener(lis);
-		tv_teacher = (TextView) findViewById(R.id.tv_teacher);
-		tv_teacher.setCompoundDrawables(null, null, drawable, null);
+		tv_teacher =  findViewById(R.id.tv_teacher);
 		tv_teacher.setOnClickListener(lis);
-		comments = (TextView) findViewById(R.id.tv_comments);
-		comments.setCompoundDrawables(null, null, drawable, null);
+		comments =  findViewById(R.id.tv_comments);
 		comments.setOnClickListener(lis);
-		announcements = (TextView) findViewById(R.id.tv_announcements);
-		announcements.setCompoundDrawables(null, null, drawable, null);
+		announcements =  findViewById(R.id.tv_announcements);
 		announcements.setOnClickListener(lis);
 		announcements.setVisibility(View.VISIBLE);
-		tv_tlq = (TextView) findViewById(R.id.tv_tlq);
-		tv_tlq.setCompoundDrawables(null, null, drawable, null);
+		tv_tlq =  findViewById(R.id.tv_tlq);
 		tv_tlq.setOnClickListener(lis);
 		talk = (TextView) findViewById(R.id.tv_talk);
 		talk.setOnClickListener(lis);
@@ -233,6 +225,11 @@ public class ClassRoomActivity extends BaseActivity {
 					intent.putExtra("address", people.getAddres());
 				}
 				startActivity(intent);
+			} else if (v == iv_share) {// 分享
+				SharePopWindow.build(context).setTitle(people.getUsername() +"的空间——好琴声，音乐人的交流平台！")
+						.setContent(people.getUsername() +"的空间")
+						.setTOargetUrl(people.getShareurl())
+						.setIconPath(people.getUserpic()).show();
 			}
 		}
 	};
