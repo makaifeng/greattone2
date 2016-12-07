@@ -28,7 +28,7 @@ import com.greattone.greattone.activity.BaseFragment;
 import com.greattone.greattone.activity.EntryActivity;
 import com.greattone.greattone.activity.SearchAct;
 import com.greattone.greattone.activity.WebActivity;
-import com.greattone.greattone.activity.brand.MusicalInstrumentBrandActivity;
+import com.greattone.greattone.activity.brand.MusicalInstrumentBrandActivity2;
 import com.greattone.greattone.activity.yuepu.YuePuAct;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.entity.ImageData;
@@ -163,7 +163,7 @@ public void onCreate(Bundle savedInstanceState) {
 
 				break;
 			case R.id.ll_pingpai://乐器品牌
-				Intent intent2 = new Intent(context, MusicalInstrumentBrandActivity.class);
+				Intent intent2 = new Intent(context, MusicalInstrumentBrandActivity2.class);
 				startActivity(intent2);
 				break;
 			case R.id.fragment_home_yuepu://乐谱中心
@@ -184,7 +184,7 @@ public void onCreate(Bundle savedInstanceState) {
 	/**
 	 * 获取广告栏数据
 	 * 
-	 * @return
+	 *
 	 */
 	private void getAdvList() {
 		HashMap<String, String> map = new HashMap<String, String>();

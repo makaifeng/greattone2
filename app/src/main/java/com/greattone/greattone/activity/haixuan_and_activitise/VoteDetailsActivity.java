@@ -1,9 +1,18 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
@@ -31,19 +40,10 @@ import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyBanner;
 import com.greattone.greattone.widget.PullToRefreshView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /** 海选投票详情页面 */
 public class VoteDetailsActivity extends BaseActivity {
@@ -128,12 +128,6 @@ public class VoteDetailsActivity extends BaseActivity {
 		this.m_comment = ((TextView) headView.findViewById(R.id.activity_video_details_comment));
 		this.m_vote = ((TextView) headView.findViewById(R.id.activity_video_details_vote));
 //		this.lv_content = ((MyListView) findViewById(R.id.activity_video_details_lv));
-		if (history==0) {
-			headView.	findViewById(R.id.activity_video_details_vote_on).setOnClickListener(
-					lis);
-		}else{
-			headView.	findViewById(R.id.activity_video_details_vote_on).setVisibility(View.GONE);
-		}
 		headView.findViewById(R.id.activity_video_details_mycomment).setOnClickListener(
 				lis);
 		

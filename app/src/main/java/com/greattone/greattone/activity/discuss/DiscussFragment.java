@@ -17,12 +17,12 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
 import com.greattone.greattone.activity.WebActivity;
-import com.greattone.greattone.adapter.DiscussListAdapter2;
 import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Discuss;
 import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
@@ -223,6 +223,52 @@ public class DiscussFragment extends BaseFragment {
 					colors[position]));
 			textview.setText(name[position]);
 			return convertView;
+		}
+	}
+	public class DiscussListAdapter2 extends BaseAdapter {
+		private Context context;
+		private List<Discuss> list;
+
+		public DiscussListAdapter2(Context context, List<Discuss> list) {
+			this.list = list;
+			this.context = context;
+		}
+
+		public int getCount() {
+			return list.size();
+		}
+
+		public Object getItem(int position) {
+			return this.list.get(position);
+		}
+
+		public long getItemId(int paramInt) {
+			return 0;
+		}
+
+		public View getView(int position, View convertView, ViewGroup group) {
+			ViewHolder holder;
+			if (convertView == null) {
+				holder = new ViewHolder();
+				convertView=new TextView(context);
+				holder.content = ((TextView)convertView);
+				holder.content.setPadding(0,DisplayUtil.dip2px(context,10),0,DisplayUtil.dip2px(context,10));
+				holder.content.setBackgroundColor(getResources().getColor(R.color.white));
+				holder.content.setTextSize(15);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+
+			holder.setPosition(position);
+			return convertView;
+		}
+
+		private class ViewHolder {
+			private TextView content;
+			private  void setPosition(int position ){
+				content.setText(list.get(position).getTitle());
+			}
 		}
 	}
 }

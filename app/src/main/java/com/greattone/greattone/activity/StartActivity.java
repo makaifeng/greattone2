@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -19,8 +15,8 @@ import com.alibaba.fastjson.JSONException;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.android.volley.VolleyError;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnBtnItemClickListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.adapter.StartPagerAdapter;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.entity.Filter;
@@ -36,6 +32,10 @@ import com.greattone.greattone.util.LanguageUtil;
 import com.greattone.greattone.util.LocationUtil;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class StartActivity extends BaseActivity {
 	boolean isLotation;
@@ -168,6 +168,9 @@ private void initView() {
 							Data.filter_classroom = JSON.parseObject(
 									JSON.parseObject(message.getData()).getString(
 											"music_classroom"), Filter.class);
+							Data.filter_pinpai = JSON.parseObject(
+									JSON.parseObject(message.getData()).getString(
+											"pinpai_type"), Filter.class);
 //							Data.haiXuanFilter = JSON.parseObject(
 //									JSON.parseObject(message.getData()).getString(
 //											"hxbm"), HaiXuanFilter.class);

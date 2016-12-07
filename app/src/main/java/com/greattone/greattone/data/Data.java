@@ -1,11 +1,5 @@
 package com.greattone.greattone.data;
 
-import java.io.UnsupportedEncodingException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import com.amap.api.location.AMapLocation;
 import com.greattone.greattone.entity.BaseData;
 import com.greattone.greattone.entity.Fava;
@@ -15,6 +9,12 @@ import com.greattone.greattone.entity.LoginInfo;
 import com.greattone.greattone.entity.Model;
 import com.greattone.greattone.entity.UserInfo;
 
+import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class Data {
 	public static LoginInfo user = new LoginInfo();
 	public static UserInfo myinfo= new UserInfo();
@@ -23,6 +23,7 @@ public class Data {
 	public static Filter filter_putong = new Filter();
 	public static Filter filter_teacher = new Filter();
 	public static Filter filter_classroom = new Filter();
+	public static Filter filter_pinpai = new Filter();
 
 	public static List<Fava> favaList = new ArrayList<Fava>();
 	public static AMapLocation myLocation = new AMapLocation("0");
@@ -384,7 +385,7 @@ public class Data {
 	/**
 	 * 获取星期
 	 * 
-	 * @param c
+	 * @param milliseconds
 	 */
 	public static String getWeekData(long milliseconds) {
 		Calendar c = Calendar.getInstance();

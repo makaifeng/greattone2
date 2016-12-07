@@ -17,8 +17,7 @@
         <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/midtext" android:textColor="#777777" android:id="@+id/tv_time" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="发帖时间：" android:layout_below="@+id/tv_name"/>
         <com.greattone.greattone.widget.MyTextView android:textSize="@dimen/midtext" android:textColor="#777777" android:id="@+id/tv_onclick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="点击量：" android:layout_below="@+id/tv_name" android:layout_marginLeft="15dp" android:layout_toRightOf="@+id/tv_time"/>
     </RelativeLayout>
-    <com.greattone.greattone.widget.MyRoundImageView android:id="@+id/iv_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/icon_next"
-        android:maxHeight="30dp"
-        app:differ_radius="30"
-        android:maxWidth="30dp"/>
+    <com.greattone.greattone.widget.MyRoundImageView android:id="@+id/iv_icon" android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/icon_next"
+        app:differ_radius="20"
+        />
 </LinearLayout>
