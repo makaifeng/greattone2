@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,8 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.Friend;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class FensGridAdapter extends BaseAdapter {
 	private Context context;
@@ -53,7 +53,7 @@ public class FensGridAdapter extends BaseAdapter {
 			holder.name = (TextView) convertView.findViewById(R.id.tv_name);//
 			holder.identity = (TextView) convertView.findViewById(R.id.tv_identity);//
 			holder.fans = (TextView) convertView.findViewById(R.id.tv_fans);//
-			holder.level = (ImageView) convertView.findViewById(R.id.iv_level);//
+			holder.level = (TextView) convertView.findViewById(R.id.tv_level);//
 			holder.vip = (ImageView) convertView.findViewById(R.id.iv_vip);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -83,7 +83,7 @@ public class FensGridAdapter extends BaseAdapter {
 		/**
 		 *  等级
 		 */
-		ImageView level;
+		TextView level;
 		/**
 		 * 头像
 		 */
@@ -97,6 +97,7 @@ public class FensGridAdapter extends BaseAdapter {
 			name.setText(userList.get(position).getUsername());
 			fans.setText(context.getResources().getString(R.string.粉丝数_hint)+userList.get(position).getFollownum());
 			identity.setText(context.getResources().getString(R.string.identity)+userList.get(position).getGroupname());
+			level.setText(context.getResources().getString(R.string.level_hint)+userList.get(position).getLevel().getName());
 //					ImageLoaderUtil.getInstance().setImagebyurl(
 //			userList.get(position).getLevel().getPic(), level);
 //			if (userList.get(position).getVerification()==1) {

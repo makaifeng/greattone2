@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,9 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.UserInfo;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.MessageUtil;
+
+import java.util.List;
 
 public class ClassRoomTeactherGridAdapter extends BaseAdapter {
 	private Context context;
@@ -100,7 +101,7 @@ public class ClassRoomTeactherGridAdapter extends BaseAdapter {
 			//粉丝数
 			fans.setText(context.getResources().getString(R.string.粉丝数_hint)+userList.get(position).getFollownum());
 			//身份
-			identity.setText(context.getResources().getString(R.string.identity)+userList.get(position).getTeacher_type());
+			identity.setText(context.getResources().getString(R.string.identity)+ MessageUtil.getIdentity(userList.get(position)));
 			//等级
 			level.setText(context.getResources().getString(R.string.level_hint)+userList.get(position).getLevel().getName());
 //			ImageLoaderUtil.getInstance().setImagebyurl(

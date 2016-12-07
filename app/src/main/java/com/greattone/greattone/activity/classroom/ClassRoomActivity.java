@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.celebrity.CelebrityActivity;
 import com.greattone.greattone.activity.chat.MyChatActivity;
 import com.greattone.greattone.activity.course.CourseCenterActivity;
 import com.greattone.greattone.activity.map.ShowMapActivity;
@@ -94,6 +95,7 @@ public class ClassRoomActivity extends BaseActivity {
 		mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth,
 				screenWidth * 3 / 5));
 		name = (TextView) findViewById(R.id.tv_name);
+		name.setOnClickListener(lis);
 		iv_share = (ImageView) findViewById(R.id.iv_share);
 		iv_share.setOnClickListener(lis);
 //		ratingbar = (RatingBar) findViewById(R.id.ratingbar);
@@ -230,6 +232,12 @@ public class ClassRoomActivity extends BaseActivity {
 						.setContent(people.getUsername() +"的空间")
 						.setTOargetUrl(people.getShareurl())
 						.setIconPath(people.getUserpic()).show();
+			} else if (v == name) {// 去他空间
+				Intent intent = new Intent();
+				intent.setClass(context, CelebrityActivity.class);
+				intent.putExtra("id", people.getUserid() + "");
+				intent.putExtra("groupid",people.getGroupid());
+				startActivity(intent);
 			}
 		}
 	};

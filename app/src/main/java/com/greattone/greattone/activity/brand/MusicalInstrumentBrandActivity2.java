@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
@@ -80,6 +81,7 @@ public class MusicalInstrumentBrandActivity2 extends BaseActivity {
 		gv_content.setPadding(DisplayUtil.dip2px(context, 5), DisplayUtil.dip2px(context, 10),
 				DisplayUtil.dip2px(context, 5), 0);
 		gv_content.setClipToPadding(false);
+		gv_content.setOnItemClickListener(itemClickListener);
 		pull_to_refresh.setOnHeaderRefreshListener(headerRefreshListener);
 		pull_to_refresh.setOnFooterRefreshListener(footerRefreshListener);
 		initContentAdapter();
@@ -99,6 +101,15 @@ public class MusicalInstrumentBrandActivity2 extends BaseActivity {
 			page = 1;
 			musicBrandList.clear();
 			getMusicBrands();
+		}
+	};
+	AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+			Intent intent = new Intent(context, BrandDetailActivity.class);
+			intent.putExtra("userid", musicBrandList.get(position).getUserid());
+			startActivity(intent);
 		}
 	};
 	private OnClickListener lis=new OnClickListener() {

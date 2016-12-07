@@ -1,8 +1,5 @@
 package com.greattone.greattone.activity.post;
 
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +19,9 @@ import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 发帖
@@ -94,7 +94,8 @@ public class PostFragment extends BaseFragment {
 //			if (Data.myinfo.getSign() == 1) {
 			Intent intent=new Intent();
 			if (imageUrlList!=null&&imageUrlList.size()>0) {
-			intent.putExtra("ggUrl",imageUrlList.get(0).getPic());
+				int position= (int) (Math.random()*imageUrlList.size());
+			intent.putExtra("ggUrl",imageUrlList.get(position).getPic());
 			}
 			if (v == ll_video) {
 				intent.setClass(context, PostVideoActivity.class);
@@ -133,7 +134,8 @@ public class PostFragment extends BaseFragment {
 								&& !TextUtils.isEmpty(message.getData())) {
 							imageUrlList=JSON.parseArray(message.getData(), ImageData.class);
 						}
-						ImageLoaderUtil.getInstance().setImagebyurl(imageUrlList.get(0).getPic(), iv_gg);
+						int position= (int) (Math.random()*imageUrlList.size());
+						ImageLoaderUtil.getInstance().setImagebyurl(imageUrlList.get(position).getPic(), iv_gg);
 					}
 
 				},null));

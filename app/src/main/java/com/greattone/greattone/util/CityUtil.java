@@ -1,19 +1,17 @@
 package com.greattone.greattone.util;
 
+import android.content.Context;
+
+import com.alibaba.fastjson.JSON;
+import com.greattone.greattone.entity.City;
+import com.greattone.greattone.entity.District;
+import com.greattone.greattone.entity.Province;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import android.content.Context;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.activity.PinyinComparator;
-import com.greattone.greattone.entity.City;
-import com.greattone.greattone.entity.District;
-import com.greattone.greattone.entity.Province;
 
 public class CityUtil {
 	static List<Province> provinceList = new ArrayList<Province>();
@@ -128,7 +126,7 @@ public class CityUtil {
 			list.add(provinceList.get(i).getName());
 		}
 //		Collections.sort(list,Collator.getInstance(java.util.Locale.CHINA));//注意：是根据的汉字的拼音的字母排序的，而不是根据汉字一般的排序方法
-        Collections.sort(list, new PinyinComparator());  
+//        Collections.sort(list, new PinyinComparator());
 		return list;
 	}
 	/** 获取某省的城市 */
