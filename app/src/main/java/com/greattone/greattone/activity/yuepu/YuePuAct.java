@@ -1,28 +1,5 @@
 package com.greattone.greattone.activity.yuepu;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.activity.SearchAct;
-import com.greattone.greattone.adapter.YuePuAdapter;
-import com.greattone.greattone.data.ClassId;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.dialog.NormalPopuWindow;
-import com.greattone.greattone.dialog.NormalPopuWindow.OnItemClickBack;
-import com.greattone.greattone.entity.Column;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.entity.Yuepu;
-import com.greattone.greattone.util.HttpProxyUtil;
-import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
-import com.greattone.greattone.widget.PullToRefreshView;
-import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
-import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -33,6 +10,29 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.SearchAct;
+import com.greattone.greattone.adapter.YuePuAdapter;
+import com.greattone.greattone.data.ClassId;
+import com.greattone.greattone.data.Data;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.NormalPopuWindow;
+import com.greattone.greattone.dialog.NormalPopuWindow.OnItemClickBack;
+import com.greattone.greattone.entity.Column;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.entity.Yuepu;
+import com.greattone.greattone.util.HttpUtil;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.widget.PullToRefreshView;
+import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
+import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**
  * 乐谱中心列表
  * @author makaifeng
@@ -40,8 +40,8 @@ import android.widget.TextView;
  */
 public class YuePuAct extends BaseActivity {
 	List<Yuepu> yplist = new ArrayList<Yuepu>();
-	List<String> typeList  = new ArrayList<String>();
-	List<Column> classList  = new ArrayList<Column>();
+	List<String> styleList  = new ArrayList<String>();
+	List<Column> typeList  = new ArrayList<Column>();
 	private RadioGroup rg_group;
 	private TextView tv_name;
 	private PullToRefreshView pull_to_refresh;
@@ -52,7 +52,6 @@ public class YuePuAct extends BaseActivity {
 	private String keyboard;
 	private String type;
 	private TextView tv_type;
-	int num=0,all=2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +83,24 @@ public class YuePuAct extends BaseActivity {
 	}
 
 	private void getType() {
-		HttpProxyUtil.getYuepuType(context, new ResponseListener() {
 
-			@Override
-			public void setResponseHandle(Message2 message) {
-				if (message.getData() != null && message.getData().startsWith("{")) {
-					 typeList = JSON.parseArray( JSON.parseObject(message.getData()).getString("type"), String.class);
-					 classList = JSON.parseArray(JSON.parseObject(message.getData()).getString("class"), Column.class);
-				}
-				num++;
-				MyProgressDialog.Cancel(num,all);
-			}}, null);
+		if (Data.filter_yuepu!=null){
+			styleList=Data.filter_yuepu.getStyle();
+			typeList=Data.filter_yuepu.getType();
+		}else {
+			styleList.clear();
+			styleList.add("全部");
+			styleList.add("古典");
+			styleList.add("流行");
+			styleList.add("原创");
+			styleList.add("伴奏");
+			styleList.add("综合");
+			typeList.clear();
+			typeList.add(new Column("全部",8));
+			typeList.add(new Column("钢琴谱",38));
+			typeList.add(new Column("吉他谱",39));
+			typeList.add(new Column("提琴谱",105));
+		}
 	}
 	private void getData() {
 		MyProgressDialog.show(context);
@@ -121,8 +127,7 @@ public class YuePuAct extends BaseActivity {
 				}
 				pull_to_refresh.onHeaderRefreshComplete();
 				pull_to_refresh.onFooterRefreshComplete();
-				num++;
-				MyProgressDialog.Cancel(num,all);
+				MyProgressDialog.Cancel();
 			}
 		}, null));
 
@@ -138,7 +143,7 @@ public class YuePuAct extends BaseActivity {
 			switch (v.getId()) {
 			case R.id.ll_btn1:// 乐谱类型
 				list = new ArrayList<String>();
-				for (Column col : classList) {
+				for (Column col : typeList) {
 					list.add(col.getName());
 				}
 				popuWindow = new NormalPopuWindow(context, list, rg_group);
@@ -150,7 +155,7 @@ public class YuePuAct extends BaseActivity {
 							return;
 						}
 						tv_name.setText(text);
-						classid = classList.get(position).getClassid();
+						classid = typeList.get(position).getClassid();
 						page = 1;
 						yplist.clear();
 						getData();
@@ -159,7 +164,7 @@ public class YuePuAct extends BaseActivity {
 				popuWindow.show();
 				break;
 			case R.id.ll_btn2:// 风格
-				popuWindow = new NormalPopuWindow(context, typeList, rg_group);
+				popuWindow = new NormalPopuWindow(context, styleList, rg_group);
 				popuWindow.setOnItemClickBack(new OnItemClickBack() {
 
 					@Override

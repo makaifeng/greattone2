@@ -8,6 +8,7 @@ import com.greattone.greattone.entity.ImageData;
 import com.greattone.greattone.entity.LoginInfo;
 import com.greattone.greattone.entity.Model;
 import com.greattone.greattone.entity.UserInfo;
+import com.greattone.greattone.entity.Yuepu_type;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
@@ -24,6 +25,7 @@ public class Data {
 	public static Filter filter_teacher = new Filter();
 	public static Filter filter_classroom = new Filter();
 	public static Filter filter_pinpai = new Filter();
+	public static Yuepu_type filter_yuepu = new Yuepu_type();
 
 	public static List<Fava> favaList = new ArrayList<Fava>();
 	public static AMapLocation myLocation = new AMapLocation("0");

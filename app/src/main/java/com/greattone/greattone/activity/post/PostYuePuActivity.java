@@ -45,8 +45,8 @@ public class PostYuePuActivity extends BaseActivity {
 	private TextView tv_style;
 	private LinearLayout ll_style;
 	private EditText et_author;
-	List<String> typeList  = new ArrayList<String>();
-	List<Column> classList  = new ArrayList<Column>();
+	List<String> styleList  = new ArrayList<String>();
+	List<Column> typeList  = new ArrayList<Column>();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,7 +83,7 @@ public class PostYuePuActivity extends BaseActivity {
 			switch (v.getId()) {
 			case R.id.ll_type://类型
 				List<String> mlist=new ArrayList<String>();
-			for (Column col : classList) {
+			for (Column col : typeList) {
 					mlist.add(col.getName());
 			}
 				  NormalPopuWindow		popu1 = new NormalPopuWindow(context, mlist,
@@ -92,13 +92,13 @@ public class PostYuePuActivity extends BaseActivity {
 
 						public void OnClick(int position, String text) {
 							tv_type.setText(text);
-							classid=classList.get(position).getClassid()+"";
+							classid=typeList.get(position).getClassid()+"";
 						}
 					});
 					 popu1.show();
 				break;
 			case R.id.ll_style://风格
-				  NormalPopuWindow		popu = new NormalPopuWindow(context, typeList,
+				  NormalPopuWindow		popu = new NormalPopuWindow(context, styleList,
 						  ll_style);
 					popu.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
 
@@ -118,23 +118,23 @@ public class PostYuePuActivity extends BaseActivity {
 		}
 	};
 	private void getType() {
-		MyProgressDialog.show(context);
-		HttpProxyUtil.getYuepuType(context, new ResponseListener() {
-
-			@Override
-			public void setResponseHandle(Message2 message) {
-				if (message.getData() != null && message.getData().startsWith("{")) {
-					 typeList = JSON.parseArray( JSON.parseObject(message.getData()).getString("type"), String.class);
-					 typeList.remove("全部");
-					 classList = JSON.parseArray(JSON.parseObject(message.getData()).getString("class"), Column.class);
-					 for (int i = 0; i < classList.size(); i++) {
-						if (classList.get(i).getName().equals("全部")) {
-							classList.remove(i);
-						}
-					}
-				}
-				MyProgressDialog.Cancel();
-			}}, null);
+		if (Data.filter_yuepu!=null){
+			styleList=Data.filter_yuepu.getStyle();
+			typeList=Data.filter_yuepu.getType();
+		}else {
+			styleList.clear();
+			styleList.add("全部");
+			styleList.add("古典");
+			styleList.add("流行");
+			styleList.add("原创");
+			styleList.add("伴奏");
+			styleList.add("综合");
+			typeList.clear();
+			typeList.add(new Column("全部",8));
+			typeList.add(new Column("钢琴谱",38));
+			typeList.add(new Column("吉他谱",39));
+			typeList.add(new Column("提琴谱",105));
+		}
 	}
 //	private ArrayList<String> pictureUrlList=new ArrayList<String>();
 	private HashMap<String, String> map;

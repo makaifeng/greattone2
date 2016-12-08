@@ -205,14 +205,6 @@ public class HttpProxyUtil {
 		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
-	/**获取乐谱类型*/
-	public static void getYuepuType(Context context,ResponseListener responseListener,
-			ErrorResponseListener errorResponseListener) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "yuepu/type");
-		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,
-				responseListener, errorResponseListener));
-	}
 	/**获取新闻和资讯的点赞数*/
 	public static void getLikes(Context context,String id,ResponseListener responseListener,
 			ErrorResponseListener errorResponseListener) {

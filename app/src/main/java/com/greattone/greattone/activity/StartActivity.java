@@ -22,6 +22,7 @@ import com.greattone.greattone.data.Data;
 import com.greattone.greattone.entity.Filter;
 import com.greattone.greattone.entity.ImageData;
 import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.entity.Yuepu_type;
 import com.greattone.greattone.proxy.LoginProxy;
 import com.greattone.greattone.util.ActivityUtil;
 import com.greattone.greattone.util.HttpUtil;
@@ -171,6 +172,9 @@ private void initView() {
 							Data.filter_pinpai = JSON.parseObject(
 									JSON.parseObject(message.getData()).getString(
 											"pinpai_type"), Filter.class);
+							Data.filter_yuepu = JSON.parseObject(
+									JSON.parseObject(message.getData()).getString(
+											"yuepu"), Yuepu_type.class);
 //							Data.haiXuanFilter = JSON.parseObject(
 //									JSON.parseObject(message.getData()).getString(
 //											"hxbm"), HaiXuanFilter.class);
