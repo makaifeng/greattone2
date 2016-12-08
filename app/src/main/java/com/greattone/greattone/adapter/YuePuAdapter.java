@@ -1,8 +1,6 @@
 package com.greattone.greattone.adapter;
 
 
-import java.util.List;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.ImageView;
@@ -14,6 +12,8 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.Yuepu;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 /**
  * 添加朋友
@@ -48,6 +48,8 @@ public class YuePuAdapter extends Adapter<Yuepu>{
 			String[] s=T.getPhoto().split("\\::::::");
 			if (s.length>1) {
 				ImageLoaderUtil.getInstance().setImagebyurl(s[0], iv_icon);
+			}else{
+				ImageLoaderUtil.getInstance().setImagebyurl(T.getTitlepic(), iv_icon);
 			}
 		}else{
 			ImageLoaderUtil.getInstance().setImagebyurl(T.getTitlepic(), iv_icon);

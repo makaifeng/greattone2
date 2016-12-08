@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.celebrity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -35,6 +31,10 @@ import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CelebrityPostsFragment extends BaseFragment {
 	private List<Blog> blogList = new ArrayList<Blog>();
@@ -159,8 +159,8 @@ public class CelebrityPostsFragment extends BaseFragment {
 				DisplayUtil.dip2px(context, 50), LayoutParams.WRAP_CONTENT,
 				true);
 		popupWindow.setTouchable(true);
-		this.popupWindow.setBackgroundDrawable(new ColorDrawable(
-				android.R.color.transparent));
+		this.popupWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(
+				android.R.color.transparent)));
 		this.popupWindow.setOutsideTouchable(true);
 	}
 

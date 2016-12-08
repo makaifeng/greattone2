@@ -34,9 +34,9 @@
     <string-array name="posts_type">
         <item> 全部</item>
         <item>视频</item>
-        <item>音乐</item>
         <item>图片</item>
-<!--         <item>日志</item> -->
+        <item>音乐</item>
+        <!--         <item>日志</item> -->
 <!--         <item>乐谱</item> -->
 <!--         <item>讨论</item> -->
     </string-array>

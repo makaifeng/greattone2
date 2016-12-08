@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.plaza;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,7 +27,11 @@ import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
 
-/** 音乐新闻  乐器资讯 */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/** 音乐新闻  原创新闻 */
 public class InstrumentInfoActivity extends BaseActivity {
 	private ListView lv_content;
 	private PullToRefreshView pull_to_refresh;

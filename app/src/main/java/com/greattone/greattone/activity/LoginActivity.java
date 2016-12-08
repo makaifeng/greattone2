@@ -1,20 +1,5 @@
 package com.greattone.greattone.activity;
 
-import org.json.JSONObject;
-
-import com.greattone.greattone.R;
-import com.greattone.greattone.Listener.BaseUiListener;
-import com.greattone.greattone.activity.personal.RegisterActivity;
-import com.greattone.greattone.activity.personal.RevisedPasswordActivity;
-import com.greattone.greattone.proxy.LoginProxy;
-import com.greattone.greattone.util.LogUtil;
-import com.tencent.connect.common.Constants;
-import com.tencent.mm.sdk.modelmsg.SendAuth;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +9,20 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.greattone.greattone.Listener.BaseUiListener;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.personal.RegisterActivity;
+import com.greattone.greattone.activity.personal.RevisedPasswordActivity;
+import com.greattone.greattone.proxy.LoginProxy;
+import com.tencent.connect.common.Constants;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+
+import org.json.JSONObject;
 
 public class LoginActivity extends BaseActivity {
 	private Context context;
@@ -265,10 +264,7 @@ private TextView tv_WX;
 
 	/**
 	 * 判断输了的数据是否正确
-	 * 
-	 * @param name
-	 * @param password
-	 * @param password2
+	 *
 	 * @return
 	 */
 	boolean textCanUse() {

@@ -96,7 +96,7 @@ public class FensGridAdapter extends BaseAdapter {
 					userList.get(position).getUserpic(), icon);
 			name.setText(userList.get(position).getUsername());
 			fans.setText(context.getResources().getString(R.string.粉丝数_hint)+userList.get(position).getFollownum());
-			identity.setText(context.getResources().getString(R.string.identity)+userList.get(position).getGroupname());
+			identity.setText(context.getResources().getString(R.string.identity)+getIdentity(userList.get(position)));
 			level.setText(context.getResources().getString(R.string.level_hint)+userList.get(position).getLevel().getName());
 //					ImageLoaderUtil.getInstance().setImagebyurl(
 //			userList.get(position).getLevel().getPic(), level);
@@ -105,6 +105,42 @@ public class FensGridAdapter extends BaseAdapter {
 //			}else {
 //				vip.setVisibility(View.GONE);
 //			}
+		}
+		/**获取身份*/
+		public  String getIdentity(Friend info){
+			String identity=null;
+			if (info.getGroupid()==1) {//普通会员
+				if (info.getPutong_shenfen()!=null&&info.getPutong_shenfen().length()>1) {
+					identity=info.getPutong_shenfen();
+				}else{
+					identity=info.getGroupname();
+				}
+			}else if (info.getGroupid()==2) {//音乐名人
+				if (info.getMusic_star()!=null&&info.getMusic_star().length()>1) {
+					identity=info.getMusic_star();
+				}else{
+					identity=info.getGroupname();
+				}
+			}else
+			if (info.getGroupid()==3) {//音乐老师
+				if (info.getTeacher_type()!=null&&info.getTeacher_type().length()>1) {
+					identity=info.getTeacher_type();
+				}else{
+					identity=info.getGroupname();
+				}
+			}else
+			if (info.getGroupid()==4) {//音乐教室
+				if (info.getClassroom_type()!=null&&info.getClassroom_type().length()>1) {
+					identity=info.getClassroom_type();
+				}else{
+					identity=info.getGroupname();
+				}
+			}else		 if (info.getGroupid()==5) {//品牌
+				identity=info.getGroupname();
+			}else{
+				identity=info.getGroupname();
+			}
+			return identity;
 		}
 	}
 

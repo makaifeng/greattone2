@@ -127,7 +127,7 @@ public class NewsFragment extends BaseFragment {
 				context.startActivity(new Intent(context,
 						InterviewActivity.class));
 				break;
-			case R.id.activity_information_video://乐器资讯
+			case R.id.activity_information_video://原创新闻
 				context.startActivity(new Intent(context,
 						InstrumentInfoActivity.class));
 				break;

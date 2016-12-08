@@ -3,6 +3,7 @@ package com.greattone.greattone.data;
 public class HttpConstants2 {
 
 	public final static String SERVER_URL = "http://m.greattone.net"; //服务器
+//	public final static String SERVER_URL = "http://116.255.138.130"; //服务器
 //	public final static String SERVER_URL = "http://106.14.21.53"; //服务器
 //	public final static String SERVER_URL = "http://192.168.1.113:8088"; //服务器
 //	public final static String SERVER_URL = "http://zjk.franzsandner.com"; //服务器

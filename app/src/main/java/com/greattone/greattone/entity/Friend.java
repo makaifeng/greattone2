@@ -2,7 +2,7 @@ package com.greattone.greattone.entity;
 
 public class Friend {
 String chusheng;
-String groupid;
+int groupid;
 String groupname;
 String saytext;
 String userfen;
@@ -11,11 +11,47 @@ String username;
 String userpic;
 String feednum;
 String follownum;
+String teacher_type;
+String putong_shenfen;
+String classroom_type;
+String music_star;
 Level level;
 String pinyin;
 int verification;
 
-public String getPinyin() {
+	public String getClassroom_type() {
+		return classroom_type;
+	}
+
+	public void setClassroom_type(String classroom_type) {
+		this.classroom_type = classroom_type;
+	}
+
+	public String getMusic_star() {
+		return music_star;
+	}
+
+	public void setMusic_star(String music_star) {
+		this.music_star = music_star;
+	}
+
+	public String getTeacher_type() {
+		return teacher_type;
+	}
+
+	public void setTeacher_type(String teacher_type) {
+		this.teacher_type = teacher_type;
+	}
+
+	public String getPutong_shenfen() {
+		return putong_shenfen;
+	}
+
+	public void setPutong_shenfen(String putong_shenfen) {
+		this.putong_shenfen = putong_shenfen;
+	}
+
+	public String getPinyin() {
 	return pinyin;
 }
 public void setPinyin(String pinyin) {
@@ -52,13 +88,16 @@ public String getChusheng() {
 public void setChusheng(String chusheng) {
 	this.chusheng = chusheng;
 }
-public String getGroupid() {
-	return groupid;
-}
-public void setGroupid(String groupid) {
-	this.groupid = groupid;
-}
-public String getGroupname() {
+
+	public int getGroupid() {
+		return groupid;
+	}
+
+	public void setGroupid(int groupid) {
+		this.groupid = groupid;
+	}
+
+	public String getGroupname() {
 	return groupname;
 }
 public void setGroupname(String groupname) {
