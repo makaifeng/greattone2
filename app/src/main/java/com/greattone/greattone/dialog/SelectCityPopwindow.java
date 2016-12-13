@@ -1,8 +1,5 @@
 package com.greattone.greattone.dialog;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,10 +17,13 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.util.CityUtil;
 import com.greattone.greattone.util.DisplayUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 提示框
@@ -52,7 +52,6 @@ String city;
 	 * 单例构建
 	 * 
 	 * @param context
-	 * @param dialogEnum
 	 * @return
 	 */
 	public static SelectCityPopwindow build(Context context) {
@@ -208,10 +207,10 @@ String city;
 			}
 			// 设置选中效果
 			if (selectedPosition == position) {
-				holder.textView.setTextColor(Color.BLUE);
+//				holder.textView.setTextColor(Color.BLUE);
 				holder.layout.setBackgroundColor(Color.GRAY);
 			} else {
-				holder.textView.setTextColor(Color.WHITE);
+//				holder.textView.setTextColor(Color.BLACK);
 				holder.layout.setBackgroundColor(Color.TRANSPARENT);
 			}
 

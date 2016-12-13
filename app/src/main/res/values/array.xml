@@ -115,11 +115,11 @@
     </string-array>
     <string-array name="haixuan_type">
            <item>全部</item>
-           <item>音乐之星</item>
-           <item>音乐精灵</item>
-           <item>好琴师</item>
-           <item>人气琴行</item>
-           <item>乐器品牌</item>
+           <item>@string/haixuan_type1</item>
+           <item>@string/haixuan_type2</item>
+           <item>@string/haixuan_type3</item>
+           <item>@string/haixuan_type4</item>
+           <item>@string/haixuan_type5</item>
     </string-array>
 <!--     乐器品牌类型 -->
     <string-array name="brand_type">

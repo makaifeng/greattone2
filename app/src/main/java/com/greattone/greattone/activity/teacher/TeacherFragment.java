@@ -1,13 +1,22 @@
 package com.greattone.greattone.activity.teacher;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
 import com.greattone.greattone.activity.SearchAct;
@@ -28,18 +37,9 @@ import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
-import android.widget.LinearLayout;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 老师列表
@@ -251,6 +251,7 @@ String username;
 		map.put("api", "search/musicTeacher");
 		map.put("sear", sear+"");
 		map.put("teacher_type", teacher_type);
+		map.put("city", Data.myLocation.getCity().replace("市","").replace("省",""));
 		map.put("orderby", orderby);
 		map.put("address", province);
 		map.put("username", username);

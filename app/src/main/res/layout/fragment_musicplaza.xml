@@ -38,7 +38,7 @@
             android:button="@android:color/transparent"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/hot_post"
+            android:text="@string/recommend_post"
             android:textColor="@color/recommend_textcolor" />
 
         <com.greattone.greattone.widget.MyRadioButton

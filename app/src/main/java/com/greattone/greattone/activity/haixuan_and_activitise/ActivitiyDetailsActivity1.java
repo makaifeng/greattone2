@@ -1,6 +1,16 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.LinkedHashMap;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -18,17 +28,7 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
+import java.util.LinkedHashMap;
 
 /** 海选详情 */
 @SuppressWarnings("deprecation")
@@ -242,7 +242,7 @@ private int history;
 				}
 				intent.putExtra("price", haiXuan.getPrice());
 				intent.putExtra("id", haiXuan.getId());
-				startActivity(intent);
+				startActivityForResult(intent,1);
 			}
 		}
 	};
@@ -314,4 +314,8 @@ private int history;
 		// }
 	}
 
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		super.onActivityResult(arg0, arg1, arg2);
+	}
 }

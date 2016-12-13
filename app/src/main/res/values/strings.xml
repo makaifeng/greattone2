@@ -79,6 +79,7 @@
     <string name="this_location">所在的位置</string>
     <!-- 音乐名人 -->
     <string name="sort_address">地区筛选</string>
+    <string name="sort_time">时间筛选</string>
     <string name="classification">分类</string>
     <string name="sort">排序</string>
     <string name="home">主页</string>
@@ -107,7 +108,7 @@
     <string name="account_security">账户安全</string>
     <!-- 音乐广场 -->
     <string name="all_dynamic">全站动态</string>
-    <string name="hot_post">热门帖子</string>
+    <string name="recommend_post">推荐帖子</string>
     <string name="friend_dynamics">知音动态</string>
     <!-- 图片选择 -->
     <string name="has_chose">已选择</string>
@@ -389,4 +390,9 @@
 
     <string name="timetable_name">课程名称</string>
     <string name="timetable_location">上课地点</string>
+    <string name="haixuan_type1">中华好琴声</string>
+    <string name="haixuan_type2">音乐精灵</string>
+    <string name="haixuan_type3">好琴师</string>
+    <string name="haixuan_type4">人气琴行</string>
+    <string name="haixuan_type5">乐器品牌</string>
 </resources>

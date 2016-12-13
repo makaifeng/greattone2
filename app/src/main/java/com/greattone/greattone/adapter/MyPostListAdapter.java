@@ -1,9 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,15 +16,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnBtnItemClickListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.plaza.ShowPictureActivity;
+import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.PostDeletePopu;
-import com.greattone.greattone.dialog.ReplayDialog;
 import com.greattone.greattone.dialog.PostDeletePopu.onDeleteBack;
+import com.greattone.greattone.dialog.ReplayDialog;
 import com.greattone.greattone.entity.Blog;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Pic;
@@ -38,6 +35,10 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MyPostListAdapter extends BaseAdapter {
 	private Context context;
@@ -206,12 +207,36 @@ public void setList(List<Blog> blogsList){
 //			ll_collect.setOnClickListener(lis);
 //			ll_share.setOnClickListener(lis);
 			delete.setOnClickListener(lis);
+
+			if (blogsList.get(position).getClassid()== ClassId.音乐海选_图片_ID) {// 海选图片报名
+				ll_pic.setVisibility(View.VISIBLE);
+				ll_pic.removeAllViews();
+				if (blogsList.get(position).getMorepic() != null) {
+					addPic(JSON.parseArray(
+							blogsList.get(position).getMorepic(), Pic.class));
+				}
+//				vote.setVisibility(View.VISIBLE);
+//				vote.setOnClickListener(lis);
+				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				content.setText(blogsList.get(position).getHai_petition());
+			}else
+			if (blogsList.get(position).getClassid()== ClassId.音乐海选_视频_ID) {// 海选视频报名
+				ll_video.setVisibility(View.VISIBLE);
+//				vote.setVisibility(View.VISIBLE);
+				ImageLoaderUtil.getInstance().setImagebyurl(
+						blogsList.get(position).getHai_photo(), video);
+//				vote.setOnClickListener(lis);
+				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				content.setText(blogsList.get(position).getHai_petition());
+			} else {
+				title.setText(blogsList.get(position).getTitle());
+				content.setText(blogsList.get(position).getSmalltext());
+			}
 			if (blogsList.get(position).getClassname().equals("视频")) {// 视频
 				ll_video.setVisibility(View.VISIBLE);
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getTitlepic(), video);
 			} else if (blogsList.get(position).getClassname().equals("音乐")) {// 音乐
-				title.setText(blogsList.get(position).getTitle());
 				ll_music.setVisibility(View.VISIBLE);
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getThumbnail(), music);

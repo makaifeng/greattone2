@@ -116,16 +116,16 @@ private int  ishistory;
 				bundle.putString("name",title_names[i]);
 				bundle.putInt("classid",ClassId.音乐海选_ID);
 				bundle.putInt("ishistory",ishistory);
-			} else if (title_names[i].equals("音乐之星")) {
+			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type1))) {
 				bundle.putInt("classid",32);
-			} else if (title_names[i].equals("音乐精灵")) {
+			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type2))) {
 				bundle.putInt("classid",33);
 				fragment.setArguments(bundle);
-			} else if (title_names[i].equals("好琴师")) {
+			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type3))) {
 				bundle.putInt("classid",34);
-			} else if (title_names[i].equals("人气琴行")) {
+			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type4))) {
 				bundle.putInt("classid",110);
-			} else if (title_names[i].equals("乐器品牌")) {
+			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type5))) {
 				bundle.putInt("classid",112);
 			} else {
 				bundle.putInt("classid",ClassId.音乐海选_ID);
