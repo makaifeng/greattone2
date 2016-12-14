@@ -1,17 +1,5 @@
 package com.greattone.greattone.wxpay;
 
-import java.io.StringReader;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.xmlpull.v1.XmlPullParser;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,6 +9,18 @@ import com.greattone.greattone.dialog.MyProgressDialog;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.xmlpull.v1.XmlPullParser;
+
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Random;
 
 public class WxPay {
 	// appid
@@ -38,7 +38,7 @@ public class WxPay {
 	/**
 	 * 生成支付参数
 	 * 
-	 * @param prepay_id
+	 * @param wxUnifiedorder
 	 */
 	private static PayReq genPayReq(WxUnifiedorder wxUnifiedorder) {
 		PayReq req = new PayReq();

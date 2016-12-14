@@ -41,6 +41,7 @@ public class PostGridAdapter extends BaseAdapter {
 	private int maxsize;
 //	private OnBtnItemClickListener itemClickListener;
 	String imgName="icon.png";
+	int requestCode_photo= (int) (Math.random()*100);
 	public PostGridAdapter(Context context, int type,int maxsize) {
 		this.context = context;
 		this.type = type;

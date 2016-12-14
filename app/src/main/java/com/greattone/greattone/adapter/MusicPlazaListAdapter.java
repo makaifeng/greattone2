@@ -1,9 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +45,10 @@ import com.greattone.greattone.util.MessageUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MusicPlazaListAdapter extends BaseAdapter {
 	private Context context;
@@ -466,8 +466,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 			}
 		}
 
-/**点赞
- * @param v */
+		/**点赞  */
 		protected void toLike() {
 			MyProgressDialog.show(context);
 			HashMap<String, String> map = new HashMap<String, String>();
@@ -591,7 +590,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 		/** 分享 */
 		protected void share() {
 			String titlePic = null;
-			if (blogsList.get(position).getClassname().equals("海选投票")) {// 海选投票
+			if (blogsList.get(position).getClassid()==73) {// 海选投票
 				titlePic = JSON.parseObject(blog.getUserInfo(), UserInfo.class)
 						.getUserpic();
 				SharePopWindow.build(context).setTitle(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名))

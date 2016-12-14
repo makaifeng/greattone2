@@ -71,7 +71,7 @@
                 android:text="@string/select_please"
                 android:textSize="14sp" />
         </LinearLayout>
-<LinearLayout 
+        <LinearLayout
             android:id="@+id/ll_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,6 +133,24 @@
                 android:paddingTop="5dp"
                 android:textSize="14sp" />
         </LinearLayout>
+        <com.greattone.greattone.widget.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="@string/titlepic_music"/>
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp">
+
+            <include android:id="@+id/fl_titlepic"
+                layout="@layout/adapter_post_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
         <com.greattone.greattone.widget.MyEditText
             android:id="@+id/et_content"
             android:layout_width="match_parent"
@@ -143,7 +161,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:background="@drawable/edit_bg"
-            android:gravity="start|top" 	
+            android:gravity="start|top"
             android:hint="@string/content"
             android:inputType="textMultiLine"
             android:padding="5dp"
@@ -152,13 +170,19 @@
         <LinearLayout android:id="@+id/ll_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:orientation="vertical" >
-
+            <com.greattone.greattone.widget.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/music_pic"/>
             <com.greattone.greattone.widget.MyGridView
                 android:id="@+id/gv_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:listSelector="@android:color/transparent"
+
                 android:verticalSpacing="10dp"
                 android:horizontalSpacing="5dp"
                 android:numColumns="4"
