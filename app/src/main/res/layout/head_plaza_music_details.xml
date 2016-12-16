@@ -138,7 +138,7 @@
             <ImageView
                 android:id="@+id/iv_videopic"
                 android:layout_width="100.0dip"
-                android:layout_height="75.0dip"
+                android:layout_height="100.0dip"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop" />
 

@@ -56,8 +56,8 @@ public class ActivitiesGridAdapter extends BaseAdapter {
 					.findViewById(R.id.tv_text3);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			LayoutParams params = new LayoutParams(
-					((screenWidth )* 2 / 5),
-					(screenWidth ) * 3* 2 / 5 / 4);
+					((screenWidth )*3/10),
+					(screenWidth ) * 3/10);
 			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {

@@ -1,5 +1,22 @@
 package com.greattone.greattone.activity.personal;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
+
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -11,24 +28,6 @@ import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Sign;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ClickableSpan;
-import android.text.style.UnderlineSpan;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.TextView;
 
 /**
  * 签约
@@ -59,9 +58,9 @@ private TextView textview1;
 		webview = (WebView) findViewById(R.id.webview);
 		WebSettings webSettings = webview.getSettings();
 		// 设置WebView属性，能够执行Javascript脚本
-		webSettings.setJavaScriptEnabled(true);
-		 // 设置可以访问文件
-		 webSettings.setAllowFileAccess(true);
+//		webSettings.setJavaScriptEnabled(true);
+//		 // 设置可以访问文件
+//		 webSettings.setAllowFileAccess(true);
 		// 设置支持缩放
 		webSettings.setBuiltInZoomControls(true);
 		String agreement = "《品牌会员认证协议》";
@@ -103,7 +102,15 @@ private TextView textview1;
 			switch (v.getId()) {
 			case R.id.tv_sign_up:
 				if (cb_agreement.isChecked()) {
-				getOrderData();
+					if (Data.myinfo.getGroupid()==5) {
+						getOrderData();
+					}else if (Data.myinfo.getGroupid()==4){
+						Intent intent = new Intent(context,
+								SelectPackeageAct.class);
+						intent.putExtra("title","《琴行教室认证协议》");
+						intent.putExtra("urlPath", "http://m.greattone.net/app/qhqy-agreement.html");
+						startActivity(intent);
+					}
 				}else{
 					toast("请确认协议");
 				}
@@ -150,17 +157,6 @@ private TextView textview1;
 		}
 
 	};
-	ClickableSpan clickableSpan=new ClickableSpan() {
-		
-		@Override
-		public void onClick(View widget) {
-			Intent intent = new Intent(context,
-					WebActivity.class);
-		    intent.putExtra("title","《琴行教室认证协议》");
-	        intent.putExtra("urlPath", "http://www.baidu.com");
-			startActivity(intent);
-		}
-	};
 	OnCheckedChangeListener	checkedChangeListener=new OnCheckedChangeListener() {
 		
 		@Override
@@ -169,9 +165,12 @@ private TextView textview1;
 		}
 	};
 
+	/**
+	 * 获取订单信息
+	 */
 	private void getOrderData() {
 		MyProgressDialog.show(context);
-		HttpProxyUtil.getSignOrderData(context, new ResponseListener() {
+		HttpProxyUtil.getSignOrderData(context,null, new ResponseListener() {
 			
 			@Override
 			public void setResponseHandle(Message2 message) {

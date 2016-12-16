@@ -62,6 +62,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'com.squareup.okio:okio:1.8.0'
     compile files('libs/compressImage.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
 afterEvaluate {
     tasks.matching {

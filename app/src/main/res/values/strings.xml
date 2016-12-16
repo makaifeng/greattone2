@@ -398,4 +398,7 @@
     <string name="titlepic_music">封面图：</string>
     <string name="music_pic">乐谱图片：</string>
     <string name="select_titlepic_please">请选择封面图</string>
+    <string name="select_packages_hint">套餐选择：</string>
+    <string name="packages_content_hint">套餐内容：</string>
+    <string name="packages_price_hint">套餐价格：</string>
 </resources>

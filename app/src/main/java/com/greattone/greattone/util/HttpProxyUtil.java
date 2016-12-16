@@ -196,10 +196,11 @@ public class HttpProxyUtil {
 				responseListener, errorResponseListener));
 	}
 	/**获取签约的订单信息*/
-	public static void getSignOrderData(Context context,ResponseListener responseListener,
+	public static void getSignOrderData(Context context,String packageid,ResponseListener responseListener,
 			ErrorResponseListener errorResponseListener) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "qianyue/getOrderData");
+		map.put("packageid", packageid);
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		((BaseActivity) context).	addRequest(HttpUtil.httpConnectionByPost(context, map,
@@ -316,6 +317,18 @@ public class HttpProxyUtil {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "kebiao/delete");
 		map.put("id", id);
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 课程表的删除
+     */
+	public static void getPackages(Context context,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "qianyue/getPackages");
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,

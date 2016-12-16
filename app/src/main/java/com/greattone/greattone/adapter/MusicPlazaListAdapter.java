@@ -107,10 +107,17 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_comments_title);//
 			holder.ll_pic = (LinearLayout) convertView
 					.findViewById(R.id.adapter_comments_ll);//
+			RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(
+					(screenWidth - DisplayUtil.dip2px(context,
+							5 * 5 + 8)) / 4,
+					(screenWidth - DisplayUtil.dip2px(context,
+							5 * 5 + 8)) / 4);
 			holder.video = (ImageView) convertView
 					.findViewById(R.id.adapter_comments_videopic);//
+			holder.video.setLayoutParams(params1);
 			holder.music = (ImageView) convertView
 					.findViewById(R.id.iv_music);//
+			holder.music.setLayoutParams(params1);
 			holder.ll_video = (RelativeLayout) convertView
 					.findViewById(R.id.adapter_comments_videopic_vi);//
 			holder.ll_music = (RelativeLayout) convertView
@@ -324,7 +331,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 			if (list.size() == 0) {
 				return;
 			}
-	int	num= list.size() >4?4:list.size();
+			int	num= list.size() >4?4:list.size();
 			for (int i = 0; i <1 ; i++) {
 //				int num = 4;
 //				if (i == (list.size() - 1) / 4) {

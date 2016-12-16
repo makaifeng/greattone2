@@ -29,7 +29,6 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.util.ActiivtyStack;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
@@ -38,7 +37,7 @@ public class BaseActivity extends FragmentActivity {
 	public	LinearLayout headlayout;
 	public RequestQueue queue;
 	public SharedPreferences preferences;
-	ImageLoader imageloader = ImageLoader.getInstance();
+//	ImageLoader imageloader = ImageLoader.getInstance();
 	// 屏幕宽高，密度
 	public int screenWidth;
 	public int screenHeight;

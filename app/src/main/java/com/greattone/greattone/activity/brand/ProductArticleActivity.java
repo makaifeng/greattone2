@@ -86,6 +86,7 @@ public class ProductArticleActivity extends BaseActivity {
 			Bundle bundle=new Bundle();
 			bundle.putString("name",mlist.get(i));
 			bundle.putString("userid",getIntent().getStringExtra("userid"));
+			fragment.setArguments(bundle);
 			fragments.add(fragment);
 			
 			RadioButton button = new RadioButton(this);

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.greattone.greattone.activity.personal.SelectPackeageAct">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        style="@style/qianyue_packages_text_style_Large"
+        android:layout_marginTop="15dp"
+        android:text="@string/select_packages_hint"
+        android:id="@+id/textView"
+        android:layout_below="@+id/iv_logo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+<LinearLayout android:id="@+id/ll_packages"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/textView"
+    android:layout_toEndOf="@+id/textView"
+    android:layout_alignTop="@+id/textView"
+    android:orientation="vertical">
+
+</LinearLayout>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        style="@style/qianyue_packages_text_style_Large"
+        android:text="@string/packages_content_hint"
+        android:id="@+id/textView1"
+        android:layout_below="@+id/ll_packages"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <com.greattone.greattone.widget.MyTextView
+        style="@style/qianyue_packages_text_style_Medium"
+        android:text=""
+        android:id="@+id/tv_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:layout_toEndOf="@+id/textView1"
+        android:textColor="@color/package_text_orange"
+        />
+
+    <TextView
+        style="@style/qianyue_packages_text_style_Large"
+        android:layout_marginTop="15dp"
+        android:text="@string/packages_price_hint"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/tv_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+    <TextView
+        style="@style/qianyue_packages_text_style_Large"
+        android:text=""
+        android:id="@+id/tv_price"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:layout_toEndOf="@+id/textView1"
+        android:textColor="@color/package_text_orange"
+        />
+
+    <com.greattone.greattone.widget.MyTextView
+        style="@style/qianyue_packages_text_style_Large"
+        android:text="1800元/年"
+        android:id="@+id/tv_price_now"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+
+        android:textColor="@color/package_text_orange"/>
+
+    <com.greattone.greattone.widget.MyTextView
+        style="@style/qianyue_packages_text_style_Medium"
+        android:text="2000元/年"
+        android:id="@+id/tv_price_old"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_alignBottom="@+id/tv_price_now"
+        android:layout_toRightOf="@+id/tv_price_now"
+        android:layout_toEndOf="@+id/tv_price_now" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="立即购买"
+        android:id="@+id/btn_buy"
+        android:background="@drawable/btn_package_buy"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"
+    android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp" />
+
+    <TextView
+        style="@style/qianyue_packages_text_style_Medium"
+        android:text="@string/备注"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/btn_buy"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <com.greattone.greattone.widget.MyTextView
+        style="@style/qianyue_packages_text_style_Medium"
+        android:text="ssssss"
+        android:id="@+id/tv_remark"
+        android:layout_below="@+id/btn_buy"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3"  />
+
+
+</RelativeLayout>
+</ScrollView>

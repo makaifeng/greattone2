@@ -146,4 +146,14 @@
         <item name="android:windowEnterAnimation">@anim/pop_push_up_in</item>
         <item name="android:windowExitAnimation">@anim/pop_push_down_out</item>
     </style>
+    <style name="qianyue_packages_text_style_Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="qianyue_packages_text_style_Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

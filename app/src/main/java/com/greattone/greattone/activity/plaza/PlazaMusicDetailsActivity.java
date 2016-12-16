@@ -142,6 +142,12 @@ private WebView wv_music_play;
 		tv_content = (TextView) headView.findViewById(R.id.tv_content);//
 		ll_pic = (LinearLayout) headView.findViewById(R.id.ll_pic);//
 		iv_videopic = (ImageView) headView.findViewById(R.id.iv_videopic);//
+		RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(
+				(screenWidth - DisplayUtil.dip2px(context,
+						5 * 5 + 8)) / 4,
+				(screenWidth - DisplayUtil.dip2px(context,
+						5 * 5 + 8)) / 4);
+		iv_videopic.setLayoutParams(params1);
 		rl_video = (RelativeLayout) headView.findViewById(R.id.rl_video);//
 		tv_comment = (TextView) headView.findViewById(R.id.tv_comment);//
 		tv_collect = (TextView) headView.findViewById(R.id.tv_collect);//

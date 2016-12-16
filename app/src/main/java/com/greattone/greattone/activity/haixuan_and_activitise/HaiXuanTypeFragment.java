@@ -56,8 +56,8 @@ public class HaiXuanTypeFragment extends BaseFragment {
 		super.onCreate(savedInstanceState);
 		competitionList.clear();
 		classid = getArguments().getInt("classid")+"";
+		history= getArguments().getInt("ishistory");
 		if (history==1) {
-			history= getArguments().getInt("history");
 			this.hd_activity=0;
 		}
 		getActivities();

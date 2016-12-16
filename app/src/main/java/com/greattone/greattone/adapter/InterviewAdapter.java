@@ -1,8 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,9 @@ import com.greattone.greattone.entity.Blog;
 import com.greattone.greattone.entity.ImageData;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InterviewAdapter extends BaseAdapter {
 	private Context context;
@@ -62,8 +62,8 @@ public class InterviewAdapter extends BaseAdapter {
 			holder.time = (TextView) convertView.findViewById(R.id.tv_time);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_pic);//
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					screenWidth/4+ DisplayUtil.dip2px(context, 20),
-					screenWidth*3/4/ 5 + DisplayUtil.dip2px(context, 20));
+					screenWidth*3/10 + DisplayUtil.dip2px(context, 20),
+					screenWidth*3/10 + DisplayUtil.dip2px(context, 20));
 			holder.icon.setLayoutParams(params);
 			holder.iv_ad = (ImageView) convertView
 					.findViewById(R.id.iv_ad);//
