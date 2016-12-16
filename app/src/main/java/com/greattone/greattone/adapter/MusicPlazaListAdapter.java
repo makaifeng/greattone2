@@ -115,9 +115,11 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 			holder.video = (ImageView) convertView
 					.findViewById(R.id.adapter_comments_videopic);//
 			holder.video.setLayoutParams(params1);
+			holder.video.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			holder.music = (ImageView) convertView
 					.findViewById(R.id.iv_music);//
 			holder.music.setLayoutParams(params1);
+			holder.music.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			holder.ll_video = (RelativeLayout) convertView
 					.findViewById(R.id.adapter_comments_videopic_vi);//
 			holder.ll_music = (RelativeLayout) convertView
