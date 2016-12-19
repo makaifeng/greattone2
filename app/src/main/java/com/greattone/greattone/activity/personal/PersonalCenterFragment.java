@@ -470,7 +470,7 @@ public class PersonalCenterFragment extends BaseFragment {
 			// name.setText(Data.personalCenter.getName());
 			// ImageLoaderUtil.getInstance().setImagebyurl(
 			// Data.personalCenter.getPic(), icon);
-			// // imageloader.displayImage(Data.personalCenter.getPic(), icon,
+			// // imageloader.displayImage(Data.personalCenter.getPic(), ircon,
 			// // ((BaseActivity) context).options);
 			// identity.setText(Data.personalCenter.getIdentity());
 			// level.setText(Data.personalCenter.getLevel());

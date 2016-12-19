@@ -1,21 +1,19 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.ActivityVideo;
-import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 /**
  * 海选投票列表-乐器品牌
  *
@@ -60,10 +58,12 @@ public class HaiXuanVoteList2Adapter extends BaseAdapter {
 			holder.vote_num = (TextView) convertView.findViewById(R.id.tv_vote_num);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			holder.iv_play = (ImageView) convertView.findViewById(R.id.iv_play);//
-			LayoutParams params = new LayoutParams(
-					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2,
-					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2 * 5 / 3);
-			holder.icon.setLayoutParams(params);
+//			LayoutParams params = new LayoutParams(
+//					(screenWidth - DisplayUtil.dip2px(context, 10)) /4,
+//					(screenWidth - DisplayUtil.dip2px(context, 10)) / 4);
+//			(screenWidth - DisplayUtil.dip2px(context, 10)) / 2 ,
+//					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2 * 5 / 3);
+//			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();

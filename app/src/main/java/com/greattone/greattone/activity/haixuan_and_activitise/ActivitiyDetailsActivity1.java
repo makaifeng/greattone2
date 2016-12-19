@@ -84,7 +84,8 @@ private int history;
 		iv_icon = (ImageView) findViewById(R.id.iv_icon);
 		LayoutParams params = new LayoutParams(screenWidth
 				- DisplayUtil.dip2px(context, 20),
-				(screenWidth*3/5 - DisplayUtil.dip2px(context, 10)));
+				screenWidth- DisplayUtil.dip2px(context, 20));
+//				(screenWidth*3/5 - DisplayUtil.dip2px(context, 10)));
 		params.setMargins(DisplayUtil.dip2px(context, 10),
 				DisplayUtil.dip2px(context, 10),
 				DisplayUtil.dip2px(context, 10),
@@ -234,6 +235,17 @@ private int history;
 					}else if (haiXuan.getClassid().equals("112")) {//乐器品牌
 						intent.setClass(context, ApplyActivity5.class);
 					}else {//其他
+						if (haiXuan.getClassid().equals("120")) {
+							Class cls = null;
+							try {
+								cls = Class.forName("com.greattone.greattone.activity.haixuan_and_activitise.ApplyActivity"+haiXuan.getHai_bao_group());
+							} catch (ClassNotFoundException e) {
+								cls=ApplyActivity2.class;
+								e.printStackTrace();
+							}
+
+							intent.setClass(context, cls);
+						}else
 						intent.setClass(context, ApplyActivity2.class);
 					}
 					intent.putExtra("title", haiXuan.getTitle());

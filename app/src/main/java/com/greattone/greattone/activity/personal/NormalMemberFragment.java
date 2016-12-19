@@ -316,7 +316,7 @@ public class NormalMemberFragment extends BaseFragment {
 	/** 获取验证码 */
 	protected void getCode() {
 		String str1 = this.et_phone_num.getText().toString();
-		if (str1.isEmpty()) {
+		if (TextUtils.isEmpty(str1)) {
 			toast(getResources().getString(R.string.请输入手机号));
 			return;
 		}
@@ -421,6 +421,7 @@ public class NormalMemberFragment extends BaseFragment {
 						map.put("api", "user/createUser");
 						map.put("password", str2);
 						map.put("username", str1);
+						map.put("groupid", groupid+"");
 //						if (groupid!=4) {
 							map.put("phone", str5);
 							map.put("smscode", str7);

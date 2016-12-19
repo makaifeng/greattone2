@@ -49,7 +49,8 @@ String titles[]=getResources().getStringArray(R.array.title_names);
 	} else if (type.equals(titles[4])) {//琴行教室
 		fragment=(new ClassRoomFragment());
 	} else if (type.equals(titles[5])) {//音乐海选
-		 fragment=new HaiXuanfragment();Bundle bundle=new Bundle();
+		 fragment=new HaiXuanfragment();
+		Bundle bundle=new Bundle();
 		bundle.putString("type","音乐海选");
 		fragment.setArguments(bundle);
 	} else if (type.equals(titles[6])) {//音乐乐团

@@ -395,6 +395,7 @@
     <string name="haixuan_type3">好琴师</string>
     <string name="haixuan_type4">人气琴行</string>
     <string name="haixuan_type5">乐器品牌</string>
+    <string name="haixuan_type6">其他</string>
     <string name="titlepic_music">封面图：</string>
     <string name="music_pic">乐谱图片：</string>
     <string name="select_titlepic_please">请选择封面图</string>

@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,8 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.Blog;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class HaiXuanListAdapter extends BaseAdapter {
 	private Context context;
@@ -56,8 +56,10 @@ public class HaiXuanListAdapter extends BaseAdapter {
 					.findViewById(R.id.tv_address);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-					(screenWidth/4),
-					screenWidth*3/4/4);
+					(screenWidth/5),
+					screenWidth/5);
+//					(screenWidth/4),
+//					screenWidth*3/4/4);
 			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {

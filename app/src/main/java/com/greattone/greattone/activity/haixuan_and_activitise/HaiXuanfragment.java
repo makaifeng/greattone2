@@ -125,6 +125,8 @@ private int  ishistory;
 				bundle.putInt("classid",110);
 			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type5))) {
 				bundle.putInt("classid",112);
+			} else if (title_names[i].equals(getResources().getString(R.string.haixuan_type6))) {
+				bundle.putInt("classid",120);
 			} else {
 				bundle.putInt("classid",ClassId.音乐海选_ID);
 			}

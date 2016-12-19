@@ -32,6 +32,7 @@ import com.greattone.greattone.entity.ImageData;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Pic;
 import com.greattone.greattone.entity.VoteOK;
+import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ErrorResponseListener;
@@ -103,8 +104,8 @@ public class VoteDetailsActivity extends BaseActivity {
 			headView.	findViewById(R.id.rl_play_video).setVisibility(
 					View.GONE);
 			mybanner = (MyBanner)headView. findViewById(R.id.mybanner);
-			mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth,
-					screenWidth *2/3));
+			mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth- DisplayUtil.dip2px(context,20),
+					screenWidth- DisplayUtil.dip2px(context,20)));
 			mybanner.setAdaptive(true);
 //			mybanner.seWidthToHeightRatio(3, 2);
 		}

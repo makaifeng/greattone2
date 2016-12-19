@@ -120,6 +120,7 @@
            <item>@string/haixuan_type3</item>
            <item>@string/haixuan_type4</item>
            <item>@string/haixuan_type5</item>
+           <item>@string/haixuan_type6</item>
     </string-array>
 <!--     乐器品牌类型 -->
     <string-array name="brand_type">

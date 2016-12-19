@@ -94,8 +94,17 @@ String bitype;
 String hai_baotype;//报名上传类型
 int ishistory;//海选是否过期  0没过期，1过期
 int isstart;//海选是否开始  0没开始，1开始
+	int hai_bao_group;//报名选用界面类型
 
-public String getHai_baotype() {
+	public int getHai_bao_group() {
+		return hai_bao_group;
+	}
+
+	public void setHai_bao_group(int hai_bao_group) {
+		this.hai_bao_group = hai_bao_group;
+	}
+
+	public String getHai_baotype() {
 	return hai_baotype;
 }
 public void setHai_baotype(String hai_baotype) {
