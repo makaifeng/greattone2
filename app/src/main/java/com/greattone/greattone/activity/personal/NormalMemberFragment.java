@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.android.volley.VolleyError;
 import com.greattone.greattone.Listener.OnSelectCityListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -33,7 +35,9 @@ import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.LoginInfo;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.BitmapUtil;
+import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.FileUtil;
+import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.Permission;
@@ -92,7 +96,6 @@ public class NormalMemberFragment extends BaseFragment {
 	private int groupid;
 	private String code_num;
 //	private View ll_code;
-
 	String imgName="icon.png";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -117,18 +120,23 @@ public class NormalMemberFragment extends BaseFragment {
 		iv_icon = (ImageView) rootView.findViewById(R.id.iv_icon);
 		iv_icon.setOnClickListener(lis);
 		et_name = (EditText) rootView.findViewById(R.id.et_name);
+		et_name.setOnFocusChangeListener(onFocusChangeListener);
 		et_password = (EditText) rootView.findViewById(R.id.et_password);
+		et_password.setOnFocusChangeListener(onFocusChangeListener);
 		et_double_password = (EditText) rootView
 				.findViewById(R.id.et_double_password);
+		et_double_password.setOnFocusChangeListener(onFocusChangeListener);
 //		ll_phone = rootView.findViewById(R.id.ll_phone);
 		tv_phone_district_num = (TextView) rootView
 				.findViewById(R.id.tv_phone_district_num);
 //		tv_phone_district_num.setText("+86");
 		tv_phone_district_num.setOnClickListener(lis);
 		et_phone_num = (EditText) rootView.findViewById(R.id.et_phone_num);
+		et_phone_num.setOnFocusChangeListener(onFocusChangeListener);
 		et_email = (EditText) rootView.findViewById(R.id.et_email);
 //		ll_code =  rootView.findViewById(R.id.ll_code);
 		et_code = (EditText) rootView.findViewById(R.id.et_code);
+		et_code.setOnFocusChangeListener(onFocusChangeListener);
 		sendcode = (TextView) rootView.findViewById(R.id.tv_get_code);
 		sendcode.setOnClickListener(lis);
 		tv_address = (TextView) rootView.findViewById(R.id.tv_address);
@@ -157,6 +165,7 @@ public class NormalMemberFragment extends BaseFragment {
 		et_phone_num.setText("");
 		et_email.setText("");
 		et_code.setText("");
+		tv_address.setVisibility(View.VISIBLE);
 		if (groupid == 4) {// 音乐教室
 //			ll_phone.setVisibility(View.GONE);
 //			ll_code.setVisibility(View.GONE);
@@ -235,6 +244,7 @@ public class NormalMemberFragment extends BaseFragment {
 							code_num=codes[position];
 							tv_phone_district_num.setText(text);
 							popu1.dismisss();
+							checkphone();
 						}
 					});
 					 popu1.show();
@@ -245,7 +255,153 @@ public class NormalMemberFragment extends BaseFragment {
 			}
 		}
 	};
+	View.OnFocusChangeListener onFocusChangeListener=new View.OnFocusChangeListener() {
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if (hasFocus==false){
+				switch (v.getId()){
+					case R.id.et_name://姓名
+						checkname();
+						break;
+					case R.id.et_password://密码
+						checkpassword();
+						break;
+					case R.id.et_double_password://二次密码
+						checkdoublepassword();
+						break;
+					case R.id.et_phone_num://手机
+						checkphone();
+						break;
+					case R.id.et_code://验证码
+						checkcode();
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	};
 
+	/**检查验证码*/
+	private void checkcode() {
+		String phone=et_phone_num.getText().toString().trim();
+		String code=et_code.getText().toString().trim();
+		if (code.length()>0) {
+			HttpProxyUtil.checkcode(context, phone, code, new ResponseListener() {
+				@Override
+				public void setResponseHandle(Message2 message) {
+					showPrompt(et_code,true);
+				}
+			}, new HttpUtil.ErrorResponseListener() {
+				@Override
+				public void setServerErrorResponseHandle(Message2 message) {
+					showPrompt(et_code,false);
+				}
+
+				@Override
+				public void setErrorResponseHandle(VolleyError error) {
+
+				}
+			});
+		}else showPrompt(et_phone_num,false);
+	}
+
+	/**检查手机号*/
+	private void checkphone() {
+		String phone=et_phone_num.getText().toString().trim();
+		if (code_num==null){
+			showPrompt(et_phone_num,false);
+			toast("请选择区域");
+			return;
+		}
+		if (phone.length()>6) {
+			HttpProxyUtil.checkphone(context, phone, new ResponseListener() {
+				@Override
+				public void setResponseHandle(Message2 message) {
+					showPrompt(et_phone_num,true);
+				}
+			}, new HttpUtil.ErrorResponseListener() {
+				@Override
+				public void setServerErrorResponseHandle(Message2 message) {
+					showPrompt(et_phone_num,false);
+				}
+
+				@Override
+				public void setErrorResponseHandle(VolleyError error) {
+
+				}
+			});
+		}else {
+			showPrompt(et_phone_num, false);
+		}
+	}
+
+
+	/**检查二次密码*/
+	private void checkdoublepassword() {
+		String password=et_password.getText().toString().trim();
+		String password2=et_double_password.getText().toString().trim();
+		if (password2.length()>=6) {
+			if (password.equals(password2)) {
+				showPrompt(et_double_password, true);
+			} else {
+				showPrompt(et_double_password, false);
+				toast("两次密码不一样");
+			}
+		}else{
+			showPrompt(et_double_password, false);
+			toast("密码长度不得小于6位");
+		}
+	}
+
+
+	/**检查密码*/
+	private void checkpassword() {
+		String password=et_password.getText().toString().trim();
+		if (password.length()>=6){
+			showPrompt(et_password,true);
+		}else {
+			showPrompt(et_password,false);
+			toast("密码长度不得小于6位");
+		}
+	}
+	/**检查用户名*/
+	private void checkname() {
+		String name=et_name.getText().toString().trim();
+		if (name.length()>0) {
+			HttpProxyUtil.checkuser(context, name, new ResponseListener() {
+				@Override
+				public void setResponseHandle(Message2 message) {
+					showPrompt(et_name, true);
+				}
+			}, new HttpUtil.ErrorResponseListener() {
+				@Override
+				public void setServerErrorResponseHandle(Message2 message) {
+					showPrompt(et_name, false);
+				}
+
+				@Override
+				public void setErrorResponseHandle(VolleyError error) {
+
+				}
+			});
+		}else {
+			showPrompt(et_name, false);
+		}
+	}
+
+	/**
+	 * 显示提示图标
+	 * @param editview
+	 * @param istrue
+     */
+	private void showPrompt(EditText editview,boolean istrue){
+		Drawable drawable;
+		if (istrue) drawable= getResources().getDrawable(R.drawable.duihaode);
+		else drawable= getResources().getDrawable(R.drawable.chahaoyuan);
+		drawable.setBounds(1,1, DisplayUtil.dip2px(context,20),DisplayUtil.dip2px(context,20));
+		editview.setCompoundDrawables(null,null,drawable,null);
+	}
 	private Bitmap bitmap;
 	/***
 	 * 去拍照
@@ -561,7 +717,7 @@ public class NormalMemberFragment extends BaseFragment {
 //						context, filePath));
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
 			    PhotoUtil.startPhotoZoom(context,data.getData(),1,1,200,200); 
-//				filePath = BitmapUtil.getFileFromALBUM(context, data);
+				filePath = BitmapUtil.getFileFromALBUM(context, data);
 //				Bitmap bitmap = BitmapUtil.getBitmapFromFile( filePath);
 			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
 				Bundle extras = data.getExtras();    
@@ -588,7 +744,7 @@ public class NormalMemberFragment extends BaseFragment {
 	          } else {
 	        	  toast("无法打开相机");
 	          }
-		}
+		  }
 	  }
 
 	@Override

@@ -93,7 +93,7 @@ public class ClassRoomActivity extends BaseActivity {
 
 		mybanner = (MyBanner) findViewById(R.id.mybanner);
 		mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth,
-				screenWidth * 3 / 5));
+				screenWidth ));
 		name = (TextView) findViewById(R.id.tv_name);
 		name.setOnClickListener(lis);
 		iv_share = (ImageView) findViewById(R.id.iv_share);

@@ -1,20 +1,21 @@
 package com.greattone.greattone.util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 
 import com.greattone.greattone.activity.BaseActivity;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class PhotoUtil {
@@ -92,8 +93,15 @@ public class PhotoUtil {
 	 */
 	public static void startPhotoZoom(Context context, Uri uri, double aspectX,
 			double aspectY, int outputX, int outputY) {
+		String filePath;
+		// 获取图片路径
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			filePath = BitmapUtil.getPath(context, uri);
+		} else {
+			filePath =BitmapUtil.selectImage(context, uri);
+		}
 		Intent intent = new Intent("com.android.camera.action.CROP");
-		intent.setDataAndType(uri, "image/*");
+		intent.setDataAndType(Uri.parse("file://"+filePath), "image/*");
 		// crop为true是设置在开启的intent中设置显示的view可以剪裁
 		intent.putExtra("crop", "true");
 
@@ -114,7 +122,7 @@ public class PhotoUtil {
 	 * 保存图片到本地
 	 * 
 	 * @param bitmap
-	 * @param imageName
+	 * @param fileName
 	 */
 	public static void sendImageToSDCard(Bitmap bitmap, String fileName) {
 		// 存入sd卡中

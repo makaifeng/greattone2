@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.HorizontalScrollView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
@@ -13,7 +13,7 @@ import com.greattone.greattone.activity.BaseActivity;
 
 /** 注册 */
 public class RegisterActivity extends BaseActivity {
-	private HorizontalScrollView horizontalScrollView;
+//	private HorizontalScrollView horizontalScrollView;
 	private RadioGroup rg_title;
 	private android.support.v4.app.FragmentManager fm;
 
@@ -30,8 +30,13 @@ private int groupid=1;
 	private void initView() {
 		setHead(getResources().getString(R.string.用户注册), true, true);
 
-		horizontalScrollView = (HorizontalScrollView) findViewById(R.id.scrollView);
+//		horizontalScrollView = (HorizontalScrollView) findViewById(R.id.scrollView);
 		rg_title = (RadioGroup) findViewById(R.id.rg_title);
+		RadioGroup.LayoutParams layoutParams=new RadioGroup.LayoutParams(screenWidth/4,-1);
+		((RadioButton) findViewById(R.id.radioButton1)).setLayoutParams(layoutParams);
+		((RadioButton) findViewById(R.id.radioButton2)).setLayoutParams(layoutParams);
+		((RadioButton) findViewById(R.id.radioButton3)).setLayoutParams(layoutParams);
+		((RadioButton) findViewById(R.id.radioButton4)).setLayoutParams(layoutParams);
 		this.fm = getSupportFragmentManager();
 		fragment = new NormalMemberFragment();
 		displayFragment(fragment);
@@ -116,14 +121,14 @@ private int groupid=1;
 			if (buttonWidth == 0) {
 				buttonWidth = group.getChildAt(position).getMeasuredWidth();
 			}
-			if (group.getChildAt(position).getRight() > screenWidth) {
-				horizontalScrollView.scrollTo(buttonWidth * position
-						+ buttonWidth / 2, 0);
-			} else if (group.getChildAt(position).getLeft() < horizontalScrollView
-					.getScrollX()) {
-				horizontalScrollView.scrollTo(buttonWidth * position
-						- buttonWidth / 2, 0);
-			}
+//			if (group.getChildAt(position).getRight() > screenWidth) {
+//				horizontalScrollView.scrollTo(buttonWidth * position
+//						+ buttonWidth / 2, 0);
+//			} else if (group.getChildAt(position).getLeft() < horizontalScrollView
+//					.getScrollX()) {
+//				horizontalScrollView.scrollTo(buttonWidth * position
+//						- buttonWidth / 2, 0);
+//			}
 			// for (int i = 0; i < buttons.size(); i++) {
 			// buttons.get(i).setTextColor(
 			// getResources().getColor(R.color.black));

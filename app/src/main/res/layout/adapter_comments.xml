@@ -21,7 +21,8 @@
             <com.greattone.greattone.widget.MyRoundImageView
                 android:id="@+id/adapter_comments_head"
                 android:layout_width="48.0dip"
-                android:layout_height="48.0dip" />
+                android:layout_height="48.0dip"
+                android:scaleType="centerCrop"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"

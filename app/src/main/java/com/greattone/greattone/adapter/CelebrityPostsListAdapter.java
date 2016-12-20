@@ -1,9 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +42,10 @@ import com.greattone.greattone.util.MessageUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class CelebrityPostsListAdapter extends BaseAdapter {
@@ -298,7 +298,7 @@ public class CelebrityPostsListAdapter extends BaseAdapter {
 			if (list.size() == 0) {
 				return;
 			}
-	int	num= list.size() >4?4:list.size();
+			int	num= list.size() >4?4:list.size();
 			for (int i = 0; i <1 ; i++) {
 //				int num = 4;
 //				if (i == (list.size() - 1) / 4) {
@@ -327,7 +327,7 @@ public class CelebrityPostsListAdapter extends BaseAdapter {
 								0);
 					}
 					imageView.setLayoutParams(params);
-					imageView.setScaleType(ScaleType.FIT_XY);
+					imageView.setScaleType(ScaleType.CENTER_CROP);
 					final int mPosition = j + i * 4;
 					ImageLoaderUtil.getInstance()
 							.setImagebyurl(list.get(mPosition).getThumbnail(),

@@ -34,6 +34,7 @@
                         android:layout_marginBottom="20dp"
                         android:layout_marginTop="20dp"
                         android:contentDescription="@null"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_camera" />
 
                     <RelativeLayout

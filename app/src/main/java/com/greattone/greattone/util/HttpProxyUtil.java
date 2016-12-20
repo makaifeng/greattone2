@@ -334,4 +334,38 @@ public class HttpProxyUtil {
 		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
+	/**
+	 * 检查用户名是否存在
+     */
+	public static void checkuser(Context context,String name,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "user/checkuser");
+		map.put("username", name);
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 检查用户名是否存在
+     */
+	public static void checkphone(Context context,String phone,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "user/checkphone");
+		map.put("phone", phone);
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 检查用户名是否存在
+     */
+	public static void checkcode(Context context,String phone,String code,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "user/checkcode");
+		map.put("phone", phone);
+		map.put("smscode", code);
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
 }

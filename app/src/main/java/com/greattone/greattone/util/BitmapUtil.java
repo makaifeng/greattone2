@@ -145,6 +145,10 @@ public class BitmapUtil {
 
 	public static String selectImage(Context context, Intent data) {
 		Uri selectedImage = data.getData();
+		return selectImage(context,selectedImage);
+	}
+
+	public static String selectImage(Context context, Uri selectedImage) {
 		// Log.e(TAG, selectedImage.toString());
 		if (selectedImage != null) {
 			String uriStr = selectedImage.toString();

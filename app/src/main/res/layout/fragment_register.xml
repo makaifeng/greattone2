@@ -14,6 +14,7 @@
             android:id="@+id/iv_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginTop="@dimen/padding10"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@null"
             android:src="@drawable/addphoto" />
@@ -99,7 +100,7 @@
                 android:background="@drawable/login_border"
                 android:padding="10.0dip"
                 android:gravity="center_horizontal"
-                android:hint="区号"
+                android:hint="区域"
                 android:textSize="@dimen/bigtext" />
 
             <com.greattone.greattone.widget.MyEditText
