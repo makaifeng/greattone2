@@ -1,12 +1,9 @@
 package com.greattone.greattone.activity.course;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -17,8 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnBtnItemClickListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.adapter.MyCourseListAdapter;
 import com.greattone.greattone.data.ClassId;
@@ -27,11 +24,15 @@ import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Course;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**我的课程*/
 public class MyCoursesActivity extends BaseActivity {
 	protected List<Course> courseList = new ArrayList<Course>();
@@ -74,18 +75,22 @@ public class MyCoursesActivity extends BaseActivity {
 		
 		@Override
 		public void onItemClick(View v, final int position) {
-			new AlertDialog.Builder(context)
-			.setMessage(getResources().getString(R.string.你确定删除吗))
-			.setPositiveButton(getResources().getString(R.string.确定),
-					new DialogInterface.OnClickListener() {
+			try {
+				new AlertDialog.Builder(context)
+                .setMessage(getResources().getString(R.string.你确定删除吗))
+                .setPositiveButton(getResources().getString(R.string.确定),
+                        new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(
-								DialogInterface dialog,
-								int which) {
-							delect(position);
-						}
-					}).setNegativeButton(getResources().getString(R.string.取消), null).show();
+                            @Override
+                            public void onClick(
+                                    DialogInterface dialog,
+                                    int which) {
+                                delect(position);
+                            }
+                        }).setNegativeButton(getResources().getString(R.string.取消), null).show();
+			} catch (Resources.NotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	};
 
@@ -94,25 +99,33 @@ public class MyCoursesActivity extends BaseActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Intent intent = new Intent(context, CourseDeailsActivity.class);
-			intent.putExtra("id", courseList.get(position).getId());
-			intent.putExtra("classid", courseList.get(position).getClassid());
-			intent.putExtra("type", "center");
-			startActivity(intent);
+			try {
+				Intent intent = new Intent(context, CourseDeailsActivity.class);
+				intent.putExtra("id", courseList.get(position).getId());
+				intent.putExtra("classid", courseList.get(position).getClassid());
+				intent.putExtra("type", "center");
+				startActivity(intent);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	};
 	OnClickListener lis = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			switch (v.getId()) {
-			case R.id.tv_head_other:// 发布课程
-				startActivityForResult(new Intent(context,
-						PostCourseActivity.class), 121);
-				break;
+			try {
+				switch (v.getId()) {
+                case R.id.tv_head_other:// 发布课程
+                    startActivityForResult(new Intent(context,
+                            PostCourseActivity.class), 121);
+                    break;
 
-			default:
-				break;
+                default:
+                    break;
+                }
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	};

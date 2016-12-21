@@ -1,8 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +23,10 @@ import com.greattone.greattone.entity.Video;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.MessageUtil;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class MyRecomendationListAdapter extends BaseAdapter {
 
@@ -64,7 +65,8 @@ public class MyRecomendationListAdapter extends BaseAdapter {
 					R.layout.adapter_my_recomm_video, group, false);
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_pic);//
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					screenWidth * 2 / 5, screenWidth * 2 * 3 / 5 / 5);
+					screenWidth /4, screenWidth /4);
+//					screenWidth * 2 / 5, screenWidth * 2 * 3 / 5 / 5);
 			holder.icon.setLayoutParams(params);
 			holder.title = (TextView) convertView.findViewById(R.id.tv_title);//
 			holder.name = (TextView) convertView.findViewById(R.id.tv_name);//
@@ -99,7 +101,7 @@ public class MyRecomendationListAdapter extends BaseAdapter {
 			ImageLoaderUtil.getInstance().setImagebyurl(
 					videoList.get(position).getTitlepic(), icon);
 			cname.setText("("
-					+ videoList.get(position).getUserInfo().getTeacher_type()
+					+ MessageUtil.getIdentity(videoList.get(position).getUserInfo())
 					+ ")");
 			remarks.setText(videoList.get(position).getPlnum() + "");
 			if (type == 0) {

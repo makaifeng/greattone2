@@ -76,8 +76,12 @@ public class TeacherActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teacher);
-		initView();
-		getTeacherInfo();
+		try {
+			initView();
+			getTeacherInfo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initView() {
@@ -134,90 +138,94 @@ public class TeacherActivity extends BaseActivity {
 
 		@Override
 		public void onClick(View v) {
-			if (v == recommended_video) {// 推荐视频
-				Intent intent = new Intent(context,
-						RecommendedVideoActivity.class);
-				intent.putExtra("id", people.getUserid());
-				startActivity(intent);
-			} else if (v == course_center) {// 课程中心
-				Intent intent = new Intent(context, CourseCenterActivity.class);
-				intent.putExtra("id", people.getUserid());
-				startActivity(intent);
-			} else if (v == tv_student) {// 全部学员
-				if (people.getIsstudent()== 1) {
-					Intent intent = new Intent(context,
-							ClassRoomStudentActivity.class);
-					intent.putExtra("id", people.getUserid());
-					startActivity(intent);
-				}else{
-					toast("你不是本老师下的学生，无法查看!");
-				}
-			} else if (v == comments) {// 介绍评论
-				Intent intent = new Intent(context, IntroAndCommActivity.class);
-				intent.putExtra("id", people.getUserid());
-				intent.putExtra("content", people.getSaytext());
-				intent.putExtra("type", "teacher");
-				intent.putExtra("classid", ClassId.音乐教室_介绍评论_ID+"");
-				startActivity(intent);
-			} else if (v == announcements) {// 活动公告
-				Intent intent = new Intent(context, NoticeActivity.class);
-				intent.putExtra("userid", people.getUserid());
-				startActivity(intent);
-			} else if (v == tv_table) {// 课程表
-				if (people.getIsstudent()== 1) {
-				Intent intent = new Intent(context,TimeTablesActivity.class);
-				intent.putExtra("userid", people.getUserid());
-				startActivity(intent);
-				}else{
-					toast("你不是本老师下的学生，无法查看!");
-				}
-			} else if (v == tv_tlq) {// 讨论区
-				if (people.getIsstudent()== 1) {
-				Intent intent = new Intent(context,TlqActivity.class);
-				intent.putExtra("userid", people.getUserid());
-				startActivity(intent);
-				}else{
-					toast("你不是本老师下的学生，无法查看!");
-				}
-			} else if (v == talk) {// 私信
-				MyProgressDialog.show(context);
-				HttpProxyUtil.isFriend(context, people.getUserid(), new ResponseListener() {
-					
-					@Override
-					public void setResponseHandle(Message2 message) {
-						MyProgressDialog.Cancel();
-						if (message.getData().equals("1")) {
-							Intent intent = new Intent(context, MyChatActivity.class);
-							intent.putExtra("name", people.getUsername());
-							intent.putExtra("image", people.getUserpic());
-							startActivity(intent);
-						} else {
-							toast(getResources().getString(R.string.互相关注后才能发送私信));
-						}
-					}
-				}, null);
-			} else if (v == focus) {// 关注
-				addattention();
-			} else if (v == ask) {// 我要提问
-				if (people.getUserid().equals(Data.myinfo.getUserid())) {
-					toast("不能向自己提问");
-					return ;
-				}
-				Intent intent = new Intent(context, AskQuestionActivity.class);
-				intent.putExtra("id",people.getUserid());
-				intent.putExtra("name",people.getUsername());
-				startActivity(intent);
-				
-			} else if (v == icon) {// 头像
-				Intent intent = new Intent(context, CelebrityActivity.class);
-					intent.putExtra("id", people.getUserid() + "");
-					intent.putExtra("groupid",people.getGroupid());
-				context.startActivity(intent);
-			} else if (v == iv_share) {// 分享
-				SharePopWindow.build(context).setTitle(people.getUsername() +"的空间——好琴声，音乐人的交流平台！")
-						.setContent(people.getUsername() +"的空间")
-						.setTOargetUrl(people.getShareurl())
-						.setIconPath(people.getUserpic()).show();
+			try {
+				if (v == recommended_video) {// 推荐视频
+                    Intent intent = new Intent(context,
+                            RecommendedVideoActivity.class);
+                    intent.putExtra("id", people.getUserid());
+                    startActivity(intent);
+                } else if (v == course_center) {// 课程中心
+                    Intent intent = new Intent(context, CourseCenterActivity.class);
+                    intent.putExtra("id", people.getUserid());
+                    startActivity(intent);
+                } else if (v == tv_student) {// 全部学员
+                    if (people.getIsstudent()== 1) {
+                        Intent intent = new Intent(context,
+                                ClassRoomStudentActivity.class);
+                        intent.putExtra("id", people.getUserid());
+                        startActivity(intent);
+                    }else{
+                        toast("你不是本老师下的学生，无法查看!");
+                    }
+                } else if (v == comments) {// 介绍评论
+                    Intent intent = new Intent(context, IntroAndCommActivity.class);
+                    intent.putExtra("id", people.getUserid());
+                    intent.putExtra("content", people.getSaytext());
+                    intent.putExtra("type", "teacher");
+                    intent.putExtra("classid", ClassId.音乐教室_介绍评论_ID+"");
+                    startActivity(intent);
+                } else if (v == announcements) {// 活动公告
+                    Intent intent = new Intent(context, NoticeActivity.class);
+                    intent.putExtra("userid", people.getUserid());
+                    startActivity(intent);
+                } else if (v == tv_table) {// 课程表
+                    if (people.getIsstudent()== 1) {
+                    Intent intent = new Intent(context,TimeTablesActivity.class);
+                    intent.putExtra("userid", people.getUserid());
+                    startActivity(intent);
+                    }else{
+                        toast("你不是本老师下的学生，无法查看!");
+                    }
+                } else if (v == tv_tlq) {// 讨论区
+                    if (people.getIsstudent()== 1) {
+                    Intent intent = new Intent(context,TlqActivity.class);
+                    intent.putExtra("userid", people.getUserid());
+                    startActivity(intent);
+                    }else{
+                        toast("你不是本老师下的学生，无法查看!");
+                    }
+                } else if (v == talk) {// 私信
+                    MyProgressDialog.show(context);
+                    HttpProxyUtil.isFriend(context, people.getUserid(), new ResponseListener() {
+
+                        @Override
+                        public void setResponseHandle(Message2 message) {
+                            MyProgressDialog.Cancel();
+                            if (message.getData().equals("1")) {
+                                Intent intent = new Intent(context, MyChatActivity.class);
+                                intent.putExtra("name", people.getUsername());
+                                intent.putExtra("image", people.getUserpic());
+                                startActivity(intent);
+                            } else {
+                                toast(getResources().getString(R.string.互相关注后才能发送私信));
+                            }
+                        }
+                    }, null);
+                } else if (v == focus) {// 关注
+                    addattention();
+                } else if (v == ask) {// 我要提问
+                    if (people.getUserid().equals(Data.myinfo.getUserid())) {
+                        toast("不能向自己提问");
+                        return ;
+                    }
+                    Intent intent = new Intent(context, AskQuestionActivity.class);
+                    intent.putExtra("id",people.getUserid());
+                    intent.putExtra("name",people.getUsername());
+                    startActivity(intent);
+
+                } else if (v == icon) {// 头像
+                    Intent intent = new Intent(context, CelebrityActivity.class);
+                        intent.putExtra("id", people.getUserid() + "");
+                        intent.putExtra("groupid",people.getGroupid());
+                    context.startActivity(intent);
+                } else if (v == iv_share) {// 分享
+                    SharePopWindow.build(context).setTitle(people.getUsername() +"的空间——好琴声，音乐人的交流平台！")
+                            .setContent(people.getUsername() +"的空间")
+                            .setTOargetUrl(people.getShareurl())
+                            .setIconPath(people.getUserpic()).show();
+                }
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	};

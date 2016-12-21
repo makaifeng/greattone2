@@ -14,8 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.UpdateFileListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.receiver.MyReceiver;
 import com.greattone.greattone.service.PostVideoService;
@@ -67,7 +67,6 @@ public class UpdateVideoAct extends BaseActivity {
 	}
 	private void initViewData() {
 		setHead("等待上传", true, true);
-		int updateState=preferences.getInt("updateState", PostVideoService.Flag_Init);
 		String title = "";
 		String content;
 			if ( preferences.getString("updateClassid", "11").equals("11")) {//广场发帖
@@ -80,15 +79,17 @@ public class UpdateVideoAct extends BaseActivity {
 			content=preferences.getString("updateContent", "");
 		 updatePath=preferences.getString("updatePath", "");
 		 if (isSee==1) {//上传跳转过来的
-			 startUpdateService( );
+			 startUpdateService();
 		 }
-		 if (updateState==PostVideoService.Flag_Init||updateState==PostVideoService.Flag_Update) {//没开始或上传中
+		int updateState=preferences.getInt("updateState", PostVideoService.Flag_Init);
+		 if (updateState==PostVideoService.Flag_Update) {//上传中
 			 rl_all.setVisibility(View.VISIBLE);
 			 Bitmap bitmap=BitmapUtil.getVideoThumbnail(updatePath, 300, 300, Thumbnails.MINI_KIND);
 			 tv_title.setText(title);
 			 tv_content.setText(content);
 			 iv_title.setImageBitmap(bitmap);
-		}else if (updateState==PostVideoService.Flag_Done) {//完成
+		}else if (updateState==PostVideoService.Flag_Init||updateState==PostVideoService.Flag_Done) {//没开始或完成
+			 rl_all.setVisibility(View.GONE);
 		}else if (updateState==PostVideoService.Flag_False) {//失败
 			 rl_all.setVisibility(View.VISIBLE);
 			btn_update.setVisibility(View.VISIBLE);
@@ -101,8 +102,6 @@ public class UpdateVideoAct extends BaseActivity {
 	}
 	/**
 	 * 上传文件
-	 * @param videoid
-	 * @param videoUrl
 	 */
 	void startUpdateService() {
 		preferences.edit().putInt("updateState",PostVideoService.Flag_Update).commit();

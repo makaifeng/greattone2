@@ -1,11 +1,5 @@
 package com.greattone.greattone.activity.personal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +16,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.brand.BrandDetailActivity;
 import com.greattone.greattone.activity.celebrity.CelebrityActivity;
 import com.greattone.greattone.activity.classroom.ClassRoomActivity;
 import com.greattone.greattone.activity.teacher.TeacherActivity;
@@ -32,12 +27,18 @@ import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Friend;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.PinYinUtil;
 import com.greattone.greattone.widget.BadgeView;
 import com.greattone.greattone.widget.MyLetterListView;
 import com.greattone.greattone.widget.MyLetterListView.OnTouchingLetterChangedListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /** 通讯录 */
 public class DirectoryActivity extends BaseActivity {
@@ -326,6 +327,13 @@ private RadioButton radioButton2;
 		}else 	if (group==4) {//教室
 			intent .setClass(context, ClassRoomActivity.class);
 			intent.putExtra("id", contactsList.get(position).getUserid()+"");
+		}else 	if (group==5) {//品牌
+			intent .setClass(context,BrandDetailActivity.class);
+			intent.putExtra("id", contactsList.get(position).getUserid()+"");
+		}else {
+			intent .setClass(context, CelebrityActivity.class);
+			intent.putExtra("id",contactsList.get(position).getUserid()+"");
+			intent.putExtra("groupid",Integer.valueOf( contactsList.get(position).getGroupid()));
 		}
 		context.startActivity(intent);
 	}

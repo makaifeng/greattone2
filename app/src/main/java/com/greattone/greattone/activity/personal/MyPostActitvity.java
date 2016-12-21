@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.personal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -16,8 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnBtnItemClickListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.EntryActivity;
 import com.greattone.greattone.activity.plaza.PlazaMusicDetailsActivity;
@@ -29,11 +25,15 @@ import com.greattone.greattone.entity.Blog;
 import com.greattone.greattone.entity.Cate;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /** 我的发帖 */
 public class MyPostActitvity extends BaseActivity {
@@ -59,8 +59,12 @@ public class MyPostActitvity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_post);
-		initView();
-		getMyPosts();
+		try {
+			initView();
+			getMyPosts();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initView() {

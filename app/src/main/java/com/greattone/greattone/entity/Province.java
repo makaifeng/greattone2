@@ -3,9 +3,12 @@ package com.greattone.greattone.entity;
 import java.util.List;
 
 public class Province {
-	String name;
+	String name;//简体名字
 	List<City> cityList;
 //	List<City> city;
+
+
+
 	public String getName() {
 		return name;
 	}

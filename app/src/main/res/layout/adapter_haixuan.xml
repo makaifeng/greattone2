@@ -22,6 +22,8 @@
         android:layout_toRightOf="@+id/iv_icon"
              android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
+        android:lines="1"
+        android:ellipsize="end"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -30,18 +32,18 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_below="@+id/tv_name"
         android:layout_toEndOf="@+id/iv_icon"
         android:layout_toRightOf="@+id/iv_icon" />
-
+1
     <com.greattone.greattone.widget.MyTextView
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_below="@+id/tv_time"

@@ -21,6 +21,7 @@ import com.greattone.greattone.Listener.OnSelectCityListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.util.CityUtil;
 import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.LanguageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,9 @@ public class SelectCityPopwindow {
 String province;
 String city;
 	List<String> provinceList=new ArrayList<String>();
+	List<String> provinceTraList=new ArrayList<String>();
 	List<String> cityList=new ArrayList<String>();
+	List<String> cityTraList=new ArrayList<String>();
 	private ListView listView;
 	private ListView subListView;
 	private MyAdapter myAdapter;
@@ -96,14 +99,21 @@ String city;
 
 		provinceList.add("全部");
 		provinceList.addAll(CityUtil.getProvince());
+		provinceTraList.add("全部");
+		provinceTraList.addAll(CityUtil.getTraProvince());
 		cityList.add("全部");
+		cityTraList.add("全部");
 //		cityList = CityUtil.getCity(provinceList.get(0));
 //		cityList.remove("默认");
 
-		myAdapter = new MyAdapter(context, provinceList);
+			if (LanguageUtil.getLanguage().equals("TW")) {//繁体
+				myAdapter = new MyAdapter(context, provinceTraList);
+				subAdapter = new SubAdapter(context, cityList);
+			}else{
+				myAdapter = new MyAdapter(context, provinceList);
+				subAdapter = new SubAdapter(context, cityTraList);
+			}
 		listView.setAdapter(myAdapter);
-
-		subAdapter = new SubAdapter(context, cityList);
 		subListView.setAdapter(subAdapter);
 
 		myAdapter.setSelectedPosition(0);
@@ -120,9 +130,14 @@ String city;
 					cityList.add("全部");
 				}else {
 					cityList = CityUtil.getCity(provinceList.get(position));
+					cityTraList = CityUtil.getTraCity(provinceList.get(position));
 					cityList.remove("默认");
 				}
-				subAdapter = new SubAdapter(context, cityList);
+				if (LanguageUtil.getLanguage().equals("TW")) {//繁体
+					subAdapter = new SubAdapter(context, cityTraList);
+				}else{
+					subAdapter = new SubAdapter(context, cityList);
+				}
 				subListView.setAdapter(subAdapter);
 				myAdapter.setSelectedPosition(position);
 				myAdapter.notifyDataSetInvalidated();
@@ -144,8 +159,8 @@ String city;
 				 }
 				if (onSelectCityListener!=null) {
 					onSelectCityListener.ClickSure(province, city, null);
-					mPopupWindow.dismiss();
 				}
+				mPopupWindow.dismiss();
 			}
 		});
 	}
@@ -160,7 +175,6 @@ String city;
 	}
 
 	public class MyAdapter extends BaseAdapter {
-
 		Context context;
 		LayoutInflater inflater;
 		List<String> provinceList;

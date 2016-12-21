@@ -200,24 +200,28 @@ private String username;
 
 /** 排序 */
 protected void sort() {
-	List<String> list = new ArrayList<String>();
-	for (OrderBy orderBy : Data.filter_classroom.getOrderby()) {
-		list.add(orderBy.getName());
-	}
-	NormalPopuWindow popuWindow = new NormalPopuWindow(context, list,
-			ll_radiobutton2);
-	popuWindow.setOnItemClickBack(new OnItemClickBack() {
+	try {
+		List<String> list = new ArrayList<String>();
+		for (OrderBy orderBy : Data.filter_classroom.getOrderby()) {
+            list.add(orderBy.getName());
+        }
+		NormalPopuWindow popuWindow = new NormalPopuWindow(context, list,
+                ll_radiobutton2);
+		popuWindow.setOnItemClickBack(new OnItemClickBack() {
 
-		@Override
-		public void OnClick(int position, String text) {
-			orderby = Data.filter_classroom.getOrderby().get(position)
-					.getField();
-			page=1;
-			classRoomList.clear();
-			getClassRoom();
-		}
-	});
-	popuWindow.show();
+            @Override
+            public void OnClick(int position, String text) {
+                orderby = Data.filter_classroom.getOrderby().get(position)
+                        .getField();
+                page=1;
+                classRoomList.clear();
+                getClassRoom();
+            }
+        });
+		popuWindow.show();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 }
 	/**
 	 * 获取教室数据

@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnBtnItemClickListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.course.PostCourseActivity;
 import com.greattone.greattone.entity.Course;
+import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class MyCourseListAdapter extends BaseAdapter {
 	private Context context;
@@ -56,7 +57,9 @@ public class MyCourseListAdapter extends BaseAdapter {
 					R.layout.adapter_my_course, group, false);
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_pic);//
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-					screenWidth * 2 / 5, screenWidth * 2 * 3 / 5 / 5);
+					screenWidth /4, screenWidth  /4);
+//					screenWidth * 2 / 5, screenWidth * 2 * 3 / 5 / 5);
+			params.setMargins(DisplayUtil.dip2px(context,5),DisplayUtil.dip2px(context,5),DisplayUtil.dip2px(context,5),DisplayUtil.dip2px(context,5));
 			holder.icon.setLayoutParams(params);
 			holder.title = (TextView) convertView.findViewById(R.id.tv_title);//
 

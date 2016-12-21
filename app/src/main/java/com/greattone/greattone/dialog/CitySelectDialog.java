@@ -1,8 +1,5 @@
 package com.greattone.greattone.dialog;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,12 +9,16 @@ import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.util.CityUtil;
+import com.greattone.greattone.util.LanguageUtil;
 import com.greattone.greattone.wheel.ArrayWheelViewAdapter;
 import com.greattone.greattone.wheel.OnWheelChangedListener;
 import com.greattone.greattone.wheel.WheelView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CitySelectDialog extends Dialog {
 	private OnSelectCityListener clickSureListener;
@@ -26,8 +27,11 @@ public class CitySelectDialog extends Dialog {
 	private WheelView wheelView_city;
 	private WheelView wheelView_district;
 	List<String> provinceList;
+	List<String> provinceTraList;
 	List<String> cityList;
+	List<String> cityTraList;
 	List<String> districtList;
+	List<String> districtTraList;
 	int districtPosition = 0;
 	int cityPosition = 0;
 	int provincePosition = 0;
@@ -67,8 +71,14 @@ public class CitySelectDialog extends Dialog {
 		setContentView(view);
 		// 省
 		provinceList = CityUtil.getProvince();
-		wheelView_province.setViewAdapter(new ArrayWheelViewAdapter(
-				getContext(), provinceList));
+		provinceTraList = CityUtil.getTraProvince();
+		if (LanguageUtil.getLanguage().equals("TW")) {//繁体
+			wheelView_province.setViewAdapter(new ArrayWheelViewAdapter(
+					getContext(), provinceTraList));
+		}else{
+			wheelView_province.setViewAdapter(new ArrayWheelViewAdapter(
+					getContext(), provinceList));
+		}
 		if (province != null) {
 			for (int i = 0; i < provinceList.size(); i++) {
 				if (provinceList.get(i).equals(province)) {
@@ -93,13 +103,21 @@ public class CitySelectDialog extends Dialog {
 		int pCurrent = wheelView_city.getCurrentItem();
 		city = cityList.get(pCurrent);
 		districtList = CityUtil.getDistrict(province,city);
+		districtTraList = CityUtil.getTraDistrict(province,city);
 //		districtList.remove("默认");
-		district = districtList.get(0);
 		if (districtList == null) {
 			districtList = new ArrayList<String>();
+		}else {
+			district = districtList.get(0);
+
 		}
-		wheelView_district.setViewAdapter(new ArrayWheelViewAdapter(
-				getContext(), districtList));
+		if (LanguageUtil.getLanguage().equals("TW")) {//繁体
+			wheelView_district.setViewAdapter(new ArrayWheelViewAdapter(
+					getContext(), districtTraList));
+		}else{
+			wheelView_district.setViewAdapter(new ArrayWheelViewAdapter(
+					getContext(), districtList));
+		}
 		if (isFrist) {
 			if (district != null) {
 				for (int i = 0; i < districtList.size(); i++) {
@@ -117,13 +135,19 @@ public class CitySelectDialog extends Dialog {
 	private void updateCities(boolean isFrist) {
 		int pCurrent = wheelView_province.getCurrentItem();
 		province = provinceList.get(pCurrent);
-		cityList = CityUtil.getCity(provinceList.get(pCurrent));
+		cityList = CityUtil.getCity(province);
+		cityTraList = CityUtil.getTraCity(province);
 //		cityList.remove("默认");
 		if (cityList == null) {
 			cityList = new ArrayList<String>();
 		}
-		wheelView_city.setViewAdapter(new ArrayWheelViewAdapter(getContext(),
-				cityList));
+		if (LanguageUtil.getLanguage().equals("TW")) {//繁体
+			wheelView_city.setViewAdapter(new ArrayWheelViewAdapter(getContext(),
+					cityTraList));
+		}else{
+			wheelView_city.setViewAdapter(new ArrayWheelViewAdapter(getContext(),
+					cityList));
+		}
 		if (isFrist) {
 			if (city != null) {
 				for (int i = 0; i < cityList.size(); i++) {

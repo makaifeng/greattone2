@@ -12,7 +12,7 @@
         android:contentDescription="@null"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop" />
 
     <com.greattone.greattone.widget.MyTextView
         android:id="@+id/tv_title"

@@ -1,10 +1,5 @@
 package com.greattone.greattone.activity2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -29,6 +24,11 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 /**推荐视频*/
 public class MyRecomendationActivity extends BaseActivity {
 	protected List<Video> videoList = new ArrayList<Video>();
@@ -49,8 +49,12 @@ public class MyRecomendationActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_post);
-		initView();
-		getData();
+		try {
+			initView();
+			getData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void getData() {

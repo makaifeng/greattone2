@@ -1,8 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +23,9 @@ import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class MyRoomRentListAdapter extends BaseAdapter {
 	private Context context;
@@ -67,8 +67,11 @@ public class MyRoomRentListAdapter extends BaseAdapter {
 			holder.del = (TextView) convertView.findViewById(R.id.tv_del);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_pic);//
 			LayoutParams params = new LayoutParams(
-					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2,
-					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2 *3 / 5);
+					(screenWidth - DisplayUtil.dip2px(context, 10)) / 3,
+					(screenWidth - DisplayUtil.dip2px(context, 10)) / 3);
+//					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2,
+//					(screenWidth - DisplayUtil.dip2px(context, 10)) / 2 *3 / 5);
+			params.setMargins(DisplayUtil.dip2px(context,5),DisplayUtil.dip2px(context,5),DisplayUtil.dip2px(context,5),DisplayUtil.dip2px(context,5));
 			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {

@@ -1,7 +1,5 @@
 package com.greattone.greattone.activity.course;
 
-import java.util.HashMap;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -25,6 +23,8 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 
+import java.util.HashMap;
+
 public class CourseDeailsActivity extends BaseActivity {
 	private Course course;
 	private TextView tv_oldprice;
@@ -40,8 +40,12 @@ public class CourseDeailsActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_course_deails);
-		initView();
-		getData();
+		try {
+			initView();
+			getData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void getData() {
@@ -77,7 +81,7 @@ public class CourseDeailsActivity extends BaseActivity {
 		iv_icon = (ImageView) findViewById(R.id.iv_icon);//
 		int width = screenWidth - DisplayUtil.dip2px(context, 20);
 		iv_icon.setLayoutParams(new LinearLayout.LayoutParams(width,
-				width * 4 / 5));
+				width ));
 		tv_content = (TextView) findViewById(R.id.tv_content);//
 		tv_address = (TextView) findViewById(R.id.tv_address);//
 		tv_address.setVisibility(View.GONE);

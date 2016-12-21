@@ -13,10 +13,10 @@
         android:background="#e4e3de"
         android:choiceMode="singleChoice"
         android:layout_weight="2"
-        android:divider="@drawable/listitem_divide"
         android:listSelector="@android:color/transparent"
-        android:scrollbars="none" >
+    android:scrollbars="none" >
     </ListView>
+    <!--android:divider="@drawable/listitem_divide"-->
 
     <ListView
         android:id="@+id/subListView"

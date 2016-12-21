@@ -1,13 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
-import com.greattone.greattone.R;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.entity.Product;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.entity.Product;
+import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class BrandNewsListAdapter extends BaseAdapter {
 	private Context context;
@@ -64,7 +64,7 @@ public class BrandNewsListAdapter extends BaseAdapter {
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_pic);//
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
 					screenWidth/4+ DisplayUtil.dip2px(context, 20),
-					screenWidth*3/4/ 5 + DisplayUtil.dip2px(context, 20));
+					screenWidth/4 + DisplayUtil.dip2px(context, 20));
 			holder.icon.setLayoutParams(params);
 			holder.iv_ad = (ImageView) convertView
 					.findViewById(R.id.iv_ad);//

@@ -96,6 +96,8 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_comments_time);//
 			holder.delete = (ImageView) convertView
 					.findViewById(R.id.adapter_comments_delete);//
+			holder.iv_like = (ImageView) convertView
+					.findViewById(R.id.iv_like);//
 			holder.vote = (TextView) convertView.findViewById(R.id.tv_my_vote);// 投票
 			holder.address = (TextView) convertView
 					.findViewById(R.id.adapter_comments_city);//
@@ -199,6 +201,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 		/** 点赞*/
 		LinearLayout ll_like;
 		TextView tv_like;
+		ImageView iv_like;
 		/** 头像 */
 		MyRoundImageView icon;
 		/** 删除 */
@@ -260,6 +263,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 				vote.setOnClickListener(lis);
 				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
 				content.setText(blogsList.get(position).getHai_petition());
+				iv_like.setImageResource(R.drawable.toupiaoicon);
 			}else
 			if (blogsList.get(position).getClassid()== ClassId.音乐海选_视频_ID) {// 海选视频报名
 				ll_video.setVisibility(View.VISIBLE);
@@ -269,7 +273,11 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 				vote.setOnClickListener(lis);
 				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
 				content.setText(blogsList.get(position).getHai_petition());
+				iv_like.setImageResource(R.drawable.toupiaoicon);
+				ll_like.setOnClickListener(null);
 			} else {
+				ll_like.setOnClickListener(lis);
+				iv_like.setImageResource(R.drawable.icon_like);
 				title.setText(blogsList.get(position).getTitle());
 				content.setText(blogsList.get(position).getSmalltext());
 			}
@@ -412,7 +420,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 				} else if (v == icon) {// 头像
 					toCenter();
 				} else if (v == ll_like) {// 点赞
-					toLike();
+						toLike();
 				} else if (v == iv_ad) {// 广告图
 					toWeb(imageUrlList.get((position/3)%imageUrlList.size()));
 				}

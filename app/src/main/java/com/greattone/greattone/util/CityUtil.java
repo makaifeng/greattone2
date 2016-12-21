@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.entity.City;
-import com.greattone.greattone.entity.District;
 import com.greattone.greattone.entity.Province;
 
 import java.io.BufferedReader;
@@ -15,9 +14,10 @@ import java.util.List;
 
 public class CityUtil {
 	static List<Province> provinceList = new ArrayList<Province>();
+	static List<Province> provinceTraList = new ArrayList<Province>();
 	// static List<Address> cityList = new ArrayList<Address>();
-	static List<District> cityList = new ArrayList<District>();
-	static List<District> districtList = new ArrayList<District>();
+//	static List<District> cityList = new ArrayList<District>();
+//	static List<District> districtList = new ArrayList<District>();
 	static CityUtil cityUtil;
 
 	private CityUtil(final Context context) {
@@ -64,6 +64,8 @@ public class CityUtil {
 		try {
 			String result = getFileString(context, "address.json");
 			provinceList = JSON.parseArray(result.trim(), Province.class);
+			String result1 = getFileString(context, "address_Tra.json");
+			provinceTraList = JSON.parseArray(result1.trim(), Province.class);
 			// JSONArray array = new JSONArray(result);
 			// for (int i = 0; i < array.length(); i++) {
 			// District district = new District();
@@ -119,7 +121,7 @@ public class CityUtil {
 		return cityUtil;
 	}
 
-	/** 获取省份 */
+	/** 获取简体的省份 */
 	public static List<String> getProvince() {
 		List<String> list = new ArrayList<String>();
 		for (int i = 0; i < provinceList.size(); i++) {
@@ -129,7 +131,15 @@ public class CityUtil {
 //        Collections.sort(list, new PinyinComparator());
 		return list;
 	}
-	/** 获取某省的城市 */
+	/** 获取繁体的省份 */
+	public static List<String> getTraProvince() {
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < provinceTraList.size(); i++) {
+			list.add(provinceTraList.get(i).getName());
+		}
+		return list;
+	}
+	/** 获取某省的城市-简体 */
 	public static List<String> getCity(String province) {
 		// String str = province.getZipcode().substring(0, 2);
 		List<String> list = new ArrayList<String>();
@@ -143,8 +153,22 @@ public class CityUtil {
 		}
 		return list;
 	}
+	/** 获取某省的城市-繁体 */
+	public static List<String> getTraCity(String province) {
+		// String str = province.getZipcode().substring(0, 2);
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < provinceList.size(); i++) {
+			if (provinceList.get(i).getName().equals(province)) {
+				for (City city : provinceTraList.get(i).getCityList()) {
+					list.add(city.getName());
+				}
+				return list;
+			}
+		}
+		return list;
+	}
 
-	/** 获取某省某城市的地区名 */
+	/** 获取某省某城市的地区名 -简体*/
 	public static List<String> getDistrict(String province, String city) {
 		// String str = city.getZipcode().substring(0, 4);
 		// List<District> list = new ArrayList<District>();
@@ -159,7 +183,28 @@ public class CityUtil {
 			if (province2.getName().equals(province)) {
 				for (City city2 : province2.getCityList()) {
 					if (city2.getName().equals(city)) {
-						list.addAll(city2.getAreaList());
+						for (String district:city2.getAreaList()) {
+							list.add(district);
+						}
+
+						return list;
+					}
+				}
+				return list;
+			}
+		}
+		return list;
+	}
+	/** 获取某省某城市的地区名-繁体 */
+	public static List<String> getTraDistrict(String province, String city) {
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < provinceList.size(); i++) {
+			if (provinceList.get(i).getName().equals(province)) {
+				for (int j = 0; j < provinceList.get(i).getCityList().size();j++) {
+					if (provinceList.get(i).getCityList().get(j).getName().equals(city)) {
+						for (String district:provinceTraList.get(i).getCityList().get(j).getAreaList()) {
+							list.add(district);
+						}
 						return list;
 					}
 				}

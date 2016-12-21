@@ -52,8 +52,12 @@ public class MusicalInstrumentBrandActivity2 extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_musical_instrument_brand2);
-		initView();
-		getMusicBrands();
+		try {
+			initView();
+			getMusicBrands();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * 加载视图
@@ -116,10 +120,14 @@ public class MusicalInstrumentBrandActivity2 extends BaseActivity {
 
 		@Override
 		public void onClick(View v) {
-			if (v==ll_radiobutton1) {// 筛选
-		fillter();
-			}else if (v==ll_radiobutton2){// 排序方式
-				sort();
+			try {
+				if (v==ll_radiobutton1) {// 筛选
+         		   fillter();
+                }else if (v==ll_radiobutton2){// 排序方式
+                    sort();
+                }
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	};

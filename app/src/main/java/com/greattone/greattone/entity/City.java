@@ -5,8 +5,8 @@ import java.util.List;
 
 public class City {
 	String name;
+//	List<String> areaList;
 	List<String> areaList;
-//	List<District> areaList;
 
 	public String getName() {
 		return name;
@@ -23,6 +23,5 @@ public class City {
 	public void setAreaList(List<String> areaList) {
 		this.areaList = areaList;
 	}
-
 
 }

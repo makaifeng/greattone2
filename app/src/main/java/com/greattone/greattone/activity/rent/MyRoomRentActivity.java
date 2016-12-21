@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.rent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -23,11 +19,15 @@ import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Lease;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**琴房租赁*/
 public class MyRoomRentActivity extends BaseActivity {
 	private List<Lease>courseList = new ArrayList<Lease>();
@@ -37,7 +37,7 @@ public class MyRoomRentActivity extends BaseActivity {
 	/** 页数 */
 	private int page = 1;
 	private MyRoomRentListAdapter adapter;
-int classid=59;
+	int classid=59;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

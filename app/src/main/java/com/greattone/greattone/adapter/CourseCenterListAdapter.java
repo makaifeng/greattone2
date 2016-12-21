@@ -1,7 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -18,6 +16,8 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.Course;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class CourseCenterListAdapter extends BaseAdapter {
 	private Context context;
@@ -54,7 +54,8 @@ public class CourseCenterListAdapter extends BaseAdapter {
 					R.layout.adapter_course_center, group, false);
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-					screenWidth * 2 / 5, screenWidth * 2 * 3 / 5 / 5);
+					screenWidth /4, screenWidth/4);
+//					screenWidth * 2 / 5, screenWidth * 2 * 3 / 5 / 5);
 			holder.icon.setLayoutParams(params);
 			holder.title = (TextView) convertView.findViewById(R.id.tv_title);//
 

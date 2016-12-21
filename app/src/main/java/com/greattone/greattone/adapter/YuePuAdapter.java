@@ -36,7 +36,7 @@ public class YuePuAdapter extends Adapter<Yuepu>{
 	public void getview(ViewHolder vh,  int position,  Yuepu T) {
 		ImageView iv_icon = (ImageView) vh.getView(R.id.iv_icon);
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-				screenWidth * 2 / 7, screenWidth * 2 / 7 * 4 / 5);
+				screenWidth * 2 / 7, screenWidth * 2 / 7);
 		params.rightMargin=rightMargin;
 		iv_icon.setLayoutParams(params);
 		TextView tv_title = (TextView) vh.getView(R.id.tv_title);

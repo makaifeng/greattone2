@@ -1,21 +1,20 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.entity.Blog;
-import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.List;
 
 public class MyActivityGridAdapter extends BaseAdapter {
 	private Context context;
@@ -52,10 +51,14 @@ public class MyActivityGridAdapter extends BaseAdapter {
 			holder.title = (TextView) convertView.findViewById(R.id.tv_title);//
 			holder.descr = (TextView) convertView
 					.findViewById(R.id.tv_descr);//
+			holder.address = (TextView) convertView
+					.findViewById(R.id.tv_address);//
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_pic);//
-			LayoutParams params = new LayoutParams(
-					(screenWidth - DisplayUtil.dip2px(context, 10)),
-					(screenWidth - DisplayUtil.dip2px(context, 10)) * 3 / 5);
+					RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+					((screenWidth )*3/10),
+					(screenWidth ) * 3/10);
+//					(screenWidth - DisplayUtil.dip2px(context, 10)),
+//					(screenWidth - DisplayUtil.dip2px(context, 10)) * 3 / 5);
 			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {
@@ -68,6 +71,7 @@ public class MyActivityGridAdapter extends BaseAdapter {
 	class ViewHolder {
 		TextView title;
 		TextView descr;
+		TextView address;
 		ImageView icon;
 
 		public void setPosition(int position) {
@@ -86,8 +90,9 @@ public class MyActivityGridAdapter extends BaseAdapter {
 //			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",
 //					Locale.CHINA);
 			title.setText(competitionList.get(position).getTitle());
-			descr.setText(competitionList.get(position).getNewstime()
-					+ " " + competitionList.get(position).getDizhi());
+			descr.setText(competitionList.get(position).getHuodong_1()+"-"+competitionList.get(position).getHuodong_2()
+			);
+			address.setText(competitionList.get(position).getDizhi());
 		}
 	}
 
