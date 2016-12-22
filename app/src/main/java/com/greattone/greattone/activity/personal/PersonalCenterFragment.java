@@ -90,6 +90,7 @@ public class PersonalCenterFragment extends BaseFragment {
 	String text;
 	private ListView lv_content;
 	String names[];
+	private String imgName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -518,12 +519,12 @@ public class PersonalCenterFragment extends BaseFragment {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
-				String filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
+				String filePath = FileUtil.getLocalImageFile(context) + "/" + imgName;
 				File temp = new File(filePath);
-				PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 200, 200);
+				PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 600, 600);
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
 				// filePath = BitmapUtil.getFileFromALBUM(context, data);
-				PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 200, 200);
+				PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 600, 600);
 			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
 				Bundle extras = data.getExtras();
 				if (extras != null) {
@@ -548,7 +549,7 @@ public class PersonalCenterFragment extends BaseFragment {
 				return;
 			}
 		}
-		String imgName = System.currentTimeMillis() + ".png";
+		 imgName = System.currentTimeMillis() + ".png";
 		PhotoUtil.setPhotograph(context, new File(FileUtil.getLocalImageUrl(context, imgName)));
 	}
 

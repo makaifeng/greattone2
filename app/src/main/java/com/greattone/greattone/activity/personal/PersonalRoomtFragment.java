@@ -240,10 +240,8 @@ public class PersonalRoomtFragment extends BaseFragment {
 				return;
 			}
 			MyProgressDialog.show(context);
-			if (Data.myinfo.getCked()==1) {
-				pictureFileList = adapter.getList();
-				photo=adapter.getUrlList();
-			}
+			pictureFileList = adapter.getList();
+			photo=adapter.getUrlList();
 			if ( pictureFileList.size()==0) {
 				post1(photo,arrayOfString);
 			}else {

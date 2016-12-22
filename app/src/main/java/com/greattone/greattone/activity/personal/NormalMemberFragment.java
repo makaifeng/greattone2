@@ -712,11 +712,11 @@ public class NormalMemberFragment extends BaseFragment {
 			if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
 				filePath = FileUtil.getLocalImageUrl(context,imgName) ;
 			       File temp = new File(filePath);    
-			     PhotoUtil.startPhotoZoom(context,Uri.fromFile(temp),1,1,200,200);
+			     PhotoUtil.startPhotoZoom(context,Uri.fromFile(temp),1,1,600,600);
 //				iv_icon.setImageBitmap(BitmapUtil.getBitmapFromPHOTOGRAPH(
 //						context, filePath));
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
-			    PhotoUtil.startPhotoZoom(context,data.getData(),1,1,200,200); 
+			    PhotoUtil.startPhotoZoom(context,data.getData(),1,1,600,600);
 				filePath = BitmapUtil.getFileFromALBUM(context, data);
 //				Bitmap bitmap = BitmapUtil.getBitmapFromFile( filePath);
 			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪

@@ -90,8 +90,14 @@ private TextView textview1;
 	}
 
 	private void initViewData() {
-		if (order != null) {
-			tv_cost.setText("认证费用：￥" + order.getMoney()+"/年");
+		if (Data.myinfo.getGroupid()==5) {
+			if (order != null) {
+				tv_cost.setText("认证费用：￥" + order.getMoney() + "/年");
+			}else if (Data.myinfo.getGroupid()==4){
+				tv_cost.setVisibility(View.GONE);
+			}else {
+				tv_cost.setVisibility(View.GONE);
+			}
 		}
 	}
 

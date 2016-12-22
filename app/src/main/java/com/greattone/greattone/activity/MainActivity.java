@@ -1,6 +1,15 @@
 package com.greattone.greattone.activity;
 
-import java.util.List;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.greattone.greattone.R;
@@ -16,16 +25,8 @@ import com.greattone.greattone.util.SQLManager;
 import com.greattone.greattone.widget.BadgeView;
 import com.umeng.analytics.MobclickAgent;
 
-import android.content.ContentValues;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
+import java.util.List;
+
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends BaseActivity {
@@ -324,8 +325,12 @@ public void finish() {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		for (int i = 0; i < getSupportFragmentManager().getFragments().size(); i++) {
-			getSupportFragmentManager().getFragments().get(i)
-					.onActivityResult(requestCode, resultCode, data);
+			if (getSupportFragmentManager().getFragments().get(i)==null){
+				continue;
+			}else {
+				getSupportFragmentManager().getFragments().get(i)
+						.onActivityResult(requestCode, resultCode, data);
+			}
 		}
 
 	}

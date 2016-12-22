@@ -7,7 +7,17 @@ String name;
 String time;
 String url;
 String vesion;
-public int getActive() {
+String fixversion;
+
+	public String getFixversion() {
+		return fixversion;
+	}
+
+	public void setFixversion(String fixversion) {
+		this.fixversion = fixversion;
+	}
+
+	public int getActive() {
 	return active;
 }
 public void setActive(int active) {

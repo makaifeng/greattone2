@@ -11,8 +11,9 @@ public class Constants  {
 	//好琴声
 	public final static String WX_APPID2= "wx1ca72dd2170d5611";//微信AppID
 	public final static String WX_APPSECRET2 = "779b1efc5db36aaecb8e884756fcad64";//微信AppSecret
-	
-	
+
+	//修复版本
+	public static final String hotFixVersionCode="1";
 	public final static int MAXPAGE =9; // 发送图片最大张数
 	// 用于swith判断
 		public final static int CONNECTIONS_SUCCESSFUL = 0; // 网络请求连接成功

@@ -368,4 +368,15 @@ public class HttpProxyUtil {
 		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
+	/**
+	 * 获取热修复的信息
+     */
+	public static void getHotFixData(Context context,String hotFixVersionCode,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "extend/getFixData");
+		map.put("hotFixVersionCode", hotFixVersionCode);
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
 }

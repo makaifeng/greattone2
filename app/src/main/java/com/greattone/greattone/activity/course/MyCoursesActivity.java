@@ -53,7 +53,8 @@ public class MyCoursesActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		setHead(getResources().getString(R.string.我的课程), true, true);
+//		setHead(getResources().getString(R.string.我的课程), true, true);
+		setHead("课程", true, true);
 		sendCourse = (TextView) findViewById(R.id.tv_head_other);
 		sendCourse.setText(getResources().getString(R.string.发布课程));
 		sendCourse.setTextSize(13);

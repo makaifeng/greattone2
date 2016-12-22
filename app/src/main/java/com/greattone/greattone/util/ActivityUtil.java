@@ -1,22 +1,9 @@
 package com.greattone.greattone.util;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.entity.Vesion;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,8 +13,33 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.view.inputmethod.InputMethodManager;
+
+import com.alibaba.fastjson.JSON;
+import com.android.volley.VolleyError;
+import com.dodola.rocoofix.RocooFix;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.data.Constants;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.entity.HotFixResult;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.entity.Vesion;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class ActivityUtil {
 //	/**退出登录*/
@@ -57,24 +69,24 @@ public class ActivityUtil {
 		}
 	}
 	
-	/***
-	 * 通过包名检测系统中是否安装某个应用程序** @param context* @param
-	 * packageName：应用程序的包名(QB:com.tencent.mtt)* @return true : 系统中已经安装该应用程序* @return
-	 * false : 系统中未安装该应用程序*
-	 */
-	@SuppressWarnings("deprecation")
-	public static boolean checkApkExist(Context context, String packageName) {
-		if (packageName == null || "".equals(packageName)) {
-			return false;
-		}
-		try {
-			context.getPackageManager().getApplicationInfo(packageName,
-					PackageManager.GET_UNINSTALLED_PACKAGES);
-			return true;
-		} catch (NameNotFoundException e) {
-			return false;
-		}
-	}
+//	/***
+//	 * 通过包名检测系统中是否安装某个应用程序** @param context* @param
+//	 * packageName：应用程序的包名(QB:com.tencent.mtt)* @return true : 系统中已经安装该应用程序* @return
+//	 * false : 系统中未安装该应用程序*
+//	 */
+//	@SuppressWarnings("deprecation")
+//	public static boolean checkApkExist(Context context, String packageName) {
+//		if (packageName == null || "".equals(packageName)) {
+//			return false;
+//		}
+//		try {
+//			context.getPackageManager().getApplicationInfo(packageName,
+//					PackageManager.GET_UNINSTALLED_PACKAGES);
+//			return true;
+//		} catch (NameNotFoundException e) {
+//			return false;
+//		}
+//	}
 	/**
 	 * 获取版本号
 	 * 
@@ -191,50 +203,51 @@ public class ActivityUtil {
 //			}
 //		}.start();
 //	}
-///**
-// * 
-// * @param path
-// * @param pd
-// * @return
-// * @throws Exception
-// */
-//	public static File getFileFromServer(String path, ProgressDialog pd)
-//			throws Exception {
-//		// 如果相等的话表示当前的sdcard挂载在手机上并且是可用的
-//		if (Environment.getExternalStorageState().equals(
-//				Environment.MEDIA_MOUNTED)) {
-//			URL url = new URL(path);
-//			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//			conn.setConnectTimeout(5000);
-//			// 获取到文件的大小
-//			pd.setMax(conn.getContentLength());
-//			InputStream is = conn.getInputStream();
+/**
+ *
+ * @param path
+ * @param pd
+ * @return
+ * @throws Exception
+ */
+	public static File getFileFromServer(String urlpath,String path, ProgressDialog pd)
+			throws Exception {
+		// 如果相等的话表示当前的sdcard挂载在手机上并且是可用的
+		if (Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED)) {
+			URL url = new URL(urlpath);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			// 获取到文件的大小
+			pd.setMax(conn.getContentLength());
+			InputStream is = conn.getInputStream();
+			File file = new File(path);
 //			File file = new File(Environment.getExternalStorageDirectory()
 //					.getPath() + Environment.getDownloadCacheDirectory(),
 //					"greattone.apk");
-//			if (!file.getParentFile().exists()) {
-//				file.getParentFile().mkdir();
-//			}
-//			FileOutputStream fos = new FileOutputStream(file);
-//			BufferedInputStream bis = new BufferedInputStream(is);
-//			byte[] buffer = new byte[1024];
-//			int len;
-//			int total = 0;
-//			while ((len = bis.read(buffer)) != -1) {
-//				fos.write(buffer, 0, len);
-//				total += len;
-//				// 获取当前下载量
-//				pd.setProgress(total);
-//			}
-//			fos.close();
-//			bis.close();
-//			is.close();
-//			return file;
-//		} else {
-//			return null;
-//		}
-//
-//	}
+			if (!file.getParentFile().exists()) {
+				file.getParentFile().mkdir();
+			}
+			FileOutputStream fos = new FileOutputStream(file);
+			BufferedInputStream bis = new BufferedInputStream(is);
+			byte[] buffer = new byte[1024];
+			int len;
+			int total = 0;
+			while ((len = bis.read(buffer)) != -1) {
+				fos.write(buffer, 0, len);
+				total += len;
+				// 获取当前下载量
+				pd.setProgress(total);
+			}
+			fos.close();
+			bis.close();
+			is.close();
+			return file;
+		} else {
+			return null;
+		}
+
+	}
 
 //	// 通过路径安装apk
 //	protected void installApk(Context context,File file) {
@@ -246,18 +259,18 @@ public class ActivityUtil {
 //				"application/vnd.android.package-archive");
 //		context.	startActivity(intent);
 //	}
-	/**
-	 * 用intent启动拨打电话
-	 * 
-	 * @param context
-	 * @param telephone
-	 */
-	public static void CallPhone(Context context, String telephone) {
-		// 用intent启动拨打电话
-		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-				+ telephone));
-		context.startActivity(intent);
-	}
+//	/**
+//	 * 用intent启动拨打电话
+//	 *
+//	 * @param context
+//	 * @param telephone
+//	 */
+//	public static void CallPhone(Context context, String telephone) {
+//		// 用intent启动拨打电话
+//		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
+//				+ telephone));
+//		context.startActivity(intent);
+//	}
 	
 	/**
 	 * 是否是虚拟机
@@ -299,7 +312,11 @@ public class ActivityUtil {
 	 */
 	private static void examine_version(final BaseActivity activity,final Vesion vesion) {
 
-		if (ActivityUtil.getVersionName(activity).equals(vesion.getVesion())) {
+		if (ActivityUtil.getVersionName(activity).equals(vesion.getVesion())) {//无版本更新
+			if(Constants.hotFixVersionCode.equals(vesion.getFixversion())){//无版本修复
+			}else {
+				HotFix(activity);
+			}
 		} else {
 			Builder builer = new Builder(activity);
 			builer.setTitle(activity.getResources().getString(R.string.版本升级));
@@ -327,6 +344,59 @@ public class ActivityUtil {
 			dialog.show();
 		}
 	}
+
+	/**
+	 *热修复
+	 */
+	private static void HotFix(final BaseActivity activity) {
+		final ProgressDialog pd; // 进度条对话框
+		pd = new ProgressDialog(activity);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("获取更新信息");
+		pd.setCancelable(true);// 设置进度条是否可以按退回键取消
+		pd.setCanceledOnTouchOutside(false);
+		pd.show();
+		HttpProxyUtil.getHotFixData(activity, Constants.hotFixVersionCode, new ResponseListener() {
+			@Override
+			public void setResponseHandle(Message2 message) {
+				if (message.getData()!=null&&message.getData().startsWith("{")){
+					final	HotFixResult hotFixResult =JSON.parseObject(message.getData(),HotFixResult.class);
+						new Thread() {
+							@Override
+							public void run() {
+								pd.setMessage("下载更新包");
+								try {
+									String path = Environment.getExternalStorageDirectory()
+											.getPath() + Environment.getDownloadCacheDirectory() +
+											File.separator + hotFixResult.getPagerName();
+									File file = getFileFromServer(hotFixResult.getUrl(), path, pd);
+									if (file==null){
+										pd.dismiss();
+									}else {
+									RocooFix.applyPatchRuntime(activity, path);}
+								} catch (Exception e) {
+									pd.dismiss();
+									e.printStackTrace();
+								}
+							}
+						}.start();
+				}else {
+					pd.dismiss();
+				}
+			}
+		}, new HttpUtil.ErrorResponseListener() {
+			@Override
+			public void setServerErrorResponseHandle(Message2 message) {
+				pd.dismiss();
+			}
+
+			@Override
+			public void setErrorResponseHandle(VolleyError error) {
+				pd.dismiss();
+			}
+		});
+	}
+
 	public static String sHA1(Context context) {
 	    try {
 	        PackageInfo info = context.getPackageManager().getPackageInfo(
