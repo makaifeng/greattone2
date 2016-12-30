@@ -24,6 +24,7 @@ import com.greattone.greattone.activity.classroom.ClassRoomActivity;
 import com.greattone.greattone.activity.haixuan_and_activitise.VoteDetailsActivity;
 import com.greattone.greattone.activity.plaza.ShowPictureActivity;
 import com.greattone.greattone.activity.teacher.TeacherActivity;
+import com.greattone.greattone.data.ClassId;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.ReplayDialog;
@@ -94,6 +95,8 @@ public class CelebrityPostsListAdapter extends BaseAdapter {
 					.findViewById(R.id.adapter_comments_time);//
 			holder.delete = (ImageView) convertView
 					.findViewById(R.id.adapter_comments_delete);//
+			holder.iv_like = (ImageView) convertView
+					.findViewById(R.id.iv_like);//
 			holder.vote = (TextView) convertView.findViewById(R.id.tv_my_vote);// 投票
 			holder.address = (TextView) convertView
 					.findViewById(R.id.adapter_comments_city);//
@@ -181,6 +184,7 @@ public class CelebrityPostsListAdapter extends BaseAdapter {
 		/** 点赞*/
 		LinearLayout ll_like;
 		TextView tv_like;
+		ImageView iv_like;
 		/** 头像 */
 		MyRoundImageView icon;
 		/** 删除 */
@@ -229,15 +233,32 @@ public class CelebrityPostsListAdapter extends BaseAdapter {
 			// Locale.CHINA);
 			// time.setText(format.format(new Date(blogsList.get(position)
 			// .getCtime() * 1000)));
-			if (blogsList.get(position).getCanvote() == 1) {// 海选投票
+			if (blogsList.get(position).getClassid()== ClassId.音乐海选_图片_ID) {// 海选图片报名
+				ll_pic.setVisibility(View.VISIBLE);
+				ll_pic.removeAllViews();
+				if (blogsList.get(position).getMorepic() != null) {
+					addPic(JSON.parseArray(
+							blogsList.get(position).getMorepic(), Pic.class));
+				}
+//				vote.setVisibility(View.VISIBLE);
+				vote.setOnClickListener(lis);
+//				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				title.setText(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛");
+				content.setText(blogsList.get(position).getHai_petition());
+				iv_like.setImageResource(R.drawable.toupiaoicon);
+			}else
+			if (blogsList.get(position).getClassid()== ClassId.音乐海选_视频_ID) {// 海选投票
 				ll_video.setVisibility(View.VISIBLE);
 				vote.setVisibility(View.VISIBLE);
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getHai_photo(), video);
-				vote.setOnClickListener(lis);
-				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+//				vote.setOnClickListener(lis);
+//				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				title.setText(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛");
 				content.setText(blogsList.get(position).getHai_petition());
+				iv_like.setImageResource(R.drawable.toupiaoicon);
 			} else {
+				iv_like.setImageResource(R.drawable.icon_like);
 				title.setText(blogsList.get(position).getTitle());
 				content.setText(blogsList.get(position).getSmalltext());
 			}
@@ -475,7 +496,7 @@ public class CelebrityPostsListAdapter extends BaseAdapter {
 		protected void vote() {
 			Intent intent = new Intent(context, VoteDetailsActivity.class);
 			intent.putExtra("id", blog.getId() + "");
-			intent.putExtra("classid", "73");
+			intent.putExtra("classid", blog.getClassid()+"");
 			context.startActivity(intent);
 		}
 

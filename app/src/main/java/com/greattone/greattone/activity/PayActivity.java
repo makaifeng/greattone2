@@ -1,8 +1,10 @@
 package com.greattone.greattone.activity;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.alipay.AliPay;
@@ -17,11 +19,9 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.wxpay.WxPay;
 
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 /**
  * 支付
  * @author Administrator
@@ -135,5 +135,9 @@ public class PayActivity extends BaseActivity {
 			MyProgressDialog.Cancel();
 		}
 	};
-
+	@Override
+	public void setBackClick() {
+		super.setBackClick();
+		setResult(RESULT_CANCELED);
+	}
 }

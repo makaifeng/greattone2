@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.personal;
 
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.List;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,9 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
 import com.greattone.greattone.Listener.TimePickerDismissCallback;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
 import com.greattone.greattone.data.Data;
@@ -32,6 +28,10 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.MessageUtil;
 
+import java.text.ParseException;
+import java.util.HashMap;
+import java.util.List;
+
 public class PersonalDetailsFragment extends BaseFragment {
 	/** fragment 主布局 */
 	private View rootView;
@@ -43,7 +43,7 @@ public class PersonalDetailsFragment extends BaseFragment {
 	String editurl;
 //	private TextView m_realname;
 	private EditText m_nickname;
-	private EditText m_realnames;
+	private TextView m_realnames;
 	private TextView m_sex;
 //	private TextView m_mobile;
 //	private EditText m_email;
@@ -87,7 +87,7 @@ public void onCreate(Bundle savedInstanceState) {
 //				.findViewById(R.id.fragment_personal_details_realname));
 		this.m_nickname = ((EditText) rootView
 				.findViewById(R.id.fragment_personal_details_nickname));
-		this.m_realnames = ((EditText) rootView
+		this.m_realnames = ((TextView) rootView
 				.findViewById(R.id.et_company));
 		this.m_sex = ((TextView) rootView
 				.findViewById(R.id.fragment_personal_details_sex));

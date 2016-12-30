@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -111,7 +112,7 @@ public class HttpUtil {
 		return httpConnectionByPost(context, url, builder.toString(),
 				responseListener, errorResponseListener);
 	}
-
+	public static final String TAG="com.greattone.greattone";
 	/**
 	 * post请求
 	 * 
@@ -126,14 +127,15 @@ public class HttpUtil {
 			String url, String msg, final ResponseListener responseListener,
 			final ErrorResponseListener errorResponseListener) {
 		final byte[] updata = msg.getBytes();
-//		LogUtil.i("POST=url=>" + url);
-//		LogUtil.i("POST=msg=>" + msg);
+		final String url1= url+"?"+msg;
+
 		stringRequest = new StringRequest(Method.POST, url,
 				new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
-//						LogUtil.i("POST=response=>" + response);
+//						Log.i(TAG,"POST=url=>" + url1);
+//						Log.i(TAG,"POST=response=>" + response);
 
 						try {
 							Message2 message = JSON.parseObject(response,

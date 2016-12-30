@@ -1,8 +1,5 @@
 package com.greattone.greattone.activity.post;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +27,9 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PostVideoActivity extends BaseActivity {
 	// private TextView send;
@@ -295,8 +295,11 @@ private ImageView iv_gg;
 //		}, null);
 //	}
 
-	/** 发帖 
-	 * @param videoid */
+	/**
+	 * 发帖
+	 * @param title
+	 * @param newstext
+     */
 	protected void post2(final String title, final String newstext) {
 
 		HashMap<String, String> map = new HashMap<String, String>();

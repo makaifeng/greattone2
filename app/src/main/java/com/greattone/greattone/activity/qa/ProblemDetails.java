@@ -1,6 +1,12 @@
 package com.greattone.greattone.activity.qa;
 
-import java.util.LinkedHashMap;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -17,13 +23,7 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.TextView;
+import java.util.LinkedHashMap;
 
 /** 我的Q&A详情 */
 public class ProblemDetails extends BaseActivity {
@@ -136,7 +136,7 @@ private TextView goOperate3;
 
 	protected void initViewData() {
 //		orderid = QAdetail.getId();
-		if (QAdetail.getOrderinfo().startsWith("{")) {
+		if (QAdetail.getOrderinfo()!=null&&QAdetail.getOrderinfo().startsWith("{")) {
 			orderinfo=JSON.parseObject(QAdetail.getOrderinfo(), Order.class);
 		}
 //		backUrl = HttpConstants2.ALIPAY_BACK_URL;
@@ -185,18 +185,18 @@ private TextView goOperate3;
 				currentState.setText(getResources().getString(R.string.待标价));
 				goOperate.setText(getResources().getString(R.string.去标价));
 				goOperate.setOnClickListener(new Click(0));//标价
-				goOperate2.setVisibility(0);
+				goOperate2.setVisibility(View.VISIBLE);
 				goOperate2.setText(getResources().getString(R.string.免费回答));
 				goOperate2.setOnClickListener(new Click(4));//免费回答
-				goOperate3.setVisibility(0);
+				goOperate3.setVisibility(View.VISIBLE);
 				goOperate3.setText(getResources().getString(R.string.拒绝标价));
 				goOperate3.setOnClickListener(new Click(2));//拒绝标价
-				mPrice_ll.setVisibility(8);
-				reply_ll.setVisibility(8);
+				mPrice_ll.setVisibility(View.GONE);
+				reply_ll.setVisibility(View.GONE);
 			}else if (state.equals("未付款")) {
 				currentState.setText(getResources().getString(R.string.待支付));
-				mManage_ll.setVisibility(8);
-				reply_ll.setVisibility(8);
+				mManage_ll.setVisibility(View.GONE);
+				reply_ll.setVisibility(View.GONE);
 				m_price.setText("￥" + orderinfo.getMoney());
 				m_biaojia.setText(getResources().getString(R.string.已标价));
 			}else if (state.equals("已付款")) {
@@ -204,12 +204,12 @@ private TextView goOperate3;
 				goOperate2.setVisibility(View.GONE);
 				goOperate.setText(getResources().getString(R.string.去回答));
 				goOperate.setOnClickListener(new Click(1));//回答
-				reply_ll.setVisibility(8);
+				reply_ll.setVisibility(View.GONE);
 				m_price.setText("￥" + orderinfo.getMoney());
 				m_biaojia.setText(getResources().getString(R.string.已支付));
 			}else if (state.equals("已完成")) {
-				reply_ll.setVisibility(0);
-				mManage_ll.setVisibility(8);
+				reply_ll.setVisibility(View.VISIBLE);
+				mManage_ll.setVisibility(View.GONE);
 				currentState.setText(getResources().getString(R.string.已完成));
 				m_price.setText("￥" + orderinfo.getMoney());
 				m_biaojia.setText(getResources().getString(R.string.已支付));
@@ -223,19 +223,19 @@ private TextView goOperate3;
 		} else if (type == 0) {//我的问题
 			if (state.equals("待标价")) {
 				currentState.setText(getResources().getString(R.string.待标价));
-				mManage_ll.setVisibility(8);
-				mPrice_ll.setVisibility(8);
-				reply_ll.setVisibility(8);
+				mManage_ll.setVisibility(View.GONE);
+				mPrice_ll.setVisibility(View.GONE);
+				reply_ll.setVisibility(View.GONE);
 			}else if (state.equals("未付款")) {
 				currentState.setText(getResources().getString(R.string.待支付));
 				goOperate.setText(getResources().getString(R.string.去支付));
 				goOperate.setOnClickListener(new Click(3));//支付
-				reply_ll.setVisibility(8);
+				reply_ll.setVisibility(View.GONE);
 				m_price.setText("￥" + orderinfo.getMoney());
 				m_biaojia.setText(getResources().getString(R.string.已标价));
 			}else if (state.equals("已付款")) {
-				mManage_ll.setVisibility(8);
-				reply_ll.setVisibility(8);
+				mManage_ll.setVisibility(View.GONE);
+				reply_ll.setVisibility(View.GONE);
 				currentState.setText(getResources().getString(R.string.待回答));
 				m_price.setText("￥" + orderinfo.getMoney());
 				m_biaojia.setText(getResources().getString(R.string.待回答));
@@ -253,8 +253,8 @@ private TextView goOperate3;
 				currentState.setText(getResources().getString(R.string.已拒绝));
 			}
 		}else {
-			reply_ll.setVisibility(0);
-			mManage_ll.setVisibility(8);
+			reply_ll.setVisibility(View.VISIBLE);
+			mManage_ll.setVisibility(View.GONE);
 			currentState.setText(getResources().getString(R.string.已完成));
 			m_price.setText("￥" + orderinfo.getMoney());
 			m_biaojia.setText(getResources().getString(R.string.已支付));

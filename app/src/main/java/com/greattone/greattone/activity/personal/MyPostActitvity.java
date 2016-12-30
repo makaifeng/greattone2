@@ -16,6 +16,7 @@ import com.greattone.greattone.Listener.OnBtnItemClickListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.EntryActivity;
+import com.greattone.greattone.activity.haixuan_and_activitise.VoteDetailsActivity;
 import com.greattone.greattone.activity.plaza.PlazaMusicDetailsActivity;
 import com.greattone.greattone.adapter.MyPostListAdapter;
 import com.greattone.greattone.data.ClassId;
@@ -178,12 +179,19 @@ public class MyPostActitvity extends BaseActivity {
 		@Override
 		public void onItemClick(AdapterView<?> adapter, View v, int position,
 				long arg3) {
-			Intent intent = new Intent(context, PlazaMusicDetailsActivity.class);
-			intent.putExtra("id", blogsList.get(position).getId());
-			intent.putExtra("title","我要发帖");
-			intent.putExtra("classid", blogsList.get(position).getClassid());
-			intent.putExtra("videourl", blogsList.get(position).getShipin());
-			startActivity(intent);
+			if (blogsList.get(position).getCanvote() == 1) {//海选
+				Intent intent = new Intent(context, VoteDetailsActivity.class);
+				intent.putExtra("id", blogsList.get(position).getId() + "");
+				intent.putExtra("classid",  blogsList.get(position).getClassid()+"");
+				context.startActivity(intent);
+			}else {
+				Intent intent = new Intent(context, PlazaMusicDetailsActivity.class);
+				intent.putExtra("id", blogsList.get(position).getId());
+				intent.putExtra("title", "我的发帖");
+				intent.putExtra("classid", blogsList.get(position).getClassid());
+				intent.putExtra("videourl", blogsList.get(position).getShipin());
+				startActivity(intent);
+			}
 		}
 	};
 

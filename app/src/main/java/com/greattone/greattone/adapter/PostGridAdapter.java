@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Video.Thumbnails;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -303,7 +306,16 @@ public class PostGridAdapter extends BaseAdapter {
 						mList.add(FileUtil.getLocalImageUrl(context, imgName));
 						setList(mList);
 					}else if (type==GalleryActivity.TYPE_VIDEO) {//录制视频
-						mList.add(data.getStringExtra("data"));
+						Uri uri = data.getData();
+						Cursor cursor = context.getContentResolver().query(uri, null, null,
+								null, null);
+						if (cursor != null && cursor.moveToNext()) {
+							String filePath = cursor.getString(cursor
+									.getColumnIndex(MediaStore.Video.VideoColumns.DATA));
+							mList.add(filePath);
+							cursor.close();
+						}
+//						mList.add(data.getStringExtra("data"));
 						setList(mList);
 					}
 		

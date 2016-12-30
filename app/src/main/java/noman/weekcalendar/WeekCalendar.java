@@ -179,7 +179,7 @@ public class WeekCalendar extends LinearLayout {
 
                 if (typedArray.getInt(R.styleable.WeekCalendar_dayNameLength, 0) == 0)
                     for (int i = 0; i < daysName.size(); i++)
-                        daysName.set(i, daysName.get(i).substring(1, 2));
+                        daysName.set(i, daysName.get(i).substring(daysName.get(i).length()-1, daysName.get(i).length()));
                 names = new String[daysName.size()];
                 daysName.toArray(names);
                 return names;

@@ -1,10 +1,5 @@
 package com.greattone.greattone.activity.personal;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.OnSelectCityListener;
 import com.greattone.greattone.Listener.TimePickerDismissCallback;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
 import com.greattone.greattone.data.Constants;
@@ -41,6 +36,11 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.MessageUtil;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /** 个人中心的老师信息修改 */
 public class PersonalTeachertFragment extends BaseFragment {
 	/** fragment 主布局 */
@@ -50,8 +50,8 @@ public class PersonalTeachertFragment extends BaseFragment {
 	String url;
 	String editurl;
 	private TextView m_sex;
-	private EditText m_realname;
-	private EditText m_nickname;
+	private TextView m_realname;
+	private TextView m_nickname;
 	private EditText m_idcard;
 	private TextView m_city;
 	private EditText m_email;
@@ -85,9 +85,9 @@ String imgName;
 		this.m_sex = ((TextView) this.rootView
 				.findViewById(R.id.fragment_personal_teacher_sex));
 		this.rootView.findViewById(R.id.fragment_personal_details_jg_ll).setVisibility(View.GONE);
-		this.m_realname = ((EditText) this.rootView
+		this.m_realname = ((TextView) this.rootView
 				.findViewById(R.id.fragment_personal_teacher_realname));
-		this.m_nickname = ((EditText) this.rootView
+		this.m_nickname = ((TextView) this.rootView
 				.findViewById(R.id.fragment_personal_teacher_nickname));
 		this.m_idcard = ((EditText) this.rootView
 				.findViewById(R.id.fragment_personal_teacher_idCard));

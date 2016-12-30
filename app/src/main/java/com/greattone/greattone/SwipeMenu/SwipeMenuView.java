@@ -1,8 +1,8 @@
 package com.greattone.greattone.SwipeMenu;
 
 
-import java.util.List;
-
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * 
@@ -45,6 +47,7 @@ public class SwipeMenuView extends LinearLayout implements OnClickListener {
 		}
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void addItem(SwipeMenuItem item, int id) {
 		LayoutParams params = new LayoutParams(item.getWidth(),
 				LayoutParams.MATCH_PARENT);
@@ -53,7 +56,9 @@ public class SwipeMenuView extends LinearLayout implements OnClickListener {
 		parent.setGravity(Gravity.CENTER);
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.setLayoutParams(params);
-		parent.setBackground(item.getBackground());
+		if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
+			parent.setBackground(item.getBackground());
+		}else		parent.setBackgroundDrawable(item.getBackground());
 		parent.setOnClickListener(this);
 		addView(parent);
 

@@ -133,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="品牌介绍" />
+                    android:text="@string/品牌介绍" />
 
                 <View
                     android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                     style="@style/TeacherOrClassRoomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="产品中心" />
+                    android:text="@string/产品中心" />
 
                 <View
                     android:layout_width="match_parent"
@@ -160,7 +160,7 @@
                     style="@style/TeacherOrClassRoomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="公司新闻" />
+                    android:text="@string/公司新闻" />
 
                 <View
                     android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                     style="@style/TeacherOrClassRoomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="销售渠道" />
+                    android:text="@string/销售渠道" />
 
                 <View
                     android:layout_width="match_parent"
@@ -186,7 +186,7 @@
                     style="@style/TeacherOrClassRoomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="留言板" />
+                    android:text="@string/留言板" />
 
                 <View
                     android:layout_width="match_parent"
@@ -200,7 +200,7 @@
                     style="@style/TeacherOrClassRoomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-					      android:text="联系我们" />
+					      android:text="@string/联系我们" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

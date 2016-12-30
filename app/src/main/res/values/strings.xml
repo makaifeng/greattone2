@@ -143,7 +143,7 @@
     <string name="老师评论">老师评论</string>
     <string name="活动公告">我的动态</string>
     <string name="课程中心详情">课程中心详情</string>
-    <string name="我的课程">我的课程</string>
+    <string name="我的课程">课程管理</string>
     <string name="讨论专区">讨论专区</string>
     <string name="讨论区详情">讨论区详情</string>
     <string name="活动详情">活动详情</string>
@@ -300,11 +300,12 @@
     <string name="教师管理">教师管理</string>
     <string name="正在上传">正在上传</string>
     <string name="内部公告">我的动态</string>
+    <string name="琴行动态">琴行动态</string>
     <string name="教室管理">教室管理</string>
     <string name="退出登录">退出登录</string>
     <string name="品牌介绍">品牌介绍</string>
     <string name="产品中心">产品中心</string>
-    <string name="公司新闻">公司新闻</string>
+    <string name="公司新闻">公司动态</string>
     <string name="销售渠道">销售渠道</string>
     <string name="留言板">留言板</string>
     <string name="联系我们">联系我们</string>

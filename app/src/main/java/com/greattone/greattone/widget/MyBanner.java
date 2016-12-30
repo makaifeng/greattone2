@@ -1,10 +1,5 @@
 package com.greattone.greattone.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Handler.Callback;
@@ -24,6 +19,11 @@ import android.widget.RelativeLayout;
 import com.greattone.greattone.R;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 /**轮播*/
 public class MyBanner extends RelativeLayout {
 	Context context;
@@ -45,10 +45,8 @@ public class MyBanner extends RelativeLayout {
 	private LoopViewPager viewpager;
 	private LinearLayout pointGroup;
 	private OnPageChangeListener onPageChangeListener;
-	/**
-	 * 图片是否自适应
-	 */
-	boolean adaptive;
+	private ScaleType scaleType;
+
 	public MyBanner(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		this.context = context;
@@ -71,8 +69,8 @@ public class MyBanner extends RelativeLayout {
 	private void init() {
 		getScreenWidth();
 		viewpager = new LoopViewPager(context);
-		LayoutParams params = new LayoutParams(screenWidth,
-				screenWidth * 3 / 5);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
 		viewpager.setLayoutParams(params);
 
 		pointGroup = new LinearLayout(context);
@@ -245,7 +243,8 @@ public class MyBanner extends RelativeLayout {
 	/**
 	 * 添加imageview
 	 * 
-	 * @param i
+	 * @param position
+	 * @param NoPic
 	 */
 	private void addImageView(int position, boolean NoPic) {
 		// 初始化图片资源
@@ -254,10 +253,10 @@ public class MyBanner extends RelativeLayout {
 		LayoutParams params2 = new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT);
 		image.setLayoutParams(params2);
-		if (adaptive) {
-			image.setScaleType(ScaleType.FIT_CENTER);
+		if (scaleType!=null) {
+			image.setScaleType(scaleType);
 		}else{
-			image.setScaleType(ScaleType.FIT_XY);
+			image.setScaleType(ScaleType.CENTER_CROP);
 		}
 		// image.setImageResource(resIds[i]);
 		if (!NoPic) {
@@ -303,8 +302,7 @@ public class MyBanner extends RelativeLayout {
 	/**
 	 * 加载图片资源
 	 * 
-	 * @param uri
-	 * @param position
+	 * @param uriList
 	 */
 	public void setImageURI(List<String> uriList) {
 		this.uriList = uriList;
@@ -392,8 +390,8 @@ public class MyBanner extends RelativeLayout {
 		this.onPageChangeListener=onPageChangeListener;
 	}
 	/**图片是否自适应*/
-	public void  setAdaptive(boolean adaptive){
-	this.adaptive=adaptive;
+	public void  setImageScaleType(ScaleType scaleType){
+	this.scaleType=scaleType;
 	}
 	public boolean onInterceptTouchEvent(MotionEvent event) {
         int x = (int) event.getX();

@@ -92,15 +92,16 @@ public class PlazaMusicDetailsActivity extends BaseActivity {
 	private TextView tv_commnum;
 	private TextView tv_zfnum;
 	private LinearLayout ll_zf;
-	private LinearLayout ll_collect;
+//	private LinearLayout ll_collect;
 	private LinearLayout ll_share;
 	private LinearLayout headView;
 //	private ImageView iv_level;
-	private TextView tv_collect;
+//	private TextView tv_collect;
 //private ImageView iv_music_play;
 private ImageView iv_ad;
 private LinearLayout ll_like;
 private WebView wv_music_play;
+	private TextView tv_like;
 
 
 	@Override
@@ -150,14 +151,15 @@ private WebView wv_music_play;
 		iv_videopic.setLayoutParams(params1);
 		rl_video = (RelativeLayout) headView.findViewById(R.id.rl_video);//
 		tv_comment = (TextView) headView.findViewById(R.id.tv_comment);//
-		tv_collect = (TextView) headView.findViewById(R.id.tv_collect);//
-		ll_pinglun = (LinearLayout) headView.findViewById(R.id.ll_pinglun);//
-		tv_commnum = (TextView) headView.findViewById(R.id.tv_commnum);//
+//		tv_collect = (TextView) headView.findViewById(R.id.tv_collect);//
+		ll_pinglun = (LinearLayout) headView.findViewById(R.id.ll_comments_co);//
+		tv_commnum = (TextView) headView.findViewById(R.id.adapter_comments_commnum);//
 		tv_zfnum = (TextView) headView.findViewById(R.id.tv_reprnum);//
 		ll_zf = (LinearLayout) headView.findViewById(R.id.ll_zhuanfa);//
-		ll_collect = (LinearLayout) headView.findViewById(R.id.ll_shoucang);//
+//		ll_collect = (LinearLayout) headView.findViewById(R.id.ll_shoucang);//
 		ll_share = (LinearLayout) headView.findViewById(R.id.ll_share);//
 		ll_like=	(LinearLayout)headView.findViewById(R.id.ll_like);//
+		tv_like = (TextView) headView.findViewById(R.id.tv_like);//
 		iv_icon = (MyRoundImageView) headView.findViewById(R.id.iv_icon);//
 		iv_icon.setRadius(DisplayUtil.dip2px(context, 15));
 		wv_music_play = (WebView) headView.findViewById(R.id.wv_music_play);//
@@ -253,8 +255,8 @@ private WebView wv_music_play;
 			} else if (v == ll_zf) {
 			} else if (v == ll_share) {//分享
 				share();
-			} else if (v == ll_collect) {//收藏
-				collect();
+//			} else if (v == ll_collect) {//收藏
+//				collect();
 			} else if (v == iv_icon) {//头像
 				toCenter();
 //			} else if (v == iv_music_play) {//音乐播放
@@ -330,6 +332,7 @@ private WebView wv_music_play;
 				.getLastdotime()) * 1000)));
 		tv_title.setText(blog.getTitle());
 		tv_content.setText(blog.getNewstext());
+		tv_like.setText(blog.getDiggtop());
 		// tv_city.setText(blog.getCity());
 		tv_commnum.setText(blog.getPlnum());
 		tv_zfnum.setText(blog.getResendnum());
@@ -337,7 +340,7 @@ private WebView wv_music_play;
 		rl_video.setOnClickListener(lis);
 		ll_pinglun.setOnClickListener(lis);
 		ll_zf.setOnClickListener(lis);
-		ll_collect.setOnClickListener(lis);
+//		ll_collect.setOnClickListener(lis);
 		ll_share.setOnClickListener(lis);
 		ll_like.setOnClickListener(lis);//
 		//广告
@@ -400,6 +403,8 @@ private WebView wv_music_play;
 
 					@Override
 					public void setResponseHandle(Message2 message) {
+						blog.setDiggtop(Integer.valueOf(blog.getDiggtop())+1+"");
+						tv_like.setText(blog.getDiggtop());
 						((BaseActivity) context).toast(message.getInfo());
 						MyProgressDialog.Cancel();
 					}
@@ -517,42 +522,42 @@ private WebView wv_music_play;
 		localReplayDialog.show();
 	}
 
-	/** 收藏 */
-	protected void collect() {
-		// String url;
-		// if (blog.getCollect().equals("1")) {
-		// url = HttpConstants.BLOG_UNCOLLECT_URL;
-		// } else {
-		// url = HttpConstants.BLOG_COLLECT_URL;
-		// }
-		MyProgressDialog.show(context);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "fava/addFava");
-		map.put("classid", blog.getClassid()+"");
-		map.put("id", blog.getId()+"");
-		if (Data.favaList.size() > 0) {
-			map.put("cid", Data.favaList.get(0).getCid()+"");
-		}
-		map.put("loginuid", Data.user.getUserid());
-		map.put("logintoken", Data.user.getToken());
-		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(
-				context, map, new ResponseListener() {
-
-					@Override
-					public void setResponseHandle(Message2 message) {
-						((BaseActivity) context).toast(message.getInfo());
-						if (blog.getIsfava() == 1) {
-							tv_collect.setText(getResources().getString(R.string.收藏));
-							blog.setIsfava(0);
-						} else {
-							tv_collect.setText(getResources().getString(R.string.已收藏));
-							blog.setIsfava(1);
-						}
-						MyProgressDialog.Cancel();
-					}
-
-				}, null));
-	}
+//	/** 收藏 */
+//	protected void collect() {
+//		// String url;
+//		// if (blog.getCollect().equals("1")) {
+//		// url = HttpConstants.BLOG_UNCOLLECT_URL;
+//		// } else {
+//		// url = HttpConstants.BLOG_COLLECT_URL;
+//		// }
+//		MyProgressDialog.show(context);
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("api", "fava/addFava");
+//		map.put("classid", blog.getClassid()+"");
+//		map.put("id", blog.getId()+"");
+//		if (Data.favaList.size() > 0) {
+//			map.put("cid", Data.favaList.get(0).getCid()+"");
+//		}
+//		map.put("loginuid", Data.user.getUserid());
+//		map.put("logintoken", Data.user.getToken());
+//		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(
+//				context, map, new ResponseListener() {
+//
+//					@Override
+//					public void setResponseHandle(Message2 message) {
+//						((BaseActivity) context).toast(message.getInfo());
+//						if (blog.getIsfava() == 1) {
+//							tv_collect.setText(getResources().getString(R.string.收藏));
+//							blog.setIsfava(0);
+//						} else {
+//							tv_collect.setText(getResources().getString(R.string.已收藏));
+//							blog.setIsfava(1);
+//						}
+//						MyProgressDialog.Cancel();
+//					}
+//
+//				}, null));
+//	}
 
 	/** 分享 */
 	protected void share() {

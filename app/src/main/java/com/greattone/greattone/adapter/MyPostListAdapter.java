@@ -83,6 +83,8 @@ public void setList(List<Blog> blogsList){
 					.findViewById(R.id.adapter_comments_time);//
 			holder.delete = (ImageView) convertView
 					.findViewById(R.id.adapter_comments_delete);//
+			holder.iv_like = (ImageView) convertView
+					.findViewById(R.id.iv_like);//
 			holder.vote = (TextView) convertView.findViewById(R.id.tv_my_vote);// 投票
 			holder.address = (TextView) convertView
 					.findViewById(R.id.adapter_comments_city);//
@@ -163,8 +165,9 @@ public void setList(List<Blog> blogsList){
 		LinearLayout ll_zf;
 		TextView zfnum;
 		/** 点赞*/
-		LinearLayout ll_like;
+//		LinearLayout ll_like;
 		TextView tv_like;
+		ImageView iv_like;
 		/** 收藏 */
 		LinearLayout ll_collect;
 		ImageView collect;
@@ -217,8 +220,10 @@ public void setList(List<Blog> blogsList){
 				}
 //				vote.setVisibility(View.VISIBLE);
 //				vote.setOnClickListener(lis);
-				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+//				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				title.setText(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛");
 				content.setText(blogsList.get(position).getHai_petition());
+				iv_like.setImageResource(R.drawable.toupiaoicon);
 			}else
 			if (blogsList.get(position).getClassid()== ClassId.音乐海选_视频_ID) {// 海选视频报名
 				ll_video.setVisibility(View.VISIBLE);
@@ -226,9 +231,12 @@ public void setList(List<Blog> blogsList){
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getHai_photo(), video);
 //				vote.setOnClickListener(lis);
-				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+//				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				title.setText(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛");
 				content.setText(blogsList.get(position).getHai_petition());
+				iv_like.setImageResource(R.drawable.toupiaoicon);
 			} else {
+				iv_like.setImageResource(R.drawable.icon_like);
 				title.setText(blogsList.get(position).getTitle());
 				content.setText(blogsList.get(position).getSmalltext());
 			}

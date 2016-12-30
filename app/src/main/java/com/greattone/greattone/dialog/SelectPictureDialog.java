@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.activity.MediaRecorderActivity;
 import com.greattone.greattone.activity.MusicChoiceActivity;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
@@ -80,7 +79,10 @@ public class SelectPictureDialog {
 					boolean hasPermission_RECORD_AUDIO=permission.hasPermission_RECORD_AUDIO((BaseActivity) context);
 					boolean hasPermission_READ_EXTERNAL_STORAGE=permission.hasPermission_READ_EXTERNAL_STORAGE((BaseActivity) context);
 					if(hasPermission_CAMERA&&hasPermission_RECORD_AUDIO&&hasPermission_READ_EXTERNAL_STORAGE){
-						Intent intent = new Intent(context,MediaRecorderActivity.class);
+//						Intent intent = new Intent(context,MediaRecorderActivity.class);
+//						((Activity) context).startActivityForResult(intent, 0);
+						Intent intent = new Intent();
+						intent.setAction("android.media.action.VIDEO_CAPTURE");
 						((Activity) context).startActivityForResult(intent, 0);
 					}else if (!hasPermission_CAMERA){
 						((BaseActivity) context).  toast("无法打开相机,拍照功能关闭，请打开权限");

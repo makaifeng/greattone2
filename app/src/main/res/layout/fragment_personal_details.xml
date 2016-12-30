@@ -106,7 +106,7 @@
                     android:textColor="@color/edit_himi"
                     android:textSize="15.0sp" />
 
-                <com.greattone.greattone.widget.MyEditText
+                <com.greattone.greattone.widget.MyTextView
                     android:id="@+id/et_company"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
@@ -118,11 +118,11 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/bigtext" />
 
-                <com.greattone.greattone.widget.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*"
-                    android:textColor="#ffb80008" />
+                <!--<com.greattone.greattone.widget.MyTextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="*"-->
+                    <!--android:textColor="#ffb80008" />-->
             </LinearLayout>
 
             <LinearLayout

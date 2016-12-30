@@ -18,6 +18,7 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.WebActivity;
 import com.greattone.greattone.activity.map.ShowMapActivity;
 import com.greattone.greattone.data.Data;
+import com.greattone.greattone.data.HttpConstants2;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.SharePopWindow;
 import com.greattone.greattone.entity.HaiXuan;
@@ -221,7 +222,16 @@ private int history;
 	
 			} else if (v == tv_sign_up) {// 报名
 				Intent intent = new Intent();
-				if (type == 1) {// 活动-活动总结
+				if (type == 1) {// 活动
+					if (haiXuan.getHai_bao_page()==1){//新活动页面
+						intent.setClass(context, HuodongWebAct.class);//活动报名
+						intent.putExtra("title", haiXuan.getTitle());
+						if (haiXuan.getId().equals("2109")){
+							intent.putExtra("urlPath", HttpConstants2.SERVER_URL + "/app/buyticket/index.html");
+						}else{
+							intent.putExtra("urlPath", HttpConstants2.SERVER_URL + "/app/buyticket/"+haiXuan.getId()+".html");
+						}
+					}else
 					intent.setClass(context, ActivityApplyActivity.class);//活动报名
 				}else {//海选报名
 					if (haiXuan.getClassid().equals("32")) {//中华好琴声
@@ -313,11 +323,11 @@ private int history;
 		// tv_sign_up.setText("已报名");
 		// } else {
 		tv_sign_up.setText(getResources().getString(R.string.sign_up));//我要报名
-		if (haiXuan.getIshistory()==0&&haiXuan.getIsstart()==1) {
-			tv_sign_up.setOnClickListener(lis);
-		}else{
-			tv_sign_up.setBackgroundColor(getResources().getColor(R.color.gray_7e7c7d));
-		}
+			if (haiXuan.getIshistory() == 0 &&(type==0?haiXuan.getIsstart() == 1:true)) {//Ishistory 是否是历史  type 海选0 还是活动1   Isstart 海选是否开始
+				tv_sign_up.setOnClickListener(lis);
+			} else {
+				tv_sign_up.setBackgroundColor(getResources().getColor(R.color.gray_7e7c7d));
+			}
 //		if (history==0) {
 //			tv_sign_up.setOnClickListener(lis);
 //		}else{

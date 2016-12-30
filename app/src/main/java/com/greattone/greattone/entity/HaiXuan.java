@@ -95,6 +95,15 @@ String hai_baotype;//报名上传类型
 int ishistory;//海选是否过期  0没过期，1过期
 int isstart;//海选是否开始  0没开始，1开始
 	int hai_bao_group;//报名选用界面类型
+	int hai_bao_page;//活动选用界面类型
+
+	public int getHai_bao_page() {
+		return hai_bao_page;
+	}
+
+	public void setHai_bao_page(int hai_bao_page) {
+		this.hai_bao_page = hai_bao_page;
+	}
 
 	public int getHai_bao_group() {
 		return hai_bao_group;

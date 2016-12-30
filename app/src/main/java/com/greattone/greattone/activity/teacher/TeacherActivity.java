@@ -164,9 +164,10 @@ public class TeacherActivity extends BaseActivity {
                     intent.putExtra("type", "teacher");
                     intent.putExtra("classid", ClassId.音乐教室_介绍评论_ID+"");
                     startActivity(intent);
-                } else if (v == announcements) {// 活动公告
+                } else if (v == announcements) {// 老师动态
                     Intent intent = new Intent(context, NoticeActivity.class);
                     intent.putExtra("userid", people.getUserid());
+                    intent.putExtra("title", "老师动态");
                     startActivity(intent);
                 } else if (v == tv_table) {// 课程表
                     if (people.getIsstudent()== 1) {

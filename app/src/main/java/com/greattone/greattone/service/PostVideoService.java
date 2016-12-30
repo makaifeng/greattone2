@@ -47,7 +47,7 @@ public class PostVideoService extends Service {
 	// 运行sample前需要配置以下字段为有效的值
 	// private static final String endpoint =
 	// "http://oss-cn-shanghai.aliyuncs.com";
-	private static final String endpoint = "http://oss-cn-hangzhou.aliyuncs.com";
+	private static final String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
 	// private static final String accessKeyId = "LCN2t148awhKJ9CB";
 	// private static final String accessKeySecret =
 	// "FFqFHu4USnTgjIjx75rkHmGMgiwPVi";

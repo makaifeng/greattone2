@@ -58,7 +58,8 @@ public class ZBContentListAdapter extends BaseAdapter {
 			holder.time.setVisibility(View.VISIBLE);
 			holder.icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					screenWidth, screenWidth * 3 / 5);
+//					screenWidth, screenWidth * 3 / 5);
+					screenWidth, screenWidth );
 			holder.icon.setLayoutParams(params);
 			convertView.setTag(holder);
 		} else {

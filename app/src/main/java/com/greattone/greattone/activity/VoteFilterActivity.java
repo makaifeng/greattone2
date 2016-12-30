@@ -1,8 +1,4 @@
 package com.greattone.greattone.activity;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,7 +9,6 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.JSONObject;
 import com.greattone.greattone.R;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.NormalPopuWindow;
@@ -22,6 +17,12 @@ import com.greattone.greattone.entity.HaiXuanFilter;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeMap;
 
 
 public class VoteFilterActivity extends BaseActivity {
@@ -67,7 +68,7 @@ private Button btn_sign_in;
 			}
 		}
 	};
-	private HashMap<String, List<String>> map;
+	private TreeMap<String, List<String>> map;
 
 	
 	/**获取分组*/
@@ -95,13 +96,25 @@ private void getGroup() {
 	}
 private void initGroups() {
 	if(haiXuanFilter.getGroup()!=null&&haiXuanFilter.getGroup().startsWith("{")){
-	JSONObject jsonobject = JSON.parseObject(haiXuanFilter.getGroup());
-	 Set<String> set =jsonobject.keySet();
-	 groupList1=new ArrayList<String>(set);
-	 map=new HashMap<String, List<String>>();
-	 for (String string : set) {
-		 map.put(string,JSON.parseArray( jsonobject.getString(string),String.class));
-	}
+		try {
+			org.json.JSONObject jsonObject2=new org.json.JSONObject(haiXuanFilter.getGroup());
+			Iterator<String> iterator =	jsonObject2.keys();
+			map=new TreeMap<>();
+			while (iterator.hasNext()) { // 遍历每个key
+				String key = (String) iterator.next();
+				iterator.toString();				groupList1.add(key);
+				map.put(key,JSON.parseArray( jsonObject2.getString(key),String.class));
+			}
+		} catch (org.json.JSONException e) {
+			e.printStackTrace();
+		}
+//		JSONObject jsonobject = JSON.parseObject(haiXuanFilter.getGroup());
+//	 Set<String> set =jsonobject.;
+//	 groupList1=new ArrayList<String>(set);
+//	 map=new TreeMap<String, List<String>>();
+//	 for (String string : set) {
+//			map.put(string,JSON.parseArray( jsonobject.getString(string),String.class));
+//		}
 	}
 }
 	protected void showPopWindow( TextView textview, List<String> mlist,final int type) {

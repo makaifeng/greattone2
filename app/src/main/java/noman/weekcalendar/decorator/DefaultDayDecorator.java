@@ -66,10 +66,14 @@ public class DefaultDayDecorator implements DayDecorator {
         if (selectedDateTime != null) {
             if (selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) {
 //                if (!selectedDateTime.toLocalDate().equals(calendarStartDate.toLocalDate()))
+                if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN) {
                     dayTextView.setBackground(solidCircle);
+                }else  dayTextView.setBackgroundDrawable(solidCircle);
                 dayTextView.setTextColor(Color.WHITE);
             } else {
-                dayTextView.setBackground(null);
+                if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN) {
+                    dayTextView.setBackground(null);
+                }else  dayTextView.setBackgroundDrawable(null);
                 dayTextView.setTextColor(textColor);
             }
         }

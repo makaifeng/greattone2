@@ -140,10 +140,10 @@ public class MediaRecorderActivity extends BaseActivity implements Callback {
 				mediaRecorder.setCamera(mCamera);
 				mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 				mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-				mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+				mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 //				mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 				 mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-				mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
+				mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
 //				 mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
 
 				mediaRecorder.setVideoSize(width, height);

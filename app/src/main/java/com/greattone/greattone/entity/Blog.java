@@ -87,8 +87,18 @@ public class Blog implements Serializable {
 	String hai_petition;//
 	String huodong_1;//
 	String huodong_2;//
+	String hai_title;//
 	String ad;//
 	int isend;//活动是否结束
+
+	public String getHai_title() {
+		return hai_title;
+	}
+
+	public void setHai_title(String hai_title) {
+		this.hai_title = hai_title;
+	}
+
 	public int getIsend() {
 		return isend;
 	}

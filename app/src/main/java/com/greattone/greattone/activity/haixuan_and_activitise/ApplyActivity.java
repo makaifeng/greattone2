@@ -561,7 +561,7 @@ private void getGroup() {
 				+"&hai_division="+msg[7]//比赛赛区
 				+"&hai_grouping="+msg[8]//选择分组1
 				+"&hai_age="+msg[9]//年龄
-				+"&hai_grouping2="+msg[10]//选择分组2
+				+"&hai_grouping1="+msg[10]//选择分组2
 				+"&smalltext="+msg[11]//图片描述
 				+"&loginuid="+Data.user.getUserid()
 				+"&logintoken="+Data.user.getToken()

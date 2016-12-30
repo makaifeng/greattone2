@@ -261,9 +261,11 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 				}
 				vote.setVisibility(View.VISIBLE);
 				vote.setOnClickListener(lis);
-				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+//				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				title.setText(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛");
 				content.setText(blogsList.get(position).getHai_petition());
 				iv_like.setImageResource(R.drawable.toupiaoicon);
+				ll_like.setOnClickListener(null);
 			}else
 			if (blogsList.get(position).getClassid()== ClassId.音乐海选_视频_ID) {// 海选视频报名
 				ll_video.setVisibility(View.VISIBLE);
@@ -271,7 +273,8 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						blogsList.get(position).getHai_photo(), video);
 				vote.setOnClickListener(lis);
-				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+//				title.setText(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名));
+				title.setText(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛");
 				content.setText(blogsList.get(position).getHai_petition());
 				iv_like.setImageResource(R.drawable.toupiaoicon);
 				ll_like.setOnClickListener(null);
@@ -370,7 +373,7 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 								0);
 					}
 					imageView.setLayoutParams(params);
-					imageView.setScaleType(ScaleType.FIT_XY);
+					imageView.setScaleType(ScaleType.CENTER_CROP);
 					final int mPosition = j + i * 4;
 					ImageLoaderUtil.getInstance()
 							.setImagebyurl(list.get(mPosition).getThumbnail(),
@@ -607,10 +610,10 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 		/** 分享 */
 		protected void share() {
 			String titlePic = null;
-			if (blogsList.get(position).getClassid()==73) {// 海选投票
+			if (blogsList.get(position).getClassid()==73||blogsList.get(position).getClassid()==104) {// 海选投票
 				titlePic = JSON.parseObject(blog.getUserInfo(), UserInfo.class)
 						.getUserpic();
-				SharePopWindow.build(context).setTitle(blogsList.get(position).getHai_name() +context.getResources().getString(R.string.的报名))
+				SharePopWindow.build(context).setTitle(blogsList.get(position).getHai_name()+"参加"+blogsList.get(position).getHai_title()+"的比赛")
 						.setContent(blogsList.get(position).getHai_petition())
 						.setTOargetUrl(blog.getTitleurl())
 						.setIconPath(titlePic).show();
@@ -623,6 +626,8 @@ public class MusicPlazaListAdapter extends BaseAdapter {
 				} else if (blogsList.get(position).getClassname().equals("图片")) {// 图片
 					titlePic = JSON.parseArray(blog.getMorepic(), Pic.class)
 							.get(0).getUrl();
+				}else{
+					titlePic="http://www.greattone.net/e/data/images/notimg.gif";
 				}
 //				ShareUtil.open(context, blog.getTitle(), blog.getSmalltext(), titlePic, blog.getTitleurl(), umShareListener);
 				SharePopWindow.build(context).setTitle(blog.getTitle())

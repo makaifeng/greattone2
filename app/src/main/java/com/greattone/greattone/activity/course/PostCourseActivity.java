@@ -1,20 +1,21 @@
 package com.greattone.greattone.activity.course;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
 import com.greattone.greattone.Listener.TimePickerDismissCallback;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.adapter.PostGridAdapter;
 import com.greattone.greattone.adapter.WeekAdapter;
@@ -27,11 +28,19 @@ import com.greattone.greattone.dialog.NormalPopuWindow.OnItemClickBack;
 import com.greattone.greattone.entity.Course;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
+import com.greattone.greattone.entity.WeekEntity;
+import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** 发布课程 */
 public class PostCourseActivity extends BaseActivity {
@@ -66,7 +75,9 @@ public class PostCourseActivity extends BaseActivity {
 	String filepass;
 	String classid = ClassId.音乐教室_课程_ID + "", mid = "16";
 	String enews="MAddInfo";
-//	int id;
+	private LinearLayout ll_week;
+
+	//	int id;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -143,6 +154,9 @@ public class PostCourseActivity extends BaseActivity {
 		this.tv_cate = ((TextView) findViewById(R.id.tv_cate));
 		this.tv_cate.setOnClickListener(lis);
 		this.et_teacher = ((EditText) findViewById(R.id.tv_teacher));
+		if (Data.myinfo.getGroupid()==3){
+			et_teacher.setVisibility(View.GONE);
+		}
 		ll_cate = findViewById(R.id.ll_cate);
 		this.tv_time = ((TextView) findViewById(R.id.tv_time));
 		// this.tv_city = ((TextView) findViewById(R.id.tv_city));
@@ -156,15 +170,78 @@ public class PostCourseActivity extends BaseActivity {
 		// ll_city = findViewById(R.id.ll_city);
 		// ll_city.setOnClickListener(lis);
 		this.gv_week = ((MyGridView) findViewById(R.id.gv_week));
+		this.ll_week = ((LinearLayout) findViewById(R.id.ll_week));
+		ll_week.removeAllViews();
+
+		this.adapter = new WeekAdapter(this, null);
+		this.gv_week.setAdapter(this.adapter);
 		ll_payment_method = findViewById(R.id.ll_payment_method);
 		tv_payment_method = (TextView) findViewById(R.id.tv_payment_method);
 		ll_payment_method.setOnClickListener(lis);
 		this.gv_pic = ((MyGridView) findViewById(R.id.gv_pic));
 		gvAdapter = new PostGridAdapter(context, type, 1);
 		gv_pic.setAdapter(gvAdapter);
-		this.adapter = new WeekAdapter(this, null);
-		this.gv_week.setAdapter(this.adapter);
 		findViewById(R.id.btn_commit).setOnClickListener(lis);
+	}
+	private List<WeekEntity> weeklist=new ArrayList<WeekEntity>();
+	private void addWeekView(LinearLayout ll) {
+		addWeekList();
+		LinearLayout layout1=new LinearLayout(context);
+		layout1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+		addCheckbox(layout1,0);
+	}
+
+	private void addWeekList() {
+		String s[] = null;
+		if (course.getKe_week() != null && !course.getKe_week().isEmpty()) {
+			s = course.getKe_week().split("\\|");
+		}
+		WeekEntity[] arrayOfWeekEntity = new WeekEntity[8];
+		arrayOfWeekEntity[0] = new WeekEntity("上课时间");
+		arrayOfWeekEntity[1] = new WeekEntity("周一");
+		arrayOfWeekEntity[2] = new WeekEntity("周二");
+		arrayOfWeekEntity[3] = new WeekEntity("周三");
+		arrayOfWeekEntity[4] = new WeekEntity("周四");
+		arrayOfWeekEntity[5] = new WeekEntity("周五");
+		arrayOfWeekEntity[6] = new WeekEntity("周六");
+		arrayOfWeekEntity[7] = new WeekEntity("周日");
+		this.weeklist = Arrays.asList(arrayOfWeekEntity);
+		if (s != null) {
+			for (int i = 0; i < weeklist.size(); i++) {
+				for (int j = 0; j < s.length; j++) {
+					if (weeklist.get(i).getName().equals(s[j])) {
+						weeklist.get(i).setSelect(true);
+					}
+				}
+			}
+		}
+	}
+
+	private void addCheckbox(LinearLayout ll,final int position) {
+		CheckBox checkBox = new CheckBox(context);
+		checkBox.setButtonDrawable(R.drawable.register_checkbox_style);
+		checkBox.setTextSize(14);
+		checkBox.setPadding(10, 0, 0, 0);
+		checkBox.setLayoutParams(new GridView.LayoutParams(
+				GridView.LayoutParams.WRAP_CONTENT, DisplayUtil.dip2px(context,
+				20)));
+		if (position == 0)
+			checkBox.setButtonDrawable(new ColorDrawable(0));
+		checkBox.setText(weeklist.get(position).getName());
+		if (weeklist.get(position).isSelect()) {
+			checkBox.setChecked(true);
+		} else {
+			checkBox.setChecked(false);
+		}
+		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+										 boolean isChecked) {
+				weeklist.get(position).setSelect(isChecked);
+			}
+		});
+		ll.addView(checkBox);
 	}
 
 	protected void initViewData() {
@@ -191,6 +268,7 @@ public class PostCourseActivity extends BaseActivity {
 		}
 		adapter=new WeekAdapter(context, course.getKe_week());
 		gv_week.setAdapter(adapter);
+//		addWeekView(ll_week);
 	}
 
 	OnClickListener lis = new OnClickListener() {

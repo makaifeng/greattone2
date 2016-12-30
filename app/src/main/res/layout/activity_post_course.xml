@@ -42,7 +42,32 @@
                     android:textColor="#ffb90206"
                     android:textSize="20.0sp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
 
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/tv_teacher"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="上课老师"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="14.0sp" />
+
+                <!--                 <com.greattone.greattone.widget.MyTextView -->
+                <!--                     android:layout_width="wrap_content" -->
+                <!--                     android:layout_height="wrap_content" -->
+                <!--                     android:layout_marginRight="10.0dip" -->
+                <!--                     android:text="*" -->
+                <!--                     android:textColor="#ffb90206" -->
+                <!--                     android:textSize="20.0sp" /> -->
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_cate"
                 android:layout_width="fill_parent"
@@ -70,32 +95,7 @@
                     android:textSize="20.0sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15.0dip"
-                android:background="@drawable/login_border"
-                android:orientation="horizontal" >
 
-                <com.greattone.greattone.widget.MyEditText
-                    android:id="@+id/tv_teacher"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@null"
-                    android:hint="上课老师"
-                    android:lines="1"
-                    android:padding="10.0dip"
-                    android:textSize="14.0sp" />
-
-<!--                 <com.greattone.greattone.widget.MyTextView -->
-<!--                     android:layout_width="wrap_content" -->
-<!--                     android:layout_height="wrap_content" -->
-<!--                     android:layout_marginRight="10.0dip" -->
-<!--                     android:text="*" -->
-<!--                     android:textColor="#ffb90206" -->
-<!--                     android:textSize="20.0sp" /> -->
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_time"
@@ -242,7 +242,7 @@
                     android:textSize="20.0sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <LinearLayout android:id="@+id/ll_week"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15.0dip"

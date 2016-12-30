@@ -49,7 +49,8 @@ public class NoticeActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		setHead(getResources().getString(R.string.活动公告), true, true);//我的动态
+		String title=getIntent().getStringExtra("title")==null?getResources().getString(R.string.活动公告):getIntent().getStringExtra("title");
+		setHead(title, true, true);//我的动态
 		
 		setOtherText("发布", lis);
 		lv_content = (SwipeMenuListView) findViewById(R.id.lv_content);

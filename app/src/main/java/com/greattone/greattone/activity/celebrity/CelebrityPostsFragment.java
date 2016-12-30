@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseFragment;
+import com.greattone.greattone.activity.haixuan_and_activitise.VoteDetailsActivity;
 import com.greattone.greattone.activity.plaza.PlazaMusicDetailsActivity;
 import com.greattone.greattone.adapter.CelebrityPostsListAdapter;
 import com.greattone.greattone.data.ClassId;
@@ -78,10 +79,17 @@ public class CelebrityPostsFragment extends BaseFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Intent intent = new Intent(context, PlazaMusicDetailsActivity.class);
-			intent.putExtra("id", blogList.get(position).getId());
-			intent.putExtra("classid", blogList.get(position).getClassid());
-			startActivity(intent);
+			if (blogList.get(position).getCanvote() == 1) {//海选
+				Intent intent = new Intent(context, VoteDetailsActivity.class);
+				intent.putExtra("id", blogList.get(position).getId() + "");
+				intent.putExtra("classid",  blogList.get(position).getClassid()+"");
+				context.startActivity(intent);
+			}else {
+				Intent intent = new Intent(context, PlazaMusicDetailsActivity.class);
+				intent.putExtra("id", blogList.get(position).getId());
+				intent.putExtra("classid", blogList.get(position).getClassid());
+				startActivity(intent);
+			}
 		}
 	};
 

@@ -1,7 +1,14 @@
 package com.greattone.greattone.activity.brand;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -17,14 +24,8 @@ import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyBanner;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * 乐器品牌详情
  * @author makaifeng
@@ -38,7 +39,7 @@ public class BrandDetailActivity extends BaseActivity {
 	private TextView tv_introduction;
 	/**产品中心 */
 	private TextView tv_products;
-	/**  公司新闻 */
+	/**  公司动态 */
 	private TextView tv_news;
 	/** 销售渠道 */
 	private TextView tv_channel;
@@ -77,7 +78,7 @@ public class BrandDetailActivity extends BaseActivity {
 		mybanner = (MyBanner) findViewById(R.id.mybanner);
 		mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth,
 				screenWidth * 3 / 5));
-		mybanner.setAdaptive(true);
+		mybanner.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
 		name = (TextView) findViewById(R.id.tv_name);
 		name.setOnClickListener(lis);
 //		ratingbar = (RatingBar) findViewById(R.id.ratingbar);
@@ -135,7 +136,7 @@ public class BrandDetailActivity extends BaseActivity {
 						ProductArticleActivity.class);
 				intent.putExtra("userid", people.getUserid());
 				startActivity(intent);
-			} else if (v == tv_news) {// 公司新闻
+			} else if (v == tv_news) {// 公司动态
 				Intent intent = new Intent(context, BrandNewsActivity.class);
 				intent.putExtra("userid", people.getUserid());
 				startActivity(intent);

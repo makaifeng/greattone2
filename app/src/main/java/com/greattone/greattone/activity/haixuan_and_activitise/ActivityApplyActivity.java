@@ -1,5 +1,7 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -7,8 +9,10 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.PayActivity;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Message2;
@@ -113,11 +117,28 @@ private TextView tv_price;
 
 					@Override
 					public void setResponseHandle(Message2 message) {
-						toast(getResources().getString(R.string.报名成功));
-						MyProgressDialog.Cancel();
-						finish();
+//						toast("已生成订单，去支付");
+						if (message.getData()!=null&&message.getData().startsWith("{")) {
+							com.alibaba.fastjson.JSONObject js = JSON.parseObject(message.getData());
+							Intent intent = new Intent(context, PayActivity.class);
+							intent.putExtra("name", js.getString("payname"));
+							intent.putExtra("contant",js.getString("payname"));
+							intent.putExtra("price", js.getString("price"));
+							intent.putExtra("bitype", js.getString("bitype"));
+							intent.putExtra("orderId",js.getString("orderid"));
+							((Activity) context).startActivityForResult(intent, 3);
+							finish();
+						}
 					}
 				}, null));
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == 3&&resultCode==RESULT_OK){
+			finish();
+			setResult(RESULT_OK);
+		}
 
+	}
 }

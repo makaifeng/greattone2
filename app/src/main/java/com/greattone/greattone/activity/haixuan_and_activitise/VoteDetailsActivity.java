@@ -106,7 +106,7 @@ public class VoteDetailsActivity extends BaseActivity {
 			mybanner = (MyBanner)headView. findViewById(R.id.mybanner);
 			mybanner.setLayoutParams(new LinearLayout.LayoutParams(screenWidth- DisplayUtil.dip2px(context,20),
 					screenWidth- DisplayUtil.dip2px(context,20)));
-			mybanner.setAdaptive(true);
+			mybanner.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
 //			mybanner.seWidthToHeightRatio(3, 2);
 		}
 		this.m_title = ((TextView)headView. findViewById(R.id.activity_video_details_title));

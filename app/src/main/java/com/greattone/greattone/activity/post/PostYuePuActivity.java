@@ -55,7 +55,7 @@ public class PostYuePuActivity extends BaseActivity {
 	List<String> styleList  = new ArrayList<String>();
 	List<Column> typeList  = new ArrayList<Column>();
 	private View fl_titlepic;
-private String titlepicFile;
+	private String titlepicFile;
 	private ImageView iv_del;
 	private MyRoundImageView iv_pic;
 
@@ -195,9 +195,11 @@ private String titlepicFile;
 	}
 	private void getType() {
 		if (Data.filter_yuepu!=null){
-			styleList=Data.filter_yuepu.getStyle();
+			styleList=new ArrayList<>();
+			styleList.addAll(Data.filter_yuepu.getStyle());
 			styleList.remove("全部");
-			typeList=Data.filter_yuepu.getType();
+			typeList=new ArrayList<>();
+			typeList.addAll(Data.filter_yuepu.getType());
 			typeList.remove(0);
 		}else {
 			styleList.clear();
