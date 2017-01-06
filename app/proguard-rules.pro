@@ -121,3 +121,6 @@
 -keepclassmembers class com.shoyu666.demo.derocoodemo.** {
   public <init>();
 }
+-keep class com.alibaba.sdk.android.oss.** { *; }
+-dontwarn okio.**
+-dontwarn org.apache.commons.codec.binary.**

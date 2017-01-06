@@ -94,6 +94,12 @@ public class Permission {
             }
             return back;
         }
+
+    /**
+     *  监听是否有录音权限
+     * @param activity
+     * @return
+     */
         public   boolean hasPermission_RECORD_AUDIO(BaseActivity activity){
             this.activity=activity;
             try {

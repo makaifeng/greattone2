@@ -1,12 +1,12 @@
 package com.greattone.greattone.adapter;
 
 
-import java.util.List;
-
 import android.content.Context;
 import android.widget.TextView;
 
 import com.greattone.greattone.R;
+
+import java.util.List;
 
 public class PopuWindowsAdapter extends Adapter<String> {
 	private int selector;
@@ -17,13 +17,11 @@ public class PopuWindowsAdapter extends Adapter<String> {
 	public PopuWindowsAdapter(Context context, List<String> list,
 			int layout) {
 		super(context, list, layout);
-		// TODO Auto-generated constructor stub
 	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void getview(ViewHolder vh, int position, String T) {
-		// TODO Auto-generated method stub
 		TextView tv=(TextView) vh.getView(R.id.adapter_popuwindows_tv);
 		tv.setText(T);
 		if(selector==position){

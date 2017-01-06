@@ -2,11 +2,10 @@ package com.greattone.greattone.activity.personal;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -28,6 +27,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
@@ -67,6 +71,7 @@ import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.MessageUtil;
 import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 
 import java.io.File;
 import java.util.HashMap;
@@ -228,6 +233,14 @@ public class PersonalCenterFragment extends BaseFragment {
 			} else if (names[listPosition].equals(getResources().getString(R.string.正在上传))) {// 正在上传
 				startActivity(new Intent(context, UpdateVideoAct.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.内部公告))) {// 我的动态
+				if (Data.myinfo.getCked() != 1&&Data.myinfo.getGroupid()==4) {// 未认证教室
+					toast("未签约用户不能使用该功能");
+					return;
+				}
+				intent = new Intent(context, NoticeActivity.class);
+				intent.putExtra("userid", Data.myinfo.getUserid());
+				startActivity(intent);
+			} else if (names[listPosition].equals(getResources().getString(R.string.琴行动态))) {// 琴行动态
 				if (Data.myinfo.getCked() != 1&&Data.myinfo.getGroupid()==4) {// 未认证教室
 					toast("未签约用户不能使用该功能");
 					return;
@@ -520,17 +533,19 @@ public class PersonalCenterFragment extends BaseFragment {
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
 				String filePath = FileUtil.getLocalImageFile(context) + "/" + imgName;
-				File temp = new File(filePath);
-				PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 600, 600);
+				sendPicture(filePath);
+//				File temp = new File(filePath);
+//				PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 600, 600);
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
-				// filePath = BitmapUtil.getFileFromALBUM(context, data);
-				PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 600, 600);
+				String filePath = BitmapUtil.getFileFromALBUM(context, data);
+				sendPicture(filePath);
+//				PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 600, 600);
 			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
-				Bundle extras = data.getExtras();
-				if (extras != null) {
-					Bitmap photo = extras.getParcelable("data");
-					sendPicture(photo);
-				}
+//				Bundle extras = data.getExtras();
+//				if (extras != null) {
+//					Bitmap photo = extras.getParcelable("data");
+//					sendPicture(photo);
+//				}
 			}
 		}
 	}
@@ -539,7 +554,7 @@ public class PersonalCenterFragment extends BaseFragment {
 	 * 去拍照
 	 */
 	private void toCamera() {
-		if (Build.VERSION.SDK_INT >= 23) {
+		if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.M) {
 			int checkCallPhonePermission = ContextCompat.checkSelfPermission(getContext().getApplicationContext(),
 					Manifest.permission.CAMERA);
 			if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
@@ -557,7 +572,7 @@ public class PersonalCenterFragment extends BaseFragment {
 	 * 去相册
 	 */
 	private void toAlbum() {
-		if (Build.VERSION.SDK_INT >= 23) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			int checkCallPhonePermission = ContextCompat.checkSelfPermission(getContext().getApplicationContext(),
 					Manifest.permission.WRITE_EXTERNAL_STORAGE);
 			if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
@@ -572,37 +587,33 @@ public class PersonalCenterFragment extends BaseFragment {
 	}
 
 	/** 发送图片 */
-	protected void sendPicture(Bitmap photo) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "extend/upfile");
-		map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-		map.put("uptype", "userpic");
-		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
-		bytes.put("file", BitmapUtil.Bitmap2Bytes(photo));
-		// String[] suffix=filePath.split("\\.");
-		HttpUtil.httpConnectionByPostBytes(context, map, bytes, "png", true,
+	protected void sendPicture(String photo) {
+		final	ProgressDialog pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		UpdateObjectToOSSUtil.getInstance().uploadImage_userPic(context, photo, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int) totalSize);
+				pd.setProgress((int) currentSize);
+			}
 
-				new ResponseListener() {
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String picUrl = UpdateObjectToOSSUtil.getInstance().getUrl(request.getBucketName(),request.getObjectKey());
+				editMyPic(picUrl);
+//				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
 
-					@Override
-					public void setResponseHandle(Message2 message) {
-						String picUrl = JSON.parseObject(message.getData()).getString("url");
-						editMyPic(picUrl);
-					}
-
-				}, null);
-		// addRequest(HttpUtil2.httpConnectionByPostFile(context, map,
-		// files, new ResponseListener() {
-		//
-		//
-		// @Override
-		// public void setResponseHandle(Message2 message) {
-		// String picUrl = JSON.parseObject(message.getData()).getString(
-		// "url");
-		// editMyPic(picUrl);
-		// }
-		//
-		// },null));
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+//				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
 	}
 
 	/** 修改我的头像 */

@@ -450,6 +450,7 @@ public class AddConnectWayAct extends BaseActivity {
 				String filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
 				// sendPicture();
 				File temp = new File(filePath);
+				String filePath2 = FileUtil.getCropFile(context) + "/" + imgName;
 				PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 200, 200);
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
 				PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 200, 200);

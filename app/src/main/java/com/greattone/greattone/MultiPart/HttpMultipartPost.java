@@ -1,10 +1,17 @@
 package com.greattone.greattone.MultiPart;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+
+import com.alibaba.fastjson.JSON;
+import com.greattone.greattone.Listener.UpdateFileListener;
+import com.greattone.greattone.MultiPart.CustomMultipartEntity.ProgressListener;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.util.HttpUtil.ErrorResponseListener;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -19,18 +26,11 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.Listener.UpdateFileListener;
-import com.greattone.greattone.MultiPart.CustomMultipartEntity.ProgressListener;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.util.HttpUtil.ErrorResponseListener;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class HttpMultipartPost extends AsyncTask<String, Long, String> {

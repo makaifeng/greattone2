@@ -33,7 +33,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <TextView android:id="@+id/tv_content" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="15dp"/>
+            <TextView android:id="@+id/tv_content" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="15dp"/>
             <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
                 <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
                     <com.greattone.greattone.widget.MyTextView android:textSize="18.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="评论" />

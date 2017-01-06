@@ -1,8 +1,7 @@
 package com.greattone.greattone.Listener;
 
+
 import com.greattone.greattone.entity.Message2;
-
-
 
 public interface UpdateFileListener {
 	void onProgressUpdate(long uploadedSize, long totalSize) ;//上传中

@@ -298,7 +298,7 @@ public class VoteDetailsActivity extends BaseActivity {
 		m_hits.setText(videoMsg.getOnclick());
 		m_comment.setText(videoMsg.getPlnum());
 		m_vote.setText(videoMsg.getTou_num() + "票");
-		if (getIntent().getStringExtra("pclassid").equals("32")) {
+		if (("32").equals(videoMsg.getPclassid())) {
 			tv_content.setVisibility(View.GONE);
 		}else{
 			tv_content.setVisibility(View.VISIBLE);

@@ -1,12 +1,5 @@
 package com.greattone.greattone.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.greattone.greattone.Listener.OnBtnItemClickListener;
-import com.greattone.greattone.entity.ImageData;
-import com.greattone.greattone.util.ImageLoaderUtil;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
@@ -17,6 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+
+import com.greattone.greattone.Listener.OnBtnItemClickListener;
+import com.greattone.greattone.entity.ImageData;
+import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartPagerAdapter extends PagerAdapter {
 	private List<ImageData> imageUrlList=new ArrayList<ImageData>();

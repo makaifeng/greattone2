@@ -1,9 +1,10 @@
 package com.greattone.greattone.activity.post;
 
-import java.util.ArrayList;
-
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -11,7 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.map.SelectBdLocationActivity;
@@ -21,12 +26,14 @@ import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
 
 public class PostPictureActivity extends BaseActivity {
 //	private TextView send;
@@ -44,6 +51,11 @@ public class PostPictureActivity extends BaseActivity {
 	String mid = "10";
 	String classid = "12";
 	String filepass = System.currentTimeMillis()+"";
+	private ProgressDialog pd;
+	private ArrayList<Picture> pictureFileList=new ArrayList<>();
+	private String title;
+	private String newstext;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -123,13 +135,15 @@ public class PostPictureActivity extends BaseActivity {
 //		}
 //	};
 //	private ArrayList<String> pictureFileList=new ArrayList<String>();
-	private ArrayList<String> pictureUrlList=new ArrayList<String>();
+//	private ArrayList<String> pictureUrlList=new ArrayList<String>();
+	private  String photos="";
+	int num=0;
 	/**发帖*/
 	protected void post() {
-		final String title = et_theme.getText().toString().trim();
-		final String newstext = et_content.getText().toString().trim();
+		title = et_theme.getText().toString().trim();
+		 newstext = et_content.getText().toString().trim();
 		filepass= System.currentTimeMillis()+"";
-		final ArrayList<Picture> pictureFileList=adapter.getList();
+		pictureFileList=adapter.getList();
 		if (pictureFileList.size()==0) {
 			toast(getResources().getString(R.string.请选择图片));
 			return;
@@ -144,42 +158,104 @@ public class PostPictureActivity extends BaseActivity {
 		}
 		
 		//发送图片
-		MyProgressDialog.show(context);
-		for (int i = 0; i < pictureFileList.size(); i++) {
-			HttpProxyUtil.updatePicture(context, filepass, classid, pictureFileList.get(i).getPicUrl(),	new ResponseListener() {
+//		for (int i = 0; i < pictureFileList.size(); i++) {
+//			HttpProxyUtil.updatePicture(context, filepass, classid, pictureFileList.get(i).getPicUrl(),	new ResponseListener() {
+//
+//				@Override
+//				public void setResponseHandle(Message2 message) {
+//			String picUrl = JSON.parseObject(message.getData()).getString(
+//							"url");
+//			pictureUrlList.add(picUrl);
+//			if (pictureUrlList.size()==pictureFileList.size()) {
+//				post1(title, newstext);
+//			}
+//				}
+//			}, null);
+//		}
+		num=0;
+//		MyProgressDialog.show(context);
+		updateObjectToOSSUtil=UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		updatePic2();
 
-				@Override
-				public void setResponseHandle(Message2 message) {
-			String picUrl = JSON.parseObject(message.getData()).getString(
-							"url");
-			pictureUrlList.add(picUrl);
-			if (pictureUrlList.size()==pictureFileList.size()) {
-				post1(title, newstext);
-			}
-				}
-			}, null);
-		}
 	}
-	protected void post1(String title,String newstext) {
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+	protected void updatePic2() {
+		pd.setMessage("上传第"+(num+1)+"张");
+		String path= pictureFileList.get(num).getPicUrl();
+		updateObjectToOSSUtil.uploadImage_folder2(context,path, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				num++;
+				photos=photos+updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey())+"::::::";
+				if (num==pictureFileList.size()) {
+					post1();
+				}else {
+					Message.obtain(handler,0).sendToTarget();
+				}
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+	}
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					updatePic2();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
+
+
+	protected void post1() {
+		Message.obtain(handler,1,"上传数据中...").sendToTarget();
 		String msg="api=post/ecms&enews=MAddInfo&mid="+mid
 				+"&classid="+classid
 				+"&title="+title
 				+"&smalltext="+newstext+"&open="+"1"
-				+"&pictureUrlList="+pictureUrlList.get(0)
+//				+"&pictureUrlList="+pictureUrlList.get(0)
 				+"&loginuid="+Data.user.getUserid()
 				+"&logintoken="+Data.user.getToken()
 //				+"&zuozhe="+Data.user.getUsername()
 //				+"&laiyuan="+Data.user.getUsername()
 				+"&filepass="+filepass;
-		for (int i = 0; i < pictureUrlList.size(); i++) {
-			msg=msg+"&msmallpic[]="+pictureUrlList.get(i);
-		}
+//		for (int i = 0; i < pictureUrlList.size(); i++) {
+//			msg=msg+"&msmallpic[]="+pictureUrlList.get(i);
+//		}
+		msg=msg+"&new_photo="+photos;
 		addRequest(HttpUtil.httpConnectionByPost(context, msg,
 				new ResponseListener() {
 			
 			@Override
 			public void setResponseHandle(Message2 message) {
 				toast(message.getInfo());
+				Message.obtain(handler,2).sendToTarget();
 				MyProgressDialog.Cancel();
 				finish();
 			}

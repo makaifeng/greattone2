@@ -10,6 +10,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.greattone.greattone.util.ActivityUtil;
 import com.greattone.greattone.util.CityUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -26,6 +27,7 @@ public void onCreate() {
 	CityUtil.initCity(this);//初始化 城市数据
     JPushInterface.init(this);     		// 初始化 JPush
     JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
+		UpdateObjectToOSSUtil.getInstance().init(this);//初始化 图片上传到阿里云
 	}
 	//  Facebook 初始化
 	FacebookSdk.sdkInitialize(getApplicationContext());

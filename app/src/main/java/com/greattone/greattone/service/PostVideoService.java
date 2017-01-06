@@ -1,7 +1,11 @@
 package com.greattone.greattone.service;
 
-import java.io.File;
-import java.util.HashMap;
+import android.app.Service;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.IBinder;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.sdk.android.vod.upload.VODUploadCallback;
@@ -22,12 +26,8 @@ import com.greattone.greattone.update.PutVideoSamples;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 
-import android.app.Service;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
+import java.io.File;
+import java.util.HashMap;
 
 public class PostVideoService extends Service {
 	public static final int Flag_Init = 0; // 初始状态
@@ -47,7 +47,7 @@ public class PostVideoService extends Service {
 	// 运行sample前需要配置以下字段为有效的值
 	// private static final String endpoint =
 	// "http://oss-cn-shanghai.aliyuncs.com";
-	private static final String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
+	private static final String endpoint = "http://oss-cn-hangzhou.aliyuncs.com";
 	// private static final String accessKeyId = "LCN2t148awhKJ9CB";
 	// private static final String accessKeySecret =
 	// "FFqFHu4USnTgjIjx75rkHmGMgiwPVi";
@@ -277,7 +277,7 @@ UpdateFileListener listener=new UpdateFileListener() {
 	/**
 	 * 发帖
 	 * 
-	 * @param videoid
+	 * @param url
 	 */
 	protected void post(String url) {
 

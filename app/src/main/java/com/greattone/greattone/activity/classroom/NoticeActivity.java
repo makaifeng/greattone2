@@ -39,11 +39,12 @@ import java.util.List;
 public class NoticeActivity extends BaseActivity {
 	private SwipeMenuListView lv_content;
 	private MyAdapter adapter;
-
+	String userid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_list);
+		userid=getIntent().getStringExtra("userid");
 		initView();
 		getData();
 	}
@@ -51,8 +52,10 @@ public class NoticeActivity extends BaseActivity {
 	private void initView() {
 		String title=getIntent().getStringExtra("title")==null?getResources().getString(R.string.活动公告):getIntent().getStringExtra("title");
 		setHead(title, true, true);//我的动态
-		
-		setOtherText("发布", lis);
+
+		if(Data.myinfo.getUserid().equals(userid)) {
+			setOtherText("发布", lis);
+		}
 		lv_content = (SwipeMenuListView) findViewById(R.id.lv_content);
 		adapter = new MyAdapter(context, noticelist, R.layout.adapter_notice);
 		lv_content.setAdapter(adapter);
@@ -117,7 +120,7 @@ public class NoticeActivity extends BaseActivity {
 		MyProgressDialog.show(context);
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 		map.put("api", "jiaoshi/activity");
-		map.put("userid", getIntent().getStringExtra("userid"));
+		map.put("userid",userid);
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		addRequest(HttpUtil.httpConnectionByPost(context, map,

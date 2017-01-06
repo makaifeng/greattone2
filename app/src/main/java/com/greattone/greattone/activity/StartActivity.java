@@ -285,24 +285,24 @@ private void initView() {
 						if (message.getData() != null
 								&&message.getData().startsWith("[")) {
 							imageUrlList=JSON.parseArray(message.getData(), ImageData.class);
-							ImageLoaderUtil.getInstance().loadImage(imageUrlList.get(0).getPic(),new SimpleImageLoadingListener() {
-								
-								@Override
-								public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
-									initViewPager(arg2);
-									handler.post(runnable);
-									isLoadImage=true;
-									StartActivity.this.image.setVisibility(View.GONE);
-								}
-								
-								@Override
-								public void onLoadingFailed(String imageUri,
-										View view, FailReason failReason) {
-									super.onLoadingFailed(imageUri, view, failReason);
-									isLoadImage=true;
-									ToMain();
-								}
-							});
+								ImageLoaderUtil.getInstance().loadImage(imageUrlList.get(0).getPic(),new SimpleImageLoadingListener() {
+
+									@Override
+									public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
+										initViewPager(arg2);
+										handler.post(runnable);
+										isLoadImage=true;
+										StartActivity.this.image.setVisibility(View.GONE);
+									}
+
+									@Override
+									public void onLoadingFailed(String imageUri,
+											View view, FailReason failReason) {
+										super.onLoadingFailed(imageUri, view, failReason);
+										isLoadImage=true;
+										ToMain();
+									}
+								});
 						}else{
 							isLoadImage=true;
 							ToMain();

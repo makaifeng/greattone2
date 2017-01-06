@@ -2,6 +2,7 @@ package com.greattone.greattone.activity.personal;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,6 +11,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -22,8 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.android.volley.VolleyError;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
@@ -42,6 +50,7 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -92,11 +101,15 @@ public class NormalMemberFragment extends BaseFragment {
 	private TextView tv_address;
 	protected LoginInfo user;
 	private CountDownTimer downTimer;
-
+	String	username;
+	String	password;
 	private int groupid;
 	private String code_num;
 //	private View ll_code;
 	String imgName="icon.png";
+	private HashMap<String, String> map;
+	private ProgressDialog pd;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -491,11 +504,10 @@ public class NormalMemberFragment extends BaseFragment {
 
 				}, null));
 	}
-
 	/** 注册 */
 	protected void commit() {
-		final String str1 = this.et_name.getText().toString().trim();
-		final String str2 = this.et_password.getText().toString();
+		username = this.et_name.getText().toString().trim();
+		password = this.et_password.getText().toString();
 		final String str3 = this.et_double_password.getText().toString();
 //		final String str4 = this.tv_phone_district_num.getText().toString();
 		final String str5 = this.et_phone_num.getText().toString().trim();
@@ -505,7 +517,7 @@ public class NormalMemberFragment extends BaseFragment {
 			toast(getResources().getString(R.string.请选择头像));
 			return;
 		}
-		if (str1.isEmpty()) {
+		if (username.isEmpty()) {
 			if (groupid == 4) {
 				toast(getResources().getString(R.string.请输入机构名称));
 			} else if (groupid == 5) {
@@ -515,7 +527,7 @@ public class NormalMemberFragment extends BaseFragment {
 			}
 			return;
 		}
-		if (str2.isEmpty()) {
+		if (password.isEmpty()) {
 			toast(getResources().getString(R.string.请输入密码));
 			return;
 		}
@@ -523,7 +535,7 @@ public class NormalMemberFragment extends BaseFragment {
 			toast(getResources().getString(R.string.请再次输入密码));
 			return;
 		}
-		if (!str2.equals(str3)) {
+		if (!password.equals(str3)) {
 			toast(getResources().getString(R.string.二次密码不相同));
 			return;
 		}
@@ -558,37 +570,71 @@ public class NormalMemberFragment extends BaseFragment {
 				toast(getResources().getString(R.string.请选择地址));
 			}
 		}
-		MyProgressDialog.show(context);
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "extend/upfile");
-		map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-		map.put("uptype", "userpic");
-		map.put("groupid", groupid+"");
-		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
-		bytes.put("file", BitmapUtil.Bitmap2Bytes(bitmap));
-		HttpUtil.httpConnectionByPostBytes(context, map,bytes,"png",true,
-				new ResponseListener() {
 
-					@Override
-					public void setResponseHandle(Message2 message) {
-						url = JSON.parseObject(message.getData()).getString(
-								"url");
-						HashMap<String, String> map = new HashMap<String, String>();
-						map.put("api", "user/createUser");
-						map.put("password", str2);
-						map.put("username", str1);
-						map.put("groupid", groupid+"");
-//						if (groupid!=4) {
-							map.put("phone", str5);
-							map.put("smscode", str7);
-//						}
-						if (groupid==1) {
-							map.put("putong_shenfen","爱乐人");
-						}
-						map.put("address", province);
-						map.put("address1", city);
-						map.put("address2", district);
-						map.put("userpic", url);
+		map = new HashMap<String, String>();
+		map.put("api", "user/createUser");
+		map.put("password", password);
+		map.put("username", username);
+		map.put("groupid", groupid+"");
+		map.put("phone", str5);
+		map.put("smscode", str7);
+		if (groupid==1) {
+			map.put("putong_shenfen","爱乐人");
+		}
+		map.put("address", province);
+		map.put("address1", city);
+		map.put("address2", district);
+		sendPicture(filePath);
+	}
+	/** 发送图片 */
+	protected void sendPicture(String photo) {
+		pd = new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		UpdateObjectToOSSUtil.getInstance().uploadImage_userPic(context, photo, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int) totalSize);
+				pd.setProgress((int) currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				
+				String picUrl = UpdateObjectToOSSUtil.getInstance().getUrl(request.getBucketName(), request.getObjectKey());
+//				editMyPic(picUrl);
+
+				map.put("userpic", picUrl);
+			Message.obtain(handler,0).sendToTarget();
+
+//				MyProgressDialog.Cancel();
+
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+//				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+	}
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					register();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
+	/** 调用注册接口 */
+	protected void register() {
 						// HashMap<String, File> files = new HashMap<String,
 						// File>();
 						// files.put("userpicfile", new File(filePath));
@@ -605,67 +651,16 @@ public class NormalMemberFragment extends BaseFragment {
 										((BaseActivity) context).toast(message
 												.getInfo());
 										Intent data = new Intent();
-										data.putExtra("username", str1);
-										data.putExtra("password", str2);
+										data.putExtra("username", username);
+										data.putExtra("password", password);
 										((BaseActivity) context).setResult(
 												Activity.RESULT_OK, data);
+										pd.dismiss();
 										((BaseActivity) context).finish();
 										MyProgressDialog.Cancel();
 									}
-
 								}, null));
-					}
-				}, null);
-//		addRequest(HttpUtil2.httpConnectionByPostFile(context, map, files,
-//				new ResponseListener() {
-//			
-//			@Override
-//			public void setResponseHandle(Message2 message) {
-//				url = JSON.parseObject(message.getData()).getString(
-//						"url");
-//				HashMap<String, String> map = new HashMap<String, String>();
-//				map.put("api", "user/createUser");
-//				map.put("password", str2);
-//				map.put("username", str1);
-//				if (groupid!=4) {
-//					map.put("phone", str5);
-//					map.put("smscode", str7);
-//				}
-//				map.put("groupid", (groupid)+"");
-//				map.put("address", province);
-//				map.put("address1", city);
-//				map.put("address2", district);
-//				map.put("userpic", url);
-//				// HashMap<String, File> files = new HashMap<String,
-//				// File>();
-//				// files.put("userpicfile", new File(filePath));
-//				addRequest(HttpUtil2.httpConnectionByPost(context, map,
-//						new ResponseListener() {
-//					
-//					@Override
-//					public void setResponseHandle(
-//							Message2 message) {
-//						user = JSON.parseObject(JSON
-//								.parseObject(message.getData())
-//								.getString("user"),
-//								LoginInfo.class);
-//						((BaseActivity) context).toast(message
-//								.getInfo());
-//						Intent data = new Intent();
-//						data.putExtra("username", str1);
-//						data.putExtra("password", str2);
-//						((BaseActivity) context).setResult(
-//								Activity.RESULT_OK, data);
-//						((BaseActivity) context).finish();
-//						MyProgressDialog.Cancel();
-//					}
-//					
-//				}, null));
-//			}
-//		}, null));
-
 	}
-
 	/** 倒计时 */
 	protected void CountDownTime() {
 		downTimer = new CountDownTimer(60 * 1000L, 1000L) {

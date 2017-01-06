@@ -1,8 +1,11 @@
 package com.greattone.greattone.activity.post;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +15,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.plaza.ShowPictureActivity;
@@ -25,11 +32,11 @@ import com.greattone.greattone.entity.Column;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
 import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.Permission;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.greattone.greattone.widget.MyRoundImageView;
 import com.kf_test.picselect.GalleryActivity;
@@ -227,7 +234,7 @@ public class PostYuePuActivity extends BaseActivity {
 		 String type = tv_type.getText().toString().trim();
 		 String author = et_author.getText().toString().trim();
 		filepass= System.currentTimeMillis()+"";
-		final ArrayList<Picture> pictureFileList=adapter.getList();
+		pictureFileList=adapter.getList();
 		if (titlepicFile==null) {
 			toast(getResources().getString(R.string.select_titlepic_please));
 			return;
@@ -240,10 +247,6 @@ public class PostYuePuActivity extends BaseActivity {
 			toast("请填写标题");
 			return;
 		}
-//		if (newstext.isEmpty()) {
-//			toast(getResources().getString(R.string.请填写内容));
-//			return;
-//		}
 		if (TextUtils.isEmpty(style)) {
 			toast("请选择风格");
 			return;
@@ -259,8 +262,16 @@ public class PostYuePuActivity extends BaseActivity {
 		 map.put("title", title);
 		 map.put("smalltext", newstext);
 		//发送图片
-		MyProgressDialog.show(context);
-		updatePicture(0,pictureFileList,titlepicFile);//上传图片
+		num=0;
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		updatePic();
+//		MyProgressDialog.show(context);
+//		updatePicture(0,pictureFileList,titlepicFile);//上传图片
 //		for (int i = 0; i < pictureFileList.size()+1; i++) {//循环上传图片 乐谱图片n张+1张封面图
 //			final int num=i;
 //			String url;
@@ -287,38 +298,101 @@ public class PostYuePuActivity extends BaseActivity {
 //			}, null);
 //		}
 	}
-	/**
-	 * 上传图片
-	 * @param num
-	 * @param pictureFileList
-	 * @param titlepicFile
-     */
-	protected void updatePicture(final int num,final ArrayList<Picture> pictureFileList, final String titlepicFile) {
-		String url;
-		if (num==pictureFileList.size()) {//最后一张上传封面图
-			url=titlepicFile;
-		}else{//上传乐谱图片
-			url = pictureFileList.get(num).getPicUrl();
+	ProgressDialog pd;
+	int num;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+	ArrayList<Picture> pictureFileList;
+	protected void updatePic() {
+		pd.setMessage("上传第"+(num+1)+"张");
+		String path;
+		if (num==0){
+			path=titlepicFile;
+		}else {
+			 path= pictureFileList.get(num-1).getPicUrl();
 		}
-		HttpProxyUtil.updatePictureByCompress2(context, filepass, classid,url,	new ResponseListener() {
+		updateObjectToOSSUtil.uploadImage_folder2(context,path, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
 
 			@Override
-			public void setResponseHandle(Message2 message) {
-				String picUrl = JSON.parseObject(message.getData()).getString(
-						"url");
-				if (num==pictureFileList.size()) {//最后一张上传封面图
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+				if (num==0){
 					map.put("titlepic", picUrl);
-					post1();
-				}else{//上传乐谱图片
+				}else{
 					photo=photo+picUrl+"::::::";
-					photo.substring(0, photo.length()-6);
 					map.put("photo", photo);
-					updatePicture(num+1,pictureFileList,titlepicFile);
+				}
+				num++;
+				if (num==pictureFileList.size()+1) {
+					post1();
+				}else {
+					Message.obtain(handler,0).sendToTarget();
 				}
 			}
-		}, null);
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
 	}
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					updatePic();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
+//	/**
+//	 * 上传图片
+//	 * @param num
+//	 * @param pictureFileList
+//	 * @param titlepicFile
+//     */
+//	protected void updatePicture(final int num,final ArrayList<Picture> pictureFileList, final String titlepicFile) {
+//		String url;
+//		if (num==pictureFileList.size()) {//最后一张上传封面图
+//			url=titlepicFile;
+//		}else{//上传乐谱图片
+//			url = pictureFileList.get(num).getPicUrl();
+//		}
+//		HttpProxyUtil.updatePictureByCompress2(context, filepass, classid,url,	new ResponseListener() {
+//
+//			@Override
+//			public void setResponseHandle(Message2 message) {
+//				String picUrl = JSON.parseObject(message.getData()).getString(
+//						"url");
+//				if (num==pictureFileList.size()) {//最后一张上传封面图
+//					map.put("titlepic", picUrl);
+//					post1();
+//				}else{//上传乐谱图片
+//					photo=photo+picUrl+"::::::";
+//					photo.substring(0, photo.length()-6);
+//					map.put("photo", photo);
+//					updatePicture(num+1,pictureFileList,titlepicFile);
+//				}
+//			}
+//		}, null);
+//	}
 	protected void post1() {
+		Message.obtain(handler,1,"上传数据中...").sendToTarget();
 		map.put("api", "post/ecms");
 		map.put("enews", "MAddInfo");
 		map.put("mid", mid);
@@ -332,6 +406,7 @@ public class PostYuePuActivity extends BaseActivity {
 			@Override
 			public void setResponseHandle(Message2 message) {
 				toast(message.getInfo());
+				Message.obtain(handler,2).sendToTarget();
 				MyProgressDialog.Cancel();
 				finish();
 			}

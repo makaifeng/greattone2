@@ -1,8 +1,16 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
@@ -20,17 +28,9 @@ import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**海选投票列表*/
 public class HaiXuanVoteActivity extends BaseActivity {
 	private int page = 1;
@@ -149,7 +149,7 @@ public class HaiXuanVoteActivity extends BaseActivity {
 			 intent.putExtra("id", activitiesList.get(position).getId());
 			 intent.putExtra("title", getIntent().getStringExtra("title"));
 			 intent.putExtra("history",history);
-			 intent.putExtra("type", 1);// 1活动 2赛事
+//			 intent.putExtra("type", 1);// 1活动 2赛事
 			startActivity(intent);
 		}
 	};

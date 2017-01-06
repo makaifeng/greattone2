@@ -121,6 +121,15 @@ public class FileUtil {
 		createFile(context, path);
 		return path;
 	}
+	/**
+	 * 获取图片裁剪后的目录
+	 */
+	public static String getCropFile(Context context) {
+		String path = null;
+		path = Environment.getExternalStorageDirectory()+"/"+context.getPackageName()+"/crop";
+		createFile(context, path);
+		return path;
+	}
 
 	/**
 	 * 创建路径

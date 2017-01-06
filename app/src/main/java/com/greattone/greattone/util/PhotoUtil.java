@@ -113,7 +113,7 @@ public class PhotoUtil {
 		intent.putExtra("outputX", outputX);
 		intent.putExtra("outputY", outputY);
 		intent.putExtra("return-data", true);
-		intent.putExtra("scale", true); 
+		intent.putExtra("scale", true);
 //		intent.putExtra("noFaceDetection", true);
 		((Activity) context).startActivityForResult(intent,
 				PHOTO_REQUEST_CUT);

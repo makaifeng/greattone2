@@ -35,8 +35,17 @@ public class ActivityVideo implements Serializable{
 	String hai_photo;//图片地址
 	UserInfo userinfo;
 	String username;
+	String pclassid;
 	int ishistory;
-	
+
+	public String getPclassid() {
+		return pclassid;
+	}
+
+	public void setPclassid(String pclassid) {
+		this.pclassid = pclassid;
+	}
+
 	public String getHai_id() {
 		return hai_id;
 	}
