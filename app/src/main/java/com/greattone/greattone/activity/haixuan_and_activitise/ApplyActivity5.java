@@ -2,12 +2,13 @@ package com.greattone.greattone.activity.haixuan_and_activitise;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -22,6 +23,12 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.android.volley.VolleyError;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.UpdateVideoAct;
@@ -42,6 +49,7 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.CheckBoxListView;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
@@ -245,7 +253,7 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 		String name = et_name.getText().toString().trim();
 		String company = et_company.getText().toString().trim();
 		String desc = et_desc.getText().toString().trim();
-		ArrayList<Picture> videoFileList = adapter.getList();
+		 fileList = adapter.getList();
 		if (TextUtils.isEmpty(name)) {
 			toast(getResources().getString(R.string.请输入姓名));
 			return;
@@ -264,42 +272,115 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 			toast("请填写图片描述");
 			return;
 		}
-		if (videoFileList.size()==0) {
+		if (fileList.size()==0) {
 			toast(getResources().getString(R.string.请选择上传视频));
 			return;
 		}
 		 filepass = System.currentTimeMillis() + "";
 		 String [] msg={name,company,game_area,desc};
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
 		 if (isShowPic) {
-			 postPic(msg,videoFileList,0);
+			 postPic(msg);
 		}else{
-			postVideo(msg,videoFileList);
+			postVideo(msg,fileList);
 		}
 	}
-	private ArrayList<String> pictureUrlList=new ArrayList<String>();
-	protected String picUrl;
+	private ArrayList<Picture> fileList;
+	ProgressDialog pd;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+	int num;String photos;
+	HashMap<String, String> updateMap;
+	String filePath;
 	/**
 	 * 图片报名
 	 */
-	private void postPic(final String [] msg, final ArrayList<Picture> videoFileList,final int num) {
-		//发送图片
-//		for (int i = 0; i < videoFileList.size(); i++) {
-			HttpProxyUtil.updatePictureByCompress2(context, filepass, classid, videoFileList.get(num).getPicUrl(),	new ResponseListener() {
-
-				@Override
-				public void setResponseHandle(Message2 message) {
-			String picUrl = JSON.parseObject(message.getData()).getString(
-							"url");
-			pictureUrlList.add(picUrl);
-			if (pictureUrlList.size()==videoFileList.size()) {
-				post1(msg);
-			}else{
-				postPic(msg, videoFileList,num+1);
-			}
-				}
-			}, null);
-//		}
+	private void postPic(final String [] msg) {
+		updateMap = new HashMap<>();
+		updateMap.put("api", "post/ecms_bm");
+		updateMap.put("mid", mid);
+		updateMap.put("enews", "MAddInfo");
+		updateMap.put("classid", "104");
+		updateMap.put("bao_type", "3");// 海选
+		updateMap.put("hai_id", id);
+		updateMap.put("hai_name", msg[0]);// 选手姓名
+		updateMap.put("hai_phone",msg[1]);// 联系电话
+		updateMap.put("hai_address", msg[2]);// 详细地址
+		updateMap.put("hai_petition", msg[3]);// 参赛曲目
+		updateMap.put("hai_division", msg[4]);// 比赛赛区
+		updateMap.put("hai_grouping",msg[5]);//选择分组1
+		updateMap.put("hai_grouping2",msg[6]);//选择分组2
+		updateMap.put("smalltext",msg[7]);//图片描述
+		updateMap.put("filepass",filepass);
+		updateMap.put("loginuid", Data.user.getUserid());
+		updateMap.put("logintoken", Data.user.getToken());
+		updatePic();//发送图片
 	}
+	/**
+	 * 发送图片
+	 */
+	private void updatePic() {
+		pd.setMessage("上传第"+(num+1)+"张");
+		String path;
+		if (num==0){
+			path=filePath;
+		}else {
+			path= fileList.get(num-1).getPicUrl();
+		}
+//		String path= fileList.get(num).getPicUrl();
+		updateObjectToOSSUtil.uploadImage_folder(context,path, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String pic=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+				if (num==0){
+					updateMap.put("hai_photo",pic);// 标题图片
+				}else{
+					photos=photos+pic+"::::::";
+				}
+				num++;
+				if (num==fileList.size()+1) {
+					post1();
+				}else {
+					Message.obtain(handler,0).sendToTarget();
+				}
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+	}
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					updatePic();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
 	/**
 	 * 视频报名
 	 */
@@ -319,26 +400,6 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 				updateVideo(msg,videoFileList,imgUrl);
 			}
 		}, null );
-	}
-	/** 发送图片 */
-	protected void sendPicture(Bitmap photo) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "extend/upfile");
-		map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-		map.put("uptype", "userpic");
-		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
-		bytes.put("file", BitmapUtil.Bitmap2Bytes(photo));
-		// String[] suffix=filePath.split("\\.");
-		HttpUtil.httpConnectionByPostBytes(context, map, bytes, "png", false,
-
-				new ResponseListener() {
-
-					@Override
-					public void setResponseHandle(Message2 message) {
-						 picUrl = JSON.parseObject(message.getData()).getString("url");
-					}
-
-				}, null);
 	}
 
 	/**
@@ -371,32 +432,43 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 		finish();
 	}
 	/**	报名*/
-	protected void post1( String [] msg) {
-		String data="api=post/ecms_bm&enews=MAddInfo&mid="+mid
-				+"&classid="+104
-				+"&bao_type=3"
-				+"&hai_id="+id
-				+"&hai_photo="+picUrl//标题图片
-				+"&hai_petition="+msg[0]//品牌名称
-				+"&hai_address="+msg[1]//创立国家
-				+"&pintype="+msg[2]//乐器分类
-				+"&smalltext="+msg[3]//品牌描述
-				+"&loginuid="+Data.user.getUserid()
-				+"&logintoken="+Data.user.getToken()
-				+"&filepass="+filepass;
-		for (int i = 0; i < pictureUrlList.size(); i++) {//图片路径
-			data=data+"&msmallpic[]="+pictureUrlList.get(i);
-		}
-		addRequest(HttpUtil.httpConnectionByPost(context, data,
+	protected void post1( ) {
+//		String data="api=post/ecms_bm&enews=MAddInfo&mid="+mid
+//				+"&classid="+104
+//				+"&bao_type=3"
+//				+"&hai_id="+id
+//				+"&hai_photo="+picUrl//标题图片
+//				+"&hai_petition="+msg[0]//品牌名称
+//				+"&hai_address="+msg[1]//创立国家
+//				+"&pintype="+msg[2]//乐器分类
+//				+"&smalltext="+msg[3]//品牌描述
+//				+"&loginuid="+Data.user.getUserid()
+//				+"&logintoken="+Data.user.getToken()
+//				+"&filepass="+filepass;
+//		for (int i = 0; i < pictureUrlList.size(); i++) {//图片路径
+//			data=data+"&msmallpic[]="+pictureUrlList.get(i);
+//		}
+		updateMap.put("new_photo", photos);
+		addRequest(HttpUtil.httpConnectionByPost(context, updateMap,
 				new ResponseListener() {
-			
-			@Override
-			public void setResponseHandle(Message2 message) {
-				toast(getResources().getString(R.string.报名成功));
-				MyProgressDialog.Cancel();
-				finish();
-			}
-		}, null));
+
+					@Override
+					public void setResponseHandle(Message2 message) {
+						toast(getResources().getString(R.string.报名成功));
+						Message.obtain(handler,2).sendToTarget();
+						finish();
+					}
+				},  new HttpUtil.ErrorResponseListener() {
+					@Override
+					public void setServerErrorResponseHandle(Message2 message) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+
+					@Override
+					public void setErrorResponseHandle(VolleyError error) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+				}));
 	}
 	private int getBaoType(String type){
 		boolean  isvideo = false;
@@ -518,19 +590,9 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	super.onActivityResult(requestCode, resultCode, data);
 	if (resultCode == Activity.RESULT_OK) {
 		if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
-			String filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
-			File temp = new File(filePath);
-			PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 200, 200);
+			 filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
 		} else if (requestCode == PhotoUtil.ALBUM) {// 相册
-			// filePath = BitmapUtil.getFileFromALBUM(context, data);
-			PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 200, 200);
-		} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
-			Bundle extras = data.getExtras();
-			if (extras != null) {
-				Bitmap photo = extras.getParcelable("data");
-				iv_titlepic.setImageBitmap(photo);
-				sendPicture(photo);
-			}
+			 filePath = BitmapUtil.getFileFromALBUM(context, data);
 		}
 	}
 }

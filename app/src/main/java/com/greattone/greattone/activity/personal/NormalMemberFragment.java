@@ -565,11 +565,11 @@ public class NormalMemberFragment extends BaseFragment {
 				return;
 			}
 //		}
-		if (groupid !=5) {
+//		if (groupid !=5) {
 			if (province == null || city == null || district == null) {
 				toast(getResources().getString(R.string.请选择地址));
 			}
-		}
+//		}
 
 		map = new HashMap<String, String>();
 		map.put("api", "user/createUser");

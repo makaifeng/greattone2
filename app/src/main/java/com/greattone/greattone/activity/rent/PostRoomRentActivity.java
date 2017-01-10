@@ -1,14 +1,17 @@
 package com.greattone.greattone.activity.rent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.adapter.PostGridAdapter;
@@ -17,11 +20,15 @@ import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Lease;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /** 发布租赁 */
 public class PostRoomRentActivity extends BaseActivity {
@@ -156,58 +163,89 @@ public class PostRoomRentActivity extends BaseActivity {
 			toast("请输入人数上限");
 			return;
 		}
+		postMap.put("api", "post/ecms");
+		if (id!=null) {//修改
+			postMap.put("enews", "MEditInfo");
+			postMap.put("id", id);
+		}else {//添加
+			postMap.put("enews", "MAddInfo");
+			postMap.put("filepass", filepass);
+		}
+		postMap.put("mid", 15+"");
+		postMap.put("title",title);
+		postMap.put("price", price);
+		postMap.put("pbrand", phone);
+		postMap.put("pmaxnum", peoplenum);
+		postMap.put("price", price);
+//		postMap.put("titlepic", pictureUrlList.get(0));
+		postMap.put("intro", content);//简介
+		postMap.put("classid", getIntent().getStringExtra("classid"));
+		postMap.put("loginuid", Data.user.getUserid());
+		postMap.put("logintoken", Data.user.getToken());
 		if (pictureFileList.size() == 0) {
 			pictureUrlList.add(lease.getTitlepic());
-			post1(title, price,content,phone, peoplenum,true);
+			post1();
 		} else {
-			post(title, price,content,phone,peoplenum);
+			updatePicture(pictureFileList.get(0).getPicUrl());
+//			post(title, price,content,phone,peoplenum);
 		}
 	}
-	// 发送图片
-	private void post(final String title, final String price,final String content,final String phone,final String peoplenum) {
-		MyProgressDialog.show(context);
-		for (int i = 0; i < pictureFileList.size(); i++) {
-			HttpProxyUtil.updatePictureByCompress2(context, filepass, getIntent().getStringExtra("classid"), pictureFileList.get(i).getPicUrl(),	new ResponseListener() {
+	ProgressDialog pd;
+	private Map<String, String> postMap = new HashMap<>();
+	/**
+	 *上传图片
+	 * @param filePath
+	 */
+	private void updatePicture(String filePath) {
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		pd.setMessage("上传视频缩略图");
+		UpdateObjectToOSSUtil.getInstance().uploadImage_iamge(context, filePath, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
 
-				@Override
-				public void setResponseHandle(Message2 message) {
-							String picUrl = JSON.parseObject(message.getData())
-									.getString("url");
-							pictureUrlList.add(picUrl);
-							if (pictureUrlList.size() == pictureFileList.size()) {
-								post1(title, price, content,phone,peoplenum,false);
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String	picUrl=UpdateObjectToOSSUtil.getInstance().getUrl(request.getBucketName(),request.getObjectKey());
+				postMap.put("titlepic", picUrl);
+				post1();
+				pd.dismiss();
+			}
 
-							}
-						}
-					}, null);
-		}
-	}
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});}
+//	// 发送图片
+//	private void post(final String title, final String price,final String content,final String phone,final String peoplenum) {
+//		MyProgressDialog.show(context);
+//		for (int i = 0; i < pictureFileList.size(); i++) {
+//			HttpProxyUtil.updatePictureByCompress2(context, filepass, getIntent().getStringExtra("classid"), pictureFileList.get(i).getPicUrl(),	new ResponseListener() {
+//
+//				@Override
+//				public void setResponseHandle(Message2 message) {
+//							String picUrl = JSON.parseObject(message.getData())
+//									.getString("url");
+//							pictureUrlList.add(picUrl);
+//							if (pictureUrlList.size() == pictureFileList.size()) {
+//								post1(title, price, content,phone,peoplenum,false);
+//
+//							}
+//						}
+//					}, null);
+//		}
+//	}
 	// 提交
-	protected void post1(String title, String price, String content,String phone,String peoplenum, boolean showDialog) {
-		if (showDialog) {
-			MyProgressDialog.show(context);
-		}
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "post/ecms");
-		if (id!=null) {
-			map.put("enews", "MEditInfo");
-			map.put("id", id);
-		}else {
-			map.put("enews", "MAddInfo");
-			map.put("filepass", filepass);
-		}
-		map.put("mid", 15+"");
-		map.put("title",title);
-		map.put("price", price);
-		map.put("pbrand", phone);
-		map.put("pmaxnum", peoplenum);
-		map.put("price", price);
-		map.put("titlepic", pictureUrlList.get(0));
-		map.put("intro", content);//简介
-		map.put("classid", getIntent().getStringExtra("classid"));
-		map.put("loginuid", Data.user.getUserid());
-		map.put("logintoken", Data.user.getToken());
-		addRequest(HttpUtil.httpConnectionByPost(context, map,
+	protected void post1() {
+		addRequest(HttpUtil.httpConnectionByPost(context, postMap,
 				new ResponseListener() {
 			
 			@Override

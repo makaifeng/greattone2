@@ -16,6 +16,7 @@ import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.android.volley.VolleyError;
 import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -187,7 +188,7 @@ public class PostPictureActivity extends BaseActivity {
 	protected void updatePic2() {
 		pd.setMessage("上传第"+(num+1)+"张");
 		String path= pictureFileList.get(num).getPicUrl();
-		updateObjectToOSSUtil.uploadImage_folder2(context,path, new UpdateListener() {
+		updateObjectToOSSUtil.uploadImage_folder(context,path, new UpdateListener() {
 			@Override
 			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
 				pd.setMax((int)totalSize);
@@ -251,15 +252,25 @@ public class PostPictureActivity extends BaseActivity {
 		msg=msg+"&new_photo="+photos;
 		addRequest(HttpUtil.httpConnectionByPost(context, msg,
 				new ResponseListener() {
-			
-			@Override
-			public void setResponseHandle(Message2 message) {
-				toast(message.getInfo());
-				Message.obtain(handler,2).sendToTarget();
-				MyProgressDialog.Cancel();
-				finish();
-			}
-		}, null));
+
+					@Override
+					public void setResponseHandle(Message2 message) {
+						toast(message.getInfo());
+						Message.obtain(handler, 2).sendToTarget();
+						MyProgressDialog.Cancel();
+						finish();
+					}
+				}, new HttpUtil.ErrorResponseListener() {
+					@Override
+					public void setServerErrorResponseHandle(Message2 message) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+
+					@Override
+					public void setErrorResponseHandle(VolleyError error) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+				}));
 	}
 //	@Override
 //	protected void onActivityResult(int requestCode, int resultCode, Intent data){

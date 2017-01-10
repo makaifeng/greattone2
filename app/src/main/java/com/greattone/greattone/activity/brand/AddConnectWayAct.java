@@ -5,8 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -23,7 +21,11 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.personal.ToSignActivity;
@@ -41,6 +43,7 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 
 import java.io.File;
@@ -422,48 +425,65 @@ public class AddConnectWayAct extends BaseActivity {
 		}
 	}
 
-	/** 发送图片 */
-	protected void sendPicture(Bitmap photo) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "extend/upfile");
-		map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-		map.put("uptype", "userpic");
-		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
-		bytes.put("file", BitmapUtil.Bitmap2Bytes(photo));
-		HttpUtil.httpConnectionByPostBytes(context, map, bytes, "png", false,
+	protected void updatePic(String videoPath) {
+		UpdateObjectToOSSUtil.getInstance().uploadImage_iamge(context,videoPath, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+			}
 
-				new ResponseListener() {
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				picUrl=UpdateObjectToOSSUtil.getInstance().getUrl(request.getBucketName(),request.getObjectKey());
+			}
 
-					@Override
-					public void setResponseHandle(Message2 message) {
-						picUrl = JSON.parseObject(message.getData()).getString("url");
-					}
-
-				}, null);
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+			}
+		});
 	}
+//	/** 发送图片 */
+//	protected void sendPicture(Bitmap photo) {
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("api", "extend/upfile");
+//		map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
+//		map.put("uptype", "userpic");
+//		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
+//		bytes.put("file", BitmapUtil.Bitmap2Bytes(photo));
+//		HttpUtil.httpConnectionByPostBytes(context, map, bytes, "png", false,
+//
+//				new ResponseListener() {
+//
+//					@Override
+//					public void setResponseHandle(Message2 message) {
+//						picUrl = JSON.parseObject(message.getData()).getString("url");
+//					}
+//
+//				}, null);
+//	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
-				String filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
-				// sendPicture();
-				File temp = new File(filePath);
-				String filePath2 = FileUtil.getCropFile(context) + "/" + imgName;
-				PhotoUtil.startPhotoZoom(context, Uri.fromFile(temp), 1, 1, 200, 200);
+			String	 filePath = FileUtil.getCropFile(context) + "/" + imgName;
+				iv_pic.setImageBitmap(BitmapUtil.getBitmapFromFile(filePath));
+				updatePic(filePath);
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
-				PhotoUtil.startPhotoZoom(context, data.getData(), 1, 1, 200, 200);
+				String	 filePath = BitmapUtil.getFileFromALBUM(context, data);
+				iv_pic.setImageBitmap(BitmapUtil.getBitmapFromFile(filePath));
+				updatePic(filePath);
 				// filePath = BitmapUtil.getFileFromALBUM(context, data);
 				// sendPicture();
-			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
-				Bundle extras = data.getExtras();
-				if (extras != null) {
-					Bitmap photo = extras.getParcelable("data");
-					sendPicture(photo);
-					iv_pic.setImageBitmap(photo);
-					iv_del.setVisibility(View.VISIBLE);
-				}
+//			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
+//				Bundle extras = data.getExtras();
+//				if (extras != null) {
+//					Bitmap photo = extras.getParcelable("data");
+//					sendPicture(photo);
+//					iv_pic.setImageBitmap(photo);
+//					iv_del.setVisibility(View.VISIBLE);
+//				}
 			}
 		}
 	}

@@ -120,8 +120,7 @@ public class BitmapUtil {
 	}
 
 	/**
-	 * 图片大小缩放
-	 * 
+	 * 图片大小缩放 缩放到固定大小
 	 * @param bitmap
 	 * @param width
 	 * @param height
@@ -139,6 +138,28 @@ public class BitmapUtil {
 		// }else {
 		// matrix.postScale(scaleHeight, scaleHeight);
 		// }
+		Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
+		return newbmp;
+	}
+	/**
+	 * 图片大小缩放 等比例缩放
+	 * @param bitmap
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public static Bitmap zoomBitmapByProportional(Bitmap bitmap, int width, int height) {
+		int w = bitmap.getWidth();
+		int h = bitmap.getHeight();
+		Matrix matrix = new Matrix();
+		float scaleWidth = ((float) width / w);
+		float scaleHeight = ((float) height / h);
+//		matrix.postScale(scaleWidth, scaleHeight);
+		 if (w>h) {
+		 matrix.postScale(scaleWidth, scaleWidth);
+		 }else {
+		 matrix.postScale(scaleHeight, scaleHeight);
+		 }
 		Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
 		return newbmp;
 	}
@@ -340,19 +361,58 @@ public class BitmapUtil {
 		}
     	return ThumbnailUtils.createVideoThumbnail(videoPath, kind);
     }
-    public static Bitmap getVideoThumb(String path) {
-    	MediaMetadataRetriever media = new MediaMetadataRetriever();
-    	media.setDataSource(path);
-    	Bitmap bitmap=media.getFrameAtTime();
-    	media.release();
-    	return bitmap ;
-    	}
 
+	/**
+	 * 获取视频的缩略图
+	 * @param filePath
+	 * @return
+     */
+	public static Bitmap getVideoThumbnail(String filePath,int width, int height) {
+		Bitmap bitmap = null;
+		MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+		try {
+			retriever.setDataSource(filePath);
+			bitmap = retriever.getFrameAtTime();
+		}
+		catch(IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				retriever.release();
+			}
+			catch (RuntimeException e) {
+				e.printStackTrace();
+			}
+		}
+		if (bitmap == null) return null;
+		bitmap=	zoomBitmapByProportional(bitmap,width,height);
+		return bitmap;
+	}
+	/**
+	 *
+	 * @param videoPath
+	 * @param kind 参照MediaStore.Images.Thumbnails类中的常量MINI_KIND和MICRO_KIND。
+	 *            其中，MINI_KIND: 512 x 384，MICRO_KIND: 96 x 96
+     * @return
+     */
     public static  byte[] getVideoPicBytes(String videoPath,
     		int kind) {
-    	Bitmap bm = getVideoPic(videoPath, kind);
-    	return Bitmap2Bytes(bm);
-    }
+		Bitmap bm = getVideoThumbnail(videoPath,900,900, kind);
+		return Bitmap2Bytes(bm);
+	}
+	/**
+	 *
+	 * @param videoPath
+     * @return
+     */
+    public static  byte[] getVideoPicBytes(String videoPath) {
+		Bitmap bm = getVideoThumbnail(videoPath,500,500);
+		return Bitmap2Bytes(bm);
+	}
     public static  byte[] getPicBytes(String filePath) {
     	Bitmap bm = getBitmapFromFile(filePath);
     	return Bitmap2Bytes(bm);
@@ -411,7 +471,7 @@ public class BitmapUtil {
 		options.inJustDecodeBounds = true;  
 		File f = new File(filePath);
 		if (f.exists()) {
-			bitmap = BitmapFactory.decodeFile(filePath,options);
+//			bitmap = BitmapFactory.decodeFile(filePath,options);
 			options.inJustDecodeBounds =false;  
 			//计算缩放比  
 			int be;  

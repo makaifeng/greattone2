@@ -1,6 +1,9 @@
 package com.greattone.greattone.activity.personal;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +12,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.greattone.greattone.Listener.OnSelectCityListener;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
@@ -22,10 +29,10 @@ import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
 import com.greattone.greattone.entity.UserInfo;
-import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.MessageUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
@@ -232,54 +239,113 @@ public class PersonalRoomtFragment extends BaseFragment {
 	 * @throws ParseException
 	 */
 	private void commit()  {
-		String[] arrayOfString = {};
+
 //		String str = this.m_birthday.getText().toString();
-			arrayOfString = this.m_city.getText().toString().split("\\,");
-			if ((arrayOfString== null) || (arrayOfString.length != 3)) {
-				toast(getResources().getString(R.string.请选择城市));
-				return;
+		addresses = this.m_city.getText().toString().split("\\,");
+		if ((addresses== null) || (addresses.length != 3)) {
+			toast(getResources().getString(R.string.请选择城市));
+			return;
 			}
 			MyProgressDialog.show(context);
 			pictureFileList = adapter.getList();
 			photo=adapter.getUrlList();
 			if ( pictureFileList.size()==0) {
-				post1(photo,arrayOfString);
+				post1();//直接发送
 			}else {
-				post(arrayOfString);
+				post();//先发送图片
 			}
 	
 	}
 	// 发送图片
-	private void post(final String[] arrayOfString) {
-		for (int i = 0; i < pictureFileList.size(); i++) {
-			final int num=i;
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("api", "post/upfile");
-			map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-			map.put("uptype", "photos");
-			map.put("loginuid", Data.user.getUserid());
-			map.put("logintoken", Data.user.getToken());
-			HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
-			bytes.put("file", BitmapUtil.getBytesFromFile(pictureFileList.get(num).getPicUrl()));
-			String[] suffix=pictureFileList.get(num).getPicUrl().split("\\.");
-			HttpUtil.httpConnectionByPostBytes(context, map,bytes,suffix[suffix.length - 1],true,
-					new ResponseListener() {
-
-						@Override
-						public void setResponseHandle(Message2 message) {
-							String picUrl = JSON.parseObject(message.getData())
-									.getString("url");
-							photo=photo+picUrl+"::::::";
-							if (num+1== pictureFileList.size()) {
-								photo.substring(0, photo.length()-6);
-								post1(photo,arrayOfString);
-
-							}
-						}
-					}, null);
+	private void post() {
+		num=0;
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		updatePic();
+//		for (int i = 0; i < pictureFileList.size(); i++) {
+//			final int num=i;
+//			HashMap<String, String> map = new HashMap<String, String>();
+//			map.put("api", "post/upfile");
+//			map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
+//			map.put("uptype", "photos");
+//			map.put("loginuid", Data.user.getUserid());
+//			map.put("logintoken", Data.user.getToken());
+//			HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
+//			bytes.put("file", BitmapUtil.getBytesFromFile(pictureFileList.get(num).getPicUrl()));
+//			String[] suffix=pictureFileList.get(num).getPicUrl().split("\\.");
+//			HttpUtil.httpConnectionByPostBytes(context, map,bytes,suffix[suffix.length - 1],true,
+//					new ResponseListener() {
+//
+//						@Override
+//						public void setResponseHandle(Message2 message) {
+//							String picUrl = JSON.parseObject(message.getData())
+//									.getString("url");
+//							photo=photo+picUrl+"::::::";
+//							if (num+1== pictureFileList.size()) {
+//								photo.substring(0, photo.length()-6);
+//								post1(photo,arrayOfString);
+//
+//							}
+//						}
+//					}, null);
+//		}
 		}
+	String[] addresses = {};
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+	private ProgressDialog pd;
+	int num=0;
+	protected void updatePic() {
+		pd.setMessage("上传第"+(num+1)+"张");
+		String path= pictureFileList.get(num).getPicUrl();
+		updateObjectToOSSUtil.uploadImage_folder(context,path, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				num++;
+				photo=photo+updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey())+"::::::";
+				if (num==pictureFileList.size()) {
+					post1();
+				}else {
+					Message.obtain(handler,0).sendToTarget();
+				}
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+	}
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					updatePic();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
 		}
-	protected void post1(String photo, String[] arrayOfString) {
+	};
+	protected void post1() {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "user/editUserInfo");
 		map.put("loginuid", Data.user.getUserid());
@@ -295,9 +361,9 @@ public class PersonalRoomtFragment extends BaseFragment {
 		map.put("classroom_type", m_cname.getText().toString());
 //		map.put("sex", this.m_sex.getText().toString());
 //		map.put("chusheng", str);
-		map.put("address", arrayOfString[0]);
-		map.put("address1", arrayOfString[1]);
-		map.put("address2", arrayOfString[2]);
+		map.put("address", addresses[0]);
+		map.put("address1", addresses[1]);
+		map.put("address2", addresses[2]);
 		map.put("addres",  this.m_address.getText().toString().trim());
 		map.put("photo", photo);
 		// map.put("address", this.m_address.getText().toString());
@@ -308,8 +374,9 @@ public class PersonalRoomtFragment extends BaseFragment {
 					@Override
 					public void setResponseHandle(Message2 message) {
 						toast(message.getInfo());
-						((BaseActivity) context).finish();
+						Message.obtain(handler,2).sendToTarget();
 						MyProgressDialog.Cancel();
+						((BaseActivity) context).finish();
 					}
 				}, null));
 	}

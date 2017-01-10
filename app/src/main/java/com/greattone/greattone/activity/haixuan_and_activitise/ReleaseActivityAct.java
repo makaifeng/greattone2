@@ -1,7 +1,6 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.HashMap;
-
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,10 +8,14 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.greattone.greattone.Listener.OnSelectCityListener;
 import com.greattone.greattone.Listener.TimePickerDismissCallback;
+import com.greattone.greattone.Listener.UpdateListener;
+import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.adapter.PostGridAdapter;
 import com.greattone.greattone.data.ClassId;
@@ -21,11 +24,13 @@ import com.greattone.greattone.dialog.CitySelectDialog;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.MyTimePickerDialog;
 import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.HashMap;
 
 /** 发布活动 */
 public class ReleaseActivityAct extends BaseActivity {
@@ -234,20 +239,53 @@ public class ReleaseActivityAct extends BaseActivity {
 		postMap.put("price", price);
 		picFile=adapter.getList().get(0).getPicUrl();
 		// 发送图片
-		MyProgressDialog.show(context);
-		HttpProxyUtil.updatePictureByCompress2(context, city, desc, picFile, new ResponseListener() {
-	
-	@Override
-	public void setResponseHandle(Message2 message) {
-		String picUrl = JSON.parseObject(message.getData())
-				.getString("url");
-		postMap.put("titlepic", picUrl);
-		post2();
-		
+		updatePicture(picFile);
+//		MyProgressDialog.show(context);
+//		HttpProxyUtil.updatePictureByCompress2(context, city, desc, picFile, new ResponseListener() {
+//
+//	@Override
+//	public void setResponseHandle(Message2 message) {
+//		String picUrl = JSON.parseObject(message.getData())
+//				.getString("url");
+//		postMap.put("titlepic", picUrl);
+//		post2();
+//
+//	}
+//},null);
 	}
-},null);
-	}
+	ProgressDialog pd;
+	/**
+	 *上传图片
+	 * @param filePath
+	 */
+	private void updatePicture(String filePath) {
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		pd.setMessage("上传视频缩略图");
+		UpdateObjectToOSSUtil.getInstance().uploadImage_iamge(context, filePath, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
 
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String	picUrl=UpdateObjectToOSSUtil.getInstance().getUrl(request.getBucketName(),request.getObjectKey());
+				postMap.put("titlepic", picUrl);
+				post2();
+				pd.dismiss();
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});}
 	/** 发布 */
 	protected void post2() {
 		postMap.put("api", "post/ecms");

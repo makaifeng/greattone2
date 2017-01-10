@@ -1,7 +1,6 @@
 package com.greattone.greattone.activity.qa;
 
-import java.util.ArrayList;
-
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,18 +10,23 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.UpdateVideoAct;
 import com.greattone.greattone.adapter.PostGridAdapter;
 import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.HttpProxyUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.BitmapUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
+
+import java.util.ArrayList;
 /**我要提问*/
 public class AskQuestionActivity extends BaseActivity {
 //	/**视频类型*/
@@ -100,26 +104,60 @@ public class AskQuestionActivity extends BaseActivity {
 			toast(getResources().getString(R.string.请选择视频));
 			return;
 		}
+		preferences.edit().putString("updateTitle", title)
+				.putString("updateContent", newstext).commit();
 		//发送视频的缩略图
-		MyProgressDialog.show(context);
-		HttpProxyUtil.updatePictureByByte(context, newstext, title, videoFileList.get(0).getPicUrl(), false,new ResponseListener() {
+		// 上传图片
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		updatePic(videoFileList.get(0).getPicUrl());
+//		MyProgressDialog.show(context);
+//		HttpProxyUtil.updatePictureByByte(context, newstext, title, videoFileList.get(0).getPicUrl(), false,new ResponseListener() {
+//
+//					@Override
+//					public void setResponseHandle(Message2 message) {
+//						picUrl = JSON.parseObject(message.getData()).getString(
+//								"url");
+//						updateVideo(title, newstext);
+//					}
+//				}, null);
+	}
+	ProgressDialog pd;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+	protected void updatePic(String videoPath) {
+		pd.setMessage("上传视频缩略图");
+		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context, BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
 
-					@Override
-					public void setResponseHandle(Message2 message) {
-						picUrl = JSON.parseObject(message.getData()).getString(
-								"url");
-						updateVideo(title, newstext);
-					}
-				}, null);
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+				updateVideo();
+				pd.dismiss();
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
 	}
 	/**
 	 * 添加到preferences和启动服务
 	 */
-	private void updateVideo(final String title, final String newstext) {
-		preferences.edit().putString("updateTitle", title)//选手姓名
+	private void updateVideo() {
+		preferences.edit()
 		.putString("updateUrl", picUrl)
 		.putString("updatePath", videoFileList.get(0).getPicUrl())
-		.putString("updateContent", newstext)
 		.putString("updateClassid", classid)
 		.putString("updateId", getIntent().getStringExtra("id") )
 		.putString("updateFilepass", filepass)

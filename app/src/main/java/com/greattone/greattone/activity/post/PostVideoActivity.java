@@ -1,5 +1,6 @@
 package com.greattone.greattone.activity.post;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,27 +10,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.UpdateVideoAct;
 import com.greattone.greattone.activity.map.SelectBdLocationActivity;
 import com.greattone.greattone.adapter.PostGridAdapter;
-import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
 import com.greattone.greattone.receiver.MyReceiver;
 import com.greattone.greattone.service.PostVideoService;
-import com.greattone.greattone.util.HttpProxyUtil;
-import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PostVideoActivity extends BaseActivity {
 	// private TextView send;
@@ -47,6 +48,8 @@ public class PostVideoActivity extends BaseActivity {
 	int type = GalleryActivity.TYPE_VIDEO;
 	private ArrayList<Picture> videoFileList = new ArrayList<Picture>();
 	protected String picUrl;
+	ProgressDialog pd;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
 //	protected String videoUrl;
 //	private ProgressBar progressBar1;
 	MyReceiver receiver;
@@ -135,18 +138,27 @@ private ImageView iv_gg;
 				toast( "已经有一个视频在上传");
 				return;
 		}
+		preferences.edit().putString("updateTitle", title)
+				.putString("updateContent", newstext).commit();
 		// 上传图片
-			MyProgressDialog.show(context);
-		HttpProxyUtil.updatePictureByByte(context, filepass, classid,
-				videoFileList.get(0).getPicUrl(), false,new ResponseListener() {
-
-					@Override
-					public void setResponseHandle(Message2 message) {
-						picUrl = JSON.parseObject(message.getData()).getString(
-								"url");
-						updateVideo(title, newstext);
-					}
-				}, null);
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		updatePic(videoFileList.get(0).getPicUrl());
+//			MyProgressDialog.show(context);
+//		HttpProxyUtil.updatePictureByByte(context, filepass, classid,
+//				videoFileList.get(0).getPicUrl(), false,new ResponseListener() {
+//
+//					@Override
+//					public void setResponseHandle(Message2 message) {
+//						picUrl = JSON.parseObject(message.getData()).getString(
+//								"url");
+//						updateVideo(title, newstext);
+//					}
+//				}, null);
 //		preferences.edit().putString("updateTitle", title)
 //		.putString("updateContent", newstext)
 ////		.putString("updateVideoid", videoid)
@@ -158,12 +170,34 @@ private ImageView iv_gg;
 //		 getVideoId(title,newstext);
 ;
 	}
+	protected void updatePic(String videoPath) {
+		pd.setMessage("上传视频缩略图");
+		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context,BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				 picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+				updateVideo();
+				pd.dismiss();
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+	}
 	/**
 	 *添加到preferences和启动服务
 	 */
-	private void updateVideo(final String title, final String newstext) {
-		preferences.edit().putString("updateTitle", title)
-		.putString("updateContent", newstext)
+	private void updateVideo() {
+		preferences.edit()
 		.putString("updateClassid", classid)
 		.putString("updateUrl", picUrl)
 		.putString("updatePath", videoFileList.get(0).getPicUrl())
@@ -295,39 +329,39 @@ private ImageView iv_gg;
 //		}, null);
 //	}
 
-	/**
-	 * 发帖
-	 * @param title
-	 * @param newstext
-     */
-	protected void post2(final String title, final String newstext) {
-
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("api", "post/ecms");
-		map.put("mid", mid);
-		map.put("enews", "MAddInfo");
-		map.put("classid", classid);
-		map.put("filepass", filepass);
-		map.put("open", 1 + "");
-//		map.put("laiyuan", Data.user.getUsername());
-//		map.put("zuozhe", Data.user.getUsername());
-//		map.put("shipin", videoUrl);
-		map.put("title", title);
-		map.put("titlepic", picUrl);
-		map.put("smalltext", newstext);
-		map.put("loginuid", Data.user.getUserid());
-		map.put("logintoken", Data.user.getToken());
-		addRequest(HttpUtil.httpConnectionByPost(context, map,
-				new ResponseListener() {
-
-					@Override
-					public void setResponseHandle(Message2 message) {
-						toast(message.getInfo());
-						MyProgressDialog.Cancel();
-						updateVideo(title, newstext);
-						finish();
-					}
-				}, null));
-	}
+//	/**
+//	 * 发帖
+//	 * @param title
+//	 * @param newstext
+//     */
+//	protected void post2(final String title, final String newstext) {
+//
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("api", "post/ecms");
+//		map.put("mid", mid);
+//		map.put("enews", "MAddInfo");
+//		map.put("classid", classid);
+//		map.put("filepass", filepass);
+//		map.put("open", 1 + "");
+////		map.put("laiyuan", Data.user.getUsername());
+////		map.put("zuozhe", Data.user.getUsername());
+////		map.put("shipin", videoUrl);
+//		map.put("title", title);
+//		map.put("titlepic", picUrl);
+//		map.put("smalltext", newstext);
+//		map.put("loginuid", Data.user.getUserid());
+//		map.put("logintoken", Data.user.getToken());
+//		addRequest(HttpUtil.httpConnectionByPost(context, map,
+//				new ResponseListener() {
+//
+//					@Override
+//					public void setResponseHandle(Message2 message) {
+//						toast(message.getInfo());
+//						MyProgressDialog.Cancel();
+//						updateVideo(title, newstext);
+//						finish();
+//					}
+//				}, null));
+//	}
 
 }

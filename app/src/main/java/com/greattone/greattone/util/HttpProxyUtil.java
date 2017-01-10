@@ -48,7 +48,7 @@ public class HttpProxyUtil {
 		map.put("logintoken", Data.user.getToken());
 		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
 		bytes.put("file", BitmapUtil.getVideoPicBytes(picPath,
-				MediaStore.Images.Thumbnails.MICRO_KIND));
+				MediaStore.Images.Thumbnails.FULL_SCREEN_KIND));
 		HttpUtil.httpConnectionByPostBytes(context, map,bytes,"png",isShowProgress,
 				responseListener, errorResponseListener);
 	}

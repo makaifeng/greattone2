@@ -77,7 +77,7 @@ public class MyRoomRentActivity extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(context, PostRoomRentActivity.class);
-			 intent.putExtra("classid",classid);
+			 intent.putExtra("classid",classid+"");
 			context.startActivity(intent);
 		}
 	};

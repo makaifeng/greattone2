@@ -19,6 +19,7 @@ import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.android.volley.VolleyError;
 import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -75,7 +76,7 @@ public class PostYuePuActivity extends BaseActivity {
 	}
 	
 	private void initView() {
-		setHead("发布乐谱", true, true);
+		setHead("-", true, true);
 		setOtherText(getResources().getString(R.string.发送), lis);
 
 		et_theme = (EditText) findViewById(R.id.et_theme);
@@ -310,7 +311,7 @@ public class PostYuePuActivity extends BaseActivity {
 		}else {
 			 path= pictureFileList.get(num-1).getPicUrl();
 		}
-		updateObjectToOSSUtil.uploadImage_folder2(context,path, new UpdateListener() {
+		updateObjectToOSSUtil.uploadImage_folder(context,path, new UpdateListener() {
 			@Override
 			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
 				pd.setMax((int)totalSize);
@@ -324,7 +325,6 @@ public class PostYuePuActivity extends BaseActivity {
 					map.put("titlepic", picUrl);
 				}else{
 					photo=photo+picUrl+"::::::";
-					map.put("photo", photo);
 				}
 				num++;
 				if (num==pictureFileList.size()+1) {
@@ -398,19 +398,30 @@ public class PostYuePuActivity extends BaseActivity {
 		map.put("mid", mid);
 		map.put("classid", classid);
 		map.put("open", "1");
+		map.put("photo",photo);
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		addRequest(HttpUtil.httpConnectionByPost(context, map,
 				new ResponseListener() {
-			
-			@Override
-			public void setResponseHandle(Message2 message) {
-				toast(message.getInfo());
-				Message.obtain(handler,2).sendToTarget();
-				MyProgressDialog.Cancel();
-				finish();
-			}
-		}, null));
+
+					@Override
+					public void setResponseHandle(Message2 message) {
+						toast(message.getInfo());
+						Message.obtain(handler, 2).sendToTarget();
+						MyProgressDialog.Cancel();
+						finish();
+					}
+				}, new HttpUtil.ErrorResponseListener() {
+					@Override
+					public void setServerErrorResponseHandle(Message2 message) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+
+					@Override
+					public void setErrorResponseHandle(VolleyError error) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+				}));
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){

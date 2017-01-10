@@ -1,20 +1,21 @@
 package com.greattone.greattone.activity.course;
 
-import android.graphics.drawable.ColorDrawable;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.greattone.greattone.Listener.TimePickerDismissCallback;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.adapter.PostGridAdapter;
@@ -28,16 +29,13 @@ import com.greattone.greattone.dialog.NormalPopuWindow.OnItemClickBack;
 import com.greattone.greattone.entity.Course;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.entity.WeekEntity;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,7 +169,7 @@ public class PostCourseActivity extends BaseActivity {
 		// ll_city.setOnClickListener(lis);
 		this.gv_week = ((MyGridView) findViewById(R.id.gv_week));
 		this.ll_week = ((LinearLayout) findViewById(R.id.ll_week));
-		ll_week.removeAllViews();
+//		ll_week.removeAllViews();
 
 		this.adapter = new WeekAdapter(this, null);
 		this.gv_week.setAdapter(this.adapter);
@@ -183,66 +181,66 @@ public class PostCourseActivity extends BaseActivity {
 		gv_pic.setAdapter(gvAdapter);
 		findViewById(R.id.btn_commit).setOnClickListener(lis);
 	}
-	private List<WeekEntity> weeklist=new ArrayList<WeekEntity>();
-	private void addWeekView(LinearLayout ll) {
-		addWeekList();
-		LinearLayout layout1=new LinearLayout(context);
-		layout1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-		addCheckbox(layout1,0);
-	}
+//	private List<WeekEntity> weeklist=new ArrayList<WeekEntity>();
+//	private void addWeekView(LinearLayout ll) {
+//		addWeekList();
+//		LinearLayout layout1=new LinearLayout(context);
+//		layout1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//		addCheckbox(layout1,0);
+//	}
 
-	private void addWeekList() {
-		String s[] = null;
-		if (course.getKe_week() != null && !course.getKe_week().isEmpty()) {
-			s = course.getKe_week().split("\\|");
-		}
-		WeekEntity[] arrayOfWeekEntity = new WeekEntity[8];
-		arrayOfWeekEntity[0] = new WeekEntity("上课时间");
-		arrayOfWeekEntity[1] = new WeekEntity("周一");
-		arrayOfWeekEntity[2] = new WeekEntity("周二");
-		arrayOfWeekEntity[3] = new WeekEntity("周三");
-		arrayOfWeekEntity[4] = new WeekEntity("周四");
-		arrayOfWeekEntity[5] = new WeekEntity("周五");
-		arrayOfWeekEntity[6] = new WeekEntity("周六");
-		arrayOfWeekEntity[7] = new WeekEntity("周日");
-		this.weeklist = Arrays.asList(arrayOfWeekEntity);
-		if (s != null) {
-			for (int i = 0; i < weeklist.size(); i++) {
-				for (int j = 0; j < s.length; j++) {
-					if (weeklist.get(i).getName().equals(s[j])) {
-						weeklist.get(i).setSelect(true);
-					}
-				}
-			}
-		}
-	}
+//	private void addWeekList() {
+//		String s[] = null;
+//		if (course.getKe_week() != null && !course.getKe_week().isEmpty()) {
+//			s = course.getKe_week().split("\\|");
+//		}
+//		WeekEntity[] arrayOfWeekEntity = new WeekEntity[8];
+//		arrayOfWeekEntity[0] = new WeekEntity("上课时间");
+//		arrayOfWeekEntity[1] = new WeekEntity("周一");
+//		arrayOfWeekEntity[2] = new WeekEntity("周二");
+//		arrayOfWeekEntity[3] = new WeekEntity("周三");
+//		arrayOfWeekEntity[4] = new WeekEntity("周四");
+//		arrayOfWeekEntity[5] = new WeekEntity("周五");
+//		arrayOfWeekEntity[6] = new WeekEntity("周六");
+//		arrayOfWeekEntity[7] = new WeekEntity("周日");
+//		this.weeklist = Arrays.asList(arrayOfWeekEntity);
+//		if (s != null) {
+//			for (int i = 0; i < weeklist.size(); i++) {
+//				for (int j = 0; j < s.length; j++) {
+//					if (weeklist.get(i).getName().equals(s[j])) {
+//						weeklist.get(i).setSelect(true);
+//					}
+//				}
+//			}
+//		}
+//	}
 
-	private void addCheckbox(LinearLayout ll,final int position) {
-		CheckBox checkBox = new CheckBox(context);
-		checkBox.setButtonDrawable(R.drawable.register_checkbox_style);
-		checkBox.setTextSize(14);
-		checkBox.setPadding(10, 0, 0, 0);
-		checkBox.setLayoutParams(new GridView.LayoutParams(
-				GridView.LayoutParams.WRAP_CONTENT, DisplayUtil.dip2px(context,
-				20)));
-		if (position == 0)
-			checkBox.setButtonDrawable(new ColorDrawable(0));
-		checkBox.setText(weeklist.get(position).getName());
-		if (weeklist.get(position).isSelect()) {
-			checkBox.setChecked(true);
-		} else {
-			checkBox.setChecked(false);
-		}
-		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-										 boolean isChecked) {
-				weeklist.get(position).setSelect(isChecked);
-			}
-		});
-		ll.addView(checkBox);
-	}
+//	private void addCheckbox(LinearLayout ll,final int position) {
+//		CheckBox checkBox = new CheckBox(context);
+//		checkBox.setButtonDrawable(R.drawable.register_checkbox_style);
+//		checkBox.setTextSize(14);
+//		checkBox.setPadding(10, 0, 0, 0);
+//		checkBox.setLayoutParams(new GridView.LayoutParams(
+//				GridView.LayoutParams.WRAP_CONTENT, DisplayUtil.dip2px(context,
+//				20)));
+//		if (position == 0)
+//			checkBox.setButtonDrawable(new ColorDrawable(0));
+//		checkBox.setText(weeklist.get(position).getName());
+//		if (weeklist.get(position).isSelect()) {
+//			checkBox.setChecked(true);
+//		} else {
+//			checkBox.setChecked(false);
+//		}
+//		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView,
+//										 boolean isChecked) {
+//				weeklist.get(position).setSelect(isChecked);
+//			}
+//		});
+//		ll.addView(checkBox);
+//	}
 
 	protected void initViewData() {
 		et_name.setText(course.getTitle());
@@ -396,28 +394,56 @@ public class PostCourseActivity extends BaseActivity {
 		if ( fileList.size()==0) {
 			post2();//直接发送
 		}else {
-			updatePicture(fileList);//先发送图片
+			updatePicture(fileList.get(0).getPicUrl());//先发送图片
 		}
 		
 	
 	}
+	ProgressDialog pd;
 /**
  *上传图片
- * @param fileList 
+ * @param filePath
  */
-	private void updatePicture(List<Picture> fileList) {
-		HttpProxyUtil.updatePictureByCompress2(context, filepass, classid,
-				fileList.get(0).getPicUrl(), new ResponseListener() {
-					
-					@Override
-					public void setResponseHandle(Message2 message) {
-						String picUrl = JSON.parseObject(message.getData())
-								.getString("url");
-						postMap.put("titlepic", picUrl);
-						post2();
-						
-					}
-				},null);
+	private void updatePicture(String filePath) {
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		pd.setMessage("上传视频缩略图");
+		UpdateObjectToOSSUtil.getInstance().uploadImage_iamge(context, filePath, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+			String	picUrl=UpdateObjectToOSSUtil.getInstance().getUrl(request.getBucketName(),request.getObjectKey());
+				postMap.put("titlepic", picUrl);
+				post2();
+				pd.dismiss();
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+//		HttpProxyUtil.updatePictureByCompress2(context, filepass, classid,
+//				fileList.get(0).getPicUrl(), new ResponseListener() {
+//
+//					@Override
+//					public void setResponseHandle(Message2 message) {
+//						String picUrl = JSON.parseObject(message.getData())
+//								.getString("url");
+//						postMap.put("titlepic", picUrl);
+//						post2();
+//
+//					}
+//				},null);
 	}
 
 	/** 发布 */
@@ -440,7 +466,7 @@ public class PostCourseActivity extends BaseActivity {
 						if ("edit".equals(getIntent().getStringExtra("type"))) {
 							toast("修改成功");
 						}else {
-							toast(getResources().getString(R.string.等待审核));
+							toast("发布成功");
 						}
 						MyProgressDialog.Cancel();
 						setResult(RESULT_OK);

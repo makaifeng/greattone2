@@ -1,7 +1,10 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +16,12 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.android.volley.VolleyError;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.UpdateVideoAct;
@@ -23,9 +32,10 @@ import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.HaiXuanFilter;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.HttpProxyUtil;
+import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
@@ -242,7 +252,7 @@ private void getGroup() {
 		String age = et_age.getText().toString().trim();
 		String desc = et_desc.getText().toString().trim();
 		String game_area = tv_game_area.getText().toString().trim();
-		ArrayList<Picture> videoFileList = adapter.getList();
+		fileList = adapter.getList();
 		if (TextUtils.isEmpty(name)) {
 			toast(getResources().getString(R.string.请输入姓名));
 			return;
@@ -271,69 +281,147 @@ private void getGroup() {
 			toast("请填写图片描述");
 			return;
 		}
-		if (videoFileList.size()==0) {
+		if (fileList.size()==0) {
 			toast(getResources().getString(R.string.请选择上传视频));
 			return;
 		}
 		 filepass = System.currentTimeMillis() + "";
 		 String [] msg={name,phone,address,music,game_area,desc,age};
-			MyProgressDialog.show(context);
+//			MyProgressDialog.show(context);
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
 		 if (isShowPic) {
-			 postPic(msg,videoFileList,0);
+			 postPic(msg);
 		}else{
-			postVideo(msg,videoFileList);
+			postVideo(msg,fileList);
 		}
 	}
-	private ArrayList<String> pictureUrlList=new ArrayList<String>();
+	private ArrayList<Picture> fileList;
+	ProgressDialog pd;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+	int num;String photos;
+	HashMap<String, String> updateMap;
 	/**
 	 * 图片报名
 	 */
-	private void postPic(final String [] msg, final ArrayList<Picture> videoFileList,final int num) {
+	private void postPic(final String [] msg) {
+		updateMap = new HashMap<>();
+		updateMap.put("api", "post/ecms_bm");
+		updateMap.put("mid", mid);
+		updateMap.put("enews", "MAddInfo");
+		updateMap.put("classid", "104");
+		updateMap.put("bao_type", "3");// 海选
+		updateMap.put("hai_id", id);
+		updateMap.put("hai_name", msg[0]);// 选手姓名
+		updateMap.put("hai_phone",msg[1]);// 联系电话
+		updateMap.put("hai_address", msg[2]);// 详细地址
+		updateMap.put("hai_petition", msg[3]);// 参赛曲目
+		updateMap.put("hai_division", msg[4]);// 比赛赛区
+		updateMap.put("smalltext",msg[5]);//图片描述
+		updateMap.put("hai_age",msg[6]);// 年龄
+		updateMap.put("filepass",filepass);
+		updateMap.put("loginuid", Data.user.getUserid());
+		updateMap.put("logintoken", Data.user.getToken());
 		//发送图片
-//		for (int i = 0; i < videoFileList.size(); i++) {
-			HttpProxyUtil.updatePictureByCompress2(context, filepass, classid, videoFileList.get(num).getPicUrl(),	new ResponseListener() {
-
-				@Override
-				public void setResponseHandle(Message2 message) {
-			String picUrl = JSON.parseObject(message.getData()).getString(
-							"url");
-			pictureUrlList.add(picUrl);
-			if (pictureUrlList.size()==videoFileList.size()) {
-				post1(msg);
-			}else{
-				postPic(msg, videoFileList,num+1);
-			}
-				}
-			}, null);
-//		}
+		updatePic();
 	}
+	/**
+	 * 发送图片
+	 */
+	private void updatePic() {
+		pd.setMessage("上传第"+(num+1)+"张");
+		String path= fileList.get(num).getPicUrl();
+		updateObjectToOSSUtil.uploadImage_folder(context,path, new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
+
+			@Override
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String pic=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+				if (num==0){
+					updateMap.put("hai_photo",pic);// 标题图片
+				}
+				num++;
+				photos=photos+pic+"::::::";
+				if (num==fileList.size()) {
+					post1();
+				}else {
+					Message.obtain(handler,0).sendToTarget();
+				}
+			}
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+	}
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					updatePic();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
 	/**
 	 * 视频报名
 	 */
 	private void postVideo(final String [] msg, final ArrayList<Picture> videoFileList) {
-		postVideoPic(msg, videoFileList);
+		updateVideoThumbnail(msg,videoFileList.get(0).getPicUrl());
 	}
-	/**	发送视频的缩略图
-	 * @param videoFileList */
-	protected void postVideoPic(final String [] msg, final ArrayList<Picture> videoFileList) {
-		HttpProxyUtil.updatePictureByByte(context, filepass, classid, videoFileList.get(0).getPicUrl(), 	false,new ResponseListener() {
+	/***
+	 *上传视频缩略图
+	 * @param videoPath
+	 */
+	protected void updateVideoThumbnail(final String [] msg,String videoPath) {
+		pd.setMessage("上传视频缩略图");
+		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context, BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
 
 			@Override
-			public void setResponseHandle(Message2 message) {
-				String imgUrl = JSON.parseObject(message.getData()).getString(
-						"url");
-				updateVideo(msg,videoFileList,imgUrl);
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+				String	picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+				updateVideo(msg,picUrl);
 			}
-		}, null );
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
 	}
 	/**
 	 * 添加到preferences和启动服务
-	 * @param videoFileList 
 	 */
-	private void updateVideo(String [] msg,  ArrayList<Picture> videoFileList, String imgUrl) {
+	private void updateVideo(String [] msg,  String imgUrl ) {
 		preferences.edit().putString("updateTitle", msg[0])//选手姓名
 		.putString("updateUrl", imgUrl)
-		.putString("updatePath", videoFileList.get(0).getPicUrl())
+		.putString("updatePath", fileList.get(0).getPicUrl())
 		.putString("updateContent", msg[5])
 		.putString("updateClassid", classid)
 		.putString("updateId", id)
@@ -353,39 +441,51 @@ private void getGroup() {
 		intent.putExtra("isSee", 1);
 		startActivity(intent);
 		MyProgressDialog.Cancel();
+		pd.dismiss();
 		finish();
 	}
 	/**	报名*/
-	protected void post1( String [] msg) {
-		String data="api=post/ecms_bm&enews=MAddInfo&mid="+mid
-				+"&classid="+104
-				+"&bao_type=3"
-				+"&hai_id="+id
-				+"&hai_photo="+pictureUrlList.get(0)//标题图片
-				+"&hai_name="+msg[0]//选手姓名
-				+"&hai_phone="+msg[1]//联系电话
-				+"&hai_address="+msg[2]//详细地址
-				+"&hai_petition="+msg[3]//参赛曲目
-				+"&hai_division="+msg[4]//比赛赛区
-				+"&smalltext="+msg[5]//图片描述
-				+"&hai_age="+msg[6]//年龄
-						+"&hai_photo="+pictureUrlList.get(0)//首页图
-				+"&loginuid="+Data.user.getUserid()
-				+"&logintoken="+Data.user.getToken()
-				+"&filepass="+filepass;
-		for (int i = 0; i < pictureUrlList.size(); i++) {//图片路径
-			data=data+"&msmallpic[]="+pictureUrlList.get(i);
-		}
-		addRequest(HttpUtil.httpConnectionByPost(context, data,
+	protected void post1() {
+//		String data="api=post/ecms_bm&enews=MAddInfo&mid="+mid
+//				+"&classid="+104
+//				+"&bao_type=3"
+//				+"&hai_id="+id
+//				+"&hai_photo="+pictureUrlList.get(0)//标题图片
+//				+"&hai_name="+msg[0]//选手姓名
+//				+"&hai_phone="+msg[1]//联系电话
+//				+"&hai_address="+msg[2]//详细地址
+//				+"&hai_petition="+msg[3]//参赛曲目
+//				+"&hai_division="+msg[4]//比赛赛区
+//				+"&smalltext="+msg[5]//图片描述
+//				+"&hai_age="+msg[6]//年龄
+//						+"&hai_photo="+pictureUrlList.get(0)//首页图
+//				+"&loginuid="+Data.user.getUserid()
+//				+"&logintoken="+Data.user.getToken()
+//				+"&filepass="+filepass;
+//		for (int i = 0; i < pictureUrlList.size(); i++) {//图片路径
+//			data=data+"&msmallpic[]="+pictureUrlList.get(i);
+//		}
+		updateMap.put("new_photo", photos);
+		addRequest(HttpUtil.httpConnectionByPost(context, updateMap,
 				new ResponseListener() {
-			
-			@Override
-			public void setResponseHandle(Message2 message) {
-				toast(getResources().getString(R.string.报名成功));
-				MyProgressDialog.Cancel();
-				finish();
-			}
-		}, null));
+
+					@Override
+					public void setResponseHandle(Message2 message) {
+						toast(getResources().getString(R.string.报名成功));
+						Message.obtain(handler, 2).sendToTarget();
+						finish();
+					}
+				}, new HttpUtil.ErrorResponseListener() {
+					@Override
+					public void setServerErrorResponseHandle(Message2 message) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+
+					@Override
+					public void setErrorResponseHandle(VolleyError error) {
+						Message.obtain(handler,2).sendToTarget();
+					}
+				}));
 	}
 	private int getBaoType(String type){
 		boolean  isvideo = false;

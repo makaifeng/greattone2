@@ -1,8 +1,11 @@
 package com.greattone.greattone.activity.personal;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.greattone.greattone.Listener.OnSelectCityListener;
 import com.greattone.greattone.Listener.TimePickerDismissCallback;
+import com.greattone.greattone.Listener.UpdateListener;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.BaseFragment;
@@ -35,6 +42,7 @@ import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.MessageUtil;
+import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -308,32 +316,80 @@ String imgName;
 		}
 
 	}
+	ProgressDialog pd;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
 	// 发送图片
 	private void post() {
-		HashMap<String, String> pmap = new HashMap<String, String>();
-		pmap.put("api", "post/upfile");
-		pmap.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-		pmap.put("uptype", "photos");
-		pmap.put("loginuid", Data.user.getUserid());
-		pmap.put("logintoken", Data.user.getToken());
-		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
-		bytes.put("file", BitmapUtil.getBytesFromFile(pictureFileList1.get(0).getPicUrl()));
-		String[] suffix=pictureFileList1.get(0).getPicUrl().split("\\.");
-		HttpUtil.httpConnectionByPostBytes(context, map,bytes,suffix[suffix.length - 1],true,
-				new ResponseListener() {
+		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+		pd=new ProgressDialog(context);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		pd.setMessage("上传中...");
+		pd.setCancelable(false);
+		pd.show();
+		pd.setMessage("上传视频缩略图");
+		updateObjectToOSSUtil.uploadImage_iamge(context,pictureFileList1.get(0).getPicUrl(), new UpdateListener() {
+			@Override
+			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+				pd.setMax((int)totalSize);
+				pd.setProgress((int)currentSize);
+			}
 
 			@Override
-			public void setResponseHandle(Message2 message) {
-				String picUrl = JSON.parseObject(message.getData())
-						.getString("url");
+			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+			String	picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
 				map.put("photo", picUrl+"::::::");
-				post1();
-
+				Message.obtain(handler,0).sendToTarget();
 			}
-		}, null);
+
+			@Override
+			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+				MyProgressDialog.Cancel();
+				pd.dismiss();
+			}
+		});
+
+//		HashMap<String, String> pmap = new HashMap<String, String>();
+//		pmap.put("api", "post/upfile");
+//		pmap.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
+//		pmap.put("uptype", "photos");
+//		pmap.put("loginuid", Data.user.getUserid());
+//		pmap.put("logintoken", Data.user.getToken());
+//		HashMap<String, byte[]> bytes = new HashMap<String, byte[]>();
+//		bytes.put("file", BitmapUtil.getBytesFromFile(pictureFileList1.get(0).getPicUrl()));
+//		String[] suffix=pictureFileList1.get(0).getPicUrl().split("\\.");
+//		HttpUtil.httpConnectionByPostBytes(context, map,bytes,suffix[suffix.length - 1],true,
+//				new ResponseListener() {
+//
+//			@Override
+//			public void setResponseHandle(Message2 message) {
+//				String picUrl = JSON.parseObject(message.getData())
+//						.getString("url");
+//				map.put("photo", picUrl+"::::::");
+//				post1();
+//
+//			}
+//		}, null);
 
 	}
-
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					post1();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
 	protected void post1() {
 		addRequest(HttpUtil.httpConnectionByPost(context, map,
 				new ResponseListener() {
@@ -342,6 +398,7 @@ String imgName;
 					public void setResponseHandle(Message2 message) {
 						toast(message.getInfo());
 						((BaseActivity) context).finish();
+						Message.obtain(handler,2).sendToTarget();
 						MyProgressDialog.Cancel();
 					}
 				}, null));

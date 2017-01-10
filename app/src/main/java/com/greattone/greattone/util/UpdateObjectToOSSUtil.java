@@ -13,9 +13,7 @@ import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvide
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-import com.greattone.greattone.Listener.UpdateListListener;
 import com.greattone.greattone.Listener.UpdateListener;
-import com.greattone.greattone.entity.Picture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +100,49 @@ public class UpdateObjectToOSSUtil {
 //        task.waitUntilFinished(); // 可以等待任务完成
     }
     /**
+     * 上传图片
+     * @param uploadData
+     */
+    public  void uploadImage_by_bytes(Context context, final byte[] uploadData,String uploadBucket,String uploadObject, final UpdateListener updateListener) {
+        String name="/"+System.currentTimeMillis()+".png";
+        // 构造上传请求
+//        PutObjectRequest put = new PutObjectRequest("<bucketName>", "<objectKey>", "<uploadFilePath>");
+        PutObjectRequest put = new PutObjectRequest(uploadBucket, uploadObject+name, uploadData);
+// 异步上传时可以设置进度回调
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                if (updateListener!=null)  updateListener.onProgress(request,currentSize,totalSize);
+//                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+            }
+        });
+
+        OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                if (updateListener!=null)   updateListener.onSuccess(request,result);
+            }
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                }
+                if (serviceException != null) {
+                    if (updateListener!=null)    updateListener.onFailure(request,clientExcepion,serviceException);
+                    // 服务异常
+//                    Log.e("ErrorCode", serviceException.getErrorCode());
+//                    Log.e("RequestId", serviceException.getRequestId());
+//                    Log.e("HostId", serviceException.getHostId());
+//                    Log.e("RawMessage", serviceException.getRawMessage());
+                }
+            }
+        });
+//        task.cancel();
+//        task.waitUntilFinished(); // 可以等待任务完成
+    }
+    /**
      * 上传图片 其他图片
      * @param filePath
      */
@@ -110,63 +151,23 @@ public class UpdateObjectToOSSUtil {
         uploadImage(context,filePath,testBucket,uploadObject,updateListener);
     }
     /**
+     * 上传图片 其他图片
+     * @param uploadData
+     */
+    public  void uploadImage_iamge_by_bytes(Context context,  byte[] uploadData, UpdateListener updateListener) {
+        String uploadObject=uploadObject_iamge;
+        uploadImage_by_bytes(context,uploadData,testBucket,uploadObject,updateListener);
+    }
+    /**
      * 上传图片  多图
      * @param filePath
      */
-    public  void uploadImage_folder2(Context context, final String filePath,final UpdateListener updateListener) {
+    public  void uploadImage_folder(Context context, final String filePath,final UpdateListener updateListener) {
         String uploadObject=uploadObject_folder;
         uploadImage(context,filePath,testBucket,uploadObject,updateListener);
     }
     int num;
     List<String> piclist =new ArrayList<>();
-    /**
-     * 上传图片 多图
-     */
-    public  void uploadImage_folder(Context context,final List<Picture> pictureFileList, final UpdateListListener updateListener) {
-        String uploadObject=uploadObject_folder;
-        for (int i=0;i<pictureFileList.size();i++) {
-            String filePath= pictureFileList.get(i).getPicUrl();
-            String[] suffix=filePath.split("\\.");
-            String name="/"+System.currentTimeMillis()+"."+suffix[suffix.length-1];
-            // 构造上传请求
-//        PutObjectRequest put = new PutObjectRequest("<bucketName>", "<objectKey>", "<uploadFilePath>");
-            PutObjectRequest put = new PutObjectRequest(testBucket, uploadObject+name, filePath);
-// 异步上传时可以设置进度回调
-            put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
-                @Override
-                public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-                    if (updateListener!=null)  updateListener.onProgress(request,currentSize,totalSize);
-//                Log.d("PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
-                }
-            });
-            OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
-                @Override
-                public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-                    num++;
-                    piclist.add(getUrl(request.getBucketName(),request.getObjectKey()));
-                    if (num==pictureFileList.size()){
-                        if (updateListener!=null)   updateListener.onSuccess(piclist);
-                    }
-                }
-                @Override
-                public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
-                    // 请求异常
-                    if (clientExcepion != null) {
-                        // 本地异常如网络异常等
-                        clientExcepion.printStackTrace();
-                    }
-                    if (serviceException != null) {
-                        if (updateListener!=null)    updateListener.onFailure(request,clientExcepion,serviceException);
-                        // 服务异常
-//                    Log.e("ErrorCode", serviceException.getErrorCode());
-//                    Log.e("RequestId", serviceException.getRequestId());
-//                    Log.e("HostId", serviceException.getHostId());
-//                    Log.e("RawMessage", serviceException.getRawMessage());
-                    }
-                }
-            });
-        }
-    }
     public String getUrl(String bucketName,String objectKey){
         return   oss.presignPublicObjectURL(bucketName, objectKey);
     }

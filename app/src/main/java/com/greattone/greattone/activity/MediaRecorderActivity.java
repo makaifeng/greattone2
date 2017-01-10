@@ -192,8 +192,8 @@ public class MediaRecorderActivity extends BaseActivity implements Callback {
 			handler.removeCallbacks(refreshTime);
 			kill_recorder();
 			if (isStart) {
-				iv_bg.setImageBitmap(BitmapUtil.getVideoThumb(
-						tempFile.getAbsolutePath()));
+				iv_bg.setImageBitmap(BitmapUtil.getVideoThumbnail(
+						tempFile.getAbsolutePath(),500,500));
 			}
 		}
 	};
