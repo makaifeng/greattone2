@@ -403,4 +403,11 @@
     <string name="select_packages_hint">套餐选择：</string>
     <string name="packages_content_hint">套餐内容：</string>
     <string name="packages_price_hint">套餐价格：</string>
+    <string name="directory_1">偶像</string>
+    <string name="directory_2">知音</string>
+    <string name="directory_3">声粉</string>
+    <string name="directory_4">学生</string>
+    <string name="directory_5">老师</string>
+    <string name="directory_6">教室</string>
+    <string name="directory_7">品牌</string>
 </resources>

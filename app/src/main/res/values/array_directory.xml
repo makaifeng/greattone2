@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"  
+    tools:ignore="MissingTranslation">
+<!--    通讯录标题-普通用户 -->
+    <string-array name="directory_groupid1">
+           <item>@string/directory_1</item>
+           <item>@string/directory_2</item>
+           <item>@string/directory_3</item>
+           <item>@string/directory_5</item>
+           <item>@string/directory_6</item>
+           <item>@string/directory_7</item>
+    </string-array>
+    <!--    通讯录标题-@string/directory_5 -->
+    <string-array name="directory_groupid3">
+        <item>@string/directory_1</item>
+        <item>@string/directory_2</item>
+        <item>@string/directory_3</item>
+        <item>@string/directory_4</item>
+        <item>@string/directory_6</item>
+        <item>@string/directory_7</item>
+    </string-array>
+    <!--    通讯录标题-教室 -->
+    <string-array name="directory_groupid4">
+        <item>@string/directory_1</item>
+        <item>@string/directory_2</item>
+        <item>@string/directory_3</item>
+        <item>@string/directory_4</item>
+        <item>@string/directory_5</item>
+        <item>@string/directory_7</item>
+    </string-array>
+    <!--    通讯录标题-@string/directory_7 -->
+    <string-array name="directory_groupid5">
+        <item>@string/directory_1</item>
+        <item>@string/directory_2</item>
+        <item>@string/directory_3</item>
+        <item>@string/directory_7</item>
+    </string-array>
+</resources>

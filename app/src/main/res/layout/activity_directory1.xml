@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <LinearLayout android:id="@+id/ll_radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.greattone.greattone.widget.MyHorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none" >
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/rg_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_eeeeee"
+                    android:orientation="horizontal" >
+                </RadioGroup>
+                <RelativeLayout
+                    android:id="@+id/rl_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:background="@color/red_b90006" >
+                </RelativeLayout>
+            </LinearLayout>
+        </com.greattone.greattone.widget.MyHorizontalScrollView>
+        <ImageView android:src="@drawable/icon_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@null"/>
+    </LinearLayout>
+<LinearLayout android:id="@+id/ll_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_bg"
+    android:layout_below="@+id/ll_radiogroup"
+    android:layout_margin="10dp"
+    android:orientation="horizontal">
+        <com.greattone.greattone.widget.MyEditText android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+          android:padding="5dp"
+          android:hint="@string/search_content"
+            android:inputType="text"/>
+        <ImageView android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@null"
+            android:src="@drawable/icon_seach02"/>
+    
+</LinearLayout>
+    <ListView
+        android:id="@+id/lv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_search"
+        android:listSelector="@android:color/transparent"
+        android:layout_toLeftOf="@+id/MyLetterListView"
+        android:layout_toStartOf="@+id/MyLetterListView"
+        android:scrollbars="none"
+        android:scrollingCache="false" />
+
+    <com.greattone.greattone.widget.MyLetterListView
+        android:id="@+id/MyLetterListView"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/ll_search" />
+<com.greattone.greattone.widget.MyTextView android:id="@+id/tv_hint"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:gravity="center"
+    android:layout_centerInParent="true"
+    android:background="@color/red_b90006"
+    android:textColor="@color/gray_aaaaaa"
+    android:visibility="gone"/>
+</RelativeLayout>

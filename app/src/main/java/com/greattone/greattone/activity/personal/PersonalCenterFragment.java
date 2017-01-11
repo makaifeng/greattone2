@@ -181,7 +181,7 @@ public class PersonalCenterFragment extends BaseFragment {
 			} else if (names[listPosition].equals(getResources().getString(R.string.我的发帖))) {// 我的发帖
 				startActivity(new Intent(context, MyPostActitvity.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.通讯录))) {// 通讯录
-				startActivity(new Intent(context, DirectoryActivity.class));
+				startActivity(new Intent(context, DirectoryActivity1.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.我的问答))) {// 我的Q&A
 				if (Data.myinfo.getCked() != 1&&Data.myinfo.getGroupid()==4) {// 未认证教室
 					toast("未签约用户不能使用该功能");

@@ -379,4 +379,30 @@ public class HttpProxyUtil {
 		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
+	/**
+	 * 获取热修复的信息
+     */
+	public static void invite(Context context,String userid,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "tongxunlu/invite");
+		map.put("userid", userid);
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 获取热修复的信息
+     */
+	public static void uninvite(Context context,String userid,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "tongxunlu/uninvite");
+		map.put("userid", userid);
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
 }

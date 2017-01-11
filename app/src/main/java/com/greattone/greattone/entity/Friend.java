@@ -18,6 +18,24 @@ String music_star;
 Level level;
 String pinyin;
 int verification;
+int cked;
+int isinvite;
+
+	public int getIsinvite() {
+		return isinvite;
+	}
+
+	public void setIsinvite(int isinvite) {
+		this.isinvite = isinvite;
+	}
+
+	public int getCked() {
+		return cked;
+	}
+
+	public void setCked(int cked) {
+		this.cked = cked;
+	}
 
 	public String getClassroom_type() {
 		return classroom_type;

@@ -28,7 +28,7 @@ public class UpdateObjectToOSSUtil {
 
     public static final String testBucket = "greattone";
     public static final String uploadObject_userPic = "userpic";
-    public static final String uploadObject_iamge = "iamge";
+    public static final String uploadObject_iamge = "image";
     public static final String uploadObject_folder = "folder";
 
     private OSSClient oss;
