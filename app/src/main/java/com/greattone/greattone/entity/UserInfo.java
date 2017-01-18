@@ -74,7 +74,7 @@ public class UserInfo implements Serializable {
 	String fuzeren;//负责人
 	int sign;//是否完善资料
 	int cked;//是否认证
-	int verification;//是否认证
+	int verification=0;//是否认证
 	int isfeed;//是否关注
 	int isfans;//是否关注
 	int isfriend;//是否是好友

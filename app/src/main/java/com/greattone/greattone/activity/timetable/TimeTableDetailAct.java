@@ -30,7 +30,7 @@ public class TimeTableDetailAct extends BaseActivity{
     private TextView tv_starttime;
     private TextView tv_stoptime;
     private TextView tv_location;
-    private TextView tv_state;
+//    private TextView tv_state;
     private TextView tv_remark;
     private String userid;
     private Button btn_update;
@@ -54,7 +54,7 @@ public class TimeTableDetailAct extends BaseActivity{
         tv_starttime=    (TextView)findViewById(R.id.tv_starttime);
         tv_stoptime=    (TextView)findViewById(R.id.tv_stoptime);
         tv_location=    (TextView)findViewById(R.id.tv_location);
-        tv_state=    (TextView)findViewById(R.id.tv_state);
+//        tv_state=    (TextView)findViewById(R.id.tv_state);
         tv_remark=    (TextView)findViewById(R.id.tv_remark);
         btn_update=    (Button)findViewById(R.id.btn_update);
         btn_delete=    (Button)findViewById(R.id.btn_delete);
@@ -67,8 +67,8 @@ public class TimeTableDetailAct extends BaseActivity{
         tv_stoptime.setText(date[0]+"年"+date[1]+"月"+date[2]+"日 "+timeTable.getStoptime());
         tv_location.setText(timeTable.getLocation());
         String state="";
-        if (timeTable.getState()==1)   state="未开始";
-        tv_state.setText(state);
+//        if (timeTable.getState()==1)   state="未开始";
+//        tv_state.setText(state);
         tv_remark.setText(timeTable.getRemarks());
         if (userid==null){
             btn_update.setVisibility(View.VISIBLE);

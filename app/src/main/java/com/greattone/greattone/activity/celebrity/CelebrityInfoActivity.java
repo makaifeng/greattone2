@@ -45,7 +45,8 @@ public class CelebrityInfoActivity extends BaseActivity {
 	}
 	
 	private void initViewData() {
-		if (userInfo!=null||userInfo.getVerification()==1) {
+		m_isvip.setVisibility(View.GONE);
+		if (userInfo!=null&&userInfo.getVerification()==1) {
 			m_isvip.setVisibility(View.VISIBLE);
 		}else {
 			m_isvip.setVisibility(View.GONE);

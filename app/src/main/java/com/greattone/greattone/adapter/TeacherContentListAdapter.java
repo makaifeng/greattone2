@@ -1,6 +1,12 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -9,13 +15,7 @@ import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
+import java.util.List;
 
 public class TeacherContentListAdapter extends BaseAdapter {
 	private BaseActivity activity;
@@ -56,8 +56,8 @@ public class TeacherContentListAdapter extends BaseAdapter {
 			holder.tv_fans = (TextView) convertView
 					.findViewById(R.id.tv_fans);//
 //			holder.level = (TextView) convertView.findViewById(R.id.tv_level);//
-			holder.tv_isvip = (TextView) convertView.findViewById(R.id.tv_isvip);//
-//			holder.iv_isvip = (ImageView) convertView.findViewById(R.id.iv_isvip);//
+//			holder.tv_isvip = (TextView) convertView.findViewById(R.id.tv_isvip);//
+			holder.iv_isvip = (ImageView) convertView.findViewById(R.id.iv_isvip);//
 			holder.icon = (MyRoundImageView) convertView.findViewById(R.id.iv_icon);//
 			LayoutParams params =(LayoutParams) holder.icon.getLayoutParams();
 			params.width=screenWidth /2-DisplayUtil.dip2px(activity, 5);
@@ -93,8 +93,8 @@ public class TeacherContentListAdapter extends BaseAdapter {
 		/**
 		 * 会员
 		 */
-		TextView tv_isvip;
-//		ImageView iv_isvip;
+//		TextView tv_isvip;
+		ImageView iv_isvip;
 int position;
 		public void setPosition(int position) {
 			this.position=position;
@@ -102,11 +102,11 @@ int position;
 			ImageLoaderUtil.getInstance().setImagebyurl(
 					teacherList.get(position).getUserpic(), icon);
 			if (teacherList.get(position).getVerification()==1) {
-//				iv_isvip.setVisibility(View.VISIBLE);
-				tv_isvip.setVisibility(View.VISIBLE);
+				iv_isvip.setVisibility(View.VISIBLE);
+//				tv_isvip.setVisibility(View.VISIBLE);
 			}else {
-				tv_isvip.setVisibility(View.GONE);
-//				iv_isvip.setVisibility(View.GONE);
+//				tv_isvip.setVisibility(View.GONE);
+				iv_isvip.setVisibility(View.GONE);
 			}
 //			level.setText(teacherList.get(position).getLevel().getName());
 			identity.setText(getIdentity(teacherList.get(position)));

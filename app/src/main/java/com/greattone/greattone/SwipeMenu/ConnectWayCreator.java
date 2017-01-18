@@ -38,4 +38,9 @@ public class ConnectWayCreator implements SwipeMenuCreator {
 
 	}
 
+	@Override
+	public void setTexts(String[] strings) {
+
+	}
+
 }

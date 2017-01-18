@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -68,7 +69,8 @@ public class ClassRoomContentGridAdapter extends BaseAdapter {
 			holder.distance.setCompoundDrawables(drawable, null, null, null);
 			holder.distance.setCompoundDrawablePadding(DisplayUtil.dip2px(
 					context, 5));
-			holder.vip = (TextView) convertView.findViewById(R.id.tv_isvip);//
+//			holder.vip = (TextView) convertView.findViewById(R.id.tv_isvip);//
+			holder.vip = (ImageView) convertView.findViewById(R.id.iv_isvip);//
 			holder.icon = (MyRoundImageView) convertView.findViewById(R.id.iv_icon);//
 //			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 //					screenWidth * 2 , screenWidth * 2* 4 / 5);
@@ -99,8 +101,8 @@ public class ClassRoomContentGridAdapter extends BaseAdapter {
 		/** 头像 */
 		MyRoundImageView icon;
 		/** v符号 */
-		TextView vip;
-//		ImageView vip;
+//		TextView vip;
+		ImageView vip;
 		int position;
 		UserInfo userInfo = new UserInfo();
 

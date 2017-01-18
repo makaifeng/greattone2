@@ -12,4 +12,5 @@ public interface SwipeMenuCreator {
 
 	void create(SwipeMenu menu);
 
+	void setTexts(String[] strings);
 }

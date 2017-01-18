@@ -1,6 +1,7 @@
 package com.greattone.greattone.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +12,10 @@ import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.brand.BrandDetailActivity;
+import com.greattone.greattone.activity.celebrity.CelebrityActivity;
+import com.greattone.greattone.activity.classroom.ClassRoomActivity;
+import com.greattone.greattone.activity.teacher.TeacherActivity;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Friend;
@@ -61,8 +66,8 @@ public class DirectoryListAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.adapter_directory, group, false);
 			holder.name = (TextView) convertView.findViewById(R.id.tv_name);//
-			holder.click1 = (TextView) convertView.findViewById(R.id.tv_click1);//
-			holder.click2 = (TextView) convertView.findViewById(R.id.tv_click2);//
+			holder.click = (TextView) convertView.findViewById(R.id.tv_click);//
+//			holder.click2 = (TextView) convertView.findViewById(R.id.tv_click2);//
 			holder.shengfen = (TextView) convertView
 					.findViewById(R.id.tv_shengfen);//
 			holder.level = (TextView) convertView
@@ -83,8 +88,8 @@ public class DirectoryListAdapter extends BaseAdapter {
 
 	class ViewHolder {
 		TextView name;
-		TextView click1;
-		TextView click2;
+		TextView click;
+//		TextView click2;
 		TextView shengfen;
 		TextView level;
 		TextView other;
@@ -98,69 +103,76 @@ public class DirectoryListAdapter extends BaseAdapter {
 					contactsList.get(position).getUserpic(), icon);
 			name.setText(contactsList.get(position).getUsername());
 			shengfen.setText(getIdentity(contactsList.get(position)));
-			other.setText("|  粉丝数："+contactsList.get(position).getFollownum()+"		关注："+contactsList.get(position).getFeednum());
+			other.setText("| 粉丝数："+contactsList.get(position).getFollownum()+"	关注："+contactsList.get(position).getFeednum());
 			level.setText(contactsList.get(position).getLevel().getName());
 			if (contactsList.get(position).getCked()==1){
 				iv_vip.setVisibility(View.VISIBLE);
 			}else 			iv_vip.setVisibility(View.INVISIBLE);
-			click1.setTextColor(context.getResources().getColor(R.color.white));
-			click1.setBackgroundColor(context.getResources().getColor(R.color.yellow_ffa200));
+			click.setTextColor(context.getResources().getColor(R.color.white));
+			click.setBackgroundColor(context.getResources().getColor(R.color.yellow_ffa200));
+			click.setOnClickListener(lis);
 			if (type.equals("feed")) {// 偶像
 //				click1.setText("私信");
-				click1.setVisibility(View.INVISIBLE);
-				click2.setText("取消关注");
+				click.setVisibility(View.INVISIBLE);
+//				click2.setText("取消关注");
 			} else if (type.equals("friend")) {// 知音
 				if (Data.myinfo.getGroupid()==3){
 					if (contactsList.get(position).getGroupid()==1||contactsList.get(position).getGroupid()==2){
 						if (contactsList.get(position).getIsinvite()==0){
-							click1.setText("邀请");
+							click.setText("添加");
 						}else {
-							click1.setTextColor(context.getResources().getColor(R.color.black));
-							click1.setBackgroundColor(context.getResources().getColor(R.color.gray_7e7c7d));
-							click1.setText("取消邀请");
+							click.setTextColor(context.getResources().getColor(R.color.black));
+							click.setBackgroundColor(context.getResources().getColor(R.color.gray_b3b3b3));
+							click.setText("已添加");
+							click.setOnClickListener(null);
 						}
 					}else {
-						click1.setVisibility(View.INVISIBLE);
+						click.setVisibility(View.INVISIBLE);
 					}
 				}else if (Data.myinfo.getGroupid()==4){
 					if (contactsList.get(position).getGroupid()==1||contactsList.get(position).getGroupid()==2||contactsList.get(position).getGroupid()==3){
 						if (contactsList.get(position).getIsinvite()==0){
-							click1.setText("邀请");
+							click.setText("添加");
 						}else {
-							click1.setTextColor(context.getResources().getColor(R.color.black));
-							click1.setBackgroundColor(context.getResources().getColor(R.color.gray_7e7c7d));
-							click1.setText("取消邀请");
+							click.setTextColor(context.getResources().getColor(R.color.black));
+							click.setBackgroundColor(context.getResources().getColor(R.color.gray_b3b3b3));
+							click.setText("已添加");
+							click.setOnClickListener(null);
 						}
 					}else {
-						click1.setVisibility(View.INVISIBLE);
+						click.setVisibility(View.INVISIBLE);
 					}
 				}else {
-					click1.setVisibility(View.INVISIBLE);
+					click.setVisibility(View.INVISIBLE);
 				}
-				click2.setText("取消关注");
+//				click2.setText("取消关注");
 			} else if (type.equals("follow")) {// 粉丝
-				click1.setVisibility(View.INVISIBLE);
-				click2.setText("关注");
+//				click1.setVisibility(View.INVISIBLE);
+				click.setText("关注");
 			} else if (type.equals("student")) {//学生
-				click1.setVisibility(View.INVISIBLE);
-				click2.setText("取消邀请");
+//				click1.setVisibility(View.INVISIBLE);
+				click.setText("删除");
+				click.setTextColor(context.getResources().getColor(R.color.black));
+				click.setBackgroundColor(context.getResources().getColor(R.color.gray_b3b3b3));
 			} else if (type.equals("teacher")) {// 老师
 				if (Data.myinfo.getGroupid()==4){
-					click1.setVisibility(View.INVISIBLE);
-					click2.setText("取消邀请");
+//					click1.setVisibility(View.INVISIBLE);
+					click.setText("删除");
+					click.setTextColor(context.getResources().getColor(R.color.black));
+					click.setBackgroundColor(context.getResources().getColor(R.color.gray_b3b3b3));
 				}else {
-					click1.setVisibility(View.INVISIBLE);
-					click2.setVisibility(View.INVISIBLE);
+					click.setVisibility(View.INVISIBLE);
+//					click2.setVisibility(View.INVISIBLE);
 				}
 			} else if (type.equals("classroom")) {//教室
-				click1.setVisibility(View.INVISIBLE);
-				click2.setVisibility(View.INVISIBLE);
+				click.setVisibility(View.INVISIBLE);
+//				click2.setVisibility(View.INVISIBLE);
 			} else if (type.equals("pinpai")) {//品牌
-				click1.setVisibility(View.INVISIBLE);
-				click2.setVisibility(View.INVISIBLE);
+				click.setVisibility(View.INVISIBLE);
+//				click2.setVisibility(View.INVISIBLE);
 			}
-			click1.setOnClickListener(lis);
-			click2.setOnClickListener(lis);
+
+//			click2.setOnClickListener(lis);
 			icon.setOnClickListener(lis);
 		}
 		/**获取身份*/
@@ -203,7 +215,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				if (v == click1) {//按钮1
+				if (v == click) {//按钮1
 					if (type.equals("feed")) {// 偶像
 					} else if (type.equals("friend")) {// 知音
 						if (Data.myinfo.getGroupid()==3){
@@ -212,8 +224,8 @@ public class DirectoryListAdapter extends BaseAdapter {
 									//邀请
 									invite();
 								}else {
-									//取消邀请
-									uninvite();
+//									//取消邀请
+//									uninvite();
 								}
 							}
 						}else if (Data.myinfo.getGroupid()==4){
@@ -222,24 +234,11 @@ public class DirectoryListAdapter extends BaseAdapter {
 									//邀请
 									invite();
 								}else {
-									//取消邀请
-									uninvite();
+//									//取消邀请
+//									uninvite();
 								}
 							}
 						}
-					} else if (type.equals("follow")) {// 粉丝
-					} else if (type.equals("student")) {//学生
-					} else if (type.equals("teacher")) {// 老师
-					} else if (type.equals("classroom")) {//教室
-					} else if (type.equals("pinpai")) {//品牌
-					}
-				} else if (v == click2) {// 按钮2
-					if (type.equals("feed")) {// 偶像
-						//取消关注
-						addattention();
-					} else if (type.equals("friend")) {// 知音
-						//取消关注
-						addattention();
 					} else if (type.equals("follow")) {// 粉丝
 						//关注
 						addattention();
@@ -252,10 +251,52 @@ public class DirectoryListAdapter extends BaseAdapter {
 					} else if (type.equals("classroom")) {//教室
 					} else if (type.equals("pinpai")) {//品牌
 					}
+//				} else if (v == click2) {// 按钮2
+//					if (type.equals("feed")) {// 偶像
+//						//取消关注
+//						addattention();
+//					} else if (type.equals("friend")) {// 知音
+//						//取消关注
+//						addattention();
+//					} else if (type.equals("follow")) {// 粉丝
+//
+//					} else if (type.equals("student")) {//学生
+//
+//					} else if (type.equals("teacher")) {// 老师
+//
+//					} else if (type.equals("classroom")) {//教室
+//					} else if (type.equals("pinpai")) {//品牌
+//					}
+				} else if (v == icon) {// 头像
+					toCenter(position);
 				}
 			}
 		};
-
+		/**跳转到个人主页
+		 * @param position */
+		protected void toCenter(int position) {
+			int group=Integer.valueOf(contactsList.get(position).getGroupid());
+			Intent intent=new Intent();
+			if (group==1||group==2) {//普通会员和名人
+				intent .setClass(context, CelebrityActivity.class);
+				intent.putExtra("id",contactsList.get(position).getUserid()+"");
+				intent.putExtra("groupid",Integer.valueOf( contactsList.get(position).getGroupid()));
+			}else 	if (group==3) {//老师
+				intent .setClass(context, TeacherActivity.class);
+				intent.putExtra("id", contactsList.get(position).getUserid()+"");
+			}else 	if (group==4) {//教室
+				intent .setClass(context, ClassRoomActivity.class);
+				intent.putExtra("id", contactsList.get(position).getUserid()+"");
+			}else 	if (group==5) {//品牌
+				intent .setClass(context,BrandDetailActivity.class);
+				intent.putExtra("id", contactsList.get(position).getUserid()+"");
+			}else {
+				intent .setClass(context, CelebrityActivity.class);
+				intent.putExtra("id",contactsList.get(position).getUserid()+"");
+				intent.putExtra("groupid",Integer.valueOf( contactsList.get(position).getGroupid()));
+			}
+			context.startActivity(intent);
+		}
 		/** 关注 */
 		protected void addattention() {
 			MyProgressDialog.show(context);
@@ -283,9 +324,11 @@ public class DirectoryListAdapter extends BaseAdapter {
 						public void setResponseHandle(Message2 message) {
 							((BaseActivity) context).toast(message.getInfo());
 							if (type.equals("friend")) {
-								click1.setTextColor(context.getResources().getColor(R.color.black));
-								click1.setBackgroundColor(context.getResources().getColor(R.color.gray_7e7c7d));
-								click1.setText("取消邀请");
+								contactsList.get(position).setIsinvite(1);
+								click.setTextColor(context.getResources().getColor(R.color.black));
+								click.setBackgroundColor(context.getResources().getColor(R.color.gray_b3b3b3));
+								click.setText("已添加");
+								click.setOnClickListener(null);
 							}else {
 								contactsList.remove(position);
 								notifyDataSetChanged();
@@ -304,9 +347,10 @@ public class DirectoryListAdapter extends BaseAdapter {
 						public void setResponseHandle(Message2 message) {
 							((BaseActivity) context).toast(message.getInfo());
 							if (type.equals("friend")) {
-								click1.setText("邀请");
-								click1.setTextColor(context.getResources().getColor(R.color.white));
-								click1.setBackgroundColor(context.getResources().getColor(R.color.yellow_ffa200));
+								contactsList.get(position).setIsinvite(0);
+								click.setText("邀请");
+								click.setTextColor(context.getResources().getColor(R.color.white));
+								click.setBackgroundColor(context.getResources().getColor(R.color.yellow_ffa200));
 							}else {
 								contactsList.remove(position);
 								notifyDataSetChanged();

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="5dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:paddingRight="5dp"
     android:paddingTop="5dp"
-    android:orientation="horizontal">
-    <RelativeLayout android:id="@+id/rl_left"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
- >
+    >
     <com.greattone.greattone.widget.MyRoundImageView
         android:id="@+id/iv_icon"
         android:layout_width="40dp"
@@ -20,94 +15,101 @@
         android:layout_marginRight="5dp"
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
-
-
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout android:id="@+id/ll_name"
+        android:layout_width="match_parent"
         android:layout_alignTop="@+id/iv_icon"
-        android:layout_toEndOf="@+id/iv_icon"
         android:layout_toRightOf="@+id/iv_icon"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="name"/>
-    <ImageView
-        android:id="@+id/iv_vip"
-        android:layout_width="60dp"
-        android:layout_height="20dp"
-      android:layout_marginLeft="5dp"
-        android:layout_marginStart="5dp"
-        android:contentDescription="@null"
-        android:layout_toRightOf="@+id/tv_name"
-        android:src="@drawable/vip"
-        android:scaleType="centerCrop"
-        android:visibility="gone"/>
-
-
-
-
-
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_shengfen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_name"
-        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/iv_icon"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RelativeLayout android:id="@+id/rl_name_left"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="name"/>
+
+        <ImageView
+            android:id="@+id/iv_vip"
+            android:layout_width="40dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@null"
+            android:layout_toRightOf="@+id/tv_name"
+            android:src="@drawable/vip"
+            android:scaleType="fitXY"
+            android:visibility="gone"/>
+        </RelativeLayout>
+        <!--<com.greattone.greattone.widget.MyTextView-->
+        <!--android:id="@+id/tv_click1"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:background="@color/yellow_ffa200"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:padding="5dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="12sp"-->
+        <!--android:text="取消关注"-->
+        <!--/>-->
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_click"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_marginStart="@dimen/padding10"
+            android:background="@color/gray_b3b3b3"
+            android:padding="2dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="取消关注"
+            />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/ll_other"
+        android:layout_width="match_parent"
         android:layout_toRightOf="@+id/iv_icon"
-        android:minWidth="70dp"
-        android:singleLine="true"
-        android:text="钢琴老师"/>
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_name"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/tv_shengfen"
-        android:layout_toRightOf="@+id/tv_shengfen"
-        android:singleLine="true"
-        android:text="tv_level"/>
-    </RelativeLayout>
-    <RelativeLayout android:id="@+id/rl_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    >
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_click2"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/padding10"
-        android:layout_marginStart="@dimen/padding10"
-        android:layout_toRightOf="@+id/tv_click1"
-        android:layout_toEndOf="@+id/tv_click1"
-        android:layout_marginTop="5dp"
-        android:background="@color/gray_7e7c7d"
-        android:padding="5dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:text="取消关注"
-        />
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_click1"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@color/yellow_ffa200"
-        android:textColor="@color/white"
-        android:padding="5dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:text="取消关注"
-        />
+        android:layout_toEndOf="@+id/iv_icon"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ll_name"
+        android:layout_height="wrap_content">
+        <RelativeLayout android:id="@+id/rl_left"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            >
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_shengfen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="5dp"
+
+                android:minWidth="70dp"
+                android:singleLine="true"
+                android:text="钢琴老师"/>
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/tv_shengfen"
+                android:layout_toRightOf="@+id/tv_shengfen"
+                android:singleLine="true"
+                android:text="tv_level"/>
+        </RelativeLayout>
         <com.greattone.greattone.widget.MyTextView
             android:id="@+id/tv_other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_below="@+id/tv_click2"
+            android:layout_below="@+id/tv_click"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="2dp"
             android:padding="5dp"
@@ -115,5 +117,5 @@
             android:textSize="10sp"
             android:text="ss"
             />
-    </RelativeLayout>
-</LinearLayout>
+        </LinearLayout>
+</RelativeLayout>

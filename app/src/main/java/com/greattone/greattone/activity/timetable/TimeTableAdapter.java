@@ -204,14 +204,18 @@ public class TimeTableAdapter extends BaseAdapter {
 		switch (mlist.size()) {
 			case 0://没课程
 				break;
-			case 2://有课程 ,有多节
-				entry2.setText(mlist.get(1).getStuname());
-				entry2.setVisibility(View.VISIBLE);
 			case 1://有课程 ,只有一节
 				entry1.setText(mlist.get(0).getStuname());
 				entry1.setVisibility(View.VISIBLE);
+			case 2://有课程 ,有多节
+				entry2.setText(mlist.get(1).getStuname());
+				entry2.setVisibility(View.VISIBLE);
 				break;
 			default:
+				entry1.setText(mlist.get(0).getStuname());
+				entry1.setVisibility(View.VISIBLE);
+				entry2.setText(mlist.get(1).getStuname());
+				entry2.setVisibility(View.VISIBLE);
 				break;
 		}
 //			if (position==15) {

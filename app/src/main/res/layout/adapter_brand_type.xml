@@ -25,19 +25,19 @@
         android:textSize="15sp"
         android:textStyle="bold" />
 
-<!--     <ImageView -->
-<!--         android:id="@+id/iv_vip" -->
-<!--         android:layout_width="15dp" -->
-<!--         android:layout_height="15dp" -->
-<!--         android:layout_margin="5dp" -->
-<!--         android:layout_below="@+id/iv_icon" -->
-<!--         android:layout_toRightOf="@+id/tv_name" -->
-<!--         android:layout_toEndOf="@+id/tv_name" -->
-<!--         android:layout_marginEnd="15dp" -->
-<!--         android:layout_marginRight="15dp" -->
-<!--         android:contentDescription="@null" -->
-<!--         android:src="@drawable/icon_v" -->
-<!--         android:visibility="gone" /> -->
+     <ImageView
+         android:id="@+id/iv_vip"
+         android:layout_width="55dp"
+         android:layout_height="20dp"
+         android:layout_margin="5dp"
+         android:layout_below="@+id/iv_icon"
+         android:layout_toRightOf="@+id/tv_name"
+         android:layout_toEndOf="@+id/tv_name"
+         android:layout_marginEnd="15dp"
+         android:layout_marginRight="15dp"
+         android:contentDescription="@null"
+         android:src="@drawable/vip"
+         android:visibility="gone" />
 
     <com.greattone.greattone.widget.MyTextView
         android:id="@+id/tv_address"

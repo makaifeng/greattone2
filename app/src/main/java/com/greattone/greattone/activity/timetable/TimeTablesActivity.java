@@ -32,15 +32,16 @@ public class TimeTablesActivity extends BaseActivity {
 	private Map<String,List<TimeTable_Month>> map=new HashMap<>();
 	private TimeTableLinlayout ll_timetable;
 	private String userid;
+	private String month;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timetable);
-		initView();
 		userid=getIntent().getStringExtra("userid");
+		initView();
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-		String month=simpleDateFormat.format( new Date());
+		 month=simpleDateFormat.format( new Date());
 		 getData(month);
 	}
 
@@ -52,7 +53,7 @@ public class TimeTablesActivity extends BaseActivity {
 			setOtherText("发布课表", new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					startActivity(new Intent(context, AddTimeTableAct.class));
+					startActivityForResult(new Intent(context, AddTimeTableAct.class),11);
 				}
 			});
 		}
@@ -72,6 +73,7 @@ public class TimeTablesActivity extends BaseActivity {
 	CalendarListener.MonthChangeListener monthChangeListener =new CalendarListener.MonthChangeListener() {
 		@Override
 		public void MonthChange(String month) {
+			TimeTablesActivity.	this.month=month;
 			getData(month);
 		}
 	};
@@ -100,6 +102,16 @@ public class TimeTablesActivity extends BaseActivity {
 
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode,resultCode,data);
+		switch (resultCode){
+			case RESULT_OK:
+				getData(month);
+				break;
+		}
 	}
 }
 

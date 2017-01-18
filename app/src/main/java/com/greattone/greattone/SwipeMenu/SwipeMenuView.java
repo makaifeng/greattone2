@@ -56,7 +56,7 @@ public class SwipeMenuView extends LinearLayout implements OnClickListener {
 		parent.setGravity(Gravity.CENTER);
 		parent.setOrientation(LinearLayout.VERTICAL);
 		parent.setLayoutParams(params);
-		if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1){
+		if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN){
 			parent.setBackground(item.getBackground());
 		}else		parent.setBackgroundDrawable(item.getBackground());
 		parent.setOnClickListener(this);

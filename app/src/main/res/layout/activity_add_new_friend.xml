@@ -135,19 +135,19 @@
                 android:layout_height="1px"
                 android:background="@color/line_color_d1d1d1" />
 
-            <com.greattone.greattone.widget.MyTextView
-                android:id="@+id/result"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:lines="2"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+            <!--<com.greattone.greattone.widget.MyTextView-->
+                <!--android:id="@+id/result"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:lines="2"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="16sp" />-->
 
-            <ImageView
-                android:id="@+id/qrcode_bitmap"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+            <!--<ImageView-->
+                <!--android:id="@+id/qrcode_bitmap"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent" />-->
         </LinearLayout>
 <!--     </ScrollView> -->
 

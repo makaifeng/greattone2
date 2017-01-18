@@ -1,12 +1,5 @@
 package com.greattone.greattone.activity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -39,6 +32,13 @@ import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 
 public class WebActivity extends BaseActivity {
 
@@ -285,8 +285,7 @@ private void getLikes() {
 		});
 		localReplayDialog.show();
 }
-	/**点赞
-	 * @param v */
+	/**点赞*/
 			protected void toLike() {
 				MyProgressDialog.show(context);
 				HashMap<String, String> map = new HashMap<String, String>();

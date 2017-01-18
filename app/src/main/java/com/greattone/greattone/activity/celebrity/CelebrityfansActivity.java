@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.celebrity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +21,10 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /** 名人的关注，粉丝，相似的人 */
 public class CelebrityfansActivity extends BaseActivity {
 	int page = 1;
@@ -33,6 +33,8 @@ public class CelebrityfansActivity extends BaseActivity {
 	private FensGridAdapter adapter;
 	private PullToRefreshView pull_to_refresh;
 	private String type;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

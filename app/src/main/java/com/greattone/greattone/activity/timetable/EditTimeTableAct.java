@@ -38,7 +38,8 @@ public class EditTimeTableAct extends BaseActivity{
     private  final int Result_student=3;
     private int state=-1;
     TimeTable_Day timeTable;
-    private int year,month,day,hour,minute;
+    private int year,month,day,hour,minute;//开始时间
+    private int eHour,eMins;//结束时间
 //    private List<PersonList> personList=new ArrayList<>();
     private String[] students;
 
@@ -122,7 +123,31 @@ public class EditTimeTableAct extends BaseActivity{
             tv_name.setText(timeTable.getCouname());
             tv_location.setText(timeTable.getLocation());
             tv_starttime.setText(timeTable.getClasstime()+" "+timeTable.getStarttime());
+            try {
+                String days[]=timeTable.getClasstime().split("\\-");
+                String time[]=timeTable.getStarttime().split("\\:");
+                if (days.length==3) {
+                    year = Integer.valueOf(days[0]);
+                    month = Integer.valueOf(days[1]);
+                    day = Integer.valueOf(days[2]);
+                }
+                if (time.length==2) {
+                    hour = Integer.valueOf(time[0]);
+                    minute = Integer.valueOf(time[1]);
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
             tv_stoptime.setText(timeTable.getStoptime());
+            try {
+                String time[]=timeTable.getStoptime().split("\\:");
+                if (time.length==2) {
+                    eHour = Integer.valueOf(time[0]);
+                    eMins = Integer.valueOf(time[1]);
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
             tv_student.setText(timeTable.getStuname());
             et_remark.setText(timeTable.getRemarks());
         }
@@ -139,6 +164,10 @@ public class EditTimeTableAct extends BaseActivity{
         String stoptime=tv_stoptime.getText().toString().trim();//结束时间   	格式08:15
         String stuname=tv_student.getText().toString().trim();//学生姓名
         String remarks=et_remark.getText().toString().trim();//备注信息
+        if (eHour>hour||(eHour==hour&&eMins>minute)){
+        }else {
+            toast("结束时间不能小于开始时间");
+        }
         if (TextUtils.isEmpty(couname)){ toast("请填写课程名称"); return;}
         if (TextUtils.isEmpty(location)){ toast("请填写上课地点"); return;}
         if (year==0){ toast("请选择开始时间"); return;}
@@ -166,6 +195,7 @@ public class EditTimeTableAct extends BaseActivity{
             }
         });
     }
+
 
     View.OnClickListener lis=new View.OnClickListener() {
          @Override
@@ -200,6 +230,7 @@ public class EditTimeTableAct extends BaseActivity{
                      MyTimePickerPopWindow.showHourPopupWindow(context, new MyTimePickerPopWindow.OnHourSureListener() {
                          @Override
                          public void onHourSure(int mHour, int mMins) {
+                             eHour=mHour; eMins=mMins;
                              if (mHour>hour||(mHour==hour&&mMins>minute)){
                                  String xHour=mHour<10?"0"+mHour:""+mHour;
                                  String  xMins=mMins<10?"0"+mMins:""+mMins;

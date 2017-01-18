@@ -1,6 +1,14 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
@@ -9,15 +17,7 @@ import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
+import java.util.List;
 @SuppressWarnings("deprecation")
 public class BrandTypeGirdAdapter extends BaseAdapter {
 	private Context context;
@@ -68,7 +68,7 @@ public class BrandTypeGirdAdapter extends BaseAdapter {
 			holder.distance.setCompoundDrawables(drawable, null, null, null);
 			holder.distance.setCompoundDrawablePadding(DisplayUtil.dip2px(
 					context, 5));
-//			holder.vip = (ImageView) convertView.findViewById(R.id.iv_vip);//
+			holder.vip = (ImageView) convertView.findViewById(R.id.iv_vip);//
 			holder.icon = (MyRoundImageView) convertView.findViewById(R.id.iv_icon);//
 			holder.icon.setRadius(DisplayUtil.dip2px(context, 15));
 //			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -96,8 +96,8 @@ public class BrandTypeGirdAdapter extends BaseAdapter {
 		TextView distance;
 		/** 头像 */
 		MyRoundImageView icon;
-//		/** v符号 */
-//		ImageView vip;
+		/** v符号 */
+		ImageView vip;
 		int position;
 		UserInfo userInfo = new UserInfo();
 
@@ -122,12 +122,14 @@ public class BrandTypeGirdAdapter extends BaseAdapter {
 				distance.setText(userInfo.getDistance());
 //				icon.setOnClickListener(lis);
 				if (userInfo.getCked()== 1) {
-					Drawable right=context.getResources().getDrawable(R.drawable.icon_v);
-					right.setBounds(0, 0, DisplayUtil.dip2px(context, 15), DisplayUtil.dip2px(context, 15));
-					name.setCompoundDrawablePadding( DisplayUtil.dip2px(context, 5));
-					name.setCompoundDrawables(null, null, right, null);
+					vip.setVisibility(View.VISIBLE);
+//					Drawable right=context.getResources().getDrawable(R.drawable.icon_v);
+//					right.setBounds(0, 0, DisplayUtil.dip2px(context, 15), DisplayUtil.dip2px(context, 15));
+//					name.setCompoundDrawablePadding( DisplayUtil.dip2px(context, 5));
+//					name.setCompoundDrawables(null, null, right, null);
 				} else {
-					name.setCompoundDrawables(null, null, null, null);
+					vip.setVisibility(View.GONE);
+//					name.setCompoundDrawables(null, null, null, null);
 				}
 			}
 		}

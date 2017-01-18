@@ -30,4 +30,9 @@ public class MyDeleteSwipeMenuCreator implements SwipeMenuCreator {
         menu.addMenuItem(deleteItem2);
 	}
 
+	@Override
+	public void setTexts(String[] strings) {
+
+	}
+
 }

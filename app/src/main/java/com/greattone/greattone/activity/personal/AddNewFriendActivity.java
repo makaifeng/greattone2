@@ -1,12 +1,6 @@
 package com.greattone.greattone.activity.personal;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -15,7 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -33,6 +26,10 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 /**
  * 添加朋友
  * @author yff
@@ -42,8 +39,8 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 
 //	private LinearLayout ll_phoneman,ll_sys;
 	private final static int SCANNIN_GREQUEST_CODE = 1;
-	private TextView mTextView ;
-	private ImageView mImageView;
+//	private TextView mTextView ;
+//	private ImageView mImageView;
 	private EditText et_search;
 	int page = 1;
 	
@@ -64,8 +61,8 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 		setHead(getResources().getString(R.string.添加朋友), true, true);
 //		ll_phoneman=(LinearLayout) findViewById(R.id.ll_phoneman);
 //		ll_sys=(LinearLayout) findViewById(R.id.ll_sys);
-		mTextView = (TextView) findViewById(R.id.result); 
-		mImageView=(ImageView) findViewById(R.id.qrcode_bitmap);
+//		mTextView = (TextView) findViewById(R.id.result);
+//		mImageView=(ImageView) findViewById(R.id.qrcode_bitmap);
 		
 //		ll_phoneman.setOnClickListener(new View.OnClickListener() {
 //			
@@ -94,23 +91,24 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 
 		adapter = new AddNewFriendAdapter(AddNewFriendActivity.this, userlist);
 		lv_content.setAdapter(adapter);
+//		lv_content.setOnItemClickListener(itemClickListene);
 		pull.setOnHeaderRefreshListener(this);
 		pull.setOnFooterRefreshListener(this);
 		findViewById(R.id.ll_search).setOnClickListener(this);
 		et_search.setOnEditorActionListener(new OnEditorActionListener() {
-			
+
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				
+
 				if(actionId == EditorInfo.IME_ACTION_SEARCH){
 					getFreiend();
 				}
 				return false;
 			}
 		});
-		
+
 //		add.setOnClickListener(new OnClickListener() {
-//			
+//
 //			@Override
 //			public void onClick(View v) {
 //				sv_friend.setVisibility(View.VISIBLE);
@@ -119,10 +117,32 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 //				adapter.notifyDataSetChanged();
 //			}
 //		});
-		
-	}
 
-	
+
+	}
+//	AdapterView.OnItemClickListener itemClickListene= new AdapterView.OnItemClickListener() {
+//		@Override
+//		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//			toCenter(position);
+//		}
+//	};
+//	/** 跳转到个人中心 */
+//	protected void toCenter(int position) {
+//		int group = userlist.get(position)	.getGroupid();
+//		Intent intent = new Intent();
+//		if (group == 1 || group == 2) {// 普通会员和名人
+//			intent.setClass(context, CelebrityActivity.class);
+//			intent.putExtra("id",  userlist.get(position).getUserid() + "");
+//			intent.putExtra("groupid", userlist.get(position).getGroupid());
+//		} else if (group == 3) {// 老师
+//			intent.setClass(context, TeacherActivity.class);
+//			intent.putExtra("id",  userlist.get(position).getUserid() + "");
+//		} else if (group == 4) {// 教室
+//			intent.setClass(context, ClassRoomActivity.class);
+//			intent.putExtra("id",  userlist.get(position).getUserid() + "");
+//		}
+//		context.startActivity(intent);
+//	}
 	//获取好友列表
 	private void getFreiend(){
 		String search = et_search.getText().toString().trim();
@@ -134,6 +154,7 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "search/member");
 		map.put("keyboard", search);
+		map.put("pageIndex", page+"");
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
 		addRequest(HttpUtil.httpConnectionByPost(context, map,
@@ -198,19 +219,19 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 		lv_content.onRestoreInstanceState(listState);
 	}
 
-	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-		case SCANNIN_GREQUEST_CODE:
-			if(resultCode == RESULT_OK){
-				Bundle bundle = data.getExtras();
-				mTextView.setText(bundle.getString("result"));
-				mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
-			}
-			break;
-		}
-    }
+//	@Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode) {
+//		case SCANNIN_GREQUEST_CODE:
+//			if(resultCode == RESULT_OK){
+//				Bundle bundle = data.getExtras();
+//				mTextView.setText(bundle.getString("result"));
+//				mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
+//			}
+//			break;
+//		}
+//    }
 
 	@Override
 	public void onClick(View v) {
@@ -226,12 +247,13 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 	@Override
 	public void onHeaderRefresh(PullToRefreshView view) {
 		page = 1;
-//		list.clear();
+		userlist.clear();
 		getFreiend();
 	}
 
 	@Override
 	public void onFooterRefresh(PullToRefreshView view) {
+		page++;
 		getFreiend();
 		
 	}	

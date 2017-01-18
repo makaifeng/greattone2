@@ -29,11 +29,12 @@
 
             <ImageView
                 android:id="@+id/act_info_isvip"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
-                android:src="@drawable/icon_v" />
+                android:visibility="gone"
+                android:src="@drawable/vip" />
         </LinearLayout>
 
         <LinearLayout
@@ -193,20 +194,20 @@
                 android:text="浙江省湖州市南徐区"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/icon_addresson"
-                android:textSize="16sp" />
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:src="@drawable/icon_addresson"-->
+                <!--android:textSize="16sp" />-->
 
-            <com.greattone.greattone.widget.MyTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="查看地图"
-                android:textColor="@color/red_c30000"
-                android:textSize="16sp" />
+            <!--<com.greattone.greattone.widget.MyTextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="查看地图"-->
+                <!--android:textColor="@color/red_c30000"-->
+                <!--android:textSize="16sp" />-->
         </LinearLayout>
 
         <LinearLayout

@@ -59,6 +59,7 @@ public class FensGridAdapter extends BaseAdapter {
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 					screenWidth/5+DisplayUtil.dip2px(context, 20), screenWidth / 5+DisplayUtil.dip2px(context, 20));
 			holder.icon.setLayoutParams(params);
+			holder.icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();

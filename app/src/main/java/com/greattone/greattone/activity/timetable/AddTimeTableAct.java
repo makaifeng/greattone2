@@ -102,6 +102,7 @@ private static final int Result_student=3;
             public void setResponseHandle(Message2 message) {
                 toast("发布课程成功");
                 MyProgressDialog.Cancel();
+                setResult(RESULT_OK);
                 finish();
             }
         }, new HttpUtil.ErrorResponseListener() {

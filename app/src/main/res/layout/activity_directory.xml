@@ -4,60 +4,48 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical" >
-
-    <LinearLayout
-        android:id="@+id/radiogroup"
+    <LinearLayout android:id="@+id/ll_radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_eeeeee"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp" >
+        android:orientation="horizontal">
 
-        <com.greattone.greattone.widget.MyRadioButton
-            android:id="@+id/radioButton1"
+        <com.greattone.greattone.widget.MyHorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scrollbars="none" >
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/rg_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_eeeeee"
+                    android:orientation="horizontal" >
+                </RadioGroup>
+                <RelativeLayout
+                    android:id="@+id/rl_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:background="@color/red_b90006" >
+                </RelativeLayout>
+            </LinearLayout>
+        </com.greattone.greattone.widget.MyHorizontalScrollView>
+        <ImageView android:src="@drawable/icon_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/checked_button_bg"
-            android:button="@android:color/transparent"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/my_friend"
-            android:textColor="@color/recommend_textcolor" />
-
-        <com.greattone.greattone.widget.MyRadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/checked_button_bg"
-            android:button="@android:color/transparent"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/my_buddy"
-            android:textColor="@color/recommend_textcolor" />
-
-        <com.greattone.greattone.widget.MyRadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/checked_button_bg"
-            android:button="@android:color/transparent"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/my_fans"
-            android:textColor="@color/recommend_textcolor" />
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@null"/>
     </LinearLayout>
 <LinearLayout android:id="@+id/ll_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/edit_bg"
-    android:layout_below="@+id/radiogroup"
+    android:layout_below="@+id/ll_radiogroup"
     android:layout_margin="10dp"
     android:orientation="horizontal">
         <com.greattone.greattone.widget.MyEditText android:id="@+id/et_search"
@@ -76,7 +64,7 @@
             android:src="@drawable/icon_seach02"/>
     
 </LinearLayout>
-    <ListView
+    <com.greattone.greattone.SwipeMenu.SwipeMenuListView
         android:id="@+id/lv_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
