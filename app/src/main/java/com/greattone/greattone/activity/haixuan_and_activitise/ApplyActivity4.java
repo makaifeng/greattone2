@@ -32,7 +32,6 @@ import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.HaiXuanFilter;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.UpdateObjectToOSSUtil;
@@ -325,13 +324,13 @@ private void getGroup() {
 		}
 		 filepass = System.currentTimeMillis() + "";
 		 String [] msg={name,phone,address,music,game_area,sing_up1,sing_up2,desc};
-		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
-		pd=new ProgressDialog(context);
-		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pd.setMessage("上传中...");
-		pd.setCancelable(false);
-		pd.show();
 		 if (isShowPic) {
+			 updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+			 pd=new ProgressDialog(context);
+			 pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			 pd.setMessage("上传中...");
+			 pd.setCancelable(false);
+			 pd.show();
 			 postPic(msg);
 		}else{
 			postVideo(msg,fileList);
@@ -426,40 +425,41 @@ private void getGroup() {
 	 * 视频报名
 	 */
 	private void postVideo(final String [] msg, final ArrayList<Picture> videoFileList) {
-		updateVideoThumbnail(msg,videoFileList.get(0).getPicUrl());
+		updateVideo(msg);
+//		updateVideoThumbnail(msg,videoFileList.get(0).getPicUrl());
 	}
-	/**
-	 *上传视频缩略图
-	 * @param videoPath
-	 */
-	protected void updateVideoThumbnail(final String [] msg,String videoPath) {
-		pd.setMessage("上传视频缩略图");
-		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context, BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
-			@Override
-			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-				pd.setMax((int)totalSize);
-				pd.setProgress((int)currentSize);
-			}
-
-			@Override
-			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-				String	picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
-				updateVideo(msg,picUrl);
-			}
-
-			@Override
-			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
-				MyProgressDialog.Cancel();
-				pd.dismiss();
-			}
-		});
-	}
+//	/**
+//	 *上传视频缩略图
+//	 * @param videoPath
+//	 */
+//	protected void updateVideoThumbnail(final String [] msg,String videoPath) {
+//		pd.setMessage("上传视频缩略图");
+//		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context, BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
+//			@Override
+//			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+//				pd.setMax((int)totalSize);
+//				pd.setProgress((int)currentSize);
+//			}
+//
+//			@Override
+//			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+//				String	picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+//				updateVideo(msg,picUrl);
+//			}
+//
+//			@Override
+//			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+//				MyProgressDialog.Cancel();
+//				pd.dismiss();
+//			}
+//		});
+//	}
 	/**
 	 * 添加到preferences和启动服务
 	 */
-	private void updateVideo(String [] msg,   String imgUrl) {
+	private void updateVideo(String [] msg) {
 		preferences.edit().putString("updateTitle", msg[0])//选手姓名
-		.putString("updateUrl", imgUrl)
+		.putString("updateUrl", "")
 		.putString("updatePath", fileList.get(0).getPicUrl())
 		.putString("updateContent", msg[7])
 		.putString("updateClassid", classid)
@@ -474,7 +474,7 @@ private void getGroup() {
 		.putString("updateHai_mend",   "")//清空
 		.putString("updateHai_piano",   "")//清空
 		.putString("updateHai_age",   "")//清空
-				.putString("updatepPintype",   "")//乐器分类
+				 .putString("updatepPintype",   "")//乐器分类
 		.putInt("updateState", 0).commit();
 		Intent intent=new Intent(context, UpdateVideoAct.class);
 		intent.putExtra("isSee", 1);

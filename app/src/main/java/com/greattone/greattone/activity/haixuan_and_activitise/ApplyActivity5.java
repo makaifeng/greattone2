@@ -44,7 +44,6 @@ import com.greattone.greattone.entity.Picture;
 import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.FileUtil;
-import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.Permission;
@@ -385,30 +384,31 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 	 * 视频报名
 	 */
 	private void postVideo(final String [] msg, final ArrayList<Picture> videoFileList) {
-		postVideoPic(msg, videoFileList);
+		updateVideo(msg,videoFileList);
+//		postVideoPic(msg, videoFileList);
 	}
-	/**	发送视频的缩略图
-	 * @param videoFileList */
-	protected void postVideoPic(final String [] msg, final ArrayList<Picture> videoFileList) {
-		MyProgressDialog.show(context);
-		HttpProxyUtil.updatePictureByByte(context, filepass, classid, videoFileList.get(0).getPicUrl(), 	false,new ResponseListener() {
-
-			@Override
-			public void setResponseHandle(Message2 message) {
-				String imgUrl = JSON.parseObject(message.getData()).getString(
-						"url");
-				updateVideo(msg,videoFileList,imgUrl);
-			}
-		}, null );
-	}
+//	/**	发送视频的缩略图
+//	 * @param videoFileList */
+//	protected void postVideoPic(final String [] msg, final ArrayList<Picture> videoFileList) {
+//		MyProgressDialog.show(context);
+//		HttpProxyUtil.updatePictureByByte(context, filepass, classid, videoFileList.get(0).getPicUrl(), 	false,new ResponseListener() {
+//
+//			@Override
+//			public void setResponseHandle(Message2 message) {
+//				String imgUrl = JSON.parseObject(message.getData()).getString(
+//						"url");
+//				updateVideo(msg,videoFileList,imgUrl);
+//			}
+//		}, null );
+//	}
 
 	/**
 	 * 添加到preferences和启动服务
 	 * @param videoFileList 
 	 */
-	private void updateVideo(String [] msg,  ArrayList<Picture> videoFileList, String imgUrl) {
+	private void updateVideo(String [] msg,  ArrayList<Picture> videoFileList) {
 		preferences.edit().putString("updateTitle", "")//联系人
-		.putString("updateUrl", imgUrl)
+		.putString("updateUrl", "")
 		.putString("updatePath", videoFileList.get(0).getPicUrl())
 		.putString("updateContent", msg[3])//品牌描述
 		.putString("updateClassid", classid)

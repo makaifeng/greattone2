@@ -171,12 +171,13 @@ private BadgeView badgeView;
 		if (Data.myinfo!=null){
 			if (Data.myinfo.getGroupid()==1||Data.myinfo.getGroupid()==2)
 				title_names=getResources().getStringArray(R.array.directory_groupid1);
-			if (Data.myinfo.getGroupid()==3)
+			else	if (Data.myinfo.getGroupid()==3)
 				title_names=getResources().getStringArray(R.array.directory_groupid3);
-			if (Data.myinfo.getGroupid()==4)
+			else	if (Data.myinfo.getGroupid()==4)
 				title_names=getResources().getStringArray(R.array.directory_groupid4);
-			if (Data.myinfo.getGroupid()==5)
+			else if (Data.myinfo.getGroupid()==5)
 				title_names=getResources().getStringArray(R.array.directory_groupid5);
+			else 	title_names=getResources().getStringArray(R.array.directory_groupid1);
 		}
 		for (int i = 0; i < title_names.length; i++) {
 			RadioButton button = new RadioButton(context);
@@ -482,6 +483,11 @@ private BadgeView badgeView;
 //			}
 //		}
 //	};
+
+	/**
+	 * 添加数字
+	 * @param position
+     */
 	private   void setNum(int position) {
 		if (badgeView!=null) {
 			if (position == 0) {
@@ -492,6 +498,11 @@ private BadgeView badgeView;
 			}
 		}
 	}
+
+	/**
+	 * 按钮状态修改
+	 * @param v
+     */
 	private void initButton(View v) {
 		for (RadioButton btn:buttons) {
 			if (btn==v){

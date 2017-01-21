@@ -380,7 +380,7 @@ public class HttpProxyUtil {
 				responseListener, errorResponseListener));
 	}
 	/**
-	 * 获取热修复的信息
+	 *邀请
      */
 	public static void invite(Context context,String userid,ResponseListener responseListener,
 								ErrorResponseListener errorResponseListener) {
@@ -393,11 +393,11 @@ public class HttpProxyUtil {
 				responseListener, errorResponseListener));
 	}
 	/**
-	 * 获取热修复的信息
+	 * 取消邀请
      */
 	public static void uninvite(Context context,String userid,ResponseListener responseListener,
 								ErrorResponseListener errorResponseListener) {
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map = new HashMap<>();
 		map.put("api", "tongxunlu/uninvite");
 		map.put("userid", userid);
 		map.put("loginuid", Data.user.getUserid());
@@ -405,4 +405,60 @@ public class HttpProxyUtil {
 		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
 				responseListener, errorResponseListener));
 	}
+	/**
+	 * 添加关系
+     */
+	public static void addguanxi(Context context,String userid,int type,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("api", "tongxunlu/addguanxi");
+		map.put("userid", userid);
+		map.put("type", type+"");
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 解除关系
+     */
+	public static void unguanxi(Context context,String userid,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("api", "tongxunlu/unguanxi");
+		map.put("userid", userid);
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 拒绝添加关系
+     */
+	public static void rejectguanxi(Context context,String userid,int type,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("api", "tongxunlu/rejectguanxi");
+		map.put("userid", userid);
+		map.put("type", type+"");
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+	/**
+	 * 同意添加关系
+     */
+	public static void agreeadd(Context context,String userid,int type,ResponseListener responseListener,
+								ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("api", "tongxunlu/agreeguanxi");
+		map.put("userid", userid);
+		map.put("type", type+"");
+		map.put("loginuid", Data.user.getUserid());
+		map.put("logintoken", Data.user.getToken());
+		((BaseActivity) context).addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
+	}
+
 }

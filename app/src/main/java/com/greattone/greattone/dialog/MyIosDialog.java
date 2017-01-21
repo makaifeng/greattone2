@@ -339,7 +339,7 @@ public class MyIosDialog {
 		dialog.setCanceledOnTouchOutside(false);
 		View view=LayoutInflater.from(mContext).inflate(R.layout.dialog_radio, null);
 		dialog.setContentView(view);
-		if(title.equals("")||title==null){
+		if(title==null||title.equals("")){
 			((TextView)view.findViewById(R.id.title)).setVisibility(View.GONE);
 			((TextView)view.findViewById(R.id.title_divider)).setVisibility(View.GONE);
 		}else{

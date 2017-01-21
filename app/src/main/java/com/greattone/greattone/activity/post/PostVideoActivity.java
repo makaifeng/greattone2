@@ -140,14 +140,16 @@ private ImageView iv_gg;
 		}
 		preferences.edit().putString("updateTitle", title)
 				.putString("updateContent", newstext).commit();
-		// 上传图片
-		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
-		pd=new ProgressDialog(context);
-		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pd.setMessage("上传中...");
-		pd.setCancelable(false);
-		pd.show();
-		updatePic(videoFileList.get(0).getPicUrl());
+
+		updateVideo();
+//		// 上传图片
+//		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+//		pd=new ProgressDialog(context);
+//		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//		pd.setMessage("上传中...");
+//		pd.setCancelable(false);
+//		pd.show();
+//		updatePic(videoFileList.get(0).getPicUrl());
 //			MyProgressDialog.show(context);
 //		HttpProxyUtil.updatePictureByByte(context, filepass, classid,
 //				videoFileList.get(0).getPicUrl(), false,new ResponseListener() {
@@ -171,6 +173,7 @@ private ImageView iv_gg;
 ;
 	}
 	protected void updatePic(String videoPath) {
+
 		pd.setMessage("上传视频缩略图");
 		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context,BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
 			@Override

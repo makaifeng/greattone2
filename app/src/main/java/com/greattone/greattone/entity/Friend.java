@@ -20,6 +20,33 @@ String pinyin;
 int verification;
 int cked;
 int isinvite;
+int invite;
+int invitetype;
+int guanxi;
+
+	public int getInvitetype() {
+		return invitetype;
+	}
+
+	public void setInvitetype(int invitetype) {
+		this.invitetype = invitetype;
+	}
+
+	public int getInvite() {
+		return invite;
+	}
+
+	public void setInvite(int invite) {
+		this.invite = invite;
+	}
+
+	public int getGuanxi() {
+		return guanxi;
+	}
+
+	public void setGuanxi(int guanxi) {
+		this.guanxi = guanxi;
+	}
 
 	public int getIsinvite() {
 		return isinvite;

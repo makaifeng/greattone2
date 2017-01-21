@@ -34,7 +34,6 @@ import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.HaiXuanFilter;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.BitmapUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.UpdateObjectToOSSUtil;
@@ -443,13 +442,13 @@ private void getGroup() {
 //		 if (price.equals("0")) {
 //		}else {
 //		}
-		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
-		pd=new ProgressDialog(context);
-		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pd.setMessage("上传中...");
-		pd.setCancelable(false);
-		pd.show();
 		 if (isShowPic) {
+			 updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
+			 pd=new ProgressDialog(context);
+			 pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			 pd.setMessage("上传中...");
+			 pd.setCancelable(false);
+			 pd.show();
 			 postPic(msg);//图片报名
 		}else{
 			postVideo(msg,fileList);//视频报名
@@ -542,44 +541,44 @@ private void getGroup() {
 	 * 视频报名
 	 */
 	private void postVideo(final String [] msg, final ArrayList<Picture> videoFileList) {
-
-		updateVideoThumbnail(msg,videoFileList.get(0).getPicUrl());
+		updateVideo(msg);
+//		updateVideoThumbnail(msg,videoFileList.get(0).getPicUrl());
 //		postVideoPic(msg, videoFileList);
 	}
 
-	/***
-	 *上传视频缩略图
-	 * @param videoPath
-     */
-	protected void updateVideoThumbnail(final String [] msg,String videoPath) {
-		pd.setMessage("上传视频缩略图");
-		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context, BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
-			@Override
-			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-				pd.setMax((int)totalSize);
-				pd.setProgress((int)currentSize);
-			}
-
-			@Override
-			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-			String	picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
-				pd.dismiss();
-				updateVideo(msg,picUrl);
-			}
-
-			@Override
-			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
-				MyProgressDialog.Cancel();
-				pd.dismiss();
-			}
-		});
-	}
+//	/***
+//	 *上传视频缩略图
+//	 * @param videoPath
+//     */
+//	protected void updateVideoThumbnail(final String [] msg,String videoPath) {
+//		pd.setMessage("上传视频缩略图");
+//		updateObjectToOSSUtil.uploadImage_iamge_by_bytes(context, BitmapUtil.getVideoPicBytes(videoPath), new UpdateListener() {
+//			@Override
+//			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+//				pd.setMax((int)totalSize);
+//				pd.setProgress((int)currentSize);
+//			}
+//
+//			@Override
+//			public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+//			String	picUrl=updateObjectToOSSUtil.getUrl(request.getBucketName(),request.getObjectKey());
+//				pd.dismiss();
+//				updateVideo(msg);
+//			}
+//
+//			@Override
+//			public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+//				MyProgressDialog.Cancel();
+//				pd.dismiss();
+//			}
+//		});
+//	}
 	/**
 	 * 添加到preferences和启动服务
 	 */
-	private void updateVideo(String [] msg, String imgUrl) {
+	private void updateVideo(String [] msg) {
 		preferences.edit().putString("updateTitle", msg[0])//选手姓名
-		.putString("updateUrl", imgUrl)//上传完的视频缩略图路径
+		.putString("updateUrl", "")//上传完的视频缩略图路径
 		.putString("updatePath", fileList.get(0).getPicUrl())//本地视频路径
 		.putString("updateContent", msg[4])
 		.putString("updateClassid", classid)

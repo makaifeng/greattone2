@@ -236,6 +236,7 @@ public void onCreate(Bundle savedInstanceState) {
 				@Override
 				public void onClick(View v) {
 					Intent intent=new Intent(context, WebActivity.class);
+//					intent.putExtra("urlPath","http://www.greattone.net/zjk/player/demoX1.php");
 					intent.putExtra("urlPath", Data.bannerList.get( ps).getUrl());
 					intent.putExtra("title", "");
 					startActivity(intent);

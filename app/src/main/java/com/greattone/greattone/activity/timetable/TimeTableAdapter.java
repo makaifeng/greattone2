@@ -189,7 +189,7 @@ public class TimeTableAdapter extends BaseAdapter {
 
 		public void setPosition(int position) {
 			String d = dayNumber[position];
-			List<TimeTable_Month> mlist;
+			List<TimeTable_Month> mlist=new ArrayList<>();
 			if (jb!=null) {
 				 mlist = JSON.parseArray(jb.getString(d), TimeTable_Month.class);//课程数据
 			}else {
@@ -200,6 +200,7 @@ public class TimeTableAdapter extends BaseAdapter {
 			entry1.setVisibility(View.INVISIBLE);
 			entry2.setVisibility(View.INVISIBLE);
 			date.setBackgroundResource(R.drawable.time_table_text_bg_unselect);
+
 			//课程判断
 		switch (mlist.size()) {
 			case 0://没课程
@@ -207,9 +208,6 @@ public class TimeTableAdapter extends BaseAdapter {
 			case 1://有课程 ,只有一节
 				entry1.setText(mlist.get(0).getStuname());
 				entry1.setVisibility(View.VISIBLE);
-			case 2://有课程 ,有多节
-				entry2.setText(mlist.get(1).getStuname());
-				entry2.setVisibility(View.VISIBLE);
 				break;
 			default:
 				entry1.setText(mlist.get(0).getStuname());

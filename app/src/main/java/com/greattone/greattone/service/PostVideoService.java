@@ -1,9 +1,12 @@
 package com.greattone.greattone.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,8 +18,6 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.greattone.greattone.Listener.UpdateFileListener;
-import com.greattone.greattone.MultiPart.HttpMultipartPost;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
@@ -26,7 +27,6 @@ import com.greattone.greattone.update.PutVideoSamples;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 
-import java.io.File;
 import java.util.HashMap;
 
 public class PostVideoService extends Service {
@@ -36,13 +36,15 @@ public class PostVideoService extends Service {
 	public static final int Flag_Done = 3; // 完成状态
 	private static PostVideoService instance;
 	public SharedPreferences preferences;
-
+	String videoUrl;
+	String imageurl;
 	// private long max;
 	// private long num ;
 	private String videoPath;
 	// private OSSClient oss;
 	private VODUploadClient upload;
 	private String objectKey;
+	private String name;
 	private RequestQueue queue;
 	// 运行sample前需要配置以下字段为有效的值
 	// private static final String endpoint =
@@ -112,7 +114,8 @@ public class PostVideoService extends Service {
 	public void uploadVidoe(final String videoPath) {
 		upload = new VODUploadClient(getApplicationContext());
 		String s[] = videoPath.split("\\.");
-		objectKey = uploadObject + "/" + System.currentTimeMillis() + "."
+		name=System.currentTimeMillis()+"";
+		objectKey = uploadObject + "/" + name + "."
 				+ s[s.length - 1];
 		new PutVideoSamples(upload, accessKeyId, accessKeySecret, testBucket,
 				endpoint, videoPath, objectKey)
@@ -125,72 +128,72 @@ public class PostVideoService extends Service {
 	// videoPath).asyncPutObjectFromLocalFile(updateFileListener);
 	// }
 	//
-	/**
-	 * 上传视频到指定服务器（用于国外版本）
-	 * @param videoPath
-	 * @param url
-	 */
-	 public void uploadVidoe(String videoPath, String url) {
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("api", "post/upfile");
-			map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
-			map.put("classid", preferences.getString("updateClassid", "11"));
-			map.put("open", "1");
-			map.put("loginuid", Data.user.getUserid());
-			map.put("logintoken", Data.user.getToken());
-	 HashMap<String, File> files = new HashMap<String, File>();
-	 files.put("file", new File(videoPath));
-
-		HttpMultipartPost httpMultipartPost = new HttpMultipartPost(this,
-				url,listener);
-		if (!files.equals("")||files!=null) {
-			httpMultipartPost.addFileUpload(files);
-		}
-		if (!files.equals("")||files!=null) {
-			httpMultipartPost.addStringUpload(map);
-		}
-		httpMultipartPost.setShowProgress( false);
-		httpMultipartPost.execute("上传成功");
-	 }
-UpdateFileListener listener=new UpdateFileListener() {
-	
-	
-	@Override
-	public void updateError() {
-		preferences.edit().putInt("updateState", 2).commit();
-		status = Flag_Init;
-		Intent intent = new Intent(MyReceiver.ACTION_UPDATE_FAIL);
-		sendBroadcast(intent);
-	}
-	
-	@Override
-	public void onProgressUpdate(long uploadedSize, long totalSize) {
-		status = Flag_Update;
-		preferences.edit().putInt("updateState", status).commit();
-		Intent intent = new Intent(MyReceiver.ACTION_UPDATE_PROGRESS);
-		intent.putExtra("max", totalSize);
-		intent.putExtra("progress", uploadedSize);
-		sendBroadcast(intent);
-	}
-
-	@Override
-	public void updateSuccess(Message2 message) {
-		status = Flag_Done;
-		preferences.edit().putInt("updateState", status).commit();
-		Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
-		sendBroadcast(intent);
-		if (preferences.getString("updateClassid", "11").equals("11")) {// 广场发帖
-			post( JSON.parseObject(message.getData()).getString("url"));
-
-		} else if (preferences.getString("updateClassid", "11")
-				.equals("73")) {// 海选报名
-			post1();
-		} else if (preferences.getString("updateClassid", "11")
-				.equals("85")) {//提问
-			post2();
-		}
-	}
-};
+//	/**
+//	 * 上传视频到指定服务器（用于国外版本）
+//	 * @param videoPath
+//	 * @param url
+//	 */
+//	 public void uploadVidoe(String videoPath, String url) {
+//			HashMap<String, String> map = new HashMap<String, String>();
+//			map.put("api", "post/upfile");
+//			map.put("uploadkey", "e7627f53d4712552f8d82c30267d9bb4");
+//			map.put("classid", preferences.getString("updateClassid", "11"));
+//			map.put("open", "1");
+//			map.put("loginuid", Data.user.getUserid());
+//			map.put("logintoken", Data.user.getToken());
+//	 HashMap<String, File> files = new HashMap<String, File>();
+//	 files.put("file", new File(videoPath));
+//
+//		HttpMultipartPost httpMultipartPost = new HttpMultipartPost(this,
+//				url,listener);
+//		if (!files.equals("")||files!=null) {
+//			httpMultipartPost.addFileUpload(files);
+//		}
+//		if (!files.equals("")||files!=null) {
+//			httpMultipartPost.addStringUpload(map);
+//		}
+//		httpMultipartPost.setShowProgress( false);
+//		httpMultipartPost.execute("上传成功");
+//	 }
+//UpdateFileListener listener=new UpdateFileListener() {
+//
+//
+//	@Override
+//	public void updateError() {
+//		preferences.edit().putInt("updateState", 2).commit();
+//		status = Flag_Init;
+//		Intent intent = new Intent(MyReceiver.ACTION_UPDATE_FAIL);
+//		sendBroadcast(intent);
+//	}
+//
+//	@Override
+//	public void onProgressUpdate(long uploadedSize, long totalSize) {
+//		status = Flag_Update;
+//		preferences.edit().putInt("updateState", status).commit();
+//		Intent intent = new Intent(MyReceiver.ACTION_UPDATE_PROGRESS);
+//		intent.putExtra("max", totalSize);
+//		intent.putExtra("progress", uploadedSize);
+//		sendBroadcast(intent);
+//	}
+//
+//	@Override
+//	public void updateSuccess(Message2 message) {
+//		status = Flag_Done;
+//		preferences.edit().putInt("updateState", status).commit();
+//		Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
+//		sendBroadcast(intent);
+//		if (preferences.getString("updateClassid", "11").equals("11")) {// 广场发帖
+//			post( JSON.parseObject(message.getData()).getString("url"));
+//
+//		} else if (preferences.getString("updateClassid", "11")
+//				.equals("73")) {// 海选报名
+//			post1();
+//		} else if (preferences.getString("updateClassid", "11")
+//				.equals("85")) {//提问
+//			post2();
+//		}
+//	}
+//};
 //	UpdateListener updateFileListener = new UpdateListener() {
 //
 //		@Override
@@ -230,19 +233,19 @@ UpdateFileListener listener=new UpdateFileListener() {
 		public void onUploadSucceed(UploadFileInfo info) {
 			status = Flag_Done;
 			preferences.edit().putInt("updateState", status).commit();
-
-			if (preferences.getString("updateClassid", "11").equals("11")) {// 广场发帖
-				String videoUrl = endpoint.replace("http://", "http://" + testBucket
-				+ ".")
-				+ "/" + objectKey;
-				post(videoUrl);
-			} else if (preferences.getString("updateClassid", "11")
-					.equals("73")) {// 海选报名
-				post1();
-			} else if (preferences.getString("updateClassid", "11")
-					.equals("85")) {
-				post2();
-			}
+			Message.obtain(handler,0).sendToTarget();
+//			if (preferences.getString("updateClassid", "11").equals("11")) {// 广场发帖
+//				String videoUrl = endpoint.replace("http://", "http://" + testBucket
+//				+ ".")
+//				+ "/" + objectKey;
+//				post(videoUrl);
+//			} else if (preferences.getString("updateClassid", "11")
+//					.equals("73")) {// 海选报名
+//				post1();
+//			} else if (preferences.getString("updateClassid", "11")
+//					.equals("85")) {
+//				post2();
+//			}
 			Log.e("onUploadSucceed", "onUploadSucceed: " + info.getFilePath());
 		}
 
@@ -273,18 +276,43 @@ UpdateFileListener listener=new UpdateFileListener() {
 			Log.e("onUploadTokenExpired", "onUploadTokenExpired: ");
 		}
 	};
-
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					getUrl();
+					break;
+				case 1:
+					if (preferences.getString("updateClassid", "11").equals("11")) {// 广场发帖
+						postp(videoUrl);
+					} else if (preferences.getString("updateClassid", "11")
+							.equals("73")) {// 海选报名
+						post1();
+					} else if (preferences.getString("updateClassid", "11")
+							.equals("85")) {
+						post2();
+					}
+					break;
+				case 2:
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
 	/**
 	 * 发帖
 	 * 
 	 * @param url
 	 */
-	protected void post(String url) {
+	protected void postp(String url) {
 
 		String classid = preferences.getString("updateClassid", "11");
 		// String id = preferences.getString("updateId", "0");
 		String filepass = preferences.getString("updateFilepass", "0");
-		String picUrl = preferences.getString("updateUrl", "");
+//		String picUrl = preferences.getString("updateUrl", "");
 		String title = preferences.getString("updateTitle", "");
 		String newstext = preferences.getString("updateContent", "");
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -298,7 +326,8 @@ UpdateFileListener listener=new UpdateFileListener() {
 		// map.put("zuozhe", Data.user.getUsername());
 		map.put("shipin", url);
 		map.put("title", title);
-		map.put("titlepic", picUrl);
+//		map.put("titlepic", picUrl);
+		map.put("titlepic", imageurl);
 		map.put("smalltext", newstext);
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
@@ -318,9 +347,7 @@ UpdateFileListener listener=new UpdateFileListener() {
 
 	/** 报名 */
 	protected void post1() {
-		String videoUrl = endpoint.replace("http://", "http://" + testBucket
-				+ ".")
-				+ "/" + objectKey;
+
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "post/ecms_bm");
 		map.put("mid", "20");
@@ -341,7 +368,7 @@ UpdateFileListener listener=new UpdateFileListener() {
 		map.put("hai_age", preferences.getString("updateHai_age", "11"));// 年龄
 		map.put("hai_grouping1",
 				preferences.getString("updateHai_grouping2", ""));// 选择分组2
-		map.put("hai_photo", preferences.getString("updateUrl", ""));//
+		map.put("hai_photo", imageurl);//
 		map.put("pintype", preferences.getString("updatepPintype", ""));//乐器分类
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
@@ -361,9 +388,6 @@ UpdateFileListener listener=new UpdateFileListener() {
 
 	/** 提问 */
 	protected void post2() {
-		String videoUrl = endpoint.replace("http://", "http://" + testBucket
-				+ ".")
-				+ "/" + objectKey;
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("api", "post/ecms");
 		map.put("mid", "8");
@@ -374,7 +398,7 @@ UpdateFileListener listener=new UpdateFileListener() {
 		map.put("qa_name", preferences.getString("updateQa_name", ""));
 		map.put("qa_id", preferences.getString("updateId", "11"));
 		map.put("title", preferences.getString("updateTitle", ""));
-		map.put("titlepic", preferences.getString("updateUrl", ""));
+		map.put("titlepic", imageurl);
 		map.put("smalltext", preferences.getString("updateContent", "11"));
 		map.put("loginuid", Data.user.getUserid());
 		map.put("logintoken", Data.user.getToken());
@@ -389,6 +413,35 @@ UpdateFileListener listener=new UpdateFileListener() {
 								message.getInfo(), Toast.LENGTH_LONG).show();
 					}
 				}, null));
+	}
+	/** 提问 */
+	protected void getUrl() {
+		transcoding(instance, objectKey,name,
+				new ResponseListener() {
+
+					@Override
+					public void setResponseHandle(Message2 message) {
+						if (message.getData().startsWith("{")) {
+							 videoUrl ="http://" +JSON.parseObject(message.getData()).getString("video_url");
+							imageurl ="http://" + JSON.parseObject(message.getData()).getString("images_url");
+							Message.obtain(handler,1).sendToTarget();
+
+						}
+					}
+				}, null);
+	}
+	/**
+	 *视频转码
+	 */
+	public  void transcoding(Context context, String filepath, String filename, ResponseListener responseListener,
+								   HttpUtil.ErrorResponseListener errorResponseListener) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("api", "aliyun/zhuanma");
+		map.put("filepath", filepath);
+		map.put("filename", filename);
+		map.put("bucket", "hqsvideo");
+		addRequest(HttpUtil.httpConnectionByPost(context, map,
+				responseListener, errorResponseListener));
 	}
 	/**
 	 * 加入的volley网络请求的队列中
