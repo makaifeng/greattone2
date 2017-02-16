@@ -179,7 +179,9 @@ public class BaseActivity extends FragmentActivity {
 			}
 		}
 	}
-
+	public SharedPreferences getPreferences() {
+		return preferences;
+	}
 	@Override
 	protected void onPause() {
 		super.onPause();

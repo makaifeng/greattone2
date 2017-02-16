@@ -17,8 +17,8 @@ android {
         applicationId "com.greattone.greattone"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 15
-        versionName "3.10.2"
+        versionCode 16
+        versionName "3.10.3"
         multiDexEnabled true
     }
     packagingOptions {

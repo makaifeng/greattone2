@@ -50,7 +50,7 @@ public class DirectoryActivity2 extends BaseActivity {
 	private MyLetterListView letterListView;
 //	private RadioGroup radiogroup;
 	String url = HttpConstants.CONTACTS_URL;
-	Map<String, List<Friend>> contactsMap = new HashMap<>();
+public 	Map<String, List<Friend>> contactsMap = new HashMap<>();
 	List<Friend> contactsList = new ArrayList<Friend>();
 	List<Friend> inviteList = new ArrayList<Friend>();
 	String[] b = { "#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
@@ -124,15 +124,16 @@ private BadgeView badgeView;
 
 			@Override
 			public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+				int oposition=inviteList.size();
 				switch (index) {
 					case 0://取消关注
 						if (type.equals("feed")) {// 偶像
 							//取消关注
-							addattention(position);
+							addattention(position-oposition);
 
 						} else if (type.equals("friend")) {// 知音
 							//取消关注
-							addattention(position);
+							addattention(position-oposition);
 						}
 						break;
 				}
@@ -141,7 +142,7 @@ private BadgeView badgeView;
 		});
 	}
 
-	/** 我的关注或关注我的 */
+	/** 获取通讯录列表*/
 	public void getContacts() {
 		MyProgressDialog.show(context);
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -163,7 +164,7 @@ private BadgeView badgeView;
 								Friend.class);
 //						followNum=JSON.parseObject(message.getMsg()).getInteger("ti_guanzhu");
 						}
-						filterByLetters();
+							filterByLetters();
 						initContentAdapter();
 						MyProgressDialog.Cancel();
 //						setNum(followNum);
@@ -171,131 +172,7 @@ private BadgeView badgeView;
 
 				}, null));
 	}
-//	/** 学生 */
-//	private void getstudent() {
-//		contactsList.clear();	initContentAdapter();
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("api", "tongxunlu/getStudentList");
-//		map.put("userid", Data.user.getUserid());
-//		map.put("loginuid", Data.user.getUserid());
-//		map.put("logintoken", Data.user.getToken());
-//		addRequest(HttpUtil.httpConnectionByPost(context, map,
-//				new ResponseListener() {
-//
-//					@Override
-//					public void setResponseHandle(Message2 message) {
-//						contactsList.clear();
-//						if (message.getData().startsWith("[")) {
-//							contactsList = JSON.parseArray(message.getData(),
-//									Friend.class);
-//						}
-//						filterByLetters();
-//						initContentAdapter();
-//					}
-//
-//				}, null));
-//	}
-//	/** 老师 */
-//	private void getteacher() {
-//		contactsList.clear();	initContentAdapter();
-//		HashMap<String, String> map = new HashMap<>();
-//		map.put("api", "tongxunlu/getTeacherList");
-//		map.put("userid", Data.user.getUserid());
-//		map.put("loginuid", Data.user.getUserid());
-//		map.put("logintoken", Data.user.getToken());
-//		addRequest(HttpUtil.httpConnectionByPost(context, map,
-//				new ResponseListener() {
-//
-//					@Override
-//					public void setResponseHandle(Message2 message) {
-//						contactsList.clear();
-//						if (message.getData().startsWith("[")) {
-//							contactsList = JSON.parseArray(message.getData(),
-//									Friend.class);
-//						}
-//						filterByLetters();
-//						initContentAdapter();
-//					}
-//
-//				}, null));
-//	}
-//	/** 教室 */
-//	private void getclassroom() {
-//		contactsList.clear();	initContentAdapter();
-//		HashMap<String, String> map = new HashMap<>();
-//		map.put("api", "tongxunlu/getClassRoomList");
-//		map.put("userid", Data.user.getUserid());
-//		map.put("loginuid", Data.user.getUserid());
-//		map.put("logintoken", Data.user.getToken());
-//		addRequest(HttpUtil.httpConnectionByPost(context, map,
-//				new ResponseListener() {
-//
-//					@Override
-//					public void setResponseHandle(Message2 message) {
-//						contactsList.clear();
-//						if (message.getData().startsWith("[")) {
-//							contactsList = JSON.parseArray(message.getData(),
-//									Friend.class);
-//						}
-//						filterByLetters();
-//						initContentAdapter();
-//					}
-//
-//				}, null));
-//	}
-//	/** 品牌 */
-//	private void getpinpai() {
-//		contactsList.clear();	initContentAdapter();
-//		HashMap<String, String> map = new HashMap<>();
-//		map.put("api", "tongxunlu/getPinPaiList");
-//		map.put("userid", Data.user.getUserid());
-//		map.put("loginuid", Data.user.getUserid());
-//		map.put("logintoken", Data.user.getToken());
-//		addRequest(HttpUtil.httpConnectionByPost(context, map,
-//				new ResponseListener() {
-//
-//					@Override
-//					public void setResponseHandle(Message2 message) {
-//						contactsList.clear();
-//						if (message.getData().startsWith("[")) {
-//							contactsList = JSON.parseArray(message.getData(),
-//									Friend.class);
-//						}
-//						filterByLetters();
-//						initContentAdapter();
-//					}
-//
-//				}, null));
-//	}
-//	/** 获取好友 */
-//	protected void getFriends() {
-////		MyProgressDialog.show(context);
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("api", "tongxunlu/getFriendList");
-//		map.put("pageSize", "200");
-//		map.put("userid ", Data.user.getUserid());
-//		map.put("pageIndex", "1");
-//		map.put("loginuid", Data.user.getUserid());
-//		map.put("logintoken", Data.user.getToken());
-//		addRequest(HttpUtil.httpConnectionByPost(context, map,
-//				new ResponseListener() {
-//
-//					@Override
-//					public void setResponseHandle(Message2 message) {
-//						contactsList.clear();
-//						if (message.getData().startsWith("[")) {
-//							contactsList = JSON.parseArray(message.getData(),
-//									Friend.class);
-//
-////							moveList(mlist);
-//						}
-//						MyProgressDialog.Cancel();
-//						filterByLetters();
-//						initContentAdapter();
-//					}
-//
-//				}, null));
-//	}
+
 
 
 	OnClickListener lis=new OnClickListener() {
@@ -342,7 +219,17 @@ private BadgeView badgeView;
 		@Override
 		public void onClick(String s) {
 			contactsList.clear();
-			List<Friend> mList = contactsMap.get(s);
+			List<Friend> mList;
+			if (s.equals("#")){
+				 mList = contactsMap.get("#");
+			}else {
+				mList=new ArrayList<>();
+				for (int i = 0; i < contactsMap.get("#").size(); i++) {
+					if (	contactsMap.get("#").get(i).getPinyin().startsWith(s.toLowerCase(Locale.CHINA))) {
+						mList.add(contactsMap.get("#").get(i));
+					}
+				}
+			}
 			contactsList.addAll(mList);
 			initContentAdapter();
 		}
@@ -383,11 +270,12 @@ private BadgeView badgeView;
 			}
 			contactsList.get(i).setPinyin( PinYinUtil.getAllFirstSpell(contactsList.get(i)
 					.getUsername()));
-			for (int j = 1; j < b.length-1; j++) {
-				if (	contactsList.get(i).getPinyin().startsWith(b[j].toLowerCase(Locale.CHINA))) {
-					contactsMap.get(b[j]).add(contactsList.get(i));
-				}
-			}
+			contactsList.get(i).setPosition(i);
+//			for (int j = 1; j < b.length-1; j++) {
+//				if (	contactsList.get(i).getPinyin().startsWith(b[j].toLowerCase(Locale.CHINA))) {
+//					contactsMap.get(b[j]).add(contactsList.get(i));
+//				}
+//			}
 		}
 		contactsMap.get("#").addAll(contactsList);
 	}

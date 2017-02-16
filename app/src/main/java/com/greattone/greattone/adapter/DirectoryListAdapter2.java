@@ -72,7 +72,7 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 			holder.name = (TextView) convertView.findViewById(R.id.tv_name);//
 			holder.click = (TextView) convertView.findViewById(R.id.tv_click);//
 			holder.click2 = (TextView) convertView.findViewById(R.id.tv_click2);//
-			holder.add = (TextView) convertView.findViewById(R.id.tv_add);//
+//			holder.add = (TextView) convertView.findViewById(R.id.tv_add);//
 			holder.tv_guanxi = (TextView) convertView.findViewById(R.id.tv_guanxi);//
 			holder.lines = (View) convertView.findViewById(R.id.lines);//
 			holder.shengfen = (TextView) convertView
@@ -91,7 +91,7 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 
 	class ViewHolder {
 		TextView name;
-		TextView add;
+//		TextView add;
 		TextView click;
 		TextView click2;
 		TextView shengfen;
@@ -130,11 +130,11 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 					iv_vip.setVisibility(View.VISIBLE);
 				} else iv_vip.setVisibility(View.INVISIBLE);
 				guanxi = friend.getGuanxi();
-				add.setVisibility(View.GONE);
+//				add.setVisibility(View.GONE);
 				click.setVisibility(View.GONE);
 				click2.setVisibility(View.GONE);
 				tv_guanxi.setVisibility(View.GONE);
-				add.setOnClickListener(lis);
+//				add.setOnClickListener(lis);
 				click.setOnClickListener(lis);
 				click2.setOnClickListener(lis);
 			if (isinvite) {//邀请列表
@@ -145,37 +145,43 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 					tv_guanxi.setText("邀请你成为他的好友");
 				}else {
 					if (friend.getInvitetype() == 1) {//1学生->老师，2学生->教室，3老师->学生，4老师->教室，5教室->学生，6教室->老师
-						tv_guanxi.setText("邀请你成为他的老师");
+						tv_guanxi.setText("邀请你成为ta的学生");
 					} else if (friend.getInvitetype() == 2) {
-						tv_guanxi.setText("邀请你成为他的教室");
+						tv_guanxi.setText("邀请你成为ta的学生");
 					} else if (friend.getInvitetype() == 3) {
-						tv_guanxi.setText("邀请你成为他的学生");
+						tv_guanxi.setText("邀请你成为ta的老师");
 					} else if (friend.getInvitetype() == 4) {
-						tv_guanxi.setText("邀请你成为他的教室");
+						tv_guanxi.setText("邀请你成为ta的老师");
 					} else if (friend.getInvitetype() == 5) {
-						tv_guanxi.setText("邀请你成为他的学生");
+						tv_guanxi.setText("申请成为ta的教室");
 					} else if (friend.getInvitetype() == 6) {
-						tv_guanxi.setText("邀请你成为他的老师");
+						tv_guanxi.setText("申请成为ta的教室");
 					}
 				}
 			}else{
 				if (guanxi == 0) {//我的关注
-					add.setVisibility(View.VISIBLE);
+					tv_guanxi.setVisibility(View.VISIBLE);
+					tv_guanxi.setText("我的关注");
+					click2.setVisibility(View.VISIBLE);
+					click2.setText("添加关系");
+//					add.setVisibility(View.VISIBLE);
 					if (friend.getInvite() == 1) {
-						add.setBackgroundResource(R.drawable.tongxunlu_button_unclick);
-						add.setClickable(false);
+						click2.setText("已邀请");
+						click2.setBackgroundResource(R.drawable.tongxunlu_button_unclick);
+						click2.setClickable(false);
 					} else {
-						add.setBackgroundResource(R.drawable.tongxunlu_button);
-						add.setClickable(true);
+						click2.setBackgroundResource(R.drawable.tongxunlu_button);
+						click2.setClickable(true);
 					}
 				} else if (guanxi == 1) {//好友
 					tv_guanxi.setVisibility(View.VISIBLE);
 					click.setVisibility(View.VISIBLE);
-					tv_guanxi.setText("好友");
+					tv_guanxi.setText("我的好友");
 					if (getguanxi() != 0) {
 						click2.setVisibility(View.VISIBLE);
 						click2.setText("添加关系");
 						if (friend.getInvite() == 1) {
+							click2.setText("已邀请");
 							click2.setBackgroundResource(R.drawable.tongxunlu_button_unclick);
 							click2.setClickable(false);
 						} else {
@@ -245,9 +251,10 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				if (v==add){
-					clickaddguanxi();
-				} else if (v == click) {// 按钮1
+//				if (v==add){
+//					clickaddguanxi();
+//				} else
+				if (v == click) {// 按钮1
 					if (isinvite) {//邀请列表
 						//同意邀请
 						agreeadd();
@@ -263,7 +270,7 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 						//拒绝邀请
 						rejectguanxi();
 					}else {
-						if (guanxi == 1) {//好友
+						if (guanxi == 1||guanxi==0) {//好友
 							clickaddguanxi();
 						} else if (guanxi > 1) {
 							unguanxi();
@@ -407,8 +414,14 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 				@Override
 				public void setResponseHandle(Message2 message) {
 					((BaseActivity) context).toast(message.getInfo());
-					add.setClickable(false);
-					add.setBackgroundResource(R.drawable.tongxunlu_button_unclick);
+					((DirectoryActivity2) context).contactsMap.get("#").get(friend.getPosition()).setInvite(1);
+					friend.setInvite(1);
+
+//					add.setClickable(false);
+//					add.setBackgroundResource(R.drawable.tongxunlu_button_unclick);
+					click2.setText("已邀请");
+					click2.setClickable(false);
+					click2.setBackgroundResource(R.drawable.tongxunlu_button_unclick);
 					MyProgressDialog.Cancel();
 				}
 
@@ -422,7 +435,7 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 				@Override
 				public void setResponseHandle(Message2 message) {
 					((BaseActivity) context).toast(message.getInfo());
-					friend.setGuanxi(1);
+					friend.setGuanxi(0);
 					MyProgressDialog.Cancel();
 					notifyDataSetChanged();
 				}

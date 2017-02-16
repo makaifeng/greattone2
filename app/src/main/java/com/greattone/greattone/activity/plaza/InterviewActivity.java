@@ -1,11 +1,8 @@
 package com.greattone.greattone.activity.plaza;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +27,10 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.PullToRefreshView;
 import com.greattone.greattone.widget.PullToRefreshView.OnFooterRefreshListener;
 import com.greattone.greattone.widget.PullToRefreshView.OnHeaderRefreshListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /** 音乐新闻 专访 */
 public class InterviewActivity extends BaseActivity {
@@ -113,14 +114,14 @@ public class InterviewActivity extends BaseActivity {
 								message.getData(), Blog.class);
 						if (mList != null && mList.size() > 0) {
 							newsList.addAll(mList);
-							adapter = new InterviewAdapter(context, newsList,imageUrlList,1);
-							lv_content.setAdapter(adapter);
+
 						} else {
 							toast(getResources().getString(R.string.cannot_load_more));
 						}
 					}else{
 						toast(getResources().getString(R.string.cannot_load_more));
 					}
+					initContentAdapter();
 					pull_to_refresh.onHeaderRefreshComplete();
 					pull_to_refresh.onFooterRefreshComplete();
 					MyProgressDialog.Cancel();
@@ -163,4 +164,15 @@ public class InterviewActivity extends BaseActivity {
 	        InterviewActivity.this.startActivity(intent);
 		}
 	};
+
+	/**
+	 * 加载ContentAdapter数据
+	 */
+	protected void initContentAdapter() {
+		Parcelable listState = lv_content.onSaveInstanceState();
+		adapter = new InterviewAdapter(context, newsList,imageUrlList,1);
+		lv_content.setAdapter(adapter);
+		lv_content.onRestoreInstanceState(listState);
+
+	}
 }

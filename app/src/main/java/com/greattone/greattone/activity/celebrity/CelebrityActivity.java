@@ -65,7 +65,7 @@ public class CelebrityActivity extends BaseActivity   {
 
 	private void initView() {
 		setHead(getResources().getString(R.string.personal_space), true, true);//个人空间
-		if (groupid>0||groupid!=5) {
+		if (groupid>2||groupid!=5) {
 		ask = (TextView) findViewById(R.id.tv_head_other);
 		ask.setVisibility(View.VISIBLE);
 		ask.setTextSize(13);

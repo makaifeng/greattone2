@@ -2,12 +2,21 @@ package com.greattone.greattone.entity;
 
 public class Vesion {
 int active;
+int code;
 String desc;
 String name;
 String time;
 String url;
 String vesion;
 String fixversion;
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
 
 	public String getFixversion() {
 		return fixversion;

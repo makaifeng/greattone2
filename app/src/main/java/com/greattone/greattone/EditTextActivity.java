@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.greattone.greattone.activity.BaseActivity;
-
 public class EditTextActivity extends BaseActivity {
 
     private EditText edittext;

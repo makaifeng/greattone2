@@ -107,7 +107,27 @@ public class ActivityUtil {
 		String version = packInfo.versionName;
 		return version;
 	}
-	
+	/**
+	 * 获取版本号
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	public static int getVersionCode(Context context) {
+		// 获取packagemanager的实例
+		PackageManager packageManager = context.getPackageManager();
+		// getPackageName()是你当前类的包名，0代表是获取版本信息
+		PackageInfo packInfo = null;
+		try {
+			packInfo = packageManager.getPackageInfo(context.getPackageName(),
+					PackageManager.GET_PERMISSIONS);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		int version = packInfo.versionCode;
+		return version;
+	}
+
 	public static String GetNetworkType(Context context)
 	{
 	    String strNetworkType = "";
@@ -318,30 +338,33 @@ public class ActivityUtil {
 				HotFix(activity);
 			}
 		} else {
-			Builder builer = new Builder(activity);
-			builer.setTitle(activity.getResources().getString(R.string.版本升级));
-			builer.setMessage(vesion.getDesc());
-			builer.setCancelable(false);// 设置进度条是否可以按退回键取消
+			if (getVersionCode(activity)<=vesion.getCode()){
+				Builder builer = new Builder(activity);
+				builer.setTitle(activity.getResources().getString(R.string.版本升级));
+				builer.setMessage(vesion.getDesc());
+				builer.setCancelable(false);// 设置进度条是否可以按退回键取消
 
-			// 当点确定按钮时从服务器上下载 新的apk 然后安装 װ
-			builer.setPositiveButton(activity.getResources().getString(R.string.确定),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							Uri uri = Uri.parse(vesion.getUrl());
-							Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-							activity.startActivity(intent);
-							// ToMain();
-						}
-					});
-			if (vesion.getActive()!=1) {
-			builer.setNegativeButton(activity.getResources().getString(R.string.取消),
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-						}
-					});
+				// 当点确定按钮时从服务器上下载 新的apk 然后安装 װ
+
+				builer.setPositiveButton(activity.getResources().getString(R.string.确定),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								Uri uri = Uri.parse(vesion.getUrl());
+								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+								activity.startActivity(intent);
+								// ToMain();
+							}
+						});
+				if (vesion.getActive()!=1) {
+				builer.setNegativeButton(activity.getResources().getString(R.string.取消),
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						});
+				}
+				AlertDialog dialog = builer.create();
+				dialog.show();
 			}
-			AlertDialog dialog = builer.create();
-			dialog.show();
 		}
 	}
 

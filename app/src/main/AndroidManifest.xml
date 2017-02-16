@@ -911,11 +911,21 @@
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.personal.SelectPackeageAct"
+        <activity
+            android:name=".activity.personal.SelectPackeageAct"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".activity.haixuan_and_activitise.HuodongWebAct"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.haixuan_and_activitise.HuodongWebAct"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.mall.InstrumentMallActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.mall.PostMallProductActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"></activity>

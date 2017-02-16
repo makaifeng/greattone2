@@ -259,16 +259,20 @@ public class PersonalCenterFragment extends BaseFragment {
 				intent.putExtra("urlPath", FileUtil.getBrondH5Url("113", Data.myinfo.getUserid() + ""));
 				startActivity(intent);
 			} else if (names[listPosition].equals(getResources().getString(R.string.产品中心))) {// 产品中心
-				startActivity(new Intent(context, ProductArticleActivity.class));
+				if (Data.user.getGroupid()==5) {
+					startActivity(new Intent(context, ProductArticleActivity.class));
+				}else if (Data.user.getGroupid()==4){
+					startActivity(new Intent(context, ProductArticleActivity.class));
+				}
 			} else if (names[listPosition].equals(getResources().getString(R.string.公司新闻))) {// 公司新闻
 				startActivity(new Intent(context, BrandNewsActivity.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.销售渠道))) {// 销售渠道
-				if (Data.myinfo.getCked() == 1) {// 已认证
+//				if (Data.myinfo.getCked() == 1) {// 已认证
 					startActivity(new Intent(context, SalesChannelsActivityCenter.class));
-				} else {// 未认证
-					startActivity(new Intent(context, SignActivity.class).putExtra("content",
-							"销售渠道功能仅向签约用户开放，在这里可以编辑并展示您的线下销售渠道，扩大您品牌的知名度并引导用户前往您的线下销售渠道购买产品！"));
-				}
+//				} else {// 未认证
+//					startActivity(new Intent(context, SignActivity.class).putExtra("content",
+//							"销售渠道功能仅向签约用户开放，在这里可以编辑并展示您的线下销售渠道，扩大您品牌的知名度并引导用户前往您的线下销售渠道购买产品！"));
+//				}
 			} else if (names[listPosition].equals(getResources().getString(R.string.留言板))) {// 留言板
 				startActivity(new Intent(context, LeaveMessageActivityCenter.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.联系我们))) {// 联系我们

@@ -118,7 +118,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 			} else if (type.equals("friend")) {// 知音
 				if (Data.myinfo.getGroupid()==3){
 					if (contactsList.get(position).getGroupid()==1||contactsList.get(position).getGroupid()==2){
-						if (contactsList.get(position).getIsinvite()==0){
+						if (contactsList.get(position).getInvite()==0){
 							click.setText("添加");
 						}else {
 							click.setTextColor(context.getResources().getColor(R.color.black));
@@ -131,7 +131,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 					}
 				}else if (Data.myinfo.getGroupid()==4){
 					if (contactsList.get(position).getGroupid()==1||contactsList.get(position).getGroupid()==2||contactsList.get(position).getGroupid()==3){
-						if (contactsList.get(position).getIsinvite()==0){
+						if (contactsList.get(position).getInvite()==0){
 							click.setText("添加");
 						}else {
 							click.setTextColor(context.getResources().getColor(R.color.black));
@@ -220,7 +220,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 					} else if (type.equals("friend")) {// 知音
 						if (Data.myinfo.getGroupid()==3){
 							if (contactsList.get(position).getGroupid()==1||contactsList.get(position).getGroupid()==2){
-								if (contactsList.get(position).getIsinvite()==0){
+								if (contactsList.get(position).getInvite()==0){
 									//邀请
 									invite();
 								}else {
@@ -230,7 +230,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 							}
 						}else if (Data.myinfo.getGroupid()==4){
 							if (contactsList.get(position).getGroupid()==1||contactsList.get(position).getGroupid()==2||contactsList.get(position).getGroupid()==3){
-								if (contactsList.get(position).getIsinvite()==0){
+								if (contactsList.get(position).getInvite()==0){
 									//邀请
 									invite();
 								}else {
@@ -324,7 +324,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 						public void setResponseHandle(Message2 message) {
 							((BaseActivity) context).toast(message.getInfo());
 							if (type.equals("friend")) {
-								contactsList.get(position).setIsinvite(1);
+								contactsList.get(position).setInvite(1);
 								click.setTextColor(context.getResources().getColor(R.color.black));
 								click.setBackgroundColor(context.getResources().getColor(R.color.gray_b3b3b3));
 								click.setText("已添加");
@@ -347,7 +347,7 @@ public class DirectoryListAdapter extends BaseAdapter {
 						public void setResponseHandle(Message2 message) {
 							((BaseActivity) context).toast(message.getInfo());
 							if (type.equals("friend")) {
-								contactsList.get(position).setIsinvite(0);
+								contactsList.get(position).setInvite(0);
 								click.setText("邀请");
 								click.setTextColor(context.getResources().getColor(R.color.white));
 								click.setBackgroundColor(context.getResources().getColor(R.color.yellow_ffa200));

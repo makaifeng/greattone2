@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -48,6 +47,7 @@ import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
 import com.greattone.greattone.util.UpdateObjectToOSSUtil;
@@ -707,12 +707,14 @@ public class NormalMemberFragment extends BaseFragment {
 			if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
 				filePath = FileUtil.getLocalImageUrl(context,imgName) ;
 			       File temp = new File(filePath);    
-			     PhotoUtil.startPhotoZoom(context,Uri.fromFile(temp),1,1,600,600);
+//			     PhotoUtil.startPhotoZoom(context,Uri.fromFile(temp),1,1,600,600);
 //				iv_icon.setImageBitmap(BitmapUtil.getBitmapFromPHOTOGRAPH(
 //						context, filePath));
+				ImageLoaderUtil.getInstance().setImagebyurl("file://"+filePath,iv_icon);
 			} else if (requestCode == PhotoUtil.ALBUM) {// 相册
-			    PhotoUtil.startPhotoZoom(context,data.getData(),1,1,600,600);
+//			    PhotoUtil.startPhotoZoom(context,data.getData(),1,1,600,600);
 				filePath = BitmapUtil.getFileFromALBUM(context, data);
+				ImageLoaderUtil.getInstance().setImagebyurl("file://"+filePath,iv_icon);
 //				Bitmap bitmap = BitmapUtil.getBitmapFromFile( filePath);
 			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
 				Bundle extras = data.getExtras();    

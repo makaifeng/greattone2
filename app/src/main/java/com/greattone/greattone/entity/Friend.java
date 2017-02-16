@@ -19,10 +19,19 @@ Level level;
 String pinyin;
 int verification;
 int cked;
-int isinvite;
+//int isinvite;
 int invite;
 int invitetype;
 int guanxi;
+	int position;
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
 
 	public int getInvitetype() {
 		return invitetype;
@@ -48,13 +57,13 @@ int guanxi;
 		this.guanxi = guanxi;
 	}
 
-	public int getIsinvite() {
-		return isinvite;
-	}
-
-	public void setIsinvite(int isinvite) {
-		this.isinvite = isinvite;
-	}
+//	public int getIsinvite() {
+//		return isinvite;
+//	}
+//
+//	public void setIsinvite(int isinvite) {
+//		this.isinvite = isinvite;
+//	}
 
 	public int getCked() {
 		return cked;

@@ -2,6 +2,7 @@ package com.greattone.greattone.activity.plaza;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -118,6 +119,7 @@ public class InstrumentInfoActivity extends BaseActivity {
 							} else {
 								toast(getResources().getString(R.string.cannot_load_more));
 							}
+							initContentAdapter();
 							pull_to_refresh.onHeaderRefreshComplete();
 							pull_to_refresh.onFooterRefreshComplete();
 						}
@@ -162,4 +164,14 @@ public class InstrumentInfoActivity extends BaseActivity {
 			InstrumentInfoActivity.this.startActivity(intent);
 		}
 	};
+	/**
+	 * 加载ContentAdapter数据
+	 */
+	protected void initContentAdapter() {
+		Parcelable listState = lv_content.onSaveInstanceState();
+		adapter = new InterviewAdapter(context, newsList,imageUrlList,1);
+		lv_content.setAdapter(adapter);
+		lv_content.onRestoreInstanceState(listState);
+
+	}
 }
