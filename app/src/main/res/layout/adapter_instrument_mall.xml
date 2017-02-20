@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+    <com.greattone.greattone.widget.MyRoundImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="80.0dip"
+        android:layout_height="80.0dip"
+        android:layout_marginRight="5dp"
+     android:layout_centerVertical="true"
+        android:scaleType="centerCrop" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/iv_pic"
+        android:layout_toEndOf="@+id/iv_pic"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="不列塔尼交响乐团推荐"
+        android:textColor="@color/black"
+        android:textSize="@dimen/bigtext" />
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_pic"
+        android:layout_toEndOf="@+id/iv_pic"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="上海"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/smalltext" />
+    <LinearLayout android:id="@+id/ll_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_pic"
+        android:layout_toEndOf="@+id/iv_pic"
+        android:layout_below="@+id/tv_address"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+    <!--<com.greattone.greattone.widget.MyTextView-->
+        <!--android:id="@+id/tv_pay_num"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toRightOf="@+id/tv_price"-->
+        <!--android:layout_toEndOf="@+id/tv_price"-->
+        <!--android:layout_marginLeft="25dp"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:layout_below="@+id/ll_label"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:ellipsize="end"-->
+        <!--android:lines="1"-->
+        <!--android:text="200人付款"-->
+        <!--android:textColor="@android:color/darker_gray"-->
+        <!--android:textSize="@dimen/midtext" />-->
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_dian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@+id/ll_label"
+        android:layout_marginTop="3dp"
+        android:layout_alignParentRight="true"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="• • •"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/midtext" />
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="￥21000"
+        android:layout_below="@+id/ll_label"
+        android:layout_marginTop="3dp"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="@dimen/bigtext"
+        android:layout_alignLeft="@+id/ll_label"
+        android:layout_alignStart="@+id/ll_label" />
+</RelativeLayout>

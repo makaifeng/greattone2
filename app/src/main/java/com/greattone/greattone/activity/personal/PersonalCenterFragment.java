@@ -47,6 +47,7 @@ import com.greattone.greattone.activity.classroom.ClassRoomActivity;
 import com.greattone.greattone.activity.classroom.NoticeActivity;
 import com.greattone.greattone.activity.course.MyCoursesActivity;
 import com.greattone.greattone.activity.haixuan_and_activitise.MyActivityActivity;
+import com.greattone.greattone.activity.mall.MallSelectActivity;
 import com.greattone.greattone.activity.order.MyOrderActivity;
 import com.greattone.greattone.activity.qa.MyQAActivity;
 import com.greattone.greattone.activity.rent.MyRoomRentActivity;
@@ -261,8 +262,6 @@ public class PersonalCenterFragment extends BaseFragment {
 			} else if (names[listPosition].equals(getResources().getString(R.string.产品中心))) {// 产品中心
 				if (Data.user.getGroupid()==5) {
 					startActivity(new Intent(context, ProductArticleActivity.class));
-				}else if (Data.user.getGroupid()==4){
-					startActivity(new Intent(context, ProductArticleActivity.class));
 				}
 			} else if (names[listPosition].equals(getResources().getString(R.string.公司新闻))) {// 公司新闻
 				startActivity(new Intent(context, BrandNewsActivity.class));
@@ -277,6 +276,8 @@ public class PersonalCenterFragment extends BaseFragment {
 				startActivity(new Intent(context, LeaveMessageActivityCenter.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.联系我们))) {// 联系我们
 				startActivity(new Intent(context, ConnectWayActivityCenter.class));
+			} else if (names[listPosition].equals(getResources().getString(R.string.mall))) {// 产品商城
+				startActivity(new Intent(context, MallSelectActivity.class));
 			}
 		}
 

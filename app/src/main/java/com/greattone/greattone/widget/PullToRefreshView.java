@@ -185,6 +185,7 @@ public class PullToRefreshView extends LinearLayout {
 		// header view
 		mHeaderView = mInflater.inflate(R.layout.refresh_header, this, false);
 
+
 		mHeaderImageView = (ImageView) mHeaderView
 				.findViewById(R.id.pull_to_refresh_image);
 		mHeaderTextView = (TextView) mHeaderView
@@ -193,6 +194,7 @@ public class PullToRefreshView extends LinearLayout {
 				.findViewById(R.id.pull_to_refresh_updated_at);
 		mHeaderProgressBar = (ProgressBar) mHeaderView
 				.findViewById(R.id.pull_to_refresh_progress);
+//		mHeaderProgressBar.setVisibility(GONE);
 		// header layout
 		measureView(mHeaderView);
 		mHeaderViewHeight = mHeaderView.getMeasuredHeight();

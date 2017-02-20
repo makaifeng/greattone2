@@ -48,8 +48,8 @@
         <!--         <item>@string/我的收藏</item> -->
         <!--         <item>我的教室</item> -->
         <item>@string/我的问答</item>
-                 <item>我的订单</item>
-        <item>@string/产品中心</item>
+                 <!--<item>我的订单</item>-->
+        <item>@string/mall</item>
         <item>@string/音乐活动</item>
         <item>@string/琴行动态</item>
                 <item>@string/正在上传</item>
@@ -66,6 +66,7 @@
         <item>@string/公司新闻</item>
         <item>@string/销售渠道</item>
         <item>@string/留言板</item>
+        <item>@string/mall</item>
         <item>@string/联系我们</item>
                 <item>@string/正在上传</item>
         <item>@string/退出登录</item>

@@ -35,7 +35,7 @@
         android:layout_marginEnd="20dip"
         android:layout_marginTop="10dip"
         android:indeterminate="true"
-        android:visibility="gone" />
+         />
 
     <ImageView
         android:id="@+id/pull_to_refresh_image"

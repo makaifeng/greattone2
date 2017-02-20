@@ -388,6 +388,9 @@
     <string name="课程">课程</string>
     <string name="租赁">租赁</string>
     <string name="update">上传</string>
+    <!--个人中心-->
+    <string name="mall">产品商城</string>
+
 
     <string name="timetable_name">课程名称</string>
     <string name="timetable_location">上课地点</string>
@@ -410,4 +413,32 @@
     <string name="directory_5">老师</string>
     <string name="directory_6">教室</string>
     <string name="directory_7">品牌</string>
+
+    <!--产品商城-->
+    <string name="color_label">颜色分类(以逗号隔开)</string>
+    <string name="product_model">产品型号</string>
+    <string name="product_type">产品分类</string>
+    <string name="product_name">产品名称</string>
+    <string name="product_ohter_name">副标题</string>
+    <string name="price">价格</string>
+    <string name="shipping_city">发货城市</string>
+    <string name="advisory_telephone">咨询电话</string>
+    <string name="freight">运费(0表示免邮)</string>
+    <string name="desc">描述</string>
+    <string name="price_hint">价格：</string>
+    <string name="num_hint">数量：</string>
+    <string name="product_parameters">产品参数</string>
+    <string name="buyer_reviews">买家评论</string>
+    <string name="buy">&gt;&gt; 立即购买 &lt;&lt;</string>
+    <string name="commodity_name_hint">购买商品：</string>
+    <string name="product_type_hint">产品分类：</string>
+    <string name="pay_type_hint">支付方式：</string>
+    <string name="online_payment">在线支付</string>
+    <string name="shipping_methods_hint">配送方式：</string>
+    <string name="invoice_hint">发票：</string>
+    <string name="receiving_address_hint">收货地址：</string>
+    <string name="contact_way_hint">联系方式：</string>
+    <string name="linkman_hint">联系人：</string>
+    <string name="all_orders">全部订单</string>
+
 </resources>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_mall_order_editer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+
+
+    <ScrollView android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_botton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.greattone.greattone.widget.MyTextView
+    android:id="@+id/tv_commodity_name_hint"
+        style="@style/mall_order_hint_style"
+    android:text="@string/commodity_name_hint"/>
+    <TextView
+        android:id="@+id/tv_commodity_name"
+      style="@style/mall_order_text_style"
+       android:layout_alignBottom="@+id/tv_commodity_name_hint"
+        android:layout_toRightOf="@+id/tv_commodity_name_hint"
+        android:text="法兰山德钢琴 SP-210A"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_color_type_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_below="@+id/tv_commodity_name_hint"
+        android:text="@string/product_type_hint"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_color_type"
+        style="@style/mall_order_text_style"
+        android:layout_alignBottom="@+id/tv_color_type_hint"
+        android:layout_toRightOf="@+id/tv_color_type_hint"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:text="黑色"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_quantity_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_below="@+id/tv_color_type_hint"
+        android:text="@string/num_hint"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_quantity"
+        style="@style/mall_order_text_style"
+        android:layout_alignBottom="@+id/tv_quantity_hint"
+        android:layout_toRightOf="@+id/tv_quantity_hint"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:text="1"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_pay_type_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_below="@+id/tv_quantity_hint"
+        android:text="@string/pay_type_hint"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_pay_type"
+        style="@style/mall_order_text_style"
+        android:layout_alignBottom="@+id/tv_pay_type_hint"
+        android:layout_toRightOf="@+id/tv_pay_type_hint"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:text="@string/online_payment"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_shipping_methods_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_below="@+id/tv_pay_type_hint"
+        android:text="@string/shipping_methods_hint"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_shipping_methods"
+        style="@style/mall_order_text_style"
+        android:layout_alignBottom="@+id/tv_shipping_methods_hint"
+        android:layout_toRightOf="@+id/tv_shipping_methods_hint"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:text="快递配送（免运费）"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_invoice_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_below="@+id/tv_shipping_methods_hint"
+        android:text="@string/invoice_hint"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_invoice"
+        style="@style/mall_order_text_style"
+        android:layout_alignBottom="@+id/tv_invoice_hint"
+        android:layout_toRightOf="@+id/tv_invoice_hint"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:text="不开发票"/>
+    <View android:id="@+id/dividing"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray_8f8f8f"
+        android:layout_below="@+id/tv_invoice_hint"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_receiving_address_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_alignBaseline="@+id/et_receiving_address"
+        android:text="@string/receiving_address_hint"/>
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/et_receiving_address"
+        style="@style/post_edit_style_ordinary"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/dividing"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:hint="点击输入详细收货地址"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_contact_way_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_alignBaseline="@+id/et_contact_way"
+        android:text="@string/contact_way_hint"/>
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/et_contact_way"
+        style="@style/post_edit_style_ordinary"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/et_receiving_address"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:hint="点击输入联系方式"/>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_linkman_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_alignBaseline="@+id/et_linkman"
+        android:text="@string/linkman_hint"/>
+
+    <com.greattone.greattone.widget.MyEditText
+        android:id="@+id/et_linkman"
+        style="@style/post_edit_style_ordinary"
+        android:layout_marginTop="12dp"
+        android:hint="点击输入联系人"
+        android:layout_below="@+id/et_contact_way"
+        android:layout_alignLeft="@+id/et_contact_way"
+        android:layout_marginRight="20dp"
+        android:layout_alignStart="@+id/et_contact_way" />
+
+        <RelativeLayout android:id="@+id/rl_ht"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_below="@+id/et_linkman"
+            android:background="@color/gray_eeeeee">
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/gray_8f8f8f"
+                android:layout_marginRight="20dp"/>
+            <com.greattone.greattone.widget.MyTextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:text="应付总额：21000"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/rl_ht"
+            android:layout_margin="15dp"
+           >
+        <CheckBox android:id="@+id/cb_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/gray_7e7c7d"
+            android:drawablePadding="15dp"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="2dp"
+            android:paddingEnd="2dp"
+            android:button="@drawable/checked_button_bg2"
+            android:text="确认信息无误及同意"
+            />
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cb_agreement"
+            android:textSize="16sp"
+            android:textColor="@color/blue_037bff"
+
+            android:text="好琴声商行商品第三方买卖协议"/>
+</RelativeLayout>
+</RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout android:id="@+id/ll_botton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/yellow_ffa200"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <!-- 私信 -->
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_talk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/buy" />
+
+    </LinearLayout>
+</RelativeLayout>

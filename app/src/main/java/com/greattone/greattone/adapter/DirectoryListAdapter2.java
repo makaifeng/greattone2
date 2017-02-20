@@ -107,6 +107,9 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 		boolean isinvite;
 		public void setPosition(int position) {
 			lines.setVisibility(View.GONE);
+			click.setText("私信");
+			click2.setBackgroundResource(R.drawable.tongxunlu_button);
+			click2.setClickable(true);
 			if (position>inviteList.size()-1) {
 				this.position = position-inviteList.size();
 				friend=contactsList.get(this.position);

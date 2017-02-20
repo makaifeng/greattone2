@@ -513,7 +513,7 @@ public class NormalMemberFragment extends BaseFragment {
 		final String str5 = this.et_phone_num.getText().toString().trim();
 		final String str6 = this.et_email.getText().toString();
 		final String str7 = this.et_code.getText().toString();
-		if (bitmap == null) {
+		if (filePath == null) {
 			toast(getResources().getString(R.string.请选择头像));
 			return;
 		}

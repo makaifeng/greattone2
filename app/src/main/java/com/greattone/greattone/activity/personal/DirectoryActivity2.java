@@ -39,6 +39,8 @@ import com.greattone.greattone.widget.MyLetterListView;
 import com.greattone.greattone.widget.MyLetterListView.OnTouchingLetterChangedListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -277,9 +279,16 @@ private BadgeView badgeView;
 //				}
 //			}
 		}
+		Collections.sort(contactsList,new SortComparator());
 		contactsMap.get("#").addAll(contactsList);
 	}
-/**初始化map的数据*/
+	public class SortComparator implements Comparator<Friend> {
+		@Override
+		public int compare(Friend lhs, Friend rhs) {
+			return ( lhs).getPinyin().compareTo(( rhs).getPinyin());
+		}
+	}
+	/**初始化map的数据*/
 	private void initMap() {
 		contactsMap.clear();
 		for (int j = 0; j < b.length; j++) {

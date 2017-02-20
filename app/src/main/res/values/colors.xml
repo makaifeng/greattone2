@@ -16,6 +16,7 @@
     <color name="gray_7e7c7d">#ff7e7c7d</color>
     <color name="gray_7f060005">#7f060005</color>
     <color name="yellow_ffa200">#ffa200</color>
+    <color name="yellow_feae1e">#feae1e</color>
     <color name="news_subtitle_color1_f25e84">#f25e84</color>
     <color name="news_subtitle_color2_b677dd">#b677dd</color>
     <color name="news_subtitle_color3_47b9e9">#47b9e9</color>
@@ -52,6 +53,7 @@
             <!--WXPayEntryActivity  -->
      <color name="navpage">#FFE1E8EB</color>
      <color name="package_text_orange">#eb6100</color>
+     <color name="orange_e39564">#e39564</color>
 
          <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

@@ -37,6 +37,13 @@ import com.kf_test.picselect.GalleryActivity;
 import java.util.ArrayList;
 
 public class PostPictureActivity extends BaseActivity {
+//	private LinearLayout ll_select_picture;
+	int type=GalleryActivity.TYPE_PICTURE;
+	String mid = "10";
+	String classid = "12";
+	String filepass = System.currentTimeMillis()+"";
+	int num=0;
+	UpdateObjectToOSSUtil updateObjectToOSSUtil;
 //	private TextView send;
 	private EditText et_theme;
 //	private LinearLayout ll_type;
@@ -45,17 +52,81 @@ public class PostPictureActivity extends BaseActivity {
 //	private ImageView iv_select_video;
 	private TextView tv_select_location;
 	private TextView tv_select_video;
-//	private LinearLayout ll_select_picture;
-	int type=GalleryActivity.TYPE_PICTURE;
 	private MyGridView gv_pic;
 	private PostGridAdapter adapter;
-	String mid = "10";
-	String classid = "12";
-	String filepass = System.currentTimeMillis()+"";
 	private ProgressDialog pd;
 	private ArrayList<Picture> pictureFileList=new ArrayList<>();
 	private String title;
 	private String newstext;
+//	//图片删除按钮
+//	OnBtnItemClickListener itemClickListener=new OnBtnItemClickListener() {
+//
+//		@Override
+//		public void onItemClick(View v, int position) {
+//			pictureFileList.remove(position);
+////			if (videoFileList.size()==0) {
+////				iv_select_video.setVisibility(View.VISIBLE);
+////			}
+//			adapter.setList(pictureFileList);
+//		}
+//	};
+//	private ArrayList<String> pictureFileList=new ArrayList<String>();
+//	private ArrayList<String> pictureUrlList=new ArrayList<String>();
+	private  String photos="";
+	private OnClickListener lis=new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.ll_type://类型
+				break;
+			case R.id.tv_head_other://发送
+				post();
+				break;
+			case R.id.tv_select_location://位置
+				startActivityForResult(new Intent(context, SelectBdLocationActivity.class), 101);
+				break;
+//			case R.id.iv_select_video://视频
+//				 MyIosDialog.ShowBottomDialog(context, "", new String []{"去拍照","去相册"}, new DialogItemClickListener() {
+//
+//					@Override
+//					public void itemClick(String result, int position) {
+//						if (result.equals("去拍照")) {
+//
+//						}else if (result.equals("去相册")) {
+//							Intent intent = new Intent(context,GalleryActivity.class);
+//							intent.putExtra(Constants.EXTRA_PHOTO_LIMIT, 8);//最大选择数
+//							intent.putExtra("type", type);//选择类型
+//							startActivityForResult(intent, 1);
+//						}
+//					}
+//				});
+//				break;
+
+			default:
+				break;
+			}
+		}
+	};
+	Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what){
+				case 0:
+					updatePic2();
+					break;
+				case 1:
+					pd.setMessage((CharSequence) message.obj);
+					break;
+				case 2:
+					pd.dismiss();
+					break;
+				default:
+					super.handleMessage(message);
+					break;
+			}
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +134,7 @@ public class PostPictureActivity extends BaseActivity {
 		setContentView(R.layout.activity_post_video);
 		initView();
 	}
-	
+
 	private void initView() {
 		setHead(getResources().getString(R.string.发送图片), true, true);
 		setOtherText(getResources().getString(R.string.发送), lis);
@@ -83,62 +154,12 @@ public class PostPictureActivity extends BaseActivity {
 		tv_select_video.setVisibility(View.GONE);
 		tv_select_location = (TextView) findViewById(R.id.tv_select_location);
 		tv_select_location.setOnClickListener(lis);
-		
+
 		ImageView iv_gg = (ImageView) findViewById(R.id.iv_gg);
 		iv_gg.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, screenWidth/4));
 		ImageLoaderUtil.getInstance().setImagebyurl(getIntent().getStringExtra("ggUrl"), iv_gg);
 	}
-	private OnClickListener lis=new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			switch (v.getId()) {
-			case R.id.ll_type://类型
-				break;
-			case R.id.tv_head_other://发送
-				post();
-				break;
-			case R.id.tv_select_location://位置
-				startActivityForResult(new Intent(context, SelectBdLocationActivity.class), 101);
-				break;
-//			case R.id.iv_select_video://视频
-//				 MyIosDialog.ShowBottomDialog(context, "", new String []{"去拍照","去相册"}, new DialogItemClickListener() {
-//					
-//					@Override
-//					public void itemClick(String result, int position) {
-//						if (result.equals("去拍照")) {
-//							
-//						}else if (result.equals("去相册")) {
-//							Intent intent = new Intent(context,GalleryActivity.class);
-//							intent.putExtra(Constants.EXTRA_PHOTO_LIMIT, 8);//最大选择数
-//							intent.putExtra("type", type);//选择类型
-//							startActivityForResult(intent, 1);
-//						}
-//					}
-//				});
-//				break;
 
-			default:
-				break;
-			}
-		}
-	};
-//	//图片删除按钮
-//	OnBtnItemClickListener itemClickListener=new OnBtnItemClickListener() {
-//		
-//		@Override
-//		public void onItemClick(View v, int position) {
-//			pictureFileList.remove(position);
-////			if (videoFileList.size()==0) {
-////				iv_select_video.setVisibility(View.VISIBLE);
-////			}
-//			adapter.setList(pictureFileList);
-//		}
-//	};
-//	private ArrayList<String> pictureFileList=new ArrayList<String>();
-//	private ArrayList<String> pictureUrlList=new ArrayList<String>();
-	private  String photos="";
-	int num=0;
 	/**发帖*/
 	protected void post() {
 		title = et_theme.getText().toString().trim();
@@ -157,7 +178,7 @@ public class PostPictureActivity extends BaseActivity {
 			toast(getResources().getString(R.string.请填写内容));
 			return;
 		}
-		
+
 		//发送图片
 //		for (int i = 0; i < pictureFileList.size(); i++) {
 //			HttpProxyUtil.updatePicture(context, filepass, classid, pictureFileList.get(i).getPicUrl(),	new ResponseListener() {
@@ -184,7 +205,7 @@ public class PostPictureActivity extends BaseActivity {
 		updatePic2();
 
 	}
-	UpdateObjectToOSSUtil updateObjectToOSSUtil;
+
 	protected void updatePic2() {
 		pd.setMessage("上传第"+(num+1)+"张");
 		String path= pictureFileList.get(num).getPicUrl();
@@ -213,26 +234,6 @@ public class PostPictureActivity extends BaseActivity {
 			}
 		});
 	}
-	Handler handler=new Handler(){
-		@Override
-		public void handleMessage(Message message) {
-			switch (message.what){
-				case 0:
-					updatePic2();
-					break;
-				case 1:
-					pd.setMessage((CharSequence) message.obj);
-					break;
-				case 2:
-					pd.dismiss();
-					break;
-				default:
-					super.handleMessage(message);
-					break;
-			}
-		}
-	};
-
 
 	protected void post1() {
 		Message.obtain(handler,1,"上传数据中...").sendToTarget();
