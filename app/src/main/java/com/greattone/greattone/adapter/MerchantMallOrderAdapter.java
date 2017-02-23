@@ -24,12 +24,12 @@ import com.greattone.greattone.util.ImageLoaderUtil;
 
 import java.util.List;
 
-public class MyMallOrderAdapter extends BaseAdapter {
+public class MerchantMallOrderAdapter extends BaseAdapter {
 	private Context context;
 	private List<MallOrder> orderList;
 	private int screenWidth;
 
-	public MyMallOrderAdapter(Context context, List<MallOrder> orderList) {
+	public MerchantMallOrderAdapter(Context context, List<MallOrder> orderList) {
 		this.context = context;
 		this.orderList = orderList;
 		screenWidth = ((BaseActivity) context).screenWidth;
@@ -99,7 +99,7 @@ public class MyMallOrderAdapter extends BaseAdapter {
 				ImageLoaderUtil.getInstance().setImagebyurl(
 						pic[0], icon);
 			}
-			name.setText(order.getSellername());
+			name.setText(order.getBuyersname());
 			orderid.setText("订单号："+order.getOrderid());
 			showState();
 			title.setText(order.getTitle()+"  "+order.getModel());
@@ -110,30 +110,32 @@ public class MyMallOrderAdapter extends BaseAdapter {
 			button2.setOnClickListener(lis);
 		}
 		private  void showState(){
+			button.setVisibility(View.GONE);
+			button2.setVisibility(View.GONE);
 			//1=未付款 2=已付款 3=已取消 4=以发货 5=已收货
 			if (order.getState()==1){
 				state.setText("未付款");
-				button.setVisibility(View.VISIBLE);
-				button2.setVisibility(View.GONE);
-				button.setText("付 款");
+//				button.setVisibility(View.VISIBLE);
+//				button2.setVisibility(View.GONE);
+//				button.setText("付 款");
 			}else if (order.getState()==2){
 				state.setText("待发货");
-				button.setVisibility(View.GONE);
-				button2.setVisibility(View.GONE);
+//				button.setVisibility(View.GONE);
+//				button2.setVisibility(View.GONE);
 			}else if (order.getState()==3){
-				button.setVisibility(View.GONE);
-				button2.setVisibility(View.GONE);
+//				button.setVisibility(View.GONE);
+//				button2.setVisibility(View.GONE);
 				state.setText("已取消");
 			}else if (order.getState()==4){
 				state.setText("已发货");
-				button.setVisibility(View.VISIBLE);
-				button2.setVisibility(View.VISIBLE);
-				button.setText("确认收货");
+//				button.setVisibility(View.VISIBLE);
+//				button2.setVisibility(View.VISIBLE);
+//				button.setText("确认收货");
 			}else if (order.getState()==5){
 				state.setText("已收货");
-				button.setVisibility(View.VISIBLE);
-				button2.setVisibility(View.VISIBLE);
-				button.setText("评 价");
+//				button.setVisibility(View.VISIBLE);
+//				button2.setVisibility(View.VISIBLE);
+//				button.setText("评 价");
 			}
 		}
 		private View.OnClickListener lis=new View.OnClickListener() {

@@ -15,6 +15,7 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.celebrity.CelebrityActivity;
 import com.greattone.greattone.activity.chat.MyChatActivity;
 import com.greattone.greattone.activity.course.CourseCenterActivity;
+import com.greattone.greattone.activity.mall.InstrumentMallActivity;
 import com.greattone.greattone.activity.map.ShowMapActivity;
 import com.greattone.greattone.activity.qa.AskQuestionActivity;
 import com.greattone.greattone.activity.rent.RentKotofusaActivity;
@@ -74,7 +75,7 @@ public class ClassRoomActivity extends BaseActivity {
 	private View tv_student;
 	private View tv_tlq;
 	private ImageView iv_share;
-
+   private View tv_mall;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,6 +130,8 @@ public class ClassRoomActivity extends BaseActivity {
 		focus = (TextView) findViewById(R.id.tv_focus);
 		focus.setSelected(true);
 		focus.setOnClickListener(lis);
+		tv_mall =  findViewById(R.id.tv_mall);
+		tv_mall.setOnClickListener(lis);
 
 	}
 
@@ -237,6 +240,11 @@ public class ClassRoomActivity extends BaseActivity {
 				intent.setClass(context, CelebrityActivity.class);
 				intent.putExtra("id", people.getUserid() + "");
 				intent.putExtra("groupid",people.getGroupid());
+				startActivity(intent);
+			} else if (v == tv_mall) {// 乐器商城
+				Intent intent=new Intent(context,InstrumentMallActivity.class);
+				intent.putExtra("isbusiness",0);
+				intent.putExtra("userid",people.getUserid()+"");
 				startActivity(intent);
 			}
 		}

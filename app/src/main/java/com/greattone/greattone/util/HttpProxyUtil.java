@@ -563,11 +563,13 @@ public class HttpProxyUtil {
     /**
      *获取商城列表
      */
-    public static void getProducts(Context context,String userid, ResponseListener responseListener,
+    public static void getProducts(Context context,String userid, int pageSize,int pageIndex, ResponseListener responseListener,
                                    ErrorResponseListener errorResponseListener) {
         HashMap<String, String> map = new HashMap<>();
         map.put("api", "mall/getMyProducts");
         map.put("userid", userid);
+        map.put("pageSize", pageSize + "");
+        map.put("pageIndex", pageIndex + "");
         addRequest(context,map,responseListener,errorResponseListener);
     }
     /**
@@ -589,5 +591,28 @@ public class HttpProxyUtil {
             map.put("api", "mall/createOrder");
             addRequest(context,map,responseListener,errorResponseListener);
         }
+    }
+    /**
+     *获取商城订单列表
+     */
+    public static void getMallOrders(Context context,String isbusiness,String type, int pageSize,int pageIndex,ResponseListener responseListener,
+                                  ErrorResponseListener errorResponseListener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("api", "mall/getMallOrders");
+        map.put("isbusiness", isbusiness);
+        map.put("type", type);
+        map.put("pageSize", pageSize + "");
+        map.put("pageIndex", pageIndex + "");
+        addRequest(context,map,responseListener,errorResponseListener);
+    }
+    /**
+     *商城订单确认收货
+     */
+    public static void confirmReceipt(Context context,String id,ResponseListener responseListener,
+                                  ErrorResponseListener errorResponseListener) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("api", "mall/confirmReceipt");
+        map.put("id", id);
+        addRequest(context,map,responseListener,errorResponseListener);
     }
 }

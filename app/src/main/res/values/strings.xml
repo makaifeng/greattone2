@@ -440,5 +440,10 @@
     <string name="contact_way_hint">联系方式：</string>
     <string name="linkman_hint">联系人：</string>
     <string name="all_orders">全部订单</string>
+    <string name="seller_message">卖家信息</string>
+    <string name="logistics_message">物流信息</string>
+    <string name="receipt_message">收货信息</string>
+    <string name="pay_and_invoice">支付及发票</string>
+    <string name="pay_type">支付方式：在线支付</string>
 
 </resources>

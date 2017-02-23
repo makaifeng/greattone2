@@ -1,10 +1,12 @@
 package com.greattone.greattone.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/2/20.
  */
 
-public class MallOrder {
+public class MallOrder implements Serializable {
     String orderid;
     int id;
     String titleid;
@@ -18,9 +20,10 @@ public class MallOrder {
     String freight;
     String money;
     String type;
-    String ordeytype;
+    int state;
     String name;
     String phone;
+    String model;
     String address;
     String invoice;
     String paymenttime;
@@ -29,15 +32,23 @@ public class MallOrder {
     String logisticsnumber;
     String logisticstime;
     String paytime;
-    String ddno;
     String title;
+    String city;
 
-    public String getDdno() {
-        return ddno;
+    public String getModel() {
+        return model;
     }
 
-    public void setDdno(String ddno) {
-        this.ddno = ddno;
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getTitle() {
@@ -152,12 +163,12 @@ public class MallOrder {
         this.type = type;
     }
 
-    public String getOrdeytype() {
-        return ordeytype;
+    public int getState() {
+        return state;
     }
 
-    public void setOrdeytype(String ordeytype) {
-        this.ordeytype = ordeytype;
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getName() {

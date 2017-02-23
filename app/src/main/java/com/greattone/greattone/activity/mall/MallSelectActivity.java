@@ -51,9 +51,13 @@ public class MallSelectActivity extends BaseActivity {
      */
     private void startIntent(int position) {
         if (names[position].equals("我的产品")) {//我的产品
-            startActivity(new Intent(context, InstrumentMallActivity.class));
+            Intent intent=new Intent(context,InstrumentMallActivity.class);
+            intent.putExtra("isbusiness",1);
+            startActivity(intent);
         }else if (names[position].equals("我的订单")){
-            startActivity(new Intent(context, MyMallOrderActivity.class));
+            Intent intent=new Intent(context,MerchantMallOrderActivity.class);
+            intent.putExtra("isbusiness",1);
+            startActivity(intent);
         }
     }
 

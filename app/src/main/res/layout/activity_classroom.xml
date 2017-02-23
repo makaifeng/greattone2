@@ -282,106 +282,46 @@
                             android:text="@string/tlq" />
                     </FrameLayout>
                 </LinearLayout>
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_comments"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/classroom_comments" />-->
-                
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!-- 推荐视频 -->
 
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_recommended_video"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/recommended_video" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!--&lt;!&ndash; 课程中心 &ndash;&gt;-->
-
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_course_center"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/course_center" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!--&lt;!&ndash; 琴房租赁 &ndash;&gt;-->
-
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_room_lease"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/room_lease" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!--&lt;!&ndash; 音乐老师 &ndash;&gt;-->
-
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_teacher"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/misic_teacher" />-->
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!--&lt;!&ndash; 全部学员 &ndash;&gt;-->
-
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_student"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/misic_student" -->
-                    <!--android:visibility="gone"/>-->
-
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!--&lt;!&ndash; 活动公告 &ndash;&gt;-->
-
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_announcements"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/announcements" />-->
-                                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/gray_eeeeee" />-->
-                <!--&lt;!&ndash; 讨论区 &ndash;&gt;-->
-
-                <!--<com.greattone.greattone.widget.MyTextView-->
-                    <!--android:id="@+id/tv_tlq"-->
-                    <!--style="@style/TeacherOrClassRoomItem"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/tlq" -->
-                    <!--android:visibility="gone"/>-->
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <FrameLayout       android:id="@+id/tv_mall"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="#ffbad7"
+                        >
+                        <com.greattone.greattone.widget.MyTextView
+                            style="@style/TeacherOrClassRoomItem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableLeft="@drawable/icon_play"
+                            android:drawablePadding="5dp"
+                            android:text="乐器商城"  />
+                    </FrameLayout>
+                    <FrameLayout     android:id="@+id/tv"
+                        android:visibility="invisible"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="#f9ff83"
+                        >
+                        <com.greattone.greattone.widget.MyTextView
+                            style="@style/TeacherOrClassRoomItem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:drawableLeft="@drawable/icon_play"
+                            android:drawablePadding="5dp"
+                            android:layout_gravity="center"
+                            android:text="@string/tlq" />
+                    </FrameLayout>
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

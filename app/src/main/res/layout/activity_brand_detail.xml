@@ -179,14 +179,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray_eeeeee" />
-                <!-- 留言板 -->
-
                 <com.greattone.greattone.widget.MyTextView
                     android:id="@+id/tv_message"
                     style="@style/TeacherOrClassRoomItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/留言板" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_eeeeee" />
+                <!-- 留言板 -->
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_mall"
+                    style="@style/TeacherOrClassRoomItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="乐器商城" />
 
                 <View
                     android:layout_width="match_parent"

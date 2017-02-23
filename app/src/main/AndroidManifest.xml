@@ -931,22 +931,27 @@
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.mall.MallProductDetailActivity"
+        <activity
+            android:name=".activity.mall.MallProductDetailActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.mall.MallSelectActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.mall.MallSelectActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.mall.MyMallOrderActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.mall.MerchantMallOrderActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.mall.MallOrderEditerActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.mall.MallOrderEditerActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".activity.mall.MallOrderDetailActivity"></activity>
     </application>
 
 </manifest>

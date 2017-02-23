@@ -26,52 +26,20 @@ import java.util.List;
  *琴行商城的产品列表
  */
 public class InstrumentMallActivity extends BaseActivity {
+    InstrumentMallAdapter adapter;
+    List<MusicalProduct> productList =new ArrayList<>();
+
     private ListView lv_content;
     private PullToRefreshView pull_to_refresh;
     private int page = 1;
-    InstrumentMallAdapter adapter;
-    List<MusicalProduct> productList =new ArrayList<>();
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        try {
-//            setContentView(R.layout.adapter_instrument_mall);
-            setContentView(R.layout.layout_list);
-            initView();
-            getData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initView() {
-        setHead("乐器商城",true,true);
-        setOtherText("发布", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    startActivityForResult(new Intent(context,PostMallProductActivity.class),22);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        pull_to_refresh = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
-        lv_content = (ListView) findViewById(R.id.lv_content);
-        adapter = new InstrumentMallAdapter(context, productList);
-        lv_content.setAdapter(this.adapter);
-        lv_content.setOnItemClickListener(listener);
-        pull_to_refresh.setOnHeaderRefreshListener(headerRefreshListener);
-        pull_to_refresh.setOnFooterRefreshListener(footerRefreshListener);
-
-    }
+    private int pageSize = 10;
+    int isbusiness;
     AdapterView.OnItemClickListener listener=new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent=new Intent(InstrumentMallActivity.this,MallProductDetailActivity.class);
             intent.putExtra("id",productList.get(position).getId());
+            intent.putExtra("isbusiness",isbusiness);
             startActivityForResult(intent,3);
         }
     };
@@ -93,12 +61,54 @@ public class InstrumentMallActivity extends BaseActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+//            setContentView(R.layout.adapter_instrument_mall);
+            isbusiness=getIntent().getIntExtra("isbusiness",0);
+            setContentView(R.layout.layout_list);
+            initView();
+            getData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initView() {
+        setHead("乐器商城",true,true);
+        if(isbusiness==1) {
+            setOtherText("发布", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        startActivityForResult(new Intent(context, PostMallProductActivity.class), 22);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+        pull_to_refresh = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
+        lv_content = (ListView) findViewById(R.id.lv_content);
+        adapter = new InstrumentMallAdapter(context, productList);
+        lv_content.setAdapter(this.adapter);
+        lv_content.setOnItemClickListener(listener);
+        pull_to_refresh.setOnHeaderRefreshListener(headerRefreshListener);
+        pull_to_refresh.setOnFooterRefreshListener(footerRefreshListener);
+
+    }
+
     /**
      *
      */
     private void getData() {
-
-        HttpProxyUtil.getProducts(context, null, new HttpUtil.ResponseListener() {
+        String userid="";
+        if (isbusiness!=1){
+            userid=getIntent().getStringExtra("userid");
+        }
+        HttpProxyUtil.getProducts(context, userid, pageSize,page,new HttpUtil.ResponseListener() {
                     @Override
                     public void setResponseHandle(Message2 message) {
                         if (message.getData() != null

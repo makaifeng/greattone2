@@ -1,8 +1,8 @@
 package com.greattone.greattone.activity.mall;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -10,6 +10,9 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.data.HttpConstants2;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.MusicalProduct;
@@ -40,6 +44,7 @@ public class MallProductDetailActivity extends BaseActivity {
     LinearLayout ll_label;
     RadioGroup rg_color;RadioGroup radiogroup;
     String color;
+    WebView webview;
     View.OnClickListener lis = new View.OnClickListener() {
 
         @Override
@@ -50,6 +55,7 @@ public class MallProductDetailActivity extends BaseActivity {
                     intent.putExtra("id",product.getId());
                     intent.putExtra("name",product.getTitle());
                     intent.putExtra("type",product.getType());
+                    intent.putExtra("model",product.getModel());
                     intent.putExtra("color",color);
                     intent.putExtra("freight",product.getFreight());
                     intent.putExtra("price",product.getMoney());
@@ -66,22 +72,27 @@ public class MallProductDetailActivity extends BaseActivity {
             }else if (group==radiogroup){
                 switch (checkedId) {
                     case R.id.radioButton1:
-
+                        webview.setVisibility(View.VISIBLE);
                         break;
-                    case R.id.radioButton2:
-
-                        break;
+//                    case R.id.radioButton2:
+//                        webview.setVisibility(View.GONE);
+//                        break;
                 }
             }
         }
     };
-
+    int isbusiness;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mall_product_detail);
-        initView();
-        getData();
+        try {
+            isbusiness=getIntent().getIntExtra("isbusiness",0);
+            setContentView(R.layout.activity_mall_product_detail);
+            initView();
+            getData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
@@ -100,12 +111,32 @@ public class MallProductDetailActivity extends BaseActivity {
         rg_color = (RadioGroup) findViewById(R.id.rg_color);
 
         tv_num = (TextView) findViewById(R.id.tv_num);
-        ( findViewById(R.id.ll_botton)).setOnClickListener(lis);
-
+        if (isbusiness==1){
+            (findViewById(R.id.ll_botton)).setVisibility(View.GONE);
+        }else {
+            (findViewById(R.id.ll_botton)).setOnClickListener(lis);
+        }
          radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
         radiogroup.check(R.id.radioButton1);
         radiogroup.setOnCheckedChangeListener(onCheckedChangeListener);
-        addFragment(new ProductParametersFragment());
+        webview = (WebView) findViewById(R.id.webview);
+
+    }
+
+    private void initWebView() {
+
+        WebSettings webSettings = webview.getSettings();
+        // 设置WebView属性，能够执行Javascript脚本
+        webSettings.setJavaScriptEnabled(true);
+//        // 设置可以访问文件
+//        webSettings.setAllowFileAccess(true);
+//        // 设置支持缩放
+//        webSettings.setBuiltInZoomControls(true);
+        // 加载需要显示的网页
+	 String urlPath =  HttpConstants2.SERVER_URL+"/app/product.php?id="+product.getId();
+        webview.loadUrl(urlPath);
+        // 设置Web视图
+        webview.setWebViewClient(new webViewClient());
     }
 
     private void getData() {
@@ -174,15 +205,9 @@ public class MallProductDetailActivity extends BaseActivity {
         sps.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.gray_8f8f8f)), city.length() + 4, city.length() + 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         sps.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red_b90006)), city.length() + 9, city.length() + comms.length() + 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv_address.setText(sps);
+        initWebView();
+    }
 
-    }
-    protected void addFragment(Fragment fragment) {
-        Bundle bundle=new Bundle();
-        bundle.putString("id", getIntent().getStringExtra("id"));
-        fragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment, fragment).commit();
-    }
     private void addLabelView(String name, LinearLayout ll) {
         MyTextView textview = new MyTextView(context, null);
         textview.setTextColor(context.getResources().getColor(R.color.white));
@@ -236,5 +261,27 @@ public class MallProductDetailActivity extends BaseActivity {
     protected void onDestroy() {
         mybanner.stop();
         super.onDestroy();
+    }
+
+
+    // Web视图
+    private class webViewClient extends WebViewClient {
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
+            super.onPageStarted(view, url, favicon);
+
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            MyProgressDialog.Cancel();
+            super.onPageFinished(view, url);
+        }
     }
 }

@@ -15,6 +15,7 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.WebActivity;
 import com.greattone.greattone.activity.celebrity.CelebrityActivity;
+import com.greattone.greattone.activity.mall.InstrumentMallActivity;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.UserInfo;
@@ -59,6 +60,7 @@ public class BrandDetailActivity extends BaseActivity {
 	private TextView tv_telphone;
 	/** 地址 */
 	private TextView tv_address;
+	private TextView tv_mall;
 
 
 	/** 轮播控件 */
@@ -113,6 +115,9 @@ public class BrandDetailActivity extends BaseActivity {
 		focus = (TextView) findViewById(R.id.tv_focus);
 		focus.setSelected(true);
 		focus.setOnClickListener(lis);
+		tv_mall = (TextView) findViewById(R.id.tv_mall);
+		tv_mall.setCompoundDrawables(null, null, drawable, null);
+		tv_mall.setOnClickListener(lis);
 
 	}
 
@@ -154,6 +159,11 @@ public class BrandDetailActivity extends BaseActivity {
 				startActivity(intent);
 			} else if (v == focus) {// 关注
 				addAttention();
+			} else if (v == tv_mall) {// 乐器商城
+				Intent intent=new Intent(context,InstrumentMallActivity.class);
+				intent.putExtra("isbusiness",0);
+				intent.putExtra("userid",people.getUserid()+"");
+				startActivity(intent);
 			}
 		}
 	};

@@ -52,7 +52,11 @@ public class PostMallProductActivity extends BaseActivity {
                 switch (v.getId()){
                     case R.id.tv_type://类型
                         List<String> list=new ArrayList<>();
-                        list.add("sss");
+                        list.add("钢琴");
+                        list.add("提琴");
+                        list.add("吉他");
+                        list.add("管乐");
+                        list.add("大打击乐器");
                         NormalPopuWindow pop=   new NormalPopuWindow(context,list,ll_type);
                         pop.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
                             @Override

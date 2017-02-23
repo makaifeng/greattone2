@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
@@ -21,26 +22,42 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.PayActivity;
 import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.MallOrder;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+/**
+ * 商城订单信息编辑-联系人，收货地址等
+ */
 public class MallOrderEditerActivity extends BaseActivity {
-TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_methods,tv_invoice,text,tv_price,tv_agreement;
-    EditText et_receiving_address,et_contact_way,et_linkman;
+TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_methods,tv_invoice,text,tv_price,tv_agreement,tv_invoice_title_hint;
+    EditText et_receiving_address,et_contact_way,et_linkman,et_invoice_title;
     CheckBox cb_agreement;
     View ll_botton;
     String receiving_address,contact_way,linkman;
+    boolean isNeedInvoice;
     private View.OnClickListener lis=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            creatOrder();
+            switch (v.getId()){
+                case R.id.ll_botton:
+                    creatOrder();
+                    break;
+                case R.id.tv_invoice:
+                    showPopWindow(v);
+                    break;
+            }
+
         }
     };
+
     private TextWatcher watcher1=new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,10 +117,11 @@ TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_met
     private void getIntentData() {
         String name=getIntent().getStringExtra("name");
         String type=getIntent().getStringExtra("type");
+        String model=getIntent().getStringExtra("model");
          color=getIntent().getStringExtra("color");
         int freight=getIntent().getIntExtra("freight",0);
         int price=getIntent().getIntExtra("price",0);
-        tv_commodity_name.setText(name+" "+type);
+        tv_commodity_name.setText(name+" "+model);
         tv_color_type.setText(color);
         int money=price+freight;
         String s="应付总额：￥"+money;
@@ -126,12 +144,16 @@ TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_met
         tv_pay_type= (TextView) findViewById(R.id.tv_pay_type);
         tv_shipping_methods= (TextView) findViewById(R.id.tv_shipping_methods);
         tv_invoice= (TextView) findViewById(R.id.tv_invoice);
+        tv_invoice_title_hint= (TextView) findViewById(R.id.tv_invoice_title_hint);
+        et_invoice_title= (EditText) findViewById(R.id.et_invoice_title);
+        tv_invoice= (TextView) findViewById(R.id.tv_invoice);
+        tv_invoice.setOnClickListener(lis);
         et_receiving_address= (EditText) findViewById(R.id.et_receiving_address);
-        et_receiving_address.addTextChangedListener(watcher1);
+//        et_receiving_address.addTextChangedListener(watcher1);
         et_contact_way= (EditText) findViewById(R.id.et_contact_way);
-        et_contact_way.addTextChangedListener(watcher2);
+//        et_contact_way.addTextChangedListener(watcher2);
         et_linkman= (EditText) findViewById(R.id.et_linkman);
-        et_linkman.addTextChangedListener(watcher3);
+//        et_linkman.addTextChangedListener(watcher3);
         text= (TextView) findViewById(R.id.text);
         tv_price= (TextView) findViewById(R.id.tv_price);
         cb_agreement= (CheckBox) findViewById(R.id.cb_agreement);
@@ -147,7 +169,12 @@ TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_met
      * 生成订单
      */
     private void creatOrder() {
-        MyProgressDialog.show(context);
+
+        String invoice=et_invoice_title.getText().toString().trim();
+        if (TextUtils.isEmpty(invoice)){
+            toast("请填写发票抬头");
+            return;
+        }
         if (linkman==null||linkman.length()==0){
             toast("请填写联系人");
             return;
@@ -168,12 +195,16 @@ TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_met
             toast("请确认协议");
             return;
         }
+        MyProgressDialog.show(context);
         HashMap<String ,String> map=new HashMap<>();
         map.put("id",getIntent().getStringExtra("id"));
         map.put("name",linkman);
         map.put("phone",contact_way);
         map.put("address",receiving_address);
-        map.put("invoice","");//发票抬头
+        if (isNeedInvoice){
+            map.put("invoice",invoice);//发票抬头
+        }
+
         map.put("colour",color);
         HttpProxyUtil.creatMallOrder(context, map, new HttpUtil.ResponseListener() {
             @Override
@@ -185,7 +216,8 @@ TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_met
                     intent.putExtra("name", order.getTitle());
                     intent.putExtra("contant", order.getTitle());
                     intent.putExtra("price", order.getPrice());
-                    intent.putExtra("orderId", order.getDdno());
+                    intent.putExtra("orderId", order.getOrderid());
+                    intent.putExtra("type", "shangcheng");
                     ((Activity) context).startActivityForResult(intent, 3);
                     setResult(RESULT_OK);
                     MyProgressDialog.Cancel();
@@ -204,6 +236,30 @@ TextView tv_commodity_name,tv_color_type,tv_quantity,tv_pay_type,tv_shipping_met
 
             }
         });
+    }
+
+    private void showPopWindow(View v) {
+        List<String> list=new ArrayList<>();
+        list.add("不要发票");
+        list.add("需要发票");
+        NormalPopuWindow pop=new NormalPopuWindow(context,list,v);
+        pop.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
+            @Override
+            public void OnClick(int position, String text) {
+                tv_invoice.setText(text+" ▼");
+                isNeedInvoice=false;
+                if (position==1){
+                    isNeedInvoice=true;
+                    et_invoice_title.setVisibility(View.VISIBLE);
+                    tv_invoice_title_hint.setVisibility(View.INVISIBLE);
+                }else {
+                    isNeedInvoice=false;
+                    et_invoice_title.setVisibility(View.GONE);
+                    tv_invoice_title_hint.setVisibility(View.GONE);
+                }
+            }
+        });
+        pop.show();
     }
     private void ShowText() {
         String ttt="";

@@ -399,6 +399,8 @@ public class PersonalCenterFragment extends BaseFragment {
 				return R.drawable.center_lyb;
 			} else if (names[position].equals(getResources().getString(R.string.联系我们))) {// 联系我们
 				return R.drawable.center_lxwm;
+			} else if (names[position].equals(getResources().getString(R.string.mall))) {// 产品商城
+				return R.drawable.center_mall;
 			}
 			return R.drawable.center_post;
 		}

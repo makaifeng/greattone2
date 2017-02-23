@@ -79,24 +79,51 @@
         android:layout_toRightOf="@+id/tv_shipping_methods_hint"
         android:layout_alignLeft="@+id/tv_commodity_name"
         android:text="快递配送（免运费）"/>
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_invoice_hint"
-        style="@style/mall_order_hint_style"
-        android:layout_below="@+id/tv_shipping_methods_hint"
-        android:text="@string/invoice_hint"/>
-    <com.greattone.greattone.widget.MyTextView
-        android:id="@+id/tv_invoice"
-        style="@style/mall_order_text_style"
-        android:layout_alignBottom="@+id/tv_invoice_hint"
-        android:layout_toRightOf="@+id/tv_invoice_hint"
-        android:layout_alignLeft="@+id/tv_commodity_name"
-        android:text="不开发票"/>
     <View android:id="@+id/dividing"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="@color/gray_8f8f8f"
-        android:layout_below="@+id/tv_invoice_hint"/>
+        android:layout_below="@+id/tv_shipping_methods_hint"/>
+     <LinearLayout android:id="@+id/ll_invoice"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/tv_invoice"
+         android:gravity="center_vertical"
+         android:paddingBottom="5dp"
+         android:orientation="horizontal">
+         <com.greattone.greattone.widget.MyTextView
+             android:id="@+id/tv_invoice_title_hint"
+             style="@style/mall_order_hint_style"
+             android:layout_alignBaseline="@+id/et_receiving_address"
+             android:text="发票抬头："
+             android:visibility="gone"/>
+         <com.greattone.greattone.widget.MyEditText
+             android:id="@+id/et_invoice_title"
+             style="@style/post_edit_style_ordinary"
+             android:layout_marginTop="10dp"
+             android:layout_marginRight="20dp"
+             android:layout_alignLeft="@+id/tv_commodity_name"
+             android:hint="点击输入发票抬头"
+             android:visibility="gone"/>
+     </LinearLayout>
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_invoice_hint"
+        style="@style/mall_order_hint_style"
+        android:layout_alignBaseline="@+id/tv_invoice"
+        android:text="@string/invoice_hint"/>
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_invoice"
+        style="@style/mall_order_text_style"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/tv_commodity_name"
+        android:layout_below="@+id/dividing"
+        android:padding="5dp"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
+        android:textSize="15dp"
+        android:text="不开发票 ▼"/>
+
     <com.greattone.greattone.widget.MyTextView
         android:id="@+id/tv_receiving_address_hint"
         style="@style/mall_order_hint_style"
@@ -107,7 +134,7 @@
         style="@style/post_edit_style_ordinary"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/dividing"
+        android:layout_below="@+id/ll_invoice"
         android:layout_alignLeft="@+id/tv_commodity_name"
         android:hint="点击输入详细收货地址"/>
     <com.greattone.greattone.widget.MyTextView
@@ -141,7 +168,7 @@
 
         <RelativeLayout android:id="@+id/rl_ht"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding10"
             android:layout_below="@+id/et_linkman"
             android:background="@color/gray_eeeeee">
@@ -159,7 +186,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:text="应付总额：21000"/>
         </RelativeLayout>
         <RelativeLayout

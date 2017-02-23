@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10.0dip"
+        android:layout_marginTop="10.0dip"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <!-- 可提现: -->
+
+        <com.greattone.greattone.widget.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可提现:"
+            android:textSize="@dimen/bigtext" />
+        <!-- ￥0.00 -->
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥0.00"
+            android:textColor="@color/red_b90006"
+            android:textSize="@dimen/bigtext" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:background="@color/line_color_d1d1d1" />
+
+    <!-- 申请提现 -->
+
+    <com.greattone.greattone.widget.MyTextView
+        android:id="@+id/tv_withdraw"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15.0dip"
+        android:layout_marginRight="15.0dip"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginBottom="20.0dip"
+        android:background="@color/yellow_ffa200"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="申请提现"
+        android:textColor="@color/white" />
+
+    <com.greattone.greattone.widget.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/lv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </com.greattone.greattone.widget.PullToRefreshView>
+
+</LinearLayout>

@@ -119,7 +119,13 @@ public class PayActivity extends BaseActivity {
 		public void PayBackOK(int payType) {
 			LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 			map.put("out_trade_no",orderId);
-			addRequest(HttpUtil.httpConnectionByPost(context,HttpConstants2.SERVER_URL+"/e/appdemo/zhuang.php", map,
+			String url="";
+			if (getIntent().getStringExtra("type").equals("shangcheng")){//商城订单
+			url=HttpConstants2.SERVER_URL+"/e/appdemo/zhuang2.php";
+			}else url=HttpConstants2.SERVER_URL+"/e/appdemo/zhuang.php";
+
+
+			addRequest(HttpUtil.httpConnectionByPost(context,url, map,
 					new ResponseListener() {
 
 						@Override

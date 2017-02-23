@@ -1,19 +1,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
+    android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical" >
 
+    <LinearLayout android:id="@+id/ll_botton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/yellow_ffa200"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <!-- 私信 -->
+
+        <com.greattone.greattone.widget.MyTextView
+            android:id="@+id/tv_talk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:text="@string/buy" />
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_botton">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/ll_botton"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
 
 
@@ -157,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/yellow_ffa200"
+                android:layout_marginTop="@dimen/padding10"
                 android:orientation="horizontal">
                 <RadioButton android:id="@+id/radioButton1"
                     android:layout_width="wrap_content"
@@ -172,48 +199,25 @@
                     android:paddingStart="15dp"
                     android:checked="true"
                     android:text="@string/product_parameters"/>
-                <RadioButton android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:textColor="@color/white"
-                    android:background="@drawable/mall_radio_bg"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingRight="15dp"
-                    android:paddingEnd="15dp"
-                    android:paddingLeft="15dp"
-                    android:paddingStart="15dp"
-                    android:text="@string/buyer_reviews"/>
+                <!--<RadioButton android:id="@+id/radioButton2"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:button="@null"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:background="@drawable/mall_radio_bg"-->
+                    <!--android:paddingTop="5dp"-->
+                    <!--android:paddingBottom="5dp"-->
+                    <!--android:paddingRight="15dp"-->
+                    <!--android:paddingEnd="15dp"-->
+                    <!--android:paddingLeft="15dp"-->
+                    <!--android:paddingStart="15dp"-->
+                    <!--android:text="@string/buyer_reviews"/>-->
             </RadioGroup>
-            <FrameLayout
-                android:id="@+id/fragment"
+            <WebView
+                android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout android:id="@+id/ll_botton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/yellow_ffa200"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <!-- 私信 -->
-
-        <com.greattone.greattone.widget.MyTextView
-            android:id="@+id/tv_talk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:text="@string/buy" />
-
-    </LinearLayout>
 
 </RelativeLayout>

@@ -103,6 +103,7 @@ public class InstrumentMallAdapter extends BaseAdapter {
 			price.setText("￥"+musicalProduct.getMoney());
 			String titlepic[]=musicalProduct.getTitlepic().split("\\::::::");
 			ImageLoaderUtil.getInstance().setImagebyurl(titlepic[0],icon);
+			ll_label.removeAllViews();
 			if (musicalProduct.getFreight()==0){
 					addLabelView("包邮");
 			}

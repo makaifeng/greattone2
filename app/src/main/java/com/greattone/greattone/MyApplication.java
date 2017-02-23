@@ -9,6 +9,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.greattone.greattone.util.ActivityUtil;
 import com.greattone.greattone.util.CityUtil;
+import com.greattone.greattone.util.CrashHandler;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.util.UpdateObjectToOSSUtil;
 
@@ -34,8 +35,8 @@ public void onCreate() {
 	AppEventsLogger.activateApp(this);
 	
 	
-//	 CrashHandler handler = CrashHandler.getInstance();  //异常捕获
-//	    handler.init(this); 
+	 CrashHandler handler = CrashHandler.getInstance();  //异常捕获
+	    handler.init(this);
 }
 
 public static MyApplication getInstance() {
