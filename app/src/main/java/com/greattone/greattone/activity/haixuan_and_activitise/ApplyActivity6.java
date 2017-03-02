@@ -376,23 +376,25 @@ String	type = getIntent().getStringExtra("baotype");//报名上传类型
 	 */
 	private void updateVideo(String [] msg) {
 		preferences.edit().putString("updateTitle", msg[0])//选手姓名
-		.putString("updateUrl", "")
-		.putString("updatePath", fileList.get(0).getPicUrl())
-		.putString("updateContent", msg[5])
-		.putString("updateClassid", classid)
-		.putString("updateId", id)
-		.putString("updateFilepass", filepass)
-		.putString("updateHai_phone",msg[1])//联系电话
-		.putString("updateHai_address",  msg[2])//详细地址
-		.putString("updateHai_division",   msg[4])//比赛赛区
-		.putString("updateHai_age",  msg[6])//年龄
-		.putString("updateHai_grouping",  "")//选择分组1
-		.putString("updateHai_grouping2",  "")//选择分组2
-		.putString("updateHai_petition",   "")//清空
-		.putString("updateHai_mend",   "")//清空
-		.putString("updateHai_piano",   "")//清空
-				.putString("updatepPintype",   "")//乐器分类
-		.putInt("updateState", 0).commit();
+			.putString("updateUrl", "")
+			.putString("updatePath", fileList.get(0).getPicUrl())
+			.putString("updateContent", msg[5])
+			.putString("updateClassid", classid)
+			.putString("updateId", id)
+			.putString("updateFilepass", filepass)
+			.putString("updateHai_phone",msg[1])//联系电话
+			.putString("updateHai_address",  msg[2])//详细地址
+			.putString("updateHai_division",   msg[4])//比赛赛区
+			.putString("updateHai_age",  msg[6])//年龄
+			.putString("updateHai_grouping",  "")//选择分组1
+			.putString("updateHai_grouping2",  "")//选择分组2
+			.putString("updateHai_petition",   "")//清空
+			.putString("updateHai_mend",   "")//清空
+			.putString("updateHai_piano",   "")//清空
+			.putString("updateHai_teaname","")// 所推荐的老师
+			.putString("updateHai_teaphone","")// 老师电话
+			.putString("updatepPintype",   "")//乐器分类
+			.putInt("updateState", 0).commit();
 		Intent intent=new Intent(context, UpdateVideoAct.class);
 		intent.putExtra("isSee", 1);
 		startActivity(intent);

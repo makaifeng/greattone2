@@ -41,8 +41,10 @@ public class MerchantMallOrderActivity extends BaseActivity {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             orderList.clear();
+            page=1;
             switch (checkedId){
                 case R.id.radioButton1://全部订单
+                    type="";
                     getOrder();
                     break;
                 case R.id.radioButton2://已经完成订单
@@ -70,10 +72,12 @@ public class MerchantMallOrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_mall_order);
         initView();
+        getOrder();
 
     }
 
     private void getOrder() {
+        MyProgressDialog.show(context);
         HttpProxyUtil.getMallOrders(context, isbusiness+"",type,  pageSize,page,new HttpUtil.ResponseListener() {
             @Override
             public void setResponseHandle(Message2 message) {
@@ -108,8 +112,9 @@ public class MerchantMallOrderActivity extends BaseActivity {
         setHead("我的订单",true,true);
 
         radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
-        radiogroup.setOnCheckedChangeListener(listener);
         radiogroup.check(R.id.radioButton1);
+        radiogroup.setOnCheckedChangeListener(listener);
+
 
         pull_to_refresh = (PullToRefreshView)findViewById(R.id.pull_to_refresh);//
         lv_content = (ListView) findViewById(R.id.lv_content);// 正文
@@ -118,6 +123,8 @@ public class MerchantMallOrderActivity extends BaseActivity {
 
         lv_content.setOnItemClickListener(itemClickListener);
         lv_content.setOnScrollListener(ImageLoaderUtil.getPauseOnScrollListener());
+
+
         pull_to_refresh
                 .setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
 

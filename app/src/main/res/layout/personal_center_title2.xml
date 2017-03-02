@@ -23,10 +23,15 @@
         <com.greattone.greattone.widget.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_focus"
+           android:layout_toLeftOf="@+id/tv_focus"
+            android:layout_marginRight="5dp"
             android:text="@string/focus"
              android:layout_centerHorizontal="true"/>
     </RelativeLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_aaaaaa"/>
     <RelativeLayout android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -37,7 +42,8 @@
         <com.greattone.greattone.widget.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_fans"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/tv_fans"
             android:text="@string/fans"
              android:layout_centerHorizontal="true"/>
     </RelativeLayout>

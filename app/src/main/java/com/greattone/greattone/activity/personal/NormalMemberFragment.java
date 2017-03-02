@@ -62,6 +62,8 @@ import java.util.List;
  */
 @SuppressWarnings("deprecation")
 public class NormalMemberFragment extends BaseFragment {
+	boolean canreg1,canreg2,canreg3,canreg4,canreg5;
+	String showtoast1,showtoast2,showtoast3,showtoast4,showtoast5;
 	/**
 	 * fragment 主布局
 	 */
@@ -207,6 +209,8 @@ public class NormalMemberFragment extends BaseFragment {
 				getCode();
 				break;
 			case R.id.tv_sure:// 确认
+				tv_sure.setFocusable(true);
+				tv_sure.setFocusableInTouchMode(true);
 				commit();
 				break;
 			case R.id.iv_icon:// 头像
@@ -304,11 +308,14 @@ public class NormalMemberFragment extends BaseFragment {
 				@Override
 				public void setResponseHandle(Message2 message) {
 					showPrompt(et_code,true);
+					canreg5=true;
 				}
 			}, new HttpUtil.ErrorResponseListener() {
 				@Override
 				public void setServerErrorResponseHandle(Message2 message) {
 					showPrompt(et_code,false);
+					canreg5=false;
+					showtoast5=message.getInfo();
 				}
 
 				@Override
@@ -316,7 +323,7 @@ public class NormalMemberFragment extends BaseFragment {
 
 				}
 			});
-		}else showPrompt(et_phone_num,false);
+		}else {showPrompt(et_phone_num,false);	canreg5=false;	showtoast5="验证码不能为空";}
 	}
 
 	/**检查手机号*/
@@ -325,6 +332,8 @@ public class NormalMemberFragment extends BaseFragment {
 		if (code_num==null){
 			showPrompt(et_phone_num,false);
 			toast("请选择区域");
+			showtoast4="请选择区域";
+			canreg4=false;
 			return;
 		}
 		if (phone.length()>6) {
@@ -332,11 +341,14 @@ public class NormalMemberFragment extends BaseFragment {
 				@Override
 				public void setResponseHandle(Message2 message) {
 					showPrompt(et_phone_num,true);
+					canreg4=true;
 				}
 			}, new HttpUtil.ErrorResponseListener() {
 				@Override
 				public void setServerErrorResponseHandle(Message2 message) {
 					showPrompt(et_phone_num,false);
+					canreg4=false;
+					showtoast4=message.getInfo();
 				}
 
 				@Override
@@ -346,6 +358,8 @@ public class NormalMemberFragment extends BaseFragment {
 			});
 		}else {
 			showPrompt(et_phone_num, false);
+			showtoast4="手机号过短";
+			canreg4=false;
 		}
 	}
 
@@ -357,13 +371,18 @@ public class NormalMemberFragment extends BaseFragment {
 		if (password2.length()>=6) {
 			if (password.equals(password2)) {
 				showPrompt(et_double_password, true);
+				canreg3=true;
 			} else {
 				showPrompt(et_double_password, false);
 				toast("两次密码不一样");
+				showtoast3="两次密码不一样";
+				canreg3=false;
 			}
 		}else{
 			showPrompt(et_double_password, false);
 			toast("密码长度不得小于6位");
+			showtoast3="密码长度不得小于6位";
+			canreg3=false;
 		}
 	}
 
@@ -373,9 +392,12 @@ public class NormalMemberFragment extends BaseFragment {
 		String password=et_password.getText().toString().trim();
 		if (password.length()>=6){
 			showPrompt(et_password,true);
+			canreg2=true;
 		}else {
 			showPrompt(et_password,false);
 			toast("密码长度不得小于6位");
+			showtoast2="密码长度不得小于6位";
+			canreg2=false;
 		}
 	}
 	/**检查用户名*/
@@ -386,11 +408,14 @@ public class NormalMemberFragment extends BaseFragment {
 				@Override
 				public void setResponseHandle(Message2 message) {
 					showPrompt(et_name, true);
+					canreg1=true;
 				}
 			}, new HttpUtil.ErrorResponseListener() {
 				@Override
 				public void setServerErrorResponseHandle(Message2 message) {
 					showPrompt(et_name, false);
+					showtoast1=message.getInfo();
+					canreg1=false;
 				}
 
 				@Override
@@ -400,6 +425,8 @@ public class NormalMemberFragment extends BaseFragment {
 			});
 		}else {
 			showPrompt(et_name, false);
+			showtoast1="名称不能为空";
+			canreg1=false;
 		}
 	}
 
@@ -513,6 +540,7 @@ public class NormalMemberFragment extends BaseFragment {
 		final String str5 = this.et_phone_num.getText().toString().trim();
 		final String str6 = this.et_email.getText().toString();
 		final String str7 = this.et_code.getText().toString();
+
 		if (filePath == null) {
 			toast(getResources().getString(R.string.请选择头像));
 			return;
@@ -570,6 +598,11 @@ public class NormalMemberFragment extends BaseFragment {
 				toast(getResources().getString(R.string.请选择地址));
 			}
 //		}
+		if (canreg1==false){toast(showtoast1);	return;}
+		if (canreg2==false){toast(showtoast2);	return;}
+		if (canreg3==false){toast(showtoast3);	return;}
+		if (canreg4==false){toast(showtoast4);	return;}
+		if (canreg5==false){toast(showtoast5);	return;}
 
 		map = new HashMap<String, String>();
 		map.put("api", "user/createUser");

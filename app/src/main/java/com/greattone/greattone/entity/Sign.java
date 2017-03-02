@@ -8,6 +8,7 @@ public class Sign {
 	String ddid;
 	String shoptitle;
 	String money;
+	String   ddtime;
 	String   content;
 //	public Sign() {
 //		super();
@@ -17,6 +18,15 @@ public class Sign {
 //		this.shoptitle = shoptitle;
 //		this.money = money;
 //	}
+
+	public String getDdtime() {
+		return ddtime;
+	}
+
+	public void setDdtime(String ddtime) {
+		this.ddtime = ddtime;
+	}
+
 	public String getDdid() {
 		return ddid;
 	}

@@ -202,6 +202,7 @@ public class MainActivity extends BaseActivity {
 					replaceFragment(new PostFragment());
 					break;
 				case R.id.tab_rb_3:// 个人中心
+//					setHead("我的中心",
 					setHead(getResources().getString(R.string.personal_center),
 							true, false);
 					replaceFragment(new PersonalCenterFragment());

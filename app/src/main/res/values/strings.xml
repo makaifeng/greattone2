@@ -180,8 +180,8 @@
     <string name="请选择上传视频">请选择上传视频</string>
     <string name="请选择组别">请选择组别</string>
     <string name="请选择赛区">请选择赛区</string>
-    <string name="请填写推荐老师的电话">请填写推荐琴行（老师）的电话</string>
-    <string name="请填写推荐老师">请填写推荐琴行（老师）</string>
+    <string name="请填写推荐老师的电话">请填写推荐老师的电话</string>
+    <string name="请填写推荐老师">请填写推荐老师</string>
     <string name="请填写活动曲目">请填写活动曲目</string>
     <string name="请填写详细地址">请填写详细地址</string>
     <string name="请输入证件号码">请输入证件号码</string>
@@ -226,7 +226,7 @@
     <string name="发布人">发布人：</string>
     <string name="举办活动地点">举办活动地点：</string>
     <string name="到">到</string>
-    <string name="活动时间">活动时间：</string>
+    <string name="活动时间">投票时间：</string>
     <string name="活动总结">活动总结</string>
     <string name="活动评论">活动评论</string>
     <string name="海选投票">海选投票</string>
@@ -389,13 +389,13 @@
     <string name="租赁">租赁</string>
     <string name="update">上传</string>
     <!--个人中心-->
-    <string name="mall">产品商城</string>
+    <string name="mall">在线商城</string>
 
 
     <string name="timetable_name">课程名称</string>
     <string name="timetable_location">上课地点</string>
     <string name="haixuan_type1">中华好琴声</string>
-    <string name="haixuan_type2">音乐精灵</string>
+    <string name="haixuan_type2">斗琴擂台</string>
     <string name="haixuan_type3">好琴师</string>
     <string name="haixuan_type4">人气琴行</string>
     <string name="haixuan_type5">乐器品牌</string>

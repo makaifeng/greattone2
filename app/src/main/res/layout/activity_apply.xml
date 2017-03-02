@@ -374,12 +374,12 @@
                 android:orientation="horizontal" >
 
                 <com.greattone.greattone.widget.MyEditText
-                    android:id="@+id/activity_apply_teach"
+                    android:id="@+id/activity_apply_class"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:background="@null"
-                    android:hint="所推荐琴行(老师)"
+                    android:hint="所推荐琴行"
                     android:lines="1"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
@@ -392,7 +392,6 @@
                     android:textColor="#ffb90206"
                     android:textSize="20.0sp" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -401,12 +400,38 @@
                 android:orientation="horizontal" >
 
                 <com.greattone.greattone.widget.MyEditText
-                    android:id="@+id/activity_apply_teach_tel"
+                    android:id="@+id/activity_apply_teach"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:background="@null"
-                    android:hint="琴行(老师)电话"
+                    android:hint="所推荐老师"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
+
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/activity_apply_class_tel"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="琴行电话"
                     android:inputType="phone"
                     android:padding="10.0dip"
                     android:singleLine="true"
@@ -420,7 +445,33 @@
                     android:textColor="#ffb90206"
                     android:textSize="20.0sp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
 
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/activity_apply_teach_tel"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="老师电话"
+                    android:inputType="phone"
+                    android:padding="10.0dip"
+                    android:singleLine="true"
+                    android:textSize="@dimen/bigtext" />
+
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
           
 
             <LinearLayout

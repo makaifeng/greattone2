@@ -361,13 +361,14 @@ public class PostVideoService extends Service {
 		map.put("hai_phone", preferences.getString("updateHai_phone", ""));// 联系电话
 		map.put("hai_address", preferences.getString("updateHai_address", ""));// 详细地址
 		map.put("hai_petition", preferences.getString("updateHai_petition", ""));// 参赛曲目
-		map.put("hai_mend", preferences.getString("updateHai_mend", ""));// 所推荐的琴行(老师)
-		map.put("hai_piano", preferences.getString("updateHai_piano", ""));// 琴行(老师)电话
+		map.put("hai_mend", preferences.getString("updateHai_mend", ""));// 所推荐的琴行
+		map.put("hai_piano", preferences.getString("updateHai_piano", ""));// 琴行电话
+		map.put("hai_teachname", preferences.getString("updateHai_teaname", ""));// 所推荐的(老师)
+		map.put("hai_teachphone", preferences.getString("updateHai_teaphone", ""));// (老师)电话
 		map.put("hai_division", preferences.getString("updateHai_division", ""));// 比赛赛区
 		map.put("hai_grouping", preferences.getString("updateHai_grouping", ""));// 选择分组1
 		map.put("hai_age", preferences.getString("updateHai_age", "11"));// 年龄
-		map.put("hai_grouping1",
-				preferences.getString("updateHai_grouping2", ""));// 选择分组2
+		map.put("hai_grouping1",preferences.getString("updateHai_grouping2", ""));// 选择分组2
 		map.put("hai_photo", imageurl);//
 		map.put("pintype", preferences.getString("updatepPintype", ""));//乐器分类
 		map.put("loginuid", Data.user.getUserid());

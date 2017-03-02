@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -144,7 +143,7 @@ public class PersonalCenterFragment extends BaseFragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			if (position >= 3) {
+			if (position >= 2) {
 				startIntent(position);
 			}
 		}
@@ -171,11 +170,12 @@ public class PersonalCenterFragment extends BaseFragment {
 	protected void startIntent(int position) {
 		int listPosition;
 		Intent intent;
-		if (position >= 7) {
-			listPosition = position - 4;
-		} else {
-			listPosition = position - 3;
-		}
+		listPosition = position - 2;
+//		if (position >= 7) {
+//			listPosition = position - 4;
+//		} else {
+//			listPosition = position - 3;
+//		}
 		if (position != 6) {
 			if (names[listPosition].equals(getResources().getString(R.string.friend_dynamics))) {// 知音动态
 				startActivity(new Intent(context, FriendDynamicActivity.class));
@@ -242,10 +242,10 @@ public class PersonalCenterFragment extends BaseFragment {
 				intent.putExtra("userid", Data.myinfo.getUserid());
 				startActivity(intent);
 			} else if (names[listPosition].equals(getResources().getString(R.string.琴行动态))) {// 琴行动态
-				if (Data.myinfo.getCked() != 1&&Data.myinfo.getGroupid()==4) {// 未认证教室
-					toast("未签约用户不能使用该功能");
-					return;
-				}
+//				if (Data.myinfo.getCked() != 1&&Data.myinfo.getGroupid()==4) {// 未认证教室
+//					toast("未签约用户不能使用该功能");
+//					return;
+//				}
 				intent = new Intent(context, NoticeActivity.class);
 				intent.putExtra("userid", Data.myinfo.getUserid());
 				startActivity(intent);
@@ -277,7 +277,12 @@ public class PersonalCenterFragment extends BaseFragment {
 			} else if (names[listPosition].equals(getResources().getString(R.string.联系我们))) {// 联系我们
 				startActivity(new Intent(context, ConnectWayActivityCenter.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.mall))) {// 产品商城
-				startActivity(new Intent(context, MallSelectActivity.class));
+				if (Data.myinfo.getGroupid()==4||Data.myinfo.getCked() == 0){
+					toast("未签约用户不能使用该功能");
+					return;
+				}else {
+					startActivity(new Intent(context, MallSelectActivity.class));
+				}
 			}
 		}
 
@@ -291,7 +296,7 @@ public class PersonalCenterFragment extends BaseFragment {
 
 		@Override
 		public int getCount() {
-			return names.length + 4;
+			return names.length + 2;
 		}
 
 		@Override
@@ -310,15 +315,16 @@ public class PersonalCenterFragment extends BaseFragment {
 				convertView = getFristView(parent);
 			} else if (position == 1) {// 关注和粉丝
 				convertView = getSecondView(parent);
-			} else if (position == 2 || position == 6) {// 空白条
-				convertView = getBlankView();
+//			} else if (position == 2 || position == 6) {// 空白条
+//				convertView = getBlankView();
 			} else {// 列表
 				int listPosition;
-				if (position >= 7) {
-					listPosition = position - 4;
-				} else {
-					listPosition = position - 3;
-				}
+				listPosition = position - 2;
+//				if (position >= 7) {
+//					listPosition = position - 4;
+//				} else {
+//					listPosition = position - 3;
+//				}
 				convertView = getOtherView(listPosition, parent);
 
 			}
@@ -414,6 +420,8 @@ public class PersonalCenterFragment extends BaseFragment {
 			View convertView = LayoutInflater.from(context).inflate(R.layout.personal_center_title1, parent, false);
 			TextView name = (TextView) convertView.findViewById(R.id.tv_name);//
 			icon = (ImageView) convertView.findViewById(R.id.iv_icon);//
+			ImageView iv_isvip = (ImageView) convertView.findViewById(R.id.iv_isvip);//
+			iv_isvip.setVisibility(View.GONE);
 			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(DisplayUtil.dip2px(context, 60),
 					DisplayUtil.dip2px(context, 60));
 			layoutParams.setMargins(0, 0, DisplayUtil.dip2px(context, 10), DisplayUtil.dip2px(context, 10));
@@ -466,10 +474,21 @@ public class PersonalCenterFragment extends BaseFragment {
 					if (Data.myinfo.getGroupid()>=4) {//当是品牌或教师时，显示签约按钮，否则隐藏
 					sign.setVisibility(View.VISIBLE);
 					if (Data.myinfo.getCked() == 1) {
-						sign.setText("已签约");
-						sign.setTextColor(context.getResources().getColor(R.color.red_b90006));
-						sign.setBackgroundColor(Color.WHITE);
+						iv_isvip.setVisibility(View.VISIBLE);
+						sign.setTextColor(context.getResources().getColor(R.color.white));
+						sign.setBackgroundResource(R.drawable.button_bg3);
+						sign.setText("续约");
+						sign.setOnClickListener(new OnClickListener() {
+
+							@Override
+							public void onClick(View v) {// 续约
+								Intent intent=new Intent(context,ToSignActivity.class);
+								intent.putExtra("isNewSign",true);
+								startActivity(intent);
+							}
+						});
 					} else {
+						iv_isvip.setVisibility(View.GONE);
 						sign.setTextColor(context.getResources().getColor(R.color.white));
 						sign.setBackgroundResource(R.drawable.button_bg3);
 						sign.setText("签约");
@@ -625,7 +644,7 @@ public class PersonalCenterFragment extends BaseFragment {
 
 	/** 修改我的头像 */
 	protected void editMyPic(final String picUrl) {
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map = new HashMap<>();
 		map.put("api", "user/editUserInfo");
 		map.put("userpic", picUrl);
 		map.put("loginuid", Data.user.getUserid());

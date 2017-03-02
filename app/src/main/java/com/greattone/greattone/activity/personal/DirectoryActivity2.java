@@ -27,6 +27,7 @@ import com.greattone.greattone.adapter.DirectoryListAdapter2;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.data.HttpConstants;
 import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.Friend;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.util.HttpProxyUtil;
@@ -58,7 +59,7 @@ public 	Map<String, List<Friend>> contactsMap = new HashMap<>();
 	String[] b = { "#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
 			"L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
 			"Y", "Z" };
-	private TextView tv_hint;
+	private TextView tv_hint,tv_btn,tv_filter;
 	String type = "feed";
 	private ImageView iv_search;
 	private EditText et_search;
@@ -91,17 +92,21 @@ private BadgeView badgeView;
 
 	private void initView() {
 		setHead(getResources().getString(R.string.通讯录), true, true);//通讯录
-		setOtherText(getResources().getString(R.string.添加), new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(context, AddNewFriendActivity.class));
-			}
-		});
+//		setOtherText(getResources().getString(R.string.添加), new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				startActivityForResult(new Intent(context, AddNewFriendActivity.class),222);
+//			}
+//		});
 		tv_hint = (TextView) findViewById(R.id.tv_hint);
 		et_search = (EditText) findViewById(R.id.et_search);
 		iv_search = (ImageView) findViewById(R.id.iv_search);
 		iv_search.setOnClickListener(lis);
+		tv_btn = (TextView) findViewById(R.id.tv_btn);
+		tv_btn.setOnClickListener(lis);
+		tv_filter = (TextView) findViewById(R.id.tv_filter);
+		tv_filter.setOnClickListener(lis);
 
 		lv_content = (SwipeMenuListView) findViewById(R.id.lv_content);
 		lv_content.setOnScrollListener(ImageLoaderUtil.getPauseOnScrollListener());
@@ -156,7 +161,6 @@ private BadgeView badgeView;
 
 					@Override
 					public void setResponseHandle(Message2 message) {
-						contactsList.clear();
 						if (message.getData().startsWith("{")) {
 							contactsList.clear();
 						contactsList = JSON.parseArray(JSON.parseObject(message.getData()).getString("content"),
@@ -181,7 +185,8 @@ private BadgeView badgeView;
 
 		@Override
 		public void onClick(View v) {
-			if (v==iv_search) {
+			if (v==iv_search) {//搜索
+				tv_filter.setText("筛选▼");
 				String str=et_search.getText().toString().trim();
 				if (!str.isEmpty()) {
 					contactsList.clear();
@@ -194,9 +199,16 @@ private BadgeView badgeView;
 					}
 					initContentAdapter();
 				}
+			}else if (v==tv_btn){//添加
+				startActivityForResult(new Intent(context, AddNewFriendActivity.class),222);
+			}else if (v==tv_filter){//筛选
+				showPopWindow(v);
 			}
 		}
 	};
+
+
+
 	OnItemClickListener itemClickListener=new OnItemClickListener() {
 
 		@Override
@@ -220,6 +232,7 @@ private BadgeView badgeView;
 
 		@Override
 		public void onClick(String s) {
+			tv_filter.setText("筛选▼");
 			contactsList.clear();
 			List<Friend> mList;
 			if (s.equals("#")){
@@ -282,6 +295,10 @@ private BadgeView badgeView;
 		Collections.sort(contactsList,new SortComparator());
 		contactsMap.get("#").addAll(contactsList);
 	}
+
+	/**
+	 * 排序
+	 */
 	public class SortComparator implements Comparator<Friend> {
 		@Override
 		public int compare(Friend lhs, Friend rhs) {
@@ -320,6 +337,55 @@ private BadgeView badgeView;
 		}
 		context.startActivity(intent);
 	}
+
+	/**
+	 * 显示筛选数据
+	 */
+	private void showPopWindow(View v) {
+		List<String> mlist=new ArrayList<>();
+		mlist.add("我的关注");
+		mlist.add("我的知音");
+		if (Data.myinfo.getGroupid()==1||Data.myinfo.getGroupid()==2){
+			mlist.add("我的老师");
+			mlist.add("我的教室");
+		}else if (Data.myinfo.getGroupid()==3){
+			mlist.add("我的学生");
+			mlist.add("我的教室");
+		}else if (Data.myinfo.getGroupid()==4){
+			mlist.add("我的学生");
+			mlist.add("我的老师");
+		}
+		NormalPopuWindow pop=new NormalPopuWindow(context,mlist,v);
+		pop.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
+			@Override
+			public void OnClick(int position, String text) {
+				int guanxi=0;
+				if (text.equals("我的关注")){
+					 guanxi=0;
+				}else 	if (text.equals("我的知音")){
+					guanxi=1;
+				}else 	if (text.equals("我的学生")){
+					guanxi=2;
+				}else 	if (text.equals("我的老师")){
+					guanxi=3;
+				}else 	if (text.equals("我的教室")){
+					guanxi=4;
+				}
+				tv_filter.setText(text+"▼");
+				contactsList.clear();
+				List<Friend> mList;
+					mList=new ArrayList<>();
+					for (int i = 0; i < contactsMap.get("#").size(); i++) {
+						if (	contactsMap.get("#").get(i).getGuanxi()==guanxi) {
+							mList.add(contactsMap.get("#").get(i));
+						}
+					}
+				contactsList.addAll(mList);
+				initContentAdapter();
+			}
+		});
+		pop.show();
+	}
 	/** 关注 */
 	protected void addattention(final int position) {
 		MyProgressDialog.show(context);
@@ -337,5 +403,14 @@ private BadgeView badgeView;
 			}
 
 		}, null);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+			if (requestCode == 222) {// 添加
+				tv_filter.setText("筛选▼");
+				getContacts();
+			}
 	}
 }

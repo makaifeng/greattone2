@@ -294,7 +294,7 @@ public class VoteDetailsActivity extends BaseActivity {
 		 
 		ImageLoaderUtil.getInstance().setImagebyurl(videoMsg.getHai_photo(), m_pic);
 		m_title.setText(videoMsg.getHai_petition());
-		m_name.setText(videoMsg.getUsername());
+		m_name.setText(videoMsg.getHai_name());
 		m_hits.setText(videoMsg.getOnclick());
 		m_comment.setText(videoMsg.getPlnum());
 		m_vote.setText(videoMsg.getTou_num() + "票");

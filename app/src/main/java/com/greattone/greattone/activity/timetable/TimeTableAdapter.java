@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.greattone.greattone.R;
+import com.greattone.greattone.data.Data;
 import com.greattone.greattone.entity.TimeTable_Month;
 import com.greattone.greattone.util.DisplayUtil;
 import com.kf_test.kfcalendar.SpecialCalendar;
@@ -64,6 +65,7 @@ public class TimeTableAdapter extends BaseAdapter {
 	private String sys_month = "";
 	private String sys_day = "";
 	private String TAG="TimeTableAdapter";
+	private boolean isMy=false;
 
 	public TimeTableAdapter() {
 		Date date = new Date();
@@ -206,13 +208,13 @@ public class TimeTableAdapter extends BaseAdapter {
 			case 0://没课程
 				break;
 			case 1://有课程 ,只有一节
-				entry1.setText(mlist.get(0).getStuname());
+				settext(entry1,mlist.get(0));//显示文本
 				entry1.setVisibility(View.VISIBLE);
 				break;
 			default:
-				entry1.setText(mlist.get(0).getStuname());
+				settext(entry1,mlist.get(0));//显示文本
+				settext(entry2,mlist.get(1));//显示文本
 				entry1.setVisibility(View.VISIBLE);
-				entry2.setText(mlist.get(1).getStuname());
 				entry2.setVisibility(View.VISIBLE);
 				break;
 		}
@@ -247,6 +249,22 @@ public class TimeTableAdapter extends BaseAdapter {
 			}
 
 
+		}
+	}
+
+	/**
+	 * 显示文本
+	 * @param tv
+     */
+	private  void settext(TextView tv,TimeTable_Month msg){
+		if (isMy){
+			tv.setText(msg.getStuname());
+		}else {
+			if (msg.getStuname().equals( Data.myinfo.getUsername())){
+				tv.setText(msg.getStuname());
+			}else {
+				tv.setText("有课");
+			}
 		}
 	}
 	// 得到某年的某月的天数且这月的第一天是星期几
@@ -345,6 +363,9 @@ public class TimeTableAdapter extends BaseAdapter {
 
 	public String getShowYear() {
 		return showYear;
+	}
+	public void setIsMy(boolean isMy) {
+		 this.isMy=isMy;
 	}
 
 	public void setShowYear(String showYear) {

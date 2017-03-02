@@ -144,23 +144,24 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 				tv_guanxi.setVisibility(View.VISIBLE);
 				click.setVisibility(View.VISIBLE);
 				click2.setVisibility(View.VISIBLE);
-				if (guanxi == 1) {//好友
-					tv_guanxi.setText("邀请你成为他的好友");
-				}else {
-					if (friend.getInvitetype() == 1) {//1学生->老师，2学生->教室，3老师->学生，4老师->教室，5教室->学生，6教室->老师
-						tv_guanxi.setText("邀请你成为ta的学生");
-					} else if (friend.getInvitetype() == 2) {
-						tv_guanxi.setText("邀请你成为ta的学生");
-					} else if (friend.getInvitetype() == 3) {
-						tv_guanxi.setText("邀请你成为ta的老师");
-					} else if (friend.getInvitetype() == 4) {
-						tv_guanxi.setText("邀请你成为ta的老师");
-					} else if (friend.getInvitetype() == 5) {
-						tv_guanxi.setText("申请成为ta的教室");
-					} else if (friend.getInvitetype() == 6) {
-						tv_guanxi.setText("申请成为ta的教室");
-					}
-				}
+				tv_guanxi.setText(friend.getInvitemsg());
+//				if (guanxi == 1) {//好友
+//					tv_guanxi.setText("邀请你成为ta的好友");
+//				}else {
+//					if (friend.getInvitetype() == 1) {//1学生->老师，2学生->教室，3老师->学生，4老师->教室，5教室->学生，6教室->老师
+//						tv_guanxi.setText("邀请你成为ta的学生");
+//					} else if (friend.getInvitetype() == 2) {
+//						tv_guanxi.setText("邀请你成为ta的学生");
+//					} else if (friend.getInvitetype() == 3) {
+//						tv_guanxi.setText("邀请你成为ta的老师");
+//					} else if (friend.getInvitetype() == 4) {
+//						tv_guanxi.setText("邀请你成为ta的老师");
+//					} else if (friend.getInvitetype() == 5) {
+//						tv_guanxi.setText("申请成为ta的教室");
+//					} else if (friend.getInvitetype() == 6) {
+//						tv_guanxi.setText("申请成为ta的教室");
+//					}
+//				}
 			}else{
 				if (guanxi == 0) {//我的关注
 					tv_guanxi.setVisibility(View.VISIBLE);
@@ -179,7 +180,7 @@ public class DirectoryListAdapter2 extends BaseAdapter {
 				} else if (guanxi == 1) {//好友
 					tv_guanxi.setVisibility(View.VISIBLE);
 					click.setVisibility(View.VISIBLE);
-					tv_guanxi.setText("我的好友");
+					tv_guanxi.setText("我的知音");
 					if (getguanxi() != 0) {
 						click2.setVisibility(View.VISIBLE);
 						click2.setText("添加关系");

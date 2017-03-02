@@ -1,7 +1,5 @@
 package com.greattone.greattone.activity.timetable;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +21,7 @@ import com.greattone.greattone.entity.TimeTable_Day;
 import com.greattone.greattone.util.HttpProxyUtil;
 import com.greattone.greattone.util.HttpUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,7 +40,8 @@ public class EditTimeTableAct extends BaseActivity{
     private int year,month,day,hour,minute;//开始时间
     private int eHour,eMins;//结束时间
 //    private List<PersonList> personList=new ArrayList<>();
-    private String[] students;
+//    private String[] students;
+private ArrayList<String> students=new ArrayList<>();
 
 
     @Override
@@ -73,9 +73,10 @@ public class EditTimeTableAct extends BaseActivity{
                     && message.getData().startsWith("[")) {
                 List<PersonList> mList = JSON.parseArray(
                         message.getData(), PersonList.class);
-                students=new String[mList.size()];
+//                students=new String[mList.size()];
                 for (int i=0;i<mList.size();i++) {
-                    students[i]=mList.get(i).getUsername();
+                    students.add(mList.get(i).getUsername());
+//                                students[i]=mList.get(i).getUsername();
                 }
             }
             MyProgressDialog.Cancel();
@@ -242,9 +243,13 @@ public class EditTimeTableAct extends BaseActivity{
                      });
                      break;
                  case R.id.tv_student://学生
-//                     String student=tv_student.getText().toString().trim();
-//                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","学生名称").putExtra("text",student),Result_student);
-                     showListSelectDialog();
+                     String student=tv_student.getText().toString().trim();
+                     startActivityForResult(new Intent(context, EditTextActivity.class)
+                             .putExtra("title","学生名称")
+                             .putExtra("isShowList",true)
+                             .putExtra("list",students)
+                             .putExtra("text",student),Result_student);
+//                     showListSelectDialog();
                      break;
 //                 case R.id.tv_state://状态
 //                     showStateDialog();
@@ -268,20 +273,20 @@ public class EditTimeTableAct extends BaseActivity{
 //        });
 //    }
 
-    public  void showListSelectDialog( ){
-        if (students!=null) {
-             new AlertDialog.Builder(context)
-//                .setTitle(R.string.title)
-                    .setItems(students, new DialogInterface.OnClickListener() { // 列表内容和点击事件
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichPlace) {
-                            //String[] place = getResources().getStringArray(R.array.place);
-                            tv_student.setText(students[whichPlace]);
-                        }
-                    }).show();
-        }
-    }
+//    public  void showListSelectDialog( ){
+//        if (students!=null) {
+//             new AlertDialog.Builder(context)
+////                .setTitle(R.string.title)
+//                    .setItems(students, new DialogInterface.OnClickListener() { // 列表内容和点击事件
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int whichPlace) {
+//                            //String[] place = getResources().getStringArray(R.array.place);
+//                            tv_student.setText(students[whichPlace]);
+//                        }
+//                    }).show();
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

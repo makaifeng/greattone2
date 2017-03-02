@@ -408,23 +408,25 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 	 */
 	private void updateVideo(String [] msg,  ArrayList<Picture> videoFileList) {
 		preferences.edit().putString("updateTitle", "")//联系人
-		.putString("updateUrl", "")
-		.putString("updatePath", videoFileList.get(0).getPicUrl())
-		.putString("updateContent", msg[3])//品牌描述
-		.putString("updateClassid", classid)
-		.putString("updateId", id)
-		.putString("updateFilepass", filepass)
-		.putString("updateHai_petition",  msg[0])//品牌名称
-		.putString("updateHai_address",  msg[1])//创立国家
-		.putString("updateHai_age",   "")//创立年份
-		.putString("updateHai_phone","")//联系电话
-		.putString("updateHai_division",   "")//
-		.putString("updatepPintype",   msg[2])//乐器分类
-		.putString("updateHai_mend",   "")//清空
-		.putString("updateHai_piano",   "")//清空
-		.putString("updateHai_grouping",   "")//清空
-		.putString("updateHai_grouping2",   "")//清空
-		.putInt("updateState", 0).commit();
+			.putString("updateUrl", "")
+			.putString("updatePath", videoFileList.get(0).getPicUrl())
+			.putString("updateContent", msg[3])//品牌描述
+			.putString("updateClassid", classid)
+			.putString("updateId", id)
+			.putString("updateFilepass", filepass)
+			.putString("updateHai_petition",  msg[0])//品牌名称
+			.putString("updateHai_address",  msg[1])//创立国家
+			.putString("updateHai_age",   "")//创立年份
+			.putString("updateHai_phone","")//联系电话
+			.putString("updateHai_division",   "")//
+			.putString("updatepPintype",   msg[2])//乐器分类
+			.putString("updateHai_mend",   "")//清空
+			.putString("updateHai_piano",   "")//清空
+			.putString("updateHai_grouping",   "")//清空
+			.putString("updateHai_grouping2",   "")//清空
+			.putString("updateHai_teaname","")// 所推荐的老师
+			.putString("updateHai_teaphone","")// 老师电话
+			.putInt("updateState", 0).commit();
 		Intent intent=new Intent(context, UpdateVideoAct.class);
 		intent.putExtra("isSee", 1);
 		startActivity(intent);

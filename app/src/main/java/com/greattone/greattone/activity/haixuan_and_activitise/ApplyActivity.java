@@ -55,7 +55,7 @@ public class ApplyActivity extends BaseActivity {
 	private TextView tv_sing_up1;
 	private TextView tv_sing_up2;
 	private TextView tv_game_area;
-	private EditText et_teach_tel,et_teach,et_music,et_address,et_email,et_age,et_qq,et_phone,et_name;
+	private EditText et_teach_tel,et_teach,et_music,et_address,et_email,et_age,et_qq,et_phone,et_name,et_class_tel,et_class;
 	private TextView tv_area;
 	private MyGridView gv_pic;
 	private PostGridAdapter adapter;
@@ -150,7 +150,9 @@ private void getGroup() {
 		tv_sing_up2	.setOnClickListener(lis);
 		this.tv_game_area = ((TextView) findViewById(R.id.activity_apply_game_area));
 		this.et_teach_tel = ((EditText) findViewById(R.id.activity_apply_teach_tel));
+		this.et_class_tel = ((EditText) findViewById(R.id.activity_apply_class_tel));
 		this.et_teach = ((EditText) findViewById(R.id.activity_apply_teach));
+		this.et_class = ((EditText) findViewById(R.id.activity_apply_class));
 		this.et_music = ((EditText) findViewById(R.id.activity_apply_music));
 		this.et_address = ((EditText) findViewById(R.id.activity_apply_address));
 		this.tv_area = ((TextView) findViewById(R.id.activity_apply_area));
@@ -382,6 +384,8 @@ private void getGroup() {
 		String game_area = tv_game_area.getText().toString().trim();
 		String sing_up1 = tv_sing_up1.getText().toString().trim();
 		String sing_up2 = tv_sing_up2.getText().toString().trim();
+		String class_tel = et_class_tel.getText().toString().trim();
+		String classname = et_class.getText().toString().trim();
 		fileList = adapter.getList();
 		if (TextUtils.isEmpty(name)) {
 			toast(getResources().getString(R.string.请输入姓名));
@@ -409,8 +413,16 @@ private void getGroup() {
 			toast(getResources().getString(R.string.请填写推荐老师));
 			return;
 		}
+		if (TextUtils.isEmpty(classname)) {
+			toast("请填写推荐琴行");
+			return;
+		}
 		if (TextUtils.isEmpty(teach_tel)) {
-			toast(getResources().getString(R.string.请填写推荐老师));
+			toast(getResources().getString(R.string.请填写推荐老师的电话));
+			return;
+		}
+		if (TextUtils.isEmpty(class_tel)) {
+			toast("请填写推荐琴行的电话");
 			return;
 		}
 		if (TextUtils.isEmpty(game_area)) {
@@ -436,7 +448,7 @@ private void getGroup() {
 		}
 
 		 filepass = System.currentTimeMillis() + "";
-		 String [] msg={name,phone,area,address,music,teach,teach_tel,game_area,sing_up1,age,sing_up2,desc};
+		 String [] msg={name,phone,area,address,music,teach,teach_tel,game_area,sing_up1,age,sing_up2,desc,classname,class_tel};
 
 //		 post(msg,videoFileList);
 //		 if (price.equals("0")) {
@@ -474,13 +486,15 @@ private void getGroup() {
 		updateMap.put("hai_phone",msg[1]);// 联系电话
 		updateMap.put("hai_address", msg[3]);// 详细地址
 		updateMap.put("hai_petition", msg[4]);// 参赛曲目
-		updateMap.put("hai_mend",msg[5]);// 所推荐的琴行(老师)
-		updateMap.put("hai_piano",msg[6]);// 琴行(老师)电话
+		updateMap.put("hai_teachname",msg[5]);// 所推荐的老师
+		updateMap.put("hai_teachphone",msg[6]);// 老师电话
 		updateMap.put("hai_division", msg[7]);// 比赛赛区
 		updateMap.put("hai_grouping", msg[8]);// 选择分组1
 		updateMap.put("hai_age",msg[9]);// 年龄
 		updateMap.put("hai_grouping1",msg[10]);// 选择分组2
 		updateMap.put("smalltext",msg[11]);//图片描述
+		updateMap.put("hai_mend",msg[12]);// 所推荐的琴行
+		updateMap.put("hai_piano",msg[13]);//琴行电话
 		updateMap.put("loginuid", Data.user.getUserid());
 		updateMap.put("logintoken", Data.user.getToken());
 		updatePic();
@@ -587,13 +601,15 @@ private void getGroup() {
 		.putString("updateHai_phone",msg[1])//联系电话
 		.putString("updateHai_address",  msg[3])//详细地址
 		.putString("updateHai_petition",  msg[4])//参赛曲目
-		.putString("updateHai_mend",  msg[5])//所推荐的琴行(老师)
-		.putString("updateHai_piano",   msg[6])//琴行(老师)电话
+		.putString("updateHai_teaname",msg[5])// 所推荐的老师
+		.putString("updateHai_teaphone",msg[6])// 老师电话
 		.putString("updateHai_division",   msg[7])//比赛赛区
 		.putString("updateHai_grouping",   msg[8])//选择分组1
 		.putString("updateHai_age",  msg[9])//年龄
 		.putString("updateHai_grouping2",  msg[10])//选择分组2
-				.putString("updatepPintype",  "")//乐器分类
+		.putString("updateHai_mend",  msg[12])//所推荐的琴行
+		.putString("updateHai_piano",   msg[13])//琴行(电话
+		.putString("updatepPintype",  "")//乐器分类
 		.putInt("updateState", 0).commit();
 		Intent intent=new Intent(context, UpdateVideoAct.class);
 		intent.putExtra("isSee", 1);

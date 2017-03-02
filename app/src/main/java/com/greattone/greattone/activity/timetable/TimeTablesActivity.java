@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * 课表
+ *课程表月视图
  * @author makaifeng
  *
  */
@@ -61,6 +61,11 @@ public class TimeTablesActivity extends BaseActivity {
 		ll_timetable.setOnDateClickListener(onDateClickListener);
 		ll_timetable.setMonthChangeListener(monthChangeListener);
 		ll_timetable.setBackgroundColor(Color.rgb(255, 255, 255));
+		if (userid==null) {
+			ll_timetable.setIsMy(true);
+		}else {
+			ll_timetable.setIsMy(false);
+		}
 	}
 	OnDateClickListener onDateClickListener=new OnDateClickListener() {
 		

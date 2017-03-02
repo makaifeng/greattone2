@@ -17,8 +17,8 @@ android {
         applicationId "com.greattone.greattone"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 17
-        versionName "3.10.4"
+        versionCode 19
+        versionName "3.11.2"
         multiDexEnabled true
     }
     packagingOptions {
@@ -58,11 +58,13 @@ dependencies {
     compile 'com.squareup:otto:1.3.8'
     compile 'joda-time:joda-time:2.9.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.dodola:rocoo:1.1'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.okio:okio:1.10.0'
     compile 'com.aliyun.dpa:oss-android-sdk:2.3.0'
     compile files('libs/compressImage.jar')
+    // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
+    provided("com.tencent.tinker:tinker-android-anno:1.7.7")
+    compile("com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.1.4")
 }
 afterEvaluate {
     tasks.matching {
@@ -77,5 +79,8 @@ afterEvaluate {
         //此项添加后第一个classes.dex文件只能包含-main-dex-list列表中class
         dx.additionalParameters += '--minimal-main-dex'
     }
-
 }
+if (true){
+    apply from: 'tinkerpatch.gradle'
+}
+

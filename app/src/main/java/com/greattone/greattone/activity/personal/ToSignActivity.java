@@ -39,15 +39,18 @@ import com.greattone.greattone.util.HttpUtil.ResponseListener;
 public class ToSignActivity extends BaseActivity {
 	private TextView tv_sign_up;
 	private TextView tv_cost;
-	private Sign  order;
+	private TextView textview2;
+	private Sign  order,sign;
 private WebView webview;
 private CheckBox cb_agreement;
 private TextView tv_agreement;
 private TextView textview1;
+	private  boolean isNewSign=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_to_sign);
+		isNewSign=	getIntent().getBooleanExtra("isNewSign",false);
 		initView();
 		getData();
 	}
@@ -63,28 +66,48 @@ private TextView textview1;
 //		 webSettings.setAllowFileAccess(true);
 		// 设置支持缩放
 		webSettings.setBuiltInZoomControls(true);
-		String agreement = "《品牌会员认证协议》";
-		if (Data.myinfo.getGroupid()==5) {
-			textview1.setText("立刻充值\n成为认证品牌会员");
-			agreement="《品牌会员认证协议》";
-			// 加载需要显示的网页
-			webview.loadUrl("http://m.greattone.net/app/ppqy.html");
-		}else if (Data.myinfo.getGroupid()==4){
-			textview1.setText("立刻充值\n成为认证琴行教室会员");
-			agreement="《琴行教室认证协议》";
-			// 加载需要显示的网页
-			webview.loadUrl("http://m.greattone.net/app/qhqy.html");
+		cb_agreement =(CheckBox) findViewById(R.id.cb_agreement);
+		tv_agreement =(TextView) findViewById(R.id.tv_agreement);
+		tv_cost =(TextView) findViewById(R.id.tv_cost);
+		textview2 =(TextView) findViewById(R.id.textview2);
+		if (isNewSign){
+			cb_agreement.setVisibility(View.GONE);
+			tv_agreement.setVisibility(View.GONE);
+			tv_cost.setVisibility(View.GONE);
+			textview2.setVisibility(View.GONE);
+			if (Data.myinfo.getGroupid() == 5) {
+				textview1.setText("认证品牌会员\n" +
+						"认证到期时间为：");
+				// 加载需要显示的网页
+				webview.loadUrl("http://m.greattone.net/app/ppqy.html");
+			} else if (Data.myinfo.getGroupid() == 4) {
+				textview1.setText("认证琴行教室会员\n" +
+						"认证到期时间为：");
+				// 加载需要显示的网页
+				webview.loadUrl("http://m.greattone.net/app/qhqy.html");
+			}
+		}else {
+			String agreement = "《品牌会员认证协议》";
+			if (Data.myinfo.getGroupid() == 5) {
+				textview1.setText("立刻充值\n成为认证品牌会员");
+				agreement = "《品牌会员认证协议》";
+				// 加载需要显示的网页
+				webview.loadUrl("http://m.greattone.net/app/ppqy.html");
+			} else if (Data.myinfo.getGroupid() == 4) {
+				textview1.setText("立刻充值\n成为认证琴行教室会员");
+				agreement = "《琴行教室认证协议》";
+				// 加载需要显示的网页
+				webview.loadUrl("http://m.greattone.net/app/qhqy.html");
+			}
+			cb_agreement.setOnCheckedChangeListener(checkedChangeListener);
+			SpannableString spannableString=new SpannableString(agreement);
+			spannableString.setSpan( new UnderlineSpan(), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			tv_agreement.setText(spannableString);
+			tv_agreement.setOnClickListener(clickListener);
 		}
+
 		// 设置Web视图
 		webview.setWebViewClient(new webViewClient());
-		cb_agreement =(CheckBox) findViewById(R.id.cb_agreement);
-		cb_agreement.setOnCheckedChangeListener(checkedChangeListener);
-		SpannableString spannableString=new SpannableString(agreement);
-		spannableString.setSpan( new UnderlineSpan(), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		tv_agreement =(TextView) findViewById(R.id.tv_agreement);
-		tv_agreement.setText(spannableString);
-		tv_agreement.setOnClickListener(clickListener);
-		tv_cost =(TextView) findViewById(R.id.tv_cost);
 		tv_sign_up =(TextView) findViewById(R.id.tv_sign_up);
 		tv_sign_up.setOnClickListener(clickListener);
 	}
@@ -99,6 +122,15 @@ private TextView textview1;
 				tv_cost.setVisibility(View.GONE);
 			}
 		}
+		if (isNewSign) {
+			if (Data.myinfo.getGroupid() == 5) {
+				textview1.setText("认证品牌会员\n" +
+						"认证到期时间为：\n"+sign.getDdtime());
+			} else if (Data.myinfo.getGroupid() == 4) {
+				textview1.setText("认证琴行教室会员\n" +
+						"认证到期时间为：\n"+sign.getDdtime());
+			}
+		}
 	}
 
 	OnClickListener clickListener = new OnClickListener() {
@@ -107,7 +139,7 @@ private TextView textview1;
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.tv_sign_up:
-				if (cb_agreement.isChecked()) {
+				if (cb_agreement.isChecked()||isNewSign) {
 					if (Data.myinfo.getGroupid()==5) {
 						getOrderData();
 					}else if (Data.myinfo.getGroupid()==4){
@@ -206,7 +238,7 @@ private TextView textview1;
 				if (message.getData() != null && message.getData().startsWith("{")) {
 					try {
 						order = JSON.parseObject(JSON.parseObject(message.getData()).getString("order"), Sign.class);
-//						sign = JSON.parseObject(JSON.parseObject(message.getData()).getString("sign"), Sign.class);
+						sign = JSON.parseObject(JSON.parseObject(message.getData()).getString("sign"), Sign.class);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+
 public class TimeTableLinlayout extends LinearLayout {
 	private  int jumpMonth = 0; // 每次滑动，增加或减去一个月,默认为0（即显示当前月）
 	private  int jumpYear = 0; // 滑动跨越一年，则增加或者减去一年,默认为0(即当前年)
@@ -49,7 +50,7 @@ public class TimeTableLinlayout extends LinearLayout {
 	private ViewFlipper flipper;
 	private GestureDetector gestureDetector;
 	private long currentTime;
-
+	private boolean isMy=false;
 	public TimeTableLinlayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		gestureDetector = new GestureDetector(getContext(),
@@ -361,5 +362,9 @@ public class TimeTableLinlayout extends LinearLayout {
 	 */
 	public void setOnDateClickListener(OnDateClickListener onDateClickListener) {
 		this.onDateClickListener = onDateClickListener;
+	}
+	public void setIsMy(boolean isMy) {
+		this.isMy=isMy;
+		adapter.setIsMy(isMy);
 	}
 }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.greattone.greattone.Enum.EnumTime;
+import com.greattone.greattone.data.Data;
 import com.greattone.greattone.entity.TimeTable_Day;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import java.util.List;
     private RectF cRect=new   RectF();
     private int courseX,courseY,courseEndX,courseEndY;//课程框的上下左右的位置
     AdapterView.OnItemClickListener OnItemClickListener;
+    private boolean isMy=false;
     public CourseView(Context context) {
         this(context, null);
     }
@@ -63,7 +65,9 @@ import java.util.List;
         this.courseList=courseList;
         invalidate();
     }
-
+    public void setIsMy(boolean isMy) {
+        this.isMy=isMy;
+    }
     private void init() {
         initTextAndLinePaint();
     }
@@ -124,12 +128,21 @@ import java.util.List;
         int textWidth1= (int) textPaint.measureText(TimeCouse.getCouname());
         canvas.drawText(TimeCouse.getCouname(),centerX-textWidth1/2,centerY-textPaint.descent(),textPaint);
         //学生名字
+        String name="";
+        if (isMy){
+             name=TimeCouse.getStuname();
+        }else{
+            if (Data.myinfo.getUsername().equals(TimeCouse.getStuname())){
+                name=TimeCouse.getStuname();
+            }else { name="有课";}
+        }
+
          textPaint=new Paint();
         textPaint.setColor(Color.DKGRAY);
         textPaint.setTextSize(sp2px(12));
-        int textWidth2= (int) textPaint.measureText(TimeCouse.getStuname());
+        int textWidth2= (int) textPaint.measureText(name);
         int textHeight2= (int) ((Math.ceil(textPaint.descent() - textPaint.ascent()) + 2));
-        canvas.drawText(TimeCouse.getStuname(),centerX-textWidth2/2,centerY+textHeight2,textPaint);
+        canvas.drawText(name,centerX-textWidth2/2,centerY+textHeight2,textPaint);
         //开始时间
          textPaint=new Paint();
         textPaint.setColor(Color.BLACK);

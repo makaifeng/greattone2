@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -233,22 +234,30 @@ private GridView gv_share;
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			switch (position) {
-			case 0:
-			WeiXinShareContent();
-			break;
-		case 1:
-			CircleShareContent();
-			break;
-		case 2:
-			QQShareContent();
-			break;
-		case 3:
-			FacebookContent();
-			break;
+			try {
+				switch (position) {
+                case 0:
+                WeiXinShareContent();
+                break;
+            case 1:
+                CircleShareContent();
+                break;
+            case 2:
+                QQShareContent();
+                break;
+            case 3:
+                try {
+                    FacebookContent();
+                } catch (Exception e) {
+                    Toast.makeText(context,"分享失败",Toast.LENGTH_LONG).show();
+                }
+                break;
 
-			default:
-				break;
+                default:
+                    break;
+                }
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			cancel();
 		}

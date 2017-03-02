@@ -17,6 +17,7 @@ String classroom_type;
 String music_star;
 Level level;
 String pinyin;
+String invitemsg;
 int verification;
 int cked;
 //int isinvite;
@@ -24,6 +25,14 @@ int invite;
 int invitetype;
 int guanxi;
 	int position;
+
+	public String getInvitemsg() {
+		return invitemsg;
+	}
+
+	public void setInvitemsg(String invitemsg) {
+		this.invitemsg = invitemsg;
+	}
 
 	public int getPosition() {
 		return position;

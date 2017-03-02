@@ -1,7 +1,5 @@
 package com.greattone.greattone.activity.timetable;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -42,7 +40,8 @@ private static final int Result_student=3;
 
     private int year,month,day,hour,minute;
     //    private List<PersonList> personList=new ArrayList<>();
-    private String[] students;
+//    private String[] students;
+    private ArrayList<String> students=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +89,7 @@ private static final int Result_student=3;
         String stuname=tv_student.getText().toString().trim();//学生姓名
         String remarks=et_remark.getText().toString().trim();//备注信息
         if (TextUtils.isEmpty(couname)){ toast("请填写课程名称"); return;}
-        if (TextUtils.isEmpty(location)){ toast("请填写上课地点"); return;}
+//        if (TextUtils.isEmpty(location)){ toast("请填写上课地点"); return;}
         if (year==0){ toast("请选择开始时间"); return;}
         if (TextUtils.isEmpty(stoptime)){ toast("请选择结束时间"); return;}
         if (week==0){ toast("请选择重复周期"); return;}
@@ -166,9 +165,13 @@ private static final int Result_student=3;
 
                      break;
                  case R.id.tv_student://学生
-//                     String student=tv_student.getText().toString().trim();
-//                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","学生名称").putExtra("text",student),Result_student);
-                     showListSelectDialog();
+                     String student=tv_student.getText().toString().trim();
+                     startActivityForResult(new Intent(context, EditTextActivity.class)
+                             .putExtra("title","学生名称")
+                             .putExtra("isShowList",true)
+                             .putExtra("list",students)
+                             .putExtra("text",student),Result_student);
+//                     showListSelectDialog();
                      break;
 //                 case R.id.tv_state:
 //                     showStateDialog();
@@ -199,29 +202,30 @@ private static final int Result_student=3;
                                 && message.getData().startsWith("[")) {
                             List<PersonList> mList = JSON.parseArray(
                                     message.getData(), PersonList.class);
-                            students=new String[mList.size()];
+//                            students=new String[mList.size()];
                             for (int i=0;i<mList.size();i++) {
-                                students[i]=mList.get(i).getUsername();
+                                students.add(mList.get(i).getUsername());
+//                                students[i]=mList.get(i).getUsername();
                             }
                         }
                         MyProgressDialog.Cancel();
                     }
                 }, null));
     }
-    public  void showListSelectDialog( ){
-        if (students!=null) {
-           new AlertDialog.Builder(context)
-//                .setTitle(R.string.title)
-                    .setItems(students, new DialogInterface.OnClickListener() { // 列表内容和点击事件
-
-            @Override
-            public void onClick(DialogInterface dialog, int whichPlace) {
-                //String[] place = getResources().getStringArray(R.array.place);
-                tv_student.setText(students[whichPlace]);
-            }
-        }).show();
-        }
-    }
+//    public  void showListSelectDialog( ){
+//        if (students!=null) {
+//           new AlertDialog.Builder(context)
+////                .setTitle(R.string.title)
+//                    .setItems(students, new DialogInterface.OnClickListener() { // 列表内容和点击事件
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int whichPlace) {
+//                //String[] place = getResources().getStringArray(R.array.place);
+//                tv_student.setText(students[whichPlace]);
+//            }
+//        }).show();
+//        }
+//    }
 //    private void showStateDialog() {
 //        List<String>       mlist=new ArrayList<>();
 //        mlist.add("未开始");

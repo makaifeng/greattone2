@@ -323,7 +323,7 @@ private int history;
 		// tv_sign_up.setText("已报名");
 		// } else {
 		tv_sign_up.setText(getResources().getString(R.string.sign_up));//我要报名
-			if (haiXuan.getIshistory() == 0 &&(type==0?haiXuan.getIsstart() == 1:true)) {//Ishistory 是否是历史  type 海选0 还是活动1   Isstart 海选是否开始
+			if (haiXuan.getIshistory() == 0 &&(type==2?haiXuan.getIsstart() == 1:true)) {//Ishistory 是否是历史  type 海选2 还是活动1   Isstart 海选是否开始
 				tv_sign_up.setOnClickListener(lis);
 			} else {
 				tv_sign_up.setBackgroundColor(getResources().getColor(R.color.gray_7e7c7d));

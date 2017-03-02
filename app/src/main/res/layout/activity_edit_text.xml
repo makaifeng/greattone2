@@ -12,4 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/edit_text"/>
+    <ListView android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding10"
+        android:visibility="gone"
+        android:layout_below="@+id/edit"></ListView>
 </RelativeLayout>

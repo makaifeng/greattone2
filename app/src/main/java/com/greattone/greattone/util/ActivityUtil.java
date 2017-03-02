@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.dodola.rocoofix.RocooFix;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.data.Constants;
@@ -396,7 +395,7 @@ public class ActivityUtil {
 									if (file==null){
 										pd.dismiss();
 									}else {
-									RocooFix.applyPatchRuntime(activity, path);}
+									}
 								} catch (Exception e) {
 									pd.dismiss();
 									e.printStackTrace();
