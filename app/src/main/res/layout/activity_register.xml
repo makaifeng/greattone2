@@ -11,7 +11,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#f0e6e5"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <com.greattone.greattone.widget.MyRadioButton
                 android:id="@+id/radioButton1"
@@ -20,9 +21,8 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
                 android:text="@string/ordinary_member"
+                android:background="@drawable/register_radio_bg"
                 android:textColor="@color/main_check_textcolor" />
 
             <com.greattone.greattone.widget.MyRadioButton
@@ -32,9 +32,9 @@
                 android:button="@null"
                 android:checked="true"
                 android:gravity="center"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
                 android:text="@string/music_teacher"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/register_radio_bg"
                 android:textColor="@color/main_check_textcolor" />
 
             <com.greattone.greattone.widget.MyRadioButton
@@ -47,6 +47,8 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="@string/music_classroom"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/register_radio_bg"
                 android:textColor="@color/main_check_textcolor" />
 
             <com.greattone.greattone.widget.MyRadioButton
@@ -59,9 +61,10 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="乐器品牌"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/register_radio_bg"
                 android:textColor="@color/main_check_textcolor" />
         </RadioGroup>
-
     <FrameLayout
         android:id="@+id/fl_fragment"
         android:layout_width="fill_parent"

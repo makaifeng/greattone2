@@ -44,6 +44,7 @@ public class PayActivity extends BaseActivity {
 		name=getIntent().getStringExtra("name");
 		contant=getIntent().getStringExtra("contant");
 		price=getIntent().getStringExtra("price");
+		if (price.equals("0")) { setResult(RESULT_OK);finish();}
 		orderId=getIntent().getStringExtra("orderId");
 		bitype=getIntent().getStringExtra("bitype");
 		bitype=bitype==null?"人民币":bitype;

@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -63,6 +64,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class NormalMemberFragment extends BaseFragment {
 	boolean canreg1,canreg2,canreg3,canreg4,canreg5;
+	int focus=0;//焦点在哪个按钮上面
 	String showtoast1,showtoast2,showtoast3,showtoast4,showtoast5;
 	/**
 	 * fragment 主布局
@@ -87,10 +89,10 @@ public class NormalMemberFragment extends BaseFragment {
 //	private View ll_phone;
 	/** 区号 */
 	private TextView tv_phone_district_num;
+	private TextView tv_phone_district;
 	/** 手机号 */
+	private LinearLayout ll_phone_number;
 	private EditText et_phone_num;
-	/** 邮箱 */
-	private EditText et_email;
 	/** 验证码 */
 	private EditText et_code;
 	/** 获取验证码 */
@@ -111,7 +113,7 @@ public class NormalMemberFragment extends BaseFragment {
 	String imgName="icon.png";
 	private HashMap<String, String> map;
 	private ProgressDialog pd;
-
+boolean isCommit;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -144,11 +146,14 @@ public class NormalMemberFragment extends BaseFragment {
 //		ll_phone = rootView.findViewById(R.id.ll_phone);
 		tv_phone_district_num = (TextView) rootView
 				.findViewById(R.id.tv_phone_district_num);
+		tv_phone_district = (TextView) rootView.findViewById(R.id.tv_phone_district);
 //		tv_phone_district_num.setText("+86");
-		tv_phone_district_num.setOnClickListener(lis);
+		tv_phone_district.setOnClickListener(lis);
 		et_phone_num = (EditText) rootView.findViewById(R.id.et_phone_num);
+
+		ll_phone_number = (LinearLayout) rootView.findViewById(R.id.ll_phone_number);
+
 		et_phone_num.setOnFocusChangeListener(onFocusChangeListener);
-		et_email = (EditText) rootView.findViewById(R.id.et_email);
 //		ll_code =  rootView.findViewById(R.id.ll_code);
 		et_code = (EditText) rootView.findViewById(R.id.et_code);
 		et_code.setOnFocusChangeListener(onFocusChangeListener);
@@ -169,7 +174,7 @@ public class NormalMemberFragment extends BaseFragment {
 	/** 设置身份类型 */
 	public void setGroupId(int groupid) {
 		this.groupid = groupid;
-		initGroupView();
+//		initGroupView();
 	}
 
 	/** 加载各种身份的界面 */
@@ -178,7 +183,6 @@ public class NormalMemberFragment extends BaseFragment {
 		et_password.setText("");
 		et_double_password.setText("");
 		et_phone_num.setText("");
-		et_email.setText("");
 		et_code.setText("");
 		tv_address.setVisibility(View.VISIBLE);
 		if (groupid == 4) {// 音乐教室
@@ -209,9 +213,13 @@ public class NormalMemberFragment extends BaseFragment {
 				getCode();
 				break;
 			case R.id.tv_sure:// 确认
-				tv_sure.setFocusable(true);
-				tv_sure.setFocusableInTouchMode(true);
-				commit();
+				isCommit=true;
+				if (focus==0){//当所有edittext都没获取焦点时，直接提交
+					commit();
+				}else {//清楚焦点
+					focus = 0;
+					clearFocus();
+				}
 				break;
 			case R.id.iv_icon:// 头像
 				MyIosDialog.ShowBottomDialog(context, "", new String[] { getResources().getString(R.string.拍照),
@@ -245,21 +253,24 @@ public class NormalMemberFragment extends BaseFragment {
 						});
 				citySelectDialog.show();
 				break;
-			case R.id.tv_phone_district_num:// 区号
+			case R.id.tv_phone_district:// 区号
 				List<String> mlist=new  ArrayList<String>();
-	final String[] code=context.getResources().getStringArray(R.array.AREA_CODE);
-	final String[] codes=context.getResources().getStringArray(R.array.area_codes);
-	for(String str:code){
-		mlist.add(str);
-	}
+				final String[] code=context.getResources().getStringArray(R.array.AREA_CODE);
+				final String[] codes=context.getResources().getStringArray(R.array.area_codes);
+				for(String str:code){
+					mlist.add(str);
+				}
 				 final NormalPopuWindow		popu1 = new NormalPopuWindow(context, mlist,
-						 tv_phone_district_num);
+						 tv_phone_district);
 					popu1.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
 					
 
 						public void OnClick(int position, String text) {
 							code_num=codes[position];
-							tv_phone_district_num.setText(text);
+							tv_phone_district_num.setText(code_num);
+							tv_phone_district_num.setVisibility(View.VISIBLE);
+							tv_phone_district.setText(text);
+							tv_phone_district.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border));
 							popu1.dismisss();
 							checkphone();
 						}
@@ -275,18 +286,23 @@ public class NormalMemberFragment extends BaseFragment {
 	View.OnFocusChangeListener onFocusChangeListener=new View.OnFocusChangeListener() {
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
+
 			if (hasFocus==false){
 				switch (v.getId()){
 					case R.id.et_name://姓名
+						focus=1;
 						checkname();
 						break;
 					case R.id.et_password://密码
+						focus=2;
 						checkpassword();
 						break;
 					case R.id.et_double_password://二次密码
+						focus=3;
 						checkdoublepassword();
 						break;
 					case R.id.et_phone_num://手机
+						focus=4;
 						checkphone();
 						break;
 					case R.id.et_code://验证码
@@ -295,7 +311,7 @@ public class NormalMemberFragment extends BaseFragment {
 					default:
 						break;
 				}
-			}
+			}else {focus=v==et_name?1:v==et_password?2:v==et_double_password?3:v==et_phone_num?4:v==et_code?5:0;}
 		}
 	};
 
@@ -307,48 +323,15 @@ public class NormalMemberFragment extends BaseFragment {
 			HttpProxyUtil.checkcode(context, phone, code, new ResponseListener() {
 				@Override
 				public void setResponseHandle(Message2 message) {
-					showPrompt(et_code,true);
 					canreg5=true;
+					showPrompt(et_code,true,et_code);
 				}
 			}, new HttpUtil.ErrorResponseListener() {
 				@Override
 				public void setServerErrorResponseHandle(Message2 message) {
-					showPrompt(et_code,false);
 					canreg5=false;
 					showtoast5=message.getInfo();
-				}
-
-				@Override
-				public void setErrorResponseHandle(VolleyError error) {
-
-				}
-			});
-		}else {showPrompt(et_phone_num,false);	canreg5=false;	showtoast5="验证码不能为空";}
-	}
-
-	/**检查手机号*/
-	private void checkphone() {
-		String phone=et_phone_num.getText().toString().trim();
-		if (code_num==null){
-			showPrompt(et_phone_num,false);
-			toast("请选择区域");
-			showtoast4="请选择区域";
-			canreg4=false;
-			return;
-		}
-		if (phone.length()>6) {
-			HttpProxyUtil.checkphone(context, phone, new ResponseListener() {
-				@Override
-				public void setResponseHandle(Message2 message) {
-					showPrompt(et_phone_num,true);
-					canreg4=true;
-				}
-			}, new HttpUtil.ErrorResponseListener() {
-				@Override
-				public void setServerErrorResponseHandle(Message2 message) {
-					showPrompt(et_phone_num,false);
-					canreg4=false;
-					showtoast4=message.getInfo();
+					showPrompt(et_code,false,et_code);
 				}
 
 				@Override
@@ -357,32 +340,75 @@ public class NormalMemberFragment extends BaseFragment {
 				}
 			});
 		}else {
-			showPrompt(et_phone_num, false);
-			showtoast4="手机号过短";
-			canreg4=false;
-		}
+			canreg5=false;
+			showtoast5="验证码不能为空";
+			showPrompt(et_code,false,et_code);	}
 	}
 
+	/**检查手机号*/
+	private void checkphone() {
+		String phone=et_phone_num.getText().toString().trim();
+//		if (code_num==null){
+//			showPrompt(et_phone_num,false,ll_phone_number);
+//			toast("请选择区域");
+//			showtoast4="请选择区域";
+//			canreg4=false;
+//			return;
+//		}
+		if (phone.length()>6) {
+			HttpProxyUtil.checkphone(context, phone, new ResponseListener() {
+				@Override
+				public void setResponseHandle(Message2 message) {
+					canreg4=true;
+					showPrompt(et_phone_num,true,ll_phone_number);
+				}
+			}, new HttpUtil.ErrorResponseListener() {
+				@Override
+				public void setServerErrorResponseHandle(Message2 message) {
+					canreg4=false;
+					showtoast4=message.getInfo();
+					showPrompt(et_phone_num,false,ll_phone_number);
+				}
 
+				@Override
+				public void setErrorResponseHandle(VolleyError error) {
+
+				}
+			});
+		}else {
+			showtoast4="手机号过短";
+			canreg4=false;
+			showPrompt(et_phone_num, false,ll_phone_number);
+		}
+	}
+/**	清楚焦点*/
+	private void clearFocus(){
+
+			et_code.clearFocus();
+			et_name.clearFocus();
+			et_password.clearFocus();
+			et_double_password.clearFocus();
+			et_phone_num.clearFocus();
+	}
 	/**检查二次密码*/
 	private void checkdoublepassword() {
 		String password=et_password.getText().toString().trim();
 		String password2=et_double_password.getText().toString().trim();
 		if (password2.length()>=6) {
 			if (password.equals(password2)) {
-				showPrompt(et_double_password, true);
 				canreg3=true;
+				showPrompt(et_double_password, true,et_double_password);
 			} else {
-				showPrompt(et_double_password, false);
 				toast("两次密码不一样");
 				showtoast3="两次密码不一样";
 				canreg3=false;
+				showPrompt(et_double_password, false,et_double_password);
 			}
 		}else{
-			showPrompt(et_double_password, false);
 			toast("密码长度不得小于6位");
 			showtoast3="密码长度不得小于6位";
 			canreg3=false;
+			showPrompt(et_double_password, false,et_double_password);
 		}
 	}
 
@@ -390,14 +416,18 @@ public class NormalMemberFragment extends BaseFragment {
 	/**检查密码*/
 	private void checkpassword() {
 		String password=et_password.getText().toString().trim();
+		String password2=et_double_password.getText().toString().trim();
 		if (password.length()>=6){
-			showPrompt(et_password,true);
+			if (password.equals(password2)) {//两次密码一样
+				et_double_password.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border));
+			}
 			canreg2=true;
+			showPrompt(et_password,true,et_password);
 		}else {
-			showPrompt(et_password,false);
 			toast("密码长度不得小于6位");
 			showtoast2="密码长度不得小于6位";
 			canreg2=false;
+			showPrompt(et_password,false,et_password);
 		}
 	}
 	/**检查用户名*/
@@ -407,15 +437,15 @@ public class NormalMemberFragment extends BaseFragment {
 			HttpProxyUtil.checkuser(context, name, new ResponseListener() {
 				@Override
 				public void setResponseHandle(Message2 message) {
-					showPrompt(et_name, true);
 					canreg1=true;
+					showPrompt(et_name, true,et_name);
 				}
 			}, new HttpUtil.ErrorResponseListener() {
 				@Override
 				public void setServerErrorResponseHandle(Message2 message) {
-					showPrompt(et_name, false);
 					showtoast1=message.getInfo();
 					canreg1=false;
+					showPrompt(et_name, false,et_name);
 				}
 
 				@Override
@@ -424,9 +454,11 @@ public class NormalMemberFragment extends BaseFragment {
 				}
 			});
 		}else {
-			showPrompt(et_name, false);
 			showtoast1="名称不能为空";
 			canreg1=false;
+			showPrompt(et_name, false,et_name);
+
+
 		}
 	}
 
@@ -435,12 +467,19 @@ public class NormalMemberFragment extends BaseFragment {
 	 * @param editview
 	 * @param istrue
      */
-	private void showPrompt(EditText editview,boolean istrue){
+	private void showPrompt(EditText editview,boolean istrue,View viewOfChangeBackgroud){
 		Drawable drawable;
-		if (istrue) drawable= getResources().getDrawable(R.drawable.duihaode);
-		else drawable= getResources().getDrawable(R.drawable.chahaoyuan);
+		if (istrue){
+			drawable= getResources().getDrawable(R.drawable.duihaode);
+			viewOfChangeBackgroud.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border));
+		}		else {
+			drawable= getResources().getDrawable(R.drawable.chahaoyuan);
+			viewOfChangeBackgroud.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
+		}
 		drawable.setBounds(1,1, DisplayUtil.dip2px(context,20),DisplayUtil.dip2px(context,20));
 		editview.setCompoundDrawables(null,null,drawable,null);
+		if (isCommit) {isCommit=false;
+			commit();};
 	}
 	private Bitmap bitmap;
 	/***
@@ -487,37 +526,23 @@ public class NormalMemberFragment extends BaseFragment {
 		}
 		PhotoUtil.setalbum(context);
 	}
-//	OnCheckedChangeListener listener = new OnCheckedChangeListener() {
-//
-//		@Override
-//		public void onCheckedChanged(RadioGroup group, int checkedId) {
-//			switch (checkedId) {
-//			case R.id.radioButton1:
-//				type = 1;
-////				ll_phone.setVisibility(View.VISIBLE);
-//				et_email.setVisibility(View.GONE);
-//				break;
-//			case R.id.radioButton2:
-//				type = 2;
-////				ll_phone.setVisibility(View.GONE);
-//				et_email.setVisibility(View.VISIBLE);
-//				break;
-//
-//			default:
-//				break;
-//			}
-//		}
-//	};
+
 
 	/** 获取验证码 */
 	protected void getCode() {
 		String str1 = this.et_phone_num.getText().toString();
 		if (TextUtils.isEmpty(str1)) {
 			toast(getResources().getString(R.string.请输入手机号));
+			et_phone_num.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
+			return;
+		}
+		if (TextUtils.isEmpty(code_num)) {
+			toast("请选择区域");
+			tv_phone_district.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 			return;
 		}
 		MyProgressDialog.show(context);
-		String msg = "api=user/sendSms" + "&phone=" + str1+"&Area=" + code_num;
+		String msg = "api=user/sendSms" + "&phone=" + str1+"&Area=" + code_num+"&username=" + username;
 		addRequest(HttpUtil.httpConnectionByPost(context, msg,
 				new ResponseListener() {
 
@@ -538,11 +563,11 @@ public class NormalMemberFragment extends BaseFragment {
 		final String str3 = this.et_double_password.getText().toString();
 //		final String str4 = this.tv_phone_district_num.getText().toString();
 		final String str5 = this.et_phone_num.getText().toString().trim();
-		final String str6 = this.et_email.getText().toString();
 		final String str7 = this.et_code.getText().toString();
 
 		if (filePath == null) {
 			toast(getResources().getString(R.string.请选择头像));
+			iv_icon.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 			return;
 		}
 		if (username.isEmpty()) {
@@ -553,28 +578,33 @@ public class NormalMemberFragment extends BaseFragment {
 			} else {
 				toast(getResources().getString(R.string.请输入真实姓名));
 			}
+			et_name.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 			return;
 		}
 		if (password.isEmpty()) {
 			toast(getResources().getString(R.string.请输入密码));
+			et_password.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 			return;
 		}
 		if (str3.isEmpty()) {
 			toast(getResources().getString(R.string.请再次输入密码));
+			et_double_password.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 			return;
 		}
 		if (!password.equals(str3)) {
 			toast(getResources().getString(R.string.二次密码不相同));
+			et_double_password.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 			return;
 		}
 //		if (groupid !=4) {
-			if (type == 1) {
 				if (TextUtils.isEmpty(code_num)) {
 					toast(getResources().getString(R.string.请输入区号));
+					tv_phone_district.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 					return;
 				}
 				if (str5.isEmpty()) {
 					toast(getResources().getString(R.string.请输入手机号));
+					ll_phone_number.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 					return;
 //				} else {
 //					if (str5.length() != 11) {
@@ -582,22 +612,17 @@ public class NormalMemberFragment extends BaseFragment {
 //						return;
 //					}
 				}
-			} else {
-				if (str6.isEmpty()) {
-					toast(getResources().getString(R.string.请输入邮箱));
-					return;
-				}
-			}
 			if (str7.isEmpty()) {
 				toast(getResources().getString(R.string.请输入验证码));
+				et_code.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
 				return;
 			}
 //		}
-//		if (groupid !=5) {
+		if (groupid !=5) {
 			if (province == null || city == null || district == null) {
 				toast(getResources().getString(R.string.请选择地址));
 			}
-//		}
+		}
 		if (canreg1==false){toast(showtoast1);	return;}
 		if (canreg2==false){toast(showtoast2);	return;}
 		if (canreg3==false){toast(showtoast3);	return;}
@@ -739,6 +764,7 @@ public class NormalMemberFragment extends BaseFragment {
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
 				filePath = FileUtil.getLocalImageUrl(context,imgName) ;
+				iv_icon.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border));
 			       File temp = new File(filePath);    
 //			     PhotoUtil.startPhotoZoom(context,Uri.fromFile(temp),1,1,600,600);
 //				iv_icon.setImageBitmap(BitmapUtil.getBitmapFromPHOTOGRAPH(
@@ -748,13 +774,14 @@ public class NormalMemberFragment extends BaseFragment {
 //			    PhotoUtil.startPhotoZoom(context,data.getData(),1,1,600,600);
 				filePath = BitmapUtil.getFileFromALBUM(context, data);
 				ImageLoaderUtil.getInstance().setImagebyurl("file://"+filePath,iv_icon);
+				iv_icon.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border));
 //				Bitmap bitmap = BitmapUtil.getBitmapFromFile( filePath);
-			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
-				Bundle extras = data.getExtras();    
-		        if (extras != null) {    
-		            bitmap = extras.getParcelable("data");    
-		            iv_icon.setImageBitmap(bitmap);
-		        }
+//			} else if (requestCode == PhotoUtil.PHOTO_REQUEST_CUT) {// 裁剪
+//				Bundle extras = data.getExtras();
+//		        if (extras != null) {
+//		            bitmap = extras.getParcelable("data");
+//		            iv_icon.setImageBitmap(bitmap);
+//		        }
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);

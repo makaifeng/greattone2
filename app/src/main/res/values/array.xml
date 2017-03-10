@@ -106,12 +106,12 @@
         <item>美国</item>
     </string-array>
     <string-array name="area_codes">
-        <item>+86</item>
-        <item>+886</item>
-        <item>+852</item>
-        <item>+853</item>
-        <item>+65</item>
-        <item>+1</item>
+        <item>0086</item>
+        <item>00886</item>
+        <item>00852</item>
+        <item>00853</item>
+        <item>0065</item>
+        <item>001</item>
     </string-array>
     <string-array name="haixuan_type">
            <item>全部</item>

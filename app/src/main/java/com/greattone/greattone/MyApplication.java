@@ -26,17 +26,19 @@ public class MyApplication extends Application {
 public void onCreate() {
 	super.onCreate();
 	myApplication=this;
-	// 我们可以从这里获得Tinker加载过程的信息
-	tinkerApplicationLike = TinkerPatchApplicationLike.getTinkerPatchApplicationLike();
+	if (BuildConfig.TINKER_ENABLE) {
+		// 我们可以从这里获得Tinker加载过程的信息
+		tinkerApplicationLike = TinkerPatchApplicationLike.getTinkerPatchApplicationLike();
 
-	// 初始化TinkerPatch SDK, 更多配置可参照API章节中的,初始化SDK
-	TinkerPatch.init(tinkerApplicationLike)
-			.reflectPatchLibrary()
-			.setPatchRollbackOnScreenOff(true)
-			.setPatchRestartOnSrceenOff(true);
+		// 初始化TinkerPatch SDK, 更多配置可参照API章节中的,初始化SDK
+		TinkerPatch.init(tinkerApplicationLike)
+				.reflectPatchLibrary()
+				.setPatchRollbackOnScreenOff(true)
+				.setPatchRestartOnSrceenOff(true);
 
-	// 每隔3个小时去访问后台时候有更新,通过handler实现轮训的效果
-	new FetchPatchHandler().fetchPatchWithInterval(3);
+		// 每隔3个小时去访问后台时候有更新,通过handler实现轮训的效果
+		new FetchPatchHandler().fetchPatchWithInterval(3);
+	}
 	if (!ActivityUtil.isVirtual(this)) {
 	ImageLoaderUtil.getInstance().initImageLoader(this);//初始化 图片加载
 	CityUtil.initCity(this);//初始化 城市数据

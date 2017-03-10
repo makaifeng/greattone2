@@ -36,14 +36,14 @@ tinkerpatchSupport {
      **/
 }
 
-/**
- * 用于用户在代码中判断tinkerPatch是否被使能
- */
-android {
-    defaultConfig {
-        buildConfigField "boolean", "TINKER_ENABLE", "${tinkerpatchSupport.tinkerEnable}"
-    }
-}
+///**
+// * 用于用户在代码中判断tinkerPatch是否被使能
+// */
+//android {
+//    defaultConfig {
+//        buildConfigField "boolean", "TINKER_ENABLE", "${tinkerpatchSupport.tinkerEnable}"
+//    }
+//}
 
 /**
  * 一般来说,我们无需对下面的参数做任何的修改

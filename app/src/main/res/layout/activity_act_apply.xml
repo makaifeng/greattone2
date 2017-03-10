@@ -31,7 +31,8 @@
                     android:layout_weight="1.0"
                     android:background="@null"
                     android:hint="姓名"
-                    android:singleLine="true"
+                   android:lines="1"
+                    android:ellipsize="end"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
 
@@ -60,7 +61,8 @@
                     android:background="@null"
                     android:hint="电话"
                     android:inputType="phone"
-                    android:singleLine="true"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
 
@@ -87,8 +89,9 @@
                     android:layout_weight="1.0"
                     android:background="@null"
                     android:hint="参赛曲目"
-                    android:inputType="phone"
-                    android:singleLine="true"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
 

@@ -19,16 +19,27 @@ public class RegisterActivity extends BaseActivity {
 
 	int buttonWidth;
 	private NormalMemberFragment fragment;
-private int groupid=1;
+	private int groupid=1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		groupid=getIntent().getIntExtra("groupid",1);
 		initView();
 	}
 
 	private void initView() {
-		setHead(getResources().getString(R.string.用户注册), true, true);
+		if (groupid==1){
+			setHead("注册普通会员", true, true);
+		}else 	if (groupid==3){
+			setHead("注册音乐老师", true, true);
+		}else 	if (groupid==4){
+			setHead("注册音乐教室", true, true);
+		}else 	if (groupid==5){
+			setHead("注册乐器品牌", true, true);
+		}else {
+			setHead(getResources().getString(R.string.用户注册), true, true);
+		}
 
 //		horizontalScrollView = (HorizontalScrollView) findViewById(R.id.scrollView);
 		rg_title = (RadioGroup) findViewById(R.id.rg_title);
@@ -40,6 +51,7 @@ private int groupid=1;
 		this.fm = getSupportFragmentManager();
 		fragment = new NormalMemberFragment();
 		displayFragment(fragment);
+		fragment.setGroupId(groupid);
 		rg_title.check(R.id.radioButton1);
 		rg_title.setOnCheckedChangeListener(listener);
 	}
@@ -149,5 +161,6 @@ private int groupid=1;
 		super.onActivityResult(requestCode, resultCode, data);
 		fragment.onActivityResult(requestCode, resultCode, data);
 	}
+
 
 }

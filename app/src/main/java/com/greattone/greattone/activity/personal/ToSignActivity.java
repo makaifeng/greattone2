@@ -70,11 +70,13 @@ private TextView textview1;
 		tv_agreement =(TextView) findViewById(R.id.tv_agreement);
 		tv_cost =(TextView) findViewById(R.id.tv_cost);
 		textview2 =(TextView) findViewById(R.id.textview2);
+		tv_sign_up =(TextView) findViewById(R.id.tv_sign_up);
 		if (isNewSign){
 			cb_agreement.setVisibility(View.GONE);
 			tv_agreement.setVisibility(View.GONE);
 			tv_cost.setVisibility(View.GONE);
 			textview2.setVisibility(View.GONE);
+			tv_sign_up.setText("续约");
 			if (Data.myinfo.getGroupid() == 5) {
 				textview1.setText("认证品牌会员\n" +
 						"认证到期时间为：");
@@ -86,6 +88,7 @@ private TextView textview1;
 				// 加载需要显示的网页
 				webview.loadUrl("http://m.greattone.net/app/qhqy.html");
 			}
+
 		}else {
 			String agreement = "《品牌会员认证协议》";
 			if (Data.myinfo.getGroupid() == 5) {
@@ -98,6 +101,7 @@ private TextView textview1;
 				agreement = "《琴行教室认证协议》";
 				// 加载需要显示的网页
 				webview.loadUrl("http://m.greattone.net/app/qhqy.html");
+				tv_sign_up.setText("立即认证");
 			}
 			cb_agreement.setOnCheckedChangeListener(checkedChangeListener);
 			SpannableString spannableString=new SpannableString(agreement);
@@ -108,7 +112,7 @@ private TextView textview1;
 
 		// 设置Web视图
 		webview.setWebViewClient(new webViewClient());
-		tv_sign_up =(TextView) findViewById(R.id.tv_sign_up);
+
 		tv_sign_up.setOnClickListener(clickListener);
 	}
 

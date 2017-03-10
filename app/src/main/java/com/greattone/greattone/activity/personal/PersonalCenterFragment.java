@@ -277,7 +277,7 @@ public class PersonalCenterFragment extends BaseFragment {
 			} else if (names[listPosition].equals(getResources().getString(R.string.联系我们))) {// 联系我们
 				startActivity(new Intent(context, ConnectWayActivityCenter.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.mall))) {// 产品商城
-				if (Data.myinfo.getGroupid()==4||Data.myinfo.getCked() == 0){
+				if (Data.myinfo.getGroupid()==4&&Data.myinfo.getCked() == 0){
 					toast("未签约用户不能使用该功能");
 					return;
 				}else {

@@ -19,10 +19,28 @@ public class MusicalProduct {
     String thumbnail;
     String timestamp;
     String telephone;
+    String shardurl;
+    String shardpic;
     int money;
     int freight;
     int comms;//评价数
     int postage;//是否包邮
+
+    public String getShardurl() {
+        return shardurl;
+    }
+
+    public void setShardurl(String shardurl) {
+        this.shardurl = shardurl;
+    }
+
+    public String getShardpic() {
+        return shardpic;
+    }
+
+    public void setShardpic(String shardpic) {
+        this.shardpic = shardpic;
+    }
 
     public int getComms() {
         return comms;

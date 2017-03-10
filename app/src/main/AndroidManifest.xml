@@ -951,7 +951,8 @@
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".activity.mall.MallOrderDetailActivity"></activity>
+        <activity android:name=".activity.mall.MallOrderDetailActivity" />
+        <activity android:name=".activity.personal.SelectIdentityActivity"></activity>
     </application>
 
 </manifest>

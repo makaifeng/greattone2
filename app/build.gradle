@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+def tinkerEnable = false
 android {
     signingConfigs {
         config {
@@ -20,6 +21,7 @@ android {
         versionCode 19
         versionName "3.11.2"
         multiDexEnabled true
+        buildConfigField "boolean", "TINKER_ENABLE", "${tinkerEnable}"
     }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
@@ -80,7 +82,7 @@ afterEvaluate {
         dx.additionalParameters += '--minimal-main-dex'
     }
 }
-if (true){
+if ("${tinkerEnable}"=="true"){
     apply from: 'tinkerpatch.gradle'
 }
 

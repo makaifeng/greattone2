@@ -9,16 +9,27 @@
         android:layout_margin="10.0dip"
         android:focusableInTouchMode="true"
         android:orientation="vertical" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.greattone.greattone.widget.MyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"
+        android:text="会员头像"/>
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/padding10"
+        android:scaleType="centerCrop"
+        android:layout_centerInParent="true"
+        android:contentDescription="@null"
+        android:src="@mipmap/addphoto2" />
+</RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="@dimen/padding10"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"
-            android:contentDescription="@null"
-            android:src="@drawable/addphoto" />
 
         <com.greattone.greattone.widget.MyEditText
             android:id="@+id/et_name"
@@ -95,7 +106,7 @@
             android:orientation="horizontal" >
 
             <com.greattone.greattone.widget.MyTextView
-                android:id="@+id/tv_phone_district_num"
+                android:id="@+id/tv_phone_district"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_border"
@@ -103,41 +114,43 @@
                 android:gravity="center_horizontal"
                 android:hint="区域"
                 android:textSize="@dimen/bigtext" />
-
+            <LinearLayout
+                android:id="@+id/ll_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
+                <com.greattone.greattone.widget.MyTextView
+                    android:id="@+id/tv_phone_district_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:visibility="gone"/>
             <com.greattone.greattone.widget.MyEditText
                 android:id="@+id/et_phone_num"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/login_border"
                 android:ellipsize="end"
+                android:background="@android:color/transparent"
                 android:hint="手机号"
                 android:inputType="phone"
                 android:maxLength="15"
-				android:singleLine="true"
+				android:lines="1"
                 android:padding="10.0dip"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/bigtext" />
         </LinearLayout>
+        </LinearLayout>
 
-        <com.greattone.greattone.widget.MyEditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/login_border"
-            android:ellipsize="end"
-            android:hint="邮箱"
-            android:inputType="textEmailAddress"
-            android:lines="1"
-            android:padding="10.0dip"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/bigtext"
-            android:visibility="gone" />
+
 
         <LinearLayout android:id="@+id/ll_code"
             android:layout_width="match_parent"

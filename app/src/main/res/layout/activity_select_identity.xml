@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_select_identity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:scrollbars="none"
+    android:background="@color/gray_eeeeee"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+        <TextView android:id="@+id/tv_identity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:background="@mipmap/identity1" />
+        <TextView android:id="@+id/tv_identity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_toRightOf="@+id/tv_identity1"
+            android:background="@mipmap/identity2" />
+        <TextView android:id="@+id/tv_identity3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_below="@+id/tv_identity1"
+            android:background="@mipmap/identity3" />
+        <TextView android:id="@+id/tv_identity4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding10"
+            android:layout_marginLeft="@dimen/padding10"
+            android:layout_toRightOf="@+id/tv_identity1"
+            android:layout_below="@+id/tv_identity1"
+            android:background="@mipmap/identity4" />
+    </RelativeLayout>
+</ScrollView>

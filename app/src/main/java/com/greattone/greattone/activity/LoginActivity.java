@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.greattone.greattone.Listener.BaseUiListener;
 import com.greattone.greattone.R;
-import com.greattone.greattone.activity.personal.RegisterActivity;
 import com.greattone.greattone.activity.personal.RevisedPasswordActivity;
+import com.greattone.greattone.activity.personal.SelectIdentityActivity;
 import com.greattone.greattone.proxy.LoginProxy;
 import com.tencent.connect.common.Constants;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
@@ -117,7 +117,7 @@ private TextView tv_WX;
 //						}, null));
 			} else if (v == tv_free_registration) {// 免费注册
 				startActivityForResult(new Intent(context,
-						RegisterActivity.class), 1);
+						SelectIdentityActivity.class), 1);
 //				IWXAPI api = WXAPIFactory.createWXAPI(context,com.greattone.greattone.data.Constants.WX_APPID, true);
 //				api.registerApp(com.greattone.greattone.data.Constants.WX_APPID);
 //			    final SendAuth.Req req = new SendAuth.Req();

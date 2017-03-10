@@ -272,7 +272,7 @@ protected void sort() {
 	 */
 	protected void initContentAdapter() {
 		if (isInitView) {
-		Parcelable listState = gv_content.onSaveInstanceState();
+			Parcelable listState = gv_content.onSaveInstanceState();
 //			ClassRoomContentListAdapter adapter = new ClassRoomContentListAdapter(
 //					context, classRoomList);
 			ClassRoomContentGridAdapter adapter = new ClassRoomContentGridAdapter(

@@ -120,14 +120,19 @@ private TextView tv_price;
 //						toast("已生成订单，去支付");
 						if (message.getData()!=null&&message.getData().startsWith("{")) {
 							com.alibaba.fastjson.JSONObject js = JSON.parseObject(message.getData());
-							Intent intent = new Intent(context, PayActivity.class);
-							intent.putExtra("name", js.getString("payname"));
-							intent.putExtra("contant",js.getString("payname"));
-							intent.putExtra("price", js.getString("price"));
-							intent.putExtra("bitype", js.getString("bitype"));
-							intent.putExtra("orderId",js.getString("orderid"));
-							((Activity) context).startActivityForResult(intent, 3);
-							finish();
+							if(js.getString("price").equals("0")){
+								toast("报名成功");
+								finish();
+							}else {
+								Intent intent = new Intent(context, PayActivity.class);
+								intent.putExtra("name", js.getString("payname"));
+								intent.putExtra("contant", js.getString("payname"));
+								intent.putExtra("price", js.getString("price"));
+								intent.putExtra("bitype", js.getString("bitype"));
+								intent.putExtra("orderId", js.getString("orderid"));
+								((Activity) context).startActivityForResult(intent, 3);
+								finish();
+							}
 						}
 					}
 				}, null));

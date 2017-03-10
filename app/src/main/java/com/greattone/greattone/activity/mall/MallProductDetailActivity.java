@@ -24,6 +24,7 @@ import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.data.HttpConstants2;
 import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.SharePopWindow;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.MusicalProduct;
 import com.greattone.greattone.util.DisplayUtil;
@@ -60,6 +61,12 @@ public class MallProductDetailActivity extends BaseActivity {
                     intent.putExtra("freight",product.getFreight());
                     intent.putExtra("price",product.getMoney());
                     startActivityForResult(intent,3);
+                    break;
+                case R.id.iv_share://分享
+                    SharePopWindow.build(context).setTitle(product.getTitle())
+                            .setContent(product.getNewstext())
+                            .setTOargetUrl(product.getShardurl())
+                            .setIconPath(product.getShardpic()).show();
                     break;
             }
         }

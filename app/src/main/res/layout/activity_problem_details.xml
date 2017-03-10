@@ -39,7 +39,7 @@
                     android:id="@+id/activity_problem_details_ctime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2013-12-12 10:30"
+                    android:text=""
                     android:textColor="@color/edit_himi"
                     android:textSize="@dimen/bigtext" />
             </LinearLayout>
@@ -136,9 +136,10 @@
                         android:id="@+id/activity_problem_details_price_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2013-12-12 10:30"
+                        android:text=""
                         android:textColor="@color/edit_himi"
-                        android:textSize="@dimen/bigtext" />
+                        android:textSize="@dimen/bigtext"
+                        android:visibility="gone"/>
                 </LinearLayout>
 
                 <View
@@ -221,9 +222,10 @@
                         android:id="@+id/activity_problem_details_etime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2013-12-12 10:30"
+                        android:text=""
                         android:textColor="@color/edit_himi"
-                        android:textSize="@dimen/bigtext" />
+                        android:textSize="@dimen/bigtext"
+                        android:visibility="gone"/>
                 </LinearLayout>
 
                 <View
@@ -237,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40.0dip"
                     android:layout_marginTop="10.0dip"
-                    android:text="对方身份票数俄文版而我却金额求和"
+                    android:text=""
                     android:textColor="@color/edit_himi"
                     android:textSize="@dimen/bigtext" />
             </LinearLayout>
