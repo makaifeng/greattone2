@@ -34,7 +34,7 @@ public class RegisterActivity extends BaseActivity {
 		}else 	if (groupid==3){
 			setHead("注册音乐老师", true, true);
 		}else 	if (groupid==4){
-			setHead("注册音乐教室", true, true);
+			setHead("注册琴行教室", true, true);
 		}else 	if (groupid==5){
 			setHead("注册乐器品牌", true, true);
 		}else {

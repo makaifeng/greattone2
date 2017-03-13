@@ -109,7 +109,8 @@
                     android:gravity="center_vertical"
                     android:lines="1"
                     android:padding="10.0dip"
-                    android:hint="开始时间"
+                    android:text="开始时间"
+                    android:textColor="@color/gray_8f8f8f"
                     android:textSize="@dimen/bigtext" />
 
                 <com.greattone.greattone.widget.MyTextView
@@ -129,7 +130,8 @@
                     android:gravity="center_vertical"
                     android:lines="1"
                     android:padding="10.0dip"
-                    android:hint="结束时间"
+                    android:text="结束时间"
+                    android:textColor="@color/gray_8f8f8f"
                     android:textSize="@dimen/bigtext" />
 
                 <com.greattone.greattone.widget.MyTextView
@@ -155,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:background="@null"
-                    android:hint="城市地区"
+                    android:text="城市地区"
                     android:lines="1"
                     android:padding="10.0dip"
                     android:textColor="@color/gray_8f8f8f"
@@ -166,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:hint="请选择"
+                    android:text="请选择"
                     android:textColor="@color/gray_8f8f8f" />
 
                 <ImageView

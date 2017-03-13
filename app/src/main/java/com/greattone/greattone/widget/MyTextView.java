@@ -22,6 +22,7 @@ public class MyTextView extends TextView {
 //		super(context, attrs, defStyleAttr, defStyleRes);
 //	}
 
+
 	@Override
 	public void setText(CharSequence text, BufferType type) {
 		try {
@@ -35,7 +36,6 @@ public class MyTextView extends TextView {
 		}
 		super.setText(text, type);
 	}
-	
 	@Override
 	public CharSequence getText() {
 		try {

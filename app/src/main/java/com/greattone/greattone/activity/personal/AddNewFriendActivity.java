@@ -1,6 +1,7 @@
 package com.greattone.greattone.activity.personal;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -8,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +18,9 @@ import android.widget.TextView.OnEditorActionListener;
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.celebrity.CelebrityActivity;
+import com.greattone.greattone.activity.classroom.ClassRoomActivity;
+import com.greattone.greattone.activity.teacher.TeacherActivity;
 import com.greattone.greattone.adapter.AddNewFriendAdapter;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
@@ -86,6 +91,12 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 		
 		pull = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
 		lv_content = (ListView) findViewById(R.id.lv_content);
+		lv_content.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				toCenter(position);
+			}
+		});
 //		sv_friend = (ScrollView) findViewById(R.id.sv_add_friend);
 		et_search = (EditText) findViewById(R.id.et_friend_search);
 
@@ -143,6 +154,24 @@ public class AddNewFriendActivity extends BaseActivity implements OnClickListene
 //		}
 //		context.startActivity(intent);
 //	}
+	/** 跳转到个人中心 */
+	protected void toCenter(int position) {
+		UserInfo info=userlist.get(position);
+		int group=info.getGroupid();
+		Intent intent = new Intent();
+		if (group == 1 || group == 2) {// 普通会员和名人
+			intent.setClass(context, CelebrityActivity.class);
+			intent.putExtra("id", info.getUserid() + "");
+			intent.putExtra("groupid",info.getGroupid());
+		} else if (group == 3) {// 老师
+			intent.setClass(context, TeacherActivity.class);
+			intent.putExtra("id", info.getUserid() + "");
+		} else if (group == 4) {// 教室
+			intent.setClass(context, ClassRoomActivity.class);
+			intent.putExtra("id", info.getUserid() + "");
+		}
+		context.startActivity(intent);
+	}
 	//获取好友列表
 	private void getFreiend(){
 		String search = et_search.getText().toString().trim();
