@@ -1,22 +1,5 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
-import java.util.LinkedHashMap;
-
-import com.alibaba.fastjson.JSON;
-import com.greattone.greattone.R;
-import com.greattone.greattone.activity.BaseActivity;
-import com.greattone.greattone.activity.WebActivity;
-import com.greattone.greattone.data.Data;
-import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.dialog.SharePopWindow;
-import com.greattone.greattone.entity.HaiXuan;
-import com.greattone.greattone.entity.Message2;
-import com.greattone.greattone.util.DisplayUtil;
-import com.greattone.greattone.util.FileUtil;
-import com.greattone.greattone.util.HttpUtil;
-import com.greattone.greattone.util.HttpUtil.ResponseListener;
-import com.greattone.greattone.util.ImageLoaderUtil;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,6 +11,24 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.greattone.greattone.R;
+import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.WebActivity;
+import com.greattone.greattone.data.Data;
+import com.greattone.greattone.data.HttpConstants2;
+import com.greattone.greattone.dialog.MyProgressDialog;
+import com.greattone.greattone.dialog.SharePopWindow;
+import com.greattone.greattone.entity.HaiXuan;
+import com.greattone.greattone.entity.Message2;
+import com.greattone.greattone.util.DisplayUtil;
+import com.greattone.greattone.util.FileUtil;
+import com.greattone.greattone.util.HttpUtil;
+import com.greattone.greattone.util.HttpUtil.ResponseListener;
+import com.greattone.greattone.util.ImageLoaderUtil;
+
+import java.util.LinkedHashMap;
 
 /** 海选详情 */
 @SuppressWarnings("deprecation")
@@ -215,6 +216,15 @@ private int history;
 			} else if (v == tv_sign_up) {// 报名
 				Intent intent = new Intent();
 				if (type == 1) {// 活动-活动总结
+					if (haiXuan.getHai_bao_page()==1){//新活动页面
+						intent.setClass(context, HuodongWebAct.class);//活动报名
+						intent.putExtra("title", haiXuan.getTitle());
+						if (haiXuan.getId().equals("2109")){
+							intent.putExtra("urlPath", HttpConstants2.SERVER_URL + "/app/buyticket/index.html");
+						}else{
+							intent.putExtra("urlPath", HttpConstants2.SERVER_URL + "/app/buyticket/"+haiXuan.getId()+".html");
+						}
+					}else
 					intent.setClass(context, ActivityApplyActivity.class);//活动报名
 				}else {//海选报名
 					if (haiXuan.getClassid().equals("32")) {//中华好琴声
