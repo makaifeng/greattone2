@@ -5,7 +5,17 @@ import java.util.List;
 public class VoteOK {
 	String pm;
 	String tou_num;
+	int type;
 	List<ImageData> gg;
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	public String getPm() {
 		return pm;
 	}

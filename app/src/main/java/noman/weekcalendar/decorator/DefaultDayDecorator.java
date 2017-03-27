@@ -7,7 +7,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
-import android.support.annotation.DimenRes;
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
@@ -34,7 +33,7 @@ public class DefaultDayDecorator implements DayDecorator {
                                @ColorInt int selectedDateColor,
                                @ColorInt int todayDateColor,
                                @ColorInt int textColor,
-                               @DimenRes float textSize) {
+                                float textSize) {
         this.context = context;
         this.selectedDateColor = selectedDateColor;
         this.todayDateColor = todayDateColor;

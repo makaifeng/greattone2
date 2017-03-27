@@ -30,7 +30,9 @@ import java.util.List;
  * Created by Administrator on 2016/11/2.
  */
 public class EditTimeTableAct extends BaseActivity{
-    private TextView tv_name,tv_location,tv_starttime,tv_stoptime,tv_student;
+    private TextView tv_name,
+//            tv_location,
+            tv_starttime,tv_stoptime,tv_student;
     private EditText et_remark;
     private  final int Result_Name=1;
     private  final int Result_Location=2;
@@ -93,7 +95,7 @@ private ArrayList<String> students=new ArrayList<>();
             }
         });
         tv_name=(TextView)findViewById(R.id.tv_name);
-        tv_location=(TextView)findViewById(R.id.tv_location);
+//        tv_location=(TextView)findViewById(tv_location);
         tv_starttime=(TextView)findViewById(R.id.tv_starttime);
         tv_stoptime=(TextView)findViewById(R.id.tv_stoptime);
        findViewById(R.id.tv_repick).setVisibility(View.GONE);
@@ -103,7 +105,7 @@ private ArrayList<String> students=new ArrayList<>();
         et_remark=(EditText)findViewById(R.id.et_remark);
 
         tv_name.setOnClickListener(lis);
-        tv_location.setOnClickListener(lis);
+//        tv_location.setOnClickListener(lis);
         tv_starttime.setOnClickListener(lis);
         tv_stoptime.setOnClickListener(lis);
         tv_student.setOnClickListener(lis);
@@ -122,7 +124,7 @@ private ArrayList<String> students=new ArrayList<>();
                 }
             }
             tv_name.setText(timeTable.getCouname());
-            tv_location.setText(timeTable.getLocation());
+//            tv_location.setText(timeTable.getLocation());
             tv_starttime.setText(timeTable.getClasstime()+" "+timeTable.getStarttime());
             try {
                 String days[]=timeTable.getClasstime().split("\\-");
@@ -159,7 +161,7 @@ private ArrayList<String> students=new ArrayList<>();
      */
     private void edit() {
         String couname=tv_name.getText().toString().trim();//课程名称
-        String location=tv_location.getText().toString().trim();//上课地点
+//        String location=tv_location.getText().toString().trim();//上课地点
         String classtime=year+"-"+(month<10?"0"+month:""+month)+"-"+(day<10?"0"+day:""+day);//开始日期  格式2016-11-01
         String starttime=(hour<10?"0"+hour:""+hour)+":"+(minute<10?"0"+minute:""+minute);//开始时间  	格式08:15
         String stoptime=tv_stoptime.getText().toString().trim();//结束时间   	格式08:15
@@ -170,13 +172,13 @@ private ArrayList<String> students=new ArrayList<>();
             toast("结束时间不能小于开始时间");
         }
         if (TextUtils.isEmpty(couname)){ toast("请填写课程名称"); return;}
-        if (TextUtils.isEmpty(location)){ toast("请填写上课地点"); return;}
+//        if (TextUtils.isEmpty(location)){ toast("请填写上课地点"); return;}
         if (year==0){ toast("请选择开始时间"); return;}
         if (TextUtils.isEmpty(stoptime)){ toast("请选择结束时间"); return;}
         if (TextUtils.isEmpty(stuname)){ toast("请填写学生姓名"); return;}
 //        if (TextUtils.isEmpty(remarks)){ toast("请填写备注信息"); return;}
         MyProgressDialog.show(context);
-        HttpProxyUtil.editCourse(context,timeTable.getId(), couname, location, classtime, starttime, stoptime, stuname, remarks, new HttpUtil.ResponseListener() {
+        HttpProxyUtil.editCourse(context,timeTable.getId(), couname, null, classtime, starttime, stoptime, stuname, remarks, new HttpUtil.ResponseListener() {
             @Override
             public void setResponseHandle(Message2 message) {
                 toast("发布课程成功");
@@ -206,10 +208,10 @@ private ArrayList<String> students=new ArrayList<>();
                      String name=tv_name.getText().toString().trim();
                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","课程名称").putExtra("text",name),Result_Name);
                      break;
-                 case R.id.tv_location:
-                     String location=tv_location.getText().toString().trim();
-                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","上课地点").putExtra("text",location),Result_Location);
-                     break;
+//                 case tv_location:
+//                     String location=tv_location.getText().toString().trim();
+//                     startActivityForResult(new Intent(context, EditTextActivity.class).putExtra("title","上课地点").putExtra("text",location),Result_Location);
+//                     break;
                  case R.id.tv_starttime:
                      MyTimePickerPopWindow.showAllPopupWindow(context, new MyTimePickerPopWindow.OnAllSureListener() {
                          @Override
@@ -295,8 +297,8 @@ private ArrayList<String> students=new ArrayList<>();
             String text=data==null?"": data.getStringExtra("text");
             if (requestCode==Result_Name) {
                 tv_name.setText(text);
-            } else if (requestCode==Result_Location){
-                tv_location.setText(text);
+//            } else if (requestCode==Result_Location){
+//                tv_location.setText(text);
             } else   if (requestCode==Result_student){
                 tv_student.setText(text);
             }

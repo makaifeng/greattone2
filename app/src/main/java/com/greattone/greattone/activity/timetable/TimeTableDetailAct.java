@@ -27,9 +27,9 @@ public class TimeTableDetailAct extends BaseActivity{
     String id;
     private TextView tv_name;
     private TextView tv_student;
-    private TextView tv_starttime;
-    private TextView tv_stoptime;
-    private TextView tv_location;
+//    private TextView tv_starttime;
+//    private TextView tv_stoptime;
+//    private TextView tv_location;
 //    private TextView tv_state;
     private TextView tv_remark;
     private String userid;
@@ -51,9 +51,9 @@ public class TimeTableDetailAct extends BaseActivity{
 
         tv_name=    (TextView)findViewById(R.id.tv_name);
         tv_student=    (TextView)findViewById(R.id.tv_student);
-        tv_starttime=    (TextView)findViewById(R.id.tv_starttime);
-        tv_stoptime=    (TextView)findViewById(R.id.tv_stoptime);
-        tv_location=    (TextView)findViewById(R.id.tv_location);
+//        tv_starttime=    (TextView)findViewById(tv_starttime);
+//        tv_stoptime=    (TextView)findViewById(R.id.tv_stoptime);
+//        tv_location=    (TextView)findViewById(tv_location);
 //        tv_state=    (TextView)findViewById(R.id.tv_state);
         tv_remark=    (TextView)findViewById(R.id.tv_remark);
         btn_update=    (Button)findViewById(R.id.btn_update);
@@ -63,9 +63,9 @@ public class TimeTableDetailAct extends BaseActivity{
         tv_name.setText(timeTable.getCouname());
         tv_student.setText(timeTable.getStuname());
         String date[]=timeTable.getClasstime().split("\\-");
-        tv_starttime.setText(date[0]+"年"+date[1]+"月"+date[2]+"日 "+timeTable.getStarttime());
-        tv_stoptime.setText(date[0]+"年"+date[1]+"月"+date[2]+"日 "+timeTable.getStoptime());
-        tv_location.setText(timeTable.getLocation());
+//        tv_starttime.setText(date[0]+"年"+date[1]+"月"+date[2]+"日 "+timeTable.getStarttime());
+//        tv_stoptime.setText(date[0]+"年"+date[1]+"月"+date[2]+"日 "+timeTable.getStoptime());
+//        tv_location.setText(timeTable.getLocation());
         String state="";
 //        if (timeTable.getState()==1)   state="未开始";
 //        tv_state.setText(state);

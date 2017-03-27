@@ -236,6 +236,7 @@ public class VoteDetailsActivity extends BaseActivity {
 				break;
 			case R.id.activity_video_details_vote_on:// 投票
 					voteOn();
+
 				break;
 			case R.id.video_details_pic:// 视频
 				isplay = true;
@@ -304,12 +305,12 @@ public class VoteDetailsActivity extends BaseActivity {
 			tv_content.setVisibility(View.VISIBLE);
 			tv_content.setText(videoMsg.getSmalltext());//描述
 		}
-		if (videoMsg.getIshistory()==0) {
+//		if (videoMsg.getIshistory()==0) {
 			headView.	findViewById(R.id.activity_video_details_vote_on).setOnClickListener(
 					lis);
-		}else{
-			headView.	findViewById(R.id.activity_video_details_vote_on).setVisibility(View.GONE);
-		}
+//		}else{
+//			headView.	findViewById(R.id.activity_video_details_vote_on).setVisibility(View.GONE);
+//		}
 	}
 
 	protected void voteOn() {
@@ -334,9 +335,9 @@ public class VoteDetailsActivity extends BaseActivity {
 						if (message.getData().startsWith("{")) {
 							 vote=JSON.parseObject(message.getData(), VoteOK.class);
 							 int position=(int) (Math.random()*vote.getGg().size());
-							 MyHintDialog.showVoteHintDialog(context, vote.getGg().get(position).getPic(), vote.getGg().get(position).getUrl(), "总计："+vote.getTou_num()+"票\n排名第"+vote.getPm()+"名", true);
+							 MyHintDialog.showVoteHintDialog(context, vote.getGg().get(position).getPic(), vote.getGg().get(position).getUrl(), "总计："+vote.getTou_num()+"票\n排名第"+vote.getPm()+"名", true,false);
 						}else {
-							 MyHintDialog.showVoteHintDialog(context, "","", "", true);
+							 MyHintDialog.showVoteHintDialog(context, "","", "", true,false);
 						}
 					
 						MyProgressDialog.Cancel();
@@ -349,9 +350,11 @@ public class VoteDetailsActivity extends BaseActivity {
 						if (message.getData().startsWith("{")) {
 							 vote=JSON.parseObject(message.getData(), VoteOK.class);
 							 int position=(int) (Math.random()*vote.getGg().size());
-							 MyHintDialog.showVoteHintDialog(context,vote.getGg().get(position).getPic(), vote.getGg().get(position).getUrl(), message.getInfo(), false);
+							if (vote.getType()==1)
+							 MyHintDialog.showVoteHintDialog(context,vote.getGg().get(position).getPic(), vote.getGg().get(position).getUrl(), message.getInfo(), false,true);
+							else MyHintDialog.showVoteHintDialog(context,vote.getGg().get(position).getPic(), vote.getGg().get(position).getUrl(), message.getInfo(), false,false);
 						}else {
-							 MyHintDialog.showVoteHintDialog(context, "","", message.getInfo(), false);
+							 MyHintDialog.showVoteHintDialog(context, "","", message.getInfo(), false,false);
 						}
 						MyProgressDialog.Cancel();
 					}

@@ -239,6 +239,7 @@ public class HuodongWebAct extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode == 3&&resultCode==RESULT_OK){
+			toast("报名成功！");
 			finish();
 			setResult(RESULT_OK);
 		}

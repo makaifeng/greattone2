@@ -118,7 +118,17 @@ public class FileUtil {
 	public static String getLocalImageFile(Context context) {
 		String path = null;
 		path = Environment.getExternalStorageDirectory()+"/"+context.getPackageName()+"/p";
-		createFile(context, path);
+		createFile(path);
+		return path;
+	}
+	/**
+	 * 获取本地所在的目录
+	 *
+	 */
+	public static String getLocalFile(Context context) {
+		String path = null;
+		path = Environment.getExternalStorageDirectory()+"/"+context.getPackageName();
+		createFile(path);
 		return path;
 	}
 	/**
@@ -127,7 +137,7 @@ public class FileUtil {
 	public static String getCropFile(Context context) {
 		String path = null;
 		path = Environment.getExternalStorageDirectory()+"/"+context.getPackageName()+"/crop";
-		createFile(context, path);
+		createFile( path);
 		return path;
 	}
 
@@ -136,7 +146,7 @@ public class FileUtil {
 	 * 
 	 * @param path
 	 */
-	private static void createFile(Context context, String path) {
+	private static void createFile( String path) {
 		File file = new File(path);
 		if (!file.exists()) {
 			file.mkdirs();// 创建文件目录

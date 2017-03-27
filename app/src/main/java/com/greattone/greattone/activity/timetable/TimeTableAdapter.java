@@ -3,7 +3,10 @@ package com.greattone.greattone.activity.timetable;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,8 +174,8 @@ public class TimeTableAdapter extends BaseAdapter {
 //			// 设置当天的背景
 //			// drawable = res.getDrawable(R.drawable.calendar_item_selected_bg);
 //			// drawable = new ColorDrawable(Color.rgb(23, 126, 214));
-//			textView.setBackgroundColor(Color.rgb(23, 126, 214));
-//			textView.setTextColor(Color.WHITE);
+//			holder.date.setBackgroundColor(Color.rgb(23, 126, 214));
+//			holder.date.setTextColor(Color.WHITE);
 //		}
 		holder.setPosition(position);
 		return convertView;
@@ -183,6 +186,7 @@ public class TimeTableAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 	}
 
+	@SuppressWarnings("deprecation")
 	class ViewHolder {
 		TextView date;
 		TextView sleep;
@@ -247,7 +251,19 @@ public class TimeTableAdapter extends BaseAdapter {
 				entry1.setVisibility(View.INVISIBLE);
 				entry2.setVisibility(View.INVISIBLE);
 			}
-
+			if (currentFlag == position) {
+				// 设置当天的背景
+				Drawable solidCircle = ContextCompat.getDrawable(context, R.drawable.solid_circle);
+				solidCircle.setColorFilter(context.getResources().getColor(R.color
+						.colorAccent), PorterDuff.Mode.SRC_ATOP);
+				// drawable = res.getDrawable(R.drawable.calendar_item_selected_bg);
+				// drawable = new ColorDrawable(Color.rgb(23, 126, 214));
+//				date.setBackgroundColor(Color.rgb(23, 126, 214));
+				date.setTextColor(Color.WHITE);
+				if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN) {
+					date.setBackground(solidCircle);
+				}else  date.setBackgroundDrawable(solidCircle);
+			}
 
 		}
 	}

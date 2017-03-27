@@ -1,10 +1,7 @@
 package com.greattone.greattone.activity.plaza;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import uk.co.senab.photoview.PhotoView;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,7 +15,17 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.dialog.MyIosDialog;
+import com.greattone.greattone.util.BitmapUtil;
+import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.senab.photoview.PhotoView;
 
 public class ShowPictureActivity extends BaseActivity {
 	private ViewPager viewpager;
@@ -76,7 +83,7 @@ public class ShowPictureActivity extends BaseActivity {
 
 		@Override
 		public void onPageSelected(int arg0) {
-
+			mPosition=arg0;
 		}
 
 		@Override
@@ -107,7 +114,7 @@ public class ShowPictureActivity extends BaseActivity {
 		 * container  view的容器，其实就是viewpager自身
 		 * position 	相应的位置
 		 */
-		public Object instantiateItem(ViewGroup container, int position) {
+		public Object instantiateItem(ViewGroup container, final int position) {
 
 //			// 给 container 添加一个view
 //			try {
@@ -136,6 +143,13 @@ public class ShowPictureActivity extends BaseActivity {
 				} else {
 					image.setImageResource(R.drawable.image_empty);
 				}
+				image.setOnLongClickListener(new View.OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						showIosDialog(position);
+						return false;
+					}
+				});
 				container.addView(image);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -209,6 +223,46 @@ public class ShowPictureActivity extends BaseActivity {
 //		}
 //		imageList.add(image);
 //	}
+ private  void showIosDialog(final int mPosition){
+	 MyIosDialog.ShowBottomDialog(context, "", new String[]{"保存图片"}, new MyIosDialog.DialogItemClickListener() {
+		 @Override
+		 public void itemClick(String result, int position) {
+			if (position==0){
+				String url=uriList.get(mPosition);
+
+				ImageLoaderUtil.getInstance().loadImage(url, new ImageLoadingListener() {
+					@Override
+					public void onLoadingStarted(String s, View view) {
+
+					}
+
+					@Override
+					public void onLoadingFailed(String s, View view, FailReason failReason) {
+						toast("保存失败！");
+					}
+
+					@Override
+					public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+						String fileName = System.currentTimeMillis() + ".jpg";
+						String filepath= FileUtil.getLocalFile(context)+"/photo";
+						boolean b=	BitmapUtil.saveImage( bitmap,  filepath,  fileName);
+						if (b){
+							toast("保存成功，已保存到："+filepath+"/"+fileName);
+						}else {
+							toast("保存失败！");
+						}
+					}
+
+					@Override
+					public void onLoadingCancelled(String s, View view) {
+						toast("保存失败！");
+					}
+				});
+
+			}
+		 }
+	 }).show();
+ }
 
 	/**
 	 * 获取屏幕宽度和高度

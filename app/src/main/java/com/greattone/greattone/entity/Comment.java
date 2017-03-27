@@ -12,6 +12,52 @@ public class Comment {
 	String replys;
 	String saytext;
 	String saytime;
+	int groupid;
+	String putong_shenfen;
+	String teacher_type;
+	String music_star;
+	String classroom_type;
+
+	public int getGroupid() {
+		return groupid;
+	}
+
+	public void setGroupid(int groupid) {
+		this.groupid = groupid;
+	}
+
+	public String getPutong_shenfen() {
+		return putong_shenfen;
+	}
+
+	public void setPutong_shenfen(String putong_shenfen) {
+		this.putong_shenfen = putong_shenfen;
+	}
+
+	public String getTeacher_type() {
+		return teacher_type;
+	}
+
+	public void setTeacher_type(String teacher_type) {
+		this.teacher_type = teacher_type;
+	}
+
+	public String getMusic_star() {
+		return music_star;
+	}
+
+	public void setMusic_star(String music_star) {
+		this.music_star = music_star;
+	}
+
+	public String getClassroom_type() {
+		return classroom_type;
+	}
+
+	public void setClassroom_type(String classroom_type) {
+		this.classroom_type = classroom_type;
+	}
+
 	public int getPlid() {
 		return plid;
 	}

@@ -58,6 +58,12 @@ public class TimeTablesForDayActivity extends BaseActivity {
 
          courseView= (CourseView) findViewById(R.id.courseView);
         if (userid==null) {
+            setOtherText("发布课表", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivityForResult(new Intent(context, AddTimeTableAct.class),11);
+                }
+            });
             courseView.setIsMy(true);
         }else  courseView.setIsMy(false);
 //        TimeCouse TimeCouse =new TimeCouse(0,"钢琴基础课程","小张","10:30","12:30");

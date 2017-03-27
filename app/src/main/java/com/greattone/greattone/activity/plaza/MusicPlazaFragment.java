@@ -69,9 +69,9 @@ protected List<ImageData> imageUrlList;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		keyboard=getArguments().getString("keyboard");
-		if (keyboard==null) {
-			query = "isgood";// 热门贴
-		}
+//		if (keyboard==null) {
+//			query = "isgood";// 热门贴
+//		}
 		((BaseActivity) context).setOtherText(context.getResources().getString(R.string.post), new OnClickListener() {
 
 			@Override
@@ -100,11 +100,11 @@ protected List<ImageData> imageUrlList;
 	 */
 	private void initView() {
 		radiogroup = (RadioGroup) rootView.findViewById(R.id.radiogroup);
-		if (keyboard!=null) {//点搜索进来，显示全部
+//		if (keyboard!=null) {//点搜索进来，显示全部
 			radiogroup.check(R.id.radioButton1);
-		}else {//默认显示热门贴
-			radiogroup.check(R.id.radioButton2);
-		}
+//		}else {//默认显示热门贴
+//			radiogroup.check(R.id.radioButton2);
+//		}
 		radiogroup.setOnCheckedChangeListener(listener);
 
 		pull_to_refresh = (PullToRefreshView) rootView

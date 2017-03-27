@@ -1,8 +1,7 @@
 package com.greattone.greattone.adapter;
 
-import java.util.List;
-
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,13 +14,18 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
+import com.greattone.greattone.activity.celebrity.CelebrityActivity;
 import com.greattone.greattone.activity.chat.FaceImageDeal;
+import com.greattone.greattone.activity.classroom.ClassRoomActivity;
+import com.greattone.greattone.activity.teacher.TeacherActivity;
 import com.greattone.greattone.dialog.NormalPopuWindow.OnItemClickBack;
 import com.greattone.greattone.entity.Comment;
 import com.greattone.greattone.entity.Replys;
 import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.ImageLoaderUtil;
 import com.greattone.greattone.widget.MyRoundImageView;
+
+import java.util.List;
 
 public class PlazaMusicDetailsListAdapter extends BaseAdapter {
 	private Context context;
@@ -128,17 +132,43 @@ public class PlazaMusicDetailsListAdapter extends BaseAdapter {
 			time.setText(userList.get(position).getSaytime());
 			// replay.setText("回复");
 			replay.setOnClickListener(lis);
-
+			icon.setOnClickListener(lis);
 		}
 
 		OnClickListener lis = new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				clickBack.OnClick(position, userList.get(position).getPlid()
-						+ "");
+				switch (v.getId()){
+					case R.id.iv_icon:
+						toCenter();
+						break;
+					case R.id.tv_replay:
+						clickBack.OnClick(position, userList.get(position).getPlid()
+								+ "");
+						break;
+				}
+
 			}
 		};
+		/** 跳转到个人中心 */
+		protected void toCenter() {
+			int group = userList.get(position)
+					.getGroupid();
+			Intent intent = new Intent();
+			if (group == 1 || group == 2) {// 普通会员和名人
+				intent.setClass(context, CelebrityActivity.class);
+				intent.putExtra("id", userList.get(position).getId()+ "");
+				intent.putExtra("groupid",userList.get(position).getGroupid());
+			} else if (group == 3) {// 老师
+				intent.setClass(context, TeacherActivity.class);
+				intent.putExtra("id", userList.get(position).getId() + "");
+			} else if (group == 4) {// 教室
+				intent.setClass(context, ClassRoomActivity.class);
+				intent.putExtra("id", userList.get(position).getId() + "");
+			}
+			context.startActivity(intent);
+		}
 
 		// /** 添加回复记录 */
 		// private void addReplayTextView() {

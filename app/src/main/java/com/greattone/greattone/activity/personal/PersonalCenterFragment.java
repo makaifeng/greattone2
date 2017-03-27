@@ -176,7 +176,6 @@ public class PersonalCenterFragment extends BaseFragment {
 //		} else {
 //			listPosition = position - 3;
 //		}
-		if (position != 6) {
 			if (names[listPosition].equals(getResources().getString(R.string.friend_dynamics))) {// 知音动态
 				startActivity(new Intent(context, FriendDynamicActivity.class));
 			} else if (names[listPosition].equals(getResources().getString(R.string.我的发帖))) {// 我的发帖
@@ -283,7 +282,6 @@ public class PersonalCenterFragment extends BaseFragment {
 				}else {
 					startActivity(new Intent(context, MallSelectActivity.class));
 				}
-			}
 		}
 
 	}
