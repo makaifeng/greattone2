@@ -279,7 +279,7 @@ public class TimeTableAdapter extends BaseAdapter {
 			if (msg.getStuname().equals( Data.myinfo.getUsername())){
 				tv.setText(msg.getStuname());
 			}else {
-				tv.setText("有课");
+				tv.setText(context.getResources().getString(R.string.already_bespoke));
 			}
 		}
 	}

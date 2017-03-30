@@ -59,7 +59,9 @@ public 	Map<String, List<Friend>> contactsMap = new HashMap<>();
 	String[] b = { "#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
 			"L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X",
 			"Y", "Z" };
-	private TextView tv_hint,tv_btn,tv_filter;
+	private TextView tv_hint,
+//			tv_btn,
+			tv_filter;
 	String type = "feed";
 	private ImageView iv_search;
 	private EditText et_search;
@@ -92,19 +94,19 @@ private BadgeView badgeView;
 
 	private void initView() {
 		setHead(getResources().getString(R.string.通讯录), true, true);//通讯录
-//		setOtherText(getResources().getString(R.string.添加), new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				startActivityForResult(new Intent(context, AddNewFriendActivity.class),222);
-//			}
-//		});
+		setOtherText(getResources().getString(R.string.添加), new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startActivityForResult(new Intent(context, AddNewFriendActivity.class),222);
+			}
+		});
 		tv_hint = (TextView) findViewById(R.id.tv_hint);
 		et_search = (EditText) findViewById(R.id.et_search);
 		iv_search = (ImageView) findViewById(R.id.iv_search);
 		iv_search.setOnClickListener(lis);
-		tv_btn = (TextView) findViewById(R.id.tv_btn);
-		tv_btn.setOnClickListener(lis);
+//		tv_btn = (TextView) findViewById(tv_btn);
+//		tv_btn.setOnClickListener(lis);
 		tv_filter = (TextView) findViewById(R.id.tv_filter);
 		tv_filter.setOnClickListener(lis);
 
@@ -199,8 +201,8 @@ private BadgeView badgeView;
 					}
 					initContentAdapter();
 				}
-			}else if (v==tv_btn){//添加
-				startActivityForResult(new Intent(context, AddNewFriendActivity.class),222);
+//			}else if (v==tv_btn){//添加
+//				startActivityForResult(new Intent(context, AddNewFriendActivity.class),222);
 			}else if (v==tv_filter){//筛选
 				showPopWindow(v);
 			}

@@ -119,19 +119,19 @@ public class MyTimePickerPopWindow {
 		View menuView = LayoutInflater.from(context).inflate(R.layout.show_hour_popup_window,null);
 		final PopupWindow mPopupWindow = new PopupWindow(menuView, (int)(width*0.8),
 				ActionBar.LayoutParams.WRAP_CONTENT);
-	final 	WheelView	wv_hours = (WheelView) menuView.findViewById(R.id.hour);
+		final 	WheelView	wv_hours = (WheelView) menuView.findViewById(R.id.hour);
 		final	WheelView	wv_mins = (WheelView) menuView.findViewById(R.id.mins);
 		Calendar calendar = Calendar.getInstance();
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
 		int minute = calendar.get(Calendar.MINUTE);
 		wv_hours.setAdapter(new NumericWheelAdapter(
-				0, 23));
+				1, 23));
 		wv_hours.setCyclic(true);// 可循环滚动
 		wv_hours.setLabel("时");// 添加文字
 		wv_hours.setCurrentItem(hours);
 
 		MinutesAdapter adapter =new MinutesAdapter(
-				0, 45);
+				0, 45,10);
 
 	int	textSize = (height / 140) * 4;
 		wv_hours.TEXT_SIZE = textSize;

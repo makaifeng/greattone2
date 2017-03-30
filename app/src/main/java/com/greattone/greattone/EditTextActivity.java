@@ -26,14 +26,20 @@ public class EditTextActivity extends BaseActivity {
 
     private EditText edittext;
     private ListView listView;
-List<String > mlist=new ArrayList<>();
-List<String > intentlist=new ArrayList<>();
+    List<String > mlist=new ArrayList<>();
+    List<String > intentlist=new ArrayList<>();
     boolean isShowList;
+    MyAdapter adapter;
+    boolean canchange=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_text);
-        init();
+        try {
+            setContentView(R.layout.activity_edit_text);
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void init() {
@@ -53,14 +59,21 @@ List<String > intentlist=new ArrayList<>();
         if (isShowList){
             listView.setVisibility(View.VISIBLE);
             intentlist=getIntent().getStringArrayListExtra("list");
-            listView.setAdapter(new MyAdapter());
+            mlist.addAll(intentlist);
+            adapter=new MyAdapter();
+            listView.setAdapter(adapter);
         }else {
             listView.setVisibility(View.GONE);
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                edittext.setText(mlist.get(position));
+                try {
+                    canchange=false;
+                    edittext.setText(mlist.get(position));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -72,14 +85,23 @@ List<String > intentlist=new ArrayList<>();
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mlist.clear();
-            if (TextUtils.isEmpty(s)){
-                return;
-            }
-            for (String str:intentlist){
-                if (str.contains(s.toString())){
-                    mlist.add(str);
+            try {
+                if (canchange) {
+                    mlist.clear();
+                    if (TextUtils.isEmpty(s)) {
+                        mlist.addAll(intentlist);
+                    } else {
+                        for (String str : intentlist) {
+                            if (str.contains(s.toString())) {
+                                mlist.add(str);
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
                 }
+                canchange=true;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

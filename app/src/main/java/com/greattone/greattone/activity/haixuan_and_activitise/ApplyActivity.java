@@ -54,7 +54,7 @@ public class ApplyActivity extends BaseActivity {
 	private TextView tv_price;
 	private TextView tv_sing_up1;
 	private TextView tv_sing_up2;
-	private TextView tv_game_area;
+//	private TextView tv_game_area;
 	private EditText et_teach_tel,et_teach,et_music,et_address,et_email,et_age,et_qq,et_phone,et_name,et_class_tel,et_class;
 	private TextView tv_area;
 	private MyGridView gv_pic;
@@ -63,7 +63,7 @@ public class ApplyActivity extends BaseActivity {
 String filepass;
 String mid = "20";
 String classid = "73";//海选 73
-private View ll_game_area;
+//private View ll_game_area;
 private View ll_sing_up;
 List<String> groupList1=new ArrayList<String>();
 List<String> groupList2=new ArrayList<String>();
@@ -85,7 +85,7 @@ public static HaiXuanFilter haiXuanFilter = new HaiXuanFilter();
 		this.id = getIntent().getStringExtra("id");
 		this.originalPrice = getIntent().getStringExtra("price");
 		this.bitype = getIntent().getStringExtra("bitype");//货币类型
-String		type = getIntent().getStringExtra("baotype");//报名上传类型
+		String type = getIntent().getStringExtra("baotype");//报名上传类型
 		 baotype= getBaoType(type);//报名上传类型
 		initView();
 		getGroup();
@@ -136,8 +136,8 @@ private void getGroup() {
 		
 		this.radiogroup = ((RadioGroup) findViewById(R.id.radiogroup));
 		radiogroup.setOnCheckedChangeListener(onCheckedChangeListener);
-		ll_game_area=findViewById(R.id.ll_apply_game_area);
-		ll_game_area	.setOnClickListener(lis);
+//		ll_game_area=findViewById(R.id.ll_apply_game_area);
+//		ll_game_area	.setOnClickListener(lis);
 		ll_sing_up=findViewById(R.id.ll_apply_sign_up);
 		ll_apply_music=findViewById(R.id.ll_apply_music);
 		findViewById(R.id.activity_apply_commit).setOnClickListener(lis);
@@ -148,7 +148,7 @@ private void getGroup() {
 		tv_sing_up1	.setOnClickListener(lis);
 		this.tv_sing_up2 = ((TextView) findViewById(R.id.activity_apply_sign_up2));
 		tv_sing_up2	.setOnClickListener(lis);
-		this.tv_game_area = ((TextView) findViewById(R.id.activity_apply_game_area));
+//		this.tv_game_area = ((TextView) findViewById(R.id.activity_apply_game_area));
 		this.et_teach_tel = ((EditText) findViewById(R.id.activity_apply_teach_tel));
 		this.et_class_tel = ((EditText) findViewById(R.id.activity_apply_class_tel));
 		this.et_teach = ((EditText) findViewById(R.id.activity_apply_teach));
@@ -200,7 +200,7 @@ private void getGroup() {
 		this.et_music.setText("");
 		this.et_teach.setText("");
 		this.et_teach_tel.setText("");
-		this.tv_game_area.setText(getIntent().getStringExtra("title"));
+//		this.tv_game_area.setText(getIntent().getStringExtra("title"));
 //		this.tv_sing_up.setText("钢琴");
 		
 	}
@@ -220,7 +220,7 @@ private void getGroup() {
 		isShowPic=false;
 		ll_desc.setVisibility(View.GONE);
 		tv_upload.setText("上传参赛视频");
-		et_music.setHint("活动曲目");
+		et_music.setHint("参赛曲目");
 		ll_apply_music.setVisibility(View.VISIBLE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_VIDEO,1);
 		gv_pic.setAdapter(adapter);
@@ -232,7 +232,7 @@ private void getGroup() {
 		classid="104";
 		isShowPic=true;
 		ll_desc.setVisibility(View.VISIBLE);
-		et_music.setHint("活动曲目");
+		et_music.setHint("参赛曲目");
 		tv_upload.setText("选择个人照片");
 //		ll_apply_music.setVisibility(View.GONE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_PICTURE,9);
@@ -262,20 +262,20 @@ private void getGroup() {
 						});
 				citySelectDialog.show();
 				break;
-			case R.id.ll_apply_game_area://赛区
-//				 final List<String> mList1 =haiXuanFilter.getArea();
-				  final List<String> mList1 =new ArrayList<String>();
-				  mList1.add(getIntent().getStringExtra("title"));
-				NormalPopuWindow		popu1 = new NormalPopuWindow(context, mList1,
-						ll_game_area);
-				popu1.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
-					public void OnClick(int position, String text) {
-						tv_game_area.setText(mList1
-								.get(position));
-					}
-				});
-				 popu1.show();
-				break;
+//			case R.id.ll_apply_game_area://赛区
+////				 final List<String> mList1 =haiXuanFilter.getArea();
+//				  final List<String> mList1 =new ArrayList<String>();
+//				  mList1.add(getIntent().getStringExtra("title"));
+//				NormalPopuWindow		popu1 = new NormalPopuWindow(context, mList1,
+//						ll_game_area);
+//				popu1.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
+//					public void OnClick(int position, String text) {
+//						tv_game_area.setText(mList1
+//								.get(position));
+//					}
+//				});
+//				 popu1.show();
+//				break;
 			case R.id.activity_apply_sign_up1://组别1
 				 if (groupList1.size() > 0) {
 					 final NormalPopuWindow		popu2= new NormalPopuWindow(context, groupList1,
@@ -381,7 +381,7 @@ private void getGroup() {
 		String teach = et_teach.getText().toString().trim();
 		String teach_tel = et_teach_tel.getText().toString().trim();
 		String desc = et_desc.getText().toString().trim();
-		String game_area = tv_game_area.getText().toString().trim();
+//		String game_area = tv_game_area.getText().toString().trim();
 		String sing_up1 = tv_sing_up1.getText().toString().trim();
 		String sing_up2 = tv_sing_up2.getText().toString().trim();
 		String class_tel = et_class_tel.getText().toString().trim();
@@ -425,10 +425,10 @@ private void getGroup() {
 			toast("请填写推荐琴行的电话");
 			return;
 		}
-		if (TextUtils.isEmpty(game_area)) {
-			toast(getResources().getString(R.string.请选择赛区));
-			return;
-		}
+//		if (TextUtils.isEmpty(game_area)) {
+//			toast(getResources().getString(R.string.请选择赛区));
+//			return;
+//		}
 		if (TextUtils.isEmpty(sing_up1)) {
 			toast(getResources().getString(R.string.请选择组别));
 			return;
@@ -448,6 +448,7 @@ private void getGroup() {
 		}
 
 		 filepass = System.currentTimeMillis() + "";
+		String game_area="";//赛区
 		 String [] msg={name,phone,area,address,music,teach,teach_tel,game_area,sing_up1,age,sing_up2,desc,classname,class_tel};
 
 //		 post(msg,videoFileList);

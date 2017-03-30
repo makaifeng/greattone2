@@ -17,7 +17,8 @@ public class MinutesAdapter implements WheelAdapter {
 
     // format
     private String format;
-
+    //相差的时间 多少分钟 默认15分钟
+    private int itemDifferMinute=15;
     /**
      * Default constructor
      */
@@ -33,6 +34,9 @@ public class MinutesAdapter implements WheelAdapter {
     public MinutesAdapter(int minValue, int maxValue) {
         this(minValue, maxValue, null);
     }
+    public MinutesAdapter(int minValue, int maxValue,int itemDifferMinute) {
+        this(minValue, maxValue,itemDifferMinute, null);
+    }
 
     /**
      * Constructor
@@ -45,12 +49,18 @@ public class MinutesAdapter implements WheelAdapter {
         this.maxValue = maxValue;
         this.format = format;
     }
+    public MinutesAdapter(int minValue, int maxValue,int itemDifferMinute , String format) {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.itemDifferMinute = itemDifferMinute;
+        this.format = format;
+    }
 
     @Override
     public String getItem(int index) {
         if (index >= 0 && index < getItemsCount()) {
             String strMin;
-            int value = (minValue + index*15)%60;
+            int value = (minValue + index*itemDifferMinute)%60;
             if(value ==0){
                 strMin = "00";
             }else{

@@ -1,13 +1,8 @@
 package com.greattone.greattone.util;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -19,10 +14,16 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.greattone.greattone.MultiPart.HttpMultipartPost;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.activity.LoginActivity;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.data.HttpConstants2;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Message2;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class HttpUtil {
 	// static int errorCount = 1;
@@ -151,6 +152,9 @@ public class HttpUtil {
 										errorResponseListener
 												.setServerErrorResponseHandle(message);
 									}
+									if (message.getData()!=null&&message.getData()=="NotLogin"){
+										toLoginActivity(context);
+									}
 								}
 							}
 						} catch (Exception e) {
@@ -196,11 +200,21 @@ public class HttpUtil {
 	}
 
 	/**
+	 * 去重新登录
+	 */
+	private static void toLoginActivity(Context context) {
+		if (context instanceof BaseActivity){
+			context.startActivity(new Intent(context, LoginActivity.class));
+			ActiivtyStack.getScreenManager().clearAllActivity();
+		}
+
+	}
+
+	/**
 	 * post请求
 	 *
 	 * @param context
 	 * @param map
-	 * @param bitmap
 	 * @param responseListener
 	 * @param errorResponseListener
 	 * @return

@@ -190,7 +190,7 @@
     <string name="请选择图片">请选择图片</string>
     <string name="请选择头像">请选择头像</string>
     <string name="请输入区号">请输入区号</string>
-    <string name="请输入手机号">请输入手机号</string>
+    <string name="请输入手机号">请输入联系电话</string>
     <string name="请输入正确的手机号">请输入正确的手机号</string>
     <string name="请输入姓名">请输入姓名</string>
     <string name="请输入密码">请输入密码</string>
@@ -390,6 +390,7 @@
     <string name="update">上传</string>
     <!--个人中心-->
     <string name="mall">在线商城</string>
+    <string name="already_bespoke">已排课</string>
 
 
     <string name="timetable_name">课程名称</string>

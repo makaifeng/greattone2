@@ -18,6 +18,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.greattone.greattone.R;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
@@ -339,7 +340,7 @@ public class PostVideoService extends Service {
 						Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
 						sendBroadcast(intent);
 						Toast.makeText(getApplicationContext(),
-								"发帖成功，请等待审核", Toast.LENGTH_LONG).show();
+								"发帖成功,等待审核", Toast.LENGTH_LONG).show();
 						MyProgressDialog.Cancel();
 					}
 				}, null));
@@ -381,7 +382,7 @@ public class PostVideoService extends Service {
 						Intent intent = new Intent(MyReceiver.ACTION_UPDATE_SUCCESS);
 						sendBroadcast(intent);
 						Toast.makeText(getApplicationContext(),
-								"报名成功，请等待审核",
+								getResources().getString(R.string.报名成功),
 								Toast.LENGTH_LONG).show();
 					}
 				}, null));

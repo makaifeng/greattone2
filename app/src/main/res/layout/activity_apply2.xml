@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:background="@null"
-                    android:hint="参赛者"
+                    android:hint="选手姓名"
                     android:lines="1"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
@@ -107,94 +107,95 @@
                     android:textColor="#ffb90206"
                     android:textSize="20.0sp" />
             </LinearLayout>
-  <LinearLayout
-                android:id="@+id/ll_apply_game_area"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15.0dip"
-                android:background="@drawable/login_border"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+  <!--<LinearLayout-->
+                <!--android:id="@+id/ll_apply_game_area"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="15.0dip"-->
+                <!--android:background="@drawable/login_border"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal" >-->
 
-                <com.greattone.greattone.widget.MyTextView
-                    android:id="@+id/activity_apply_game_area"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@null"
-                    android:hint="比赛赛区"
-                    android:padding="10.0dip"
-                    android:textSize="@dimen/bigtext" />
+                <!--<com.greattone.greattone.widget.MyTextView-->
+                    <!--android:id="@+id/activity_apply_game_area"-->
+                    <!--android:layout_width="0.0dip"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1.0"-->
+                    <!--android:background="@null"-->
+                    <!--android:hint="比赛赛区"-->
+                    <!--android:padding="10.0dip"-->
+                    <!--android:textSize="@dimen/bigtext" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_next" />
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/icon_next" />-->
 
-                <com.greattone.greattone.widget.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10.0dip"
-                    android:text="*"
-                    android:textColor="#ffb90206"
-                    android:textSize="20.0sp" />
-            </LinearLayout>
+                <!--<com.greattone.greattone.widget.MyTextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10.0dip"-->
+                    <!--android:text="*"-->
+                    <!--android:textColor="#ffb90206"-->
+                    <!--android:textSize="20.0sp" />-->
+            <!--</LinearLayout>-->
 
 
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15.0dip"
-                android:background="@drawable/login_border"
-                android:orientation="horizontal" >
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="15.0dip"-->
+                <!--android:background="@drawable/login_border"-->
+                <!--android:orientation="horizontal" >-->
 
-                <com.greattone.greattone.widget.MyEditText
-                    android:id="@+id/activity_apply_address"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@null"
-                    android:hint="详细地址"
-                    android:lines="1"
-                    android:padding="10.0dip"
-                    android:textSize="@dimen/bigtext" />
+                <!--<com.greattone.greattone.widget.MyEditText-->
+                    <!--android:id="@+id/activity_apply_address"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1.0"-->
+                    <!--android:background="@null"-->
+                    <!--android:hint="详细地址"-->
+                    <!--android:lines="1"-->
+                    <!--android:padding="10.0dip"-->
+                    <!--android:textSize="@dimen/bigtext" />-->
 
-                <com.greattone.greattone.widget.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10.0dip"
-                    android:text="*"
-                    android:textColor="#ffb90206"
-                    android:textSize="20.0sp" />
-            </LinearLayout>
+                <!--<com.greattone.greattone.widget.MyTextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10.0dip"-->
+                    <!--android:text="*"-->
+                    <!--android:textColor="#ffb90206"-->
+                    <!--android:textSize="20.0sp" />-->
+            <!--</LinearLayout>-->
             
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15.0dip"
-                android:background="@drawable/login_border"
-                android:orientation="horizontal" >
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="15.0dip"-->
+                <!--android:background="@drawable/login_border"-->
+                <!--android:orientation="horizontal" >-->
 
-                <com.greattone.greattone.widget.MyEditText
-                    android:id="@+id/et_age"
-                    android:layout_width="0.0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@null"
-                    android:hint="年龄"
-                    android:lines="1"
-                    android:padding="10.0dip"
-                    android:textSize="@dimen/bigtext" />
+                <!--<com.greattone.greattone.widget.MyEditText-->
+                    <!--android:id="@+id/et_age"-->
+                    <!--android:layout_width="0.0dip"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1.0"-->
+                    <!--android:background="@null"-->
+                    <!--android:hint="年龄"-->
+                    <!--android:inputType="number"-->
+                    <!--android:lines="1"-->
+                    <!--android:padding="10.0dip"-->
+                    <!--android:textSize="@dimen/bigtext" />-->
 
-                <com.greattone.greattone.widget.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10.0dip"
-                    android:text="*"
-                    android:textColor="#ffb90206"
-                    android:textSize="20.0sp" />
-            </LinearLayout>
+                <!--<com.greattone.greattone.widget.MyTextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10.0dip"-->
+                    <!--android:text="*"-->
+                    <!--android:textColor="#ffb90206"-->
+                    <!--android:textSize="20.0sp" />-->
+            <!--</LinearLayout>-->
             <LinearLayout android:id="@+id/ll_music"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -208,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:background="@null"
-                    android:hint="活动曲目"
+                    android:hint="参赛曲目"
                     android:lines="1"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
@@ -279,7 +280,7 @@
                 android:layout_marginTop="15.0dip"
                 android:background="@drawable/login_border"
                 android:orientation="horizontal" 
-                android:visibility="gone" >
+                android:visibility="visible" >
 
                 <com.greattone.greattone.widget.MyEditText
                     android:id="@+id/et_desc"
@@ -288,7 +289,7 @@
                     android:layout_weight="1.0"
                     android:background="@null"
                     android:gravity="top"
-                    android:hint="图片描述"
+                    android:hint="擂台宣言"
                     android:padding="10.0dip"
                     android:textSize="@dimen/bigtext" />
 

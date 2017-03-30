@@ -123,8 +123,8 @@ public class HaiXuanTypeFragment extends BaseFragment {
 	protected void initContentAdapter() {
 		if (isInitView) {
 			Parcelable listState = lv_content.onSaveInstanceState();
-				lv_content.setAdapter(classid.equals("112") ?( new HaiXuanListAdapter2(context, competitionList))
-						: (new HaiXuanListAdapter(context, competitionList)));
+				lv_content.setAdapter(classid.equals("112") ?( new HaiXuanListAdapter2(context, competitionList))//乐器品牌
+						: (new HaiXuanListAdapter(context, competitionList)));//其他
 			lv_content.onRestoreInstanceState(listState);
 		}
 	}
@@ -133,8 +133,8 @@ public class HaiXuanTypeFragment extends BaseFragment {
 
 		@Override
 		public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
-			Intent intent = classid.equals("112") ? (new Intent(context, ActivitiyDetailsActivity2.class))
-					: (new Intent(context, ActivitiyDetailsActivity1.class));
+			Intent intent = classid.equals("112") ? (new Intent(context, ActivitiyDetailsActivity2.class))//乐器品牌
+					: (new Intent(context, ActivitiyDetailsActivity1.class));//其他
 			intent.putExtra("id", competitionList.get(position).getId());
 			intent.putExtra("classid", competitionList.get(position).getClassid());
 			intent.putExtra("history", history);

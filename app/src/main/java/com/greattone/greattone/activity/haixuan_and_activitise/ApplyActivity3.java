@@ -28,7 +28,6 @@ import com.greattone.greattone.activity.UpdateVideoAct;
 import com.greattone.greattone.adapter.PostGridAdapter;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
-import com.greattone.greattone.dialog.NormalPopuWindow;
 import com.greattone.greattone.entity.HaiXuanFilter;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
@@ -50,18 +49,21 @@ public class ApplyActivity3 extends BaseActivity {
 	private String price;
 	private String id;
 	private TextView tv_price;
-	private TextView tv_sing_up1;
-	private TextView tv_sing_up2;
-	private TextView tv_game_area;
-	private EditText et_music,et_address,et_phone,et_name;
+//	private TextView tv_sing_up1;
+//	private TextView tv_sing_up2;
+//	private TextView tv_game_area;
+	private EditText
+//			et_music,
+//			et_address,
+			et_phone,et_name;
 	private MyGridView gv_pic;
 	private PostGridAdapter adapter;
 	boolean isShowPic=false;
 String filepass;
 String mid = "20";
 String classid = "73";//海选 73
-private View ll_game_area;
-private View ll_sing_up;
+//private View ll_game_area;
+//private View ll_sing_up;
 List<String> groupList1=new ArrayList<String>();
 List<String> groupList2=new ArrayList<String>();
 Map<String , List<String>> map=new HashMap<String, List<String>>();
@@ -130,20 +132,20 @@ private void getGroup() {
 		
 		this.radiogroup = ((RadioGroup) findViewById(R.id.radiogroup));
 		radiogroup.setOnCheckedChangeListener(onCheckedChangeListener);
-		ll_game_area=findViewById(R.id.ll_apply_game_area);
-		ll_game_area	.setOnClickListener(lis);
-		ll_sing_up=findViewById(R.id.ll_apply_sign_up);
+//		ll_game_area=findViewById(R.id.ll_apply_game_area);
+//		ll_game_area	.setOnClickListener(lis);
+//		ll_sing_up=findViewById(R.id.ll_apply_sign_up);
 		findViewById(R.id.activity_apply_commit).setOnClickListener(lis);
-		findViewById(R.id.ll_apply_sign_up).setOnClickListener(lis);
-		findViewById(R.id.ll_apply_game_area).setOnClickListener(lis);
+//		findViewById(R.id.ll_apply_sign_up).setOnClickListener(lis);
+//		findViewById(R.id.ll_apply_game_area).setOnClickListener(lis);
 		this.tv_price = ((TextView) findViewById(R.id.activity_apply_paymoney));
-		this.tv_sing_up1 = ((TextView) findViewById(R.id.activity_apply_sign_up1));
-		tv_sing_up1	.setOnClickListener(lis);
-		this.tv_sing_up2 = ((TextView) findViewById(R.id.activity_apply_sign_up2));
-		tv_sing_up2	.setOnClickListener(lis);
-		this.tv_game_area = ((TextView) findViewById(R.id.activity_apply_game_area));
-		this.et_music = ((EditText) findViewById(R.id.activity_apply_music));
-		this.et_address = ((EditText) findViewById(R.id.activity_apply_address));
+//		this.tv_sing_up1 = ((TextView) findViewById(R.id.activity_apply_sign_up1));
+//		tv_sing_up1	.setOnClickListener(lis);
+//		this.tv_sing_up2 = ((TextView) findViewById(R.id.activity_apply_sign_up2));
+//		tv_sing_up2	.setOnClickListener(lis);
+//		this.tv_game_area = ((TextView) findViewById(R.id.activity_apply_game_area));
+//		this.et_music = ((EditText) findViewById(R.id.activity_apply_music));
+//		this.et_address = ((EditText) findViewById(R.id.activity_apply_address));
 		this.et_phone = ((EditText) findViewById(R.id.activity_apply_phone));
 		this.et_name = ((EditText) findViewById(R.id.activity_apply_name));
 		this.tv_upload = ((TextView) findViewById(R.id.activity_apply_upload));
@@ -171,19 +173,19 @@ private void getGroup() {
 		}
 		this.et_name.setText(Data.myinfo.getUsername());
 		this.et_phone.setText(Data.myinfo.getPhone());
-		this.et_address.setText(Data.myinfo.getAddres());
-		this.et_music.setText("");
-		this.tv_game_area.setText(getIntent().getStringExtra("title"));
+//		this.et_address.setText(Data.myinfo.getAddres());
+//		this.et_music.setText("");
+//		this.tv_game_area.setText(getIntent().getStringExtra("title"));
 	}
 /**
  * 上传视频
  */
 	private void showUpdateVideo() {
 		isShowPic=false;
-		ll_desc.setVisibility(View.GONE);
-		tv_upload.setText("上传参赛视频");
-		et_desc.setHint("视频描述");
-		et_music.setVisibility(View.GONE);
+//		ll_desc.setVisibility(View.GONE);
+		tv_upload.setText("上传个人视频");
+		et_desc.setHint("个人简介");
+//		et_music.setVisibility(View.GONE);
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_VIDEO,1);
 		gv_pic.setAdapter(adapter);
 	}
@@ -193,10 +195,10 @@ private void getGroup() {
 	private void showUpdatePicture() {
 		isShowPic=true;
 		ll_desc.setVisibility(View.VISIBLE);
-		tv_upload.setText("选择图片");
-		et_music.setVisibility(View.VISIBLE);
-		et_music.setHint("图片主题");
-		et_desc.setHint("图片描述");
+		tv_upload.setText("选择个人照片");
+//		et_music.setVisibility(View.VISIBLE);
+//		et_music.setHint("图片主题");
+		et_desc.setHint("个人简介");
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_PICTURE,9);
 		gv_pic.setAdapter(adapter);
 	}
@@ -209,52 +211,52 @@ private void getGroup() {
 			case R.id.activity_apply_commit://提交
 				submiitData();
 				break;
-			case R.id.ll_apply_game_area://赛区
-				  final List<String> mList1 =new ArrayList<String>();
-				  mList1.add(getIntent().getStringExtra("title"));
-				NormalPopuWindow		popu1 = new NormalPopuWindow(context, mList1,
-						ll_game_area);
-				popu1.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
-					public void OnClick(int position, String text) {
-						tv_game_area.setText(mList1
-								.get(position));
-					}
-				});
-				 popu1.show();
-				break;
-			case R.id.activity_apply_sign_up1://组别1
-				 if (groupList1.size() > 0) {
-					 final NormalPopuWindow		popu2= new NormalPopuWindow(context, groupList1,
-							ll_sing_up);
-					popu2.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
-						public void OnClick(int position, String text) {
-							tv_sing_up1.setText(groupList1
-									.get(position));
-							groupList2=map.get(tv_sing_up1.getText().toString().trim());
-							popu2.dismisss();
-						}
-					});
-					 popu2.show();
-				 }else{
-					 toast(getResources().getString(R.string.暂无组别) );//暂无组别
-				 }
-				break;
-			case R.id.activity_apply_sign_up2://组别2
-				if (groupList2.size() > 0) {
-					final NormalPopuWindow		popu2= new NormalPopuWindow(context, groupList2,
-							ll_sing_up);
-					popu2.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
-						public void OnClick(int position, String text) {
-							tv_sing_up2.setText(groupList2
-									.get(position));
-							popu2.dismisss();
-						}
-					});
-					popu2.show();
-				}else{
-					toast(getResources().getString(R.string.暂无组别) );//暂无组别
-				}
-				break;
+//			case R.id.ll_apply_game_area://赛区
+//				  final List<String> mList1 =new ArrayList<String>();
+//				  mList1.add(getIntent().getStringExtra("title"));
+//				NormalPopuWindow		popu1 = new NormalPopuWindow(context, mList1,
+//						ll_game_area);
+//				popu1.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
+//					public void OnClick(int position, String text) {
+//						tv_game_area.setText(mList1
+//								.get(position));
+//					}
+//				});
+//				 popu1.show();
+//				break;
+//			case R.id.activity_apply_sign_up1://组别1
+//				 if (groupList1.size() > 0) {
+//					 final NormalPopuWindow		popu2= new NormalPopuWindow(context, groupList1,
+//							ll_sing_up);
+//					popu2.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
+//						public void OnClick(int position, String text) {
+//							tv_sing_up1.setText(groupList1
+//									.get(position));
+//							groupList2=map.get(tv_sing_up1.getText().toString().trim());
+//							popu2.dismisss();
+//						}
+//					});
+//					 popu2.show();
+//				 }else{
+//					 toast(getResources().getString(R.string.暂无组别) );//暂无组别
+//				 }
+//				break;
+//			case R.id.activity_apply_sign_up2://组别2
+//				if (groupList2.size() > 0) {
+//					final NormalPopuWindow		popu2= new NormalPopuWindow(context, groupList2,
+//							ll_sing_up);
+//					popu2.setOnItemClickBack(new NormalPopuWindow.OnItemClickBack() {
+//						public void OnClick(int position, String text) {
+//							tv_sing_up2.setText(groupList2
+//									.get(position));
+//							popu2.dismisss();
+//						}
+//					});
+//					popu2.show();
+//				}else{
+//					toast(getResources().getString(R.string.暂无组别) );//暂无组别
+//				}
+//				break;
 			default:
 				break;
 			}
@@ -283,12 +285,12 @@ private void getGroup() {
 	protected void submiitData() {
 		String name = et_name.getText().toString().trim();
 		String phone = et_phone.getText().toString().trim();
-		String address = et_address.getText().toString().trim();
-		String music = et_music.getText().toString().trim();
+//		String address = et_address.getText().toString().trim();
+//		String music = et_music.getText().toString().trim();
 		String desc = et_desc.getText().toString().trim();
-		String game_area = tv_game_area.getText().toString().trim();
-		String sing_up1 = tv_sing_up1.getText().toString().trim();
-		String sing_up2 = tv_sing_up2.getText().toString().trim();
+//		String game_area = tv_game_area.getText().toString().trim();
+//		String sing_up1 = tv_sing_up1.getText().toString().trim();
+//		String sing_up2 = tv_sing_up2.getText().toString().trim();
 		fileList = adapter.getList();
 		if (TextUtils.isEmpty(name)) {
 			toast(getResources().getString(R.string.请输入姓名));
@@ -298,32 +300,36 @@ private void getGroup() {
 			toast(getResources().getString(R.string.请输入手机号));
 			return;
 		}
-		if (TextUtils.isEmpty(address)) {
-			toast(getResources().getString(R.string.请填写详细地址));
-			return;
-		}
-		if (isShowPic&&TextUtils.isEmpty(music)) {
-			toast("请填写图片主题");
-			return;
-		}
-		if (TextUtils.isEmpty(game_area)) {
-			toast(getResources().getString(R.string.请选择赛区));
-			return;
-		}
-		if (TextUtils.isEmpty(sing_up1)) {
-			toast(getResources().getString(R.string.请选择组别));
-			return;
-		}
+//		if (TextUtils.isEmpty(address)) {
+//			toast(getResources().getString(R.string.请填写详细地址));
+//			return;
+//		}
+//		if (isShowPic&&TextUtils.isEmpty(music)) {
+//			toast("请填写图片主题");
+//			return;
+//		}
+//		if (TextUtils.isEmpty(game_area)) {
+//			toast(getResources().getString(R.string.请选择赛区));
+//			return;
+//		}
+//		if (TextUtils.isEmpty(sing_up1)) {
+//			toast(getResources().getString(R.string.请选择组别));
+//			return;
+//		}
 		if (isShowPic&&TextUtils.isEmpty(desc)) {
-			toast("请填写图片描述");
+			toast("请填写个人简介");
 			return;
 		}
 		if (fileList.size()==0) {
-			toast(getResources().getString(R.string.请选择上传视频));
+			if (isShowPic){
+				toast("请选择上传图片");
+			}else {
+				toast(getResources().getString(R.string.请选择上传视频));
+			}
 			return;
 		}
 		 filepass = System.currentTimeMillis() + "";
-		 String [] msg={name,phone,address,music,game_area,sing_up1,sing_up2,desc};
+		 String [] msg={name,phone,"","","","","",desc};
 		 if (isShowPic) {
 			 updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
 			 pd=new ProgressDialog(context);

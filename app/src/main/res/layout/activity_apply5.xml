@@ -109,66 +109,92 @@
                     android:textSize="20.0sp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15.0dip"
+                android:background="@drawable/login_border"
+                android:orientation="horizontal" >
 
-      <LinearLayout
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-                    android:layout_marginTop="15.0dip"
-          android:background="@drawable/login_border"
-          android:orientation="vertical"
-          android:padding="10.0dip" >
+                <com.greattone.greattone.widget.MyEditText
+                    android:id="@+id/activity_apply_phone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:hint="联系电话"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:padding="10.0dip"
+                    android:textSize="@dimen/bigtext" />
 
-          <LinearLayout
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal" >
+                <com.greattone.greattone.widget.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10.0dip"
+                    android:text="*"
+                    android:textColor="#ffb90206"
+                    android:textSize="20.0sp" />
+            </LinearLayout>
+      <!--<LinearLayout-->
+          <!--android:layout_width="fill_parent"-->
+          <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="15.0dip"-->
+          <!--android:background="@drawable/login_border"-->
+          <!--android:orientation="vertical"-->
+          <!--android:padding="10.0dip" >-->
 
-              <com.greattone.greattone.widget.MyTextView
-                  android:layout_width="0.0dip"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1.0"
-                  android:text="乐器分类"
-                  android:textColor="@color/edit_himi"
-                  android:textSize="15.0sp" />
+          <!--<LinearLayout-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:orientation="horizontal" >-->
 
-              <com.greattone.greattone.widget.MyTextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginRight="10.0dip"
-                  android:text="*"
-                  android:textColor="#ffb90206"
-                  android:textSize="20.0sp" />
-          </LinearLayout>
+              <!--<com.greattone.greattone.widget.MyTextView-->
+                  <!--android:layout_width="0.0dip"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:layout_weight="1.0"-->
+                  <!--android:text="乐器分类"-->
+                  <!--android:textColor="@color/edit_himi"-->
+                  <!--android:textSize="15.0sp" />-->
 
-          <com.greattone.greattone.widget.CheckBoxListView
-              android:id="@+id/cl_content"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
- >
-          </com.greattone.greattone.widget.CheckBoxListView>
-      </LinearLayout>
+              <!--<com.greattone.greattone.widget.MyTextView-->
+                  <!--android:layout_width="wrap_content"-->
+                  <!--android:layout_height="wrap_content"-->
+                  <!--android:layout_marginRight="10.0dip"-->
+                  <!--android:text="*"-->
+                  <!--android:textColor="#ffb90206"-->
+                  <!--android:textSize="20.0sp" />-->
+          <!--</LinearLayout>-->
+
+          <!--<com.greattone.greattone.widget.CheckBoxListView-->
+              <!--android:id="@+id/cl_content"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+ <!--&gt;-->
+          <!--</com.greattone.greattone.widget.CheckBoxListView>-->
+      <!--</LinearLayout>-->
 
 
           
-	<ImageView
-                android:id="@+id/iv_titlepic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@null"
-                android:src="@drawable/icon_sc"    android:padding="5.0dip" 
-                android:layout_marginTop="5dp"
-           >
-            </ImageView>
-            <com.greattone.greattone.widget.MyTextView
-                    android:id="@+id/tv_titlepic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10.0dip"
-                    android:layout_marginStart="10.0dip"
-                    android:drawablePadding="5.0dip"
-                    android:gravity="center_vertical"
-                    android:text="上传参赛视频"
-                    android:textSize="@dimen/smalltext" />
+	<!--<ImageView-->
+                <!--android:id="@+id/iv_titlepic"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:contentDescription="@null"-->
+                <!--android:src="@drawable/icon_sc"    android:padding="5.0dip" -->
+                <!--android:layout_marginTop="5dp"-->
+           <!--&gt;-->
+            <!--</ImageView>-->
+            <!--<com.greattone.greattone.widget.MyTextView-->
+                    <!--android:id="@+id/tv_titlepic"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="10.0dip"-->
+                    <!--android:layout_marginStart="10.0dip"-->
+                    <!--android:drawablePadding="5.0dip"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="上传参赛视频"-->
+                    <!--android:textSize="@dimen/smalltext" />-->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

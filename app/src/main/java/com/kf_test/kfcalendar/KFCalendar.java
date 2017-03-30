@@ -1,12 +1,5 @@
 package com.kf_test.kfcalendar;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -29,6 +22,13 @@ import android.widget.ViewFlipper;
 import com.greattone.greattone.R;
 import com.kf_test.kfcalendar.CalendarListener.MonthChangeListener;
 import com.kf_test.kfcalendar.CalendarListener.OnDateClickListener;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class KFCalendar extends LinearLayout {
 	private  int jumpMonth = 0; // 每次滑动，增加或减去一个月,默认为0（即显示当前月）
@@ -276,8 +276,6 @@ public class KFCalendar extends LinearLayout {
 	 * 将dip或dp值转换为px值，保证尺寸大小不变
 	 * 
 	 * @param dipValue
-	 * @param scale
-	 *            （DisplayMetrics类中属性density）
 	 * @return
 	 */
 	public int dip2px(float dipValue) {
@@ -296,7 +294,6 @@ public class KFCalendar extends LinearLayout {
 
 	/**
 	 * 日期选择监听
-	 * @param changeListener
 	 */
 	public void setOnDateClickListener(OnDateClickListener onDateClickListener) {
 		this.onDateClickListener = onDateClickListener;

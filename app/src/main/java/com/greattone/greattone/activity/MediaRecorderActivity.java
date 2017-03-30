@@ -28,6 +28,9 @@ import com.greattone.greattone.util.FileUtil;
 import java.io.File;
 import java.io.IOException;
 
+/***
+ * 自定义相机
+ */
 @SuppressWarnings("deprecation")
 public class MediaRecorderActivity extends BaseActivity implements Callback {
 	private SurfaceView surfaceView;

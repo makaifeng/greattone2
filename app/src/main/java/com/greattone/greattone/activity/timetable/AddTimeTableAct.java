@@ -138,7 +138,11 @@ private static final int Result_student=3;
                              AddTimeTableAct.this.day=day;
                              AddTimeTableAct.this.hour=hour;
                              AddTimeTableAct.this.minute=minute;
-                             tv_starttime.setText(time);
+                             if (hour<8||hour>20) {
+                                 toast("开始时间不正确，发布课表时间段为8:00-20:00");
+                             }else {
+                                 tv_starttime.setText(time);
+                             }
                          }
                      });
                      break;
@@ -150,12 +154,16 @@ private static final int Result_student=3;
                      MyTimePickerPopWindow.showHourPopupWindow(context, new MyTimePickerPopWindow.OnHourSureListener() {
                          @Override
                          public void onHourSure(int mHour, int mMins) {
-                             if (mHour>hour||(mHour==hour&&mMins>minute)){
-                                 String xHour=mHour<10?"0"+mHour:""+mHour;
-                                 String  xMins=mMins<10?"0"+mMins:""+mMins;
-                                 tv_stoptime.setText(xHour+":"+xMins);
+                             if (mHour<8||mHour>20||(mHour==20&&mMins!=0)) {
+                                 toast("结束时间不正确，发布课表时间段为8:00-20:00");
                              }else {
-                                 toast("结束时间不能小于开始时间");
+                                 if (mHour > hour || (mHour == hour && mMins > minute)) {
+                                     String xHour = mHour < 10 ? "0" + mHour : "" + mHour;
+                                     String xMins = mMins < 10 ? "0" + mMins : "" + mMins;
+                                     tv_stoptime.setText(xHour + ":" + xMins);
+                                 } else {
+                                     toast("结束时间不能小于开始时间");
+                                 }
                              }
                          }
                      });

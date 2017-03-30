@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.activity.LoginActivity;
 import com.greattone.greattone.activity.MainActivity;
 import com.greattone.greattone.activity.chat.MyChatActivity;
-import com.greattone.greattone.activity.personal.DirectoryActivity;
+import com.greattone.greattone.activity.personal.DirectoryActivity2;
 import com.greattone.greattone.activity.qa.MyQAActivity;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.data.Data;
@@ -83,7 +83,7 @@ public class MyJPushReceiver extends BroadcastReceiver {
                         } else if (message2.getType().equals("QAHd")) {// qa问答
                             toQA(context, 3);
                         } else if (message2.getType().equals("feed")) {// 关注
-                            Intent i = new Intent(context, DirectoryActivity.class);
+                            Intent i = new Intent(context, DirectoryActivity2.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                     | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(i);

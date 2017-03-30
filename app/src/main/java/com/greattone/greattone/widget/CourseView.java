@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.greattone.greattone.Enum.EnumTime;
+import com.greattone.greattone.R;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.entity.TimeTable_Day;
 
@@ -24,7 +25,7 @@ import java.util.List;
             */
     public class CourseView extends View {
         private  String TAG="CourseView";
-        private String textTime[]=new String[]{"8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00"};
+        private String textTime[]=new String[]{"8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"};
         EnumSet<EnumTime> currEnumSet = EnumSet.allOf(EnumTime.class);
         private int width;
         private int height;
@@ -103,6 +104,8 @@ import java.util.List;
                  sPosition=enumTime.getTime().equals(courseList.get(i).getStarttime())?enumTime.getPosition():sPosition;
                 ePosition=enumTime.getTime().equals(courseList.get(i).getStoptime())?enumTime.getPosition():ePosition;
             }
+            if (ePosition==0) continue;
+            if (sPosition>textTime.length*4) continue;
              courseY=(int)(linePadding+sPosition* mheight);
              courseEndY=(int)(linePadding+ePosition* mheight);
 
@@ -134,7 +137,7 @@ import java.util.List;
         }else{
             if (Data.myinfo.getUsername().equals(TimeCouse.getStuname())){
                 name=TimeCouse.getStuname();
-            }else { name="有课";}
+            }else { name=getContext().getResources().getString(R.string.already_bespoke);}
         }
 
          textPaint=new Paint();
@@ -166,7 +169,6 @@ import java.util.List;
      * @param canvas
      */
     private void drawCourseBackground(Canvas canvas,int state) {
-
         cRect=new RectF();
         cRect.set(courseX,courseY,courseEndX,courseEndY);
         Paint coursePaint=new Paint();

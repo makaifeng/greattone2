@@ -18,8 +18,8 @@ android {
         applicationId "com.greattone.greattone"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 19
-        versionName "3.11.2"
+        versionCode 21
+        versionName "3.11.4"
         multiDexEnabled true
         buildConfigField "boolean", "TINKER_ENABLE", "${tinkerEnable}"
     }

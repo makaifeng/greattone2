@@ -229,7 +229,7 @@ private int history;
 				}else {//海选报名
 					if (haiXuan.getClassid().equals("32")) {//中华好琴声
 						intent.setClass(context, ApplyActivity.class);
-					}else if (haiXuan.getClassid().equals("33")) {//音乐精灵
+					}else if (haiXuan.getClassid().equals("33")) {//斗琴擂台
 						intent.setClass(context, ApplyActivity2.class);
 					}else if (haiXuan.getClassid().equals("34")) {//好琴师
 						intent.setClass(context, ApplyActivity3.class);

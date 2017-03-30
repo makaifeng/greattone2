@@ -1,7 +1,6 @@
 package com.greattone.greattone.activity.haixuan_and_activitise;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,14 +14,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONException;
 import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
@@ -34,22 +29,16 @@ import com.greattone.greattone.activity.BaseActivity;
 import com.greattone.greattone.activity.UpdateVideoAct;
 import com.greattone.greattone.adapter.PostGridAdapter;
 import com.greattone.greattone.data.Data;
-import com.greattone.greattone.dialog.MyIosDialog;
-import com.greattone.greattone.dialog.MyIosDialog.DialogItemClickListener;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.HaiXuanFilter;
-import com.greattone.greattone.entity.Label;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.Picture;
-import com.greattone.greattone.util.BitmapUtil;
-import com.greattone.greattone.util.DisplayUtil;
 import com.greattone.greattone.util.FileUtil;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.util.Permission;
 import com.greattone.greattone.util.PhotoUtil;
 import com.greattone.greattone.util.UpdateObjectToOSSUtil;
-import com.greattone.greattone.widget.CheckBoxListView;
 import com.greattone.greattone.widget.MyGridView;
 import com.kf_test.picselect.GalleryActivity;
 
@@ -81,12 +70,12 @@ Map<String , List<String>> map=new HashMap<String, List<String>>();
 private String bitype;
 int baotype;
 private RadioGroup radiogroup;
-private EditText et_desc;
+private EditText et_desc,et_phone;
 private View ll_desc;
 private TextView tv_upload;
-private ImageView iv_titlepic;
-private TextView tv_titlepic;
-private CheckBoxListView cl_content;
+//private ImageView iv_titlepic;
+//private TextView tv_titlepic;
+//private CheckBoxListView cl_content;
 public static HaiXuanFilter haiXuanFilter = new HaiXuanFilter();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +84,10 @@ public static HaiXuanFilter haiXuanFilter = new HaiXuanFilter();
 		this.id = getIntent().getStringExtra("id");
 		this.price = getIntent().getStringExtra("price");
 		this.bitype = getIntent().getStringExtra("bitype");//货币类型
-String		type = getIntent().getStringExtra("baotype");//报名上传类型
+		String	type = getIntent().getStringExtra("baotype");//报名上传类型
 		 baotype= getBaoType(type);//报名上传类型
 		initView();
-		getGroup();
+//		getGroup();
 	}
 		
 
@@ -113,17 +102,18 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 //		ll_game_area=findViewById(R.id.ll_apply_game_area);
 //		ll_game_area	.setOnClickListener(lis);
 		findViewById(R.id.activity_apply_commit).setOnClickListener(lis);
-		this.cl_content = ((CheckBoxListView) findViewById(R.id.cl_content));
+		this.et_phone = ((EditText) findViewById(R.id.activity_apply_phone));
+//		this.cl_content = ((CheckBoxListView) findViewById(R.id.cl_content));
 		this.et_name = ((EditText) findViewById(R.id.activity_apply_name));
 		this.et_company = ((EditText) findViewById(R.id.activity_apply_company));
 		this.tv_upload = ((TextView) findViewById(R.id.activity_apply_upload));
-		this.iv_titlepic = ((ImageView) findViewById(R.id.iv_titlepic));
-		LayoutParams params =(LayoutParams) iv_titlepic.getLayoutParams();
-		params.width=	(screenWidth - DisplayUtil.dip2px(context, 10)) / 4;
-		params.height=	(screenWidth - DisplayUtil.dip2px(context, 10)) / 4;
-		iv_titlepic.setLayoutParams(params);
-		iv_titlepic.setOnClickListener(lis);
-		this.tv_titlepic = ((TextView) findViewById(R.id.tv_titlepic));
+//		this.iv_titlepic = ((ImageView) findViewById(iv_titlepic));
+//		LayoutParams params =(LayoutParams) iv_titlepic.getLayoutParams();
+//		params.width=	(screenWidth - DisplayUtil.dip2px(context, 10)) / 4;
+//		params.height=	(screenWidth - DisplayUtil.dip2px(context, 10)) / 4;
+//		iv_titlepic.setLayoutParams(params);
+//		iv_titlepic.setOnClickListener(lis);
+//		this.tv_titlepic = ((TextView) findViewById(tv_titlepic));
 		this.tv_price = ((TextView) findViewById(R.id.activity_apply_paymoney));
 		this.ll_desc = ( findViewById(R.id.ll_desc));
 		this.et_desc = ((EditText) findViewById(R.id.et_desc));
@@ -131,21 +121,21 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 
 		initViewData();
 	}
-/**
- * 构建乐器分类选择框
- */
-	private void addlist() {
-		List<String> mList=JSON.parseArray(	 JSON.parseObject(haiXuanFilter.getGroup()).getString("乐器品牌"),String.class);
-		List<Label> labelList=new ArrayList<Label>();
-		for (String string : mList) {
-		Label label=new Label();
-		label.setTitle(string);
-		label.setIscheck(false);
-		labelList.add(label);
-		}
-		cl_content.setList(labelList);
-		
-	}
+///**
+// * 构建乐器分类选择框
+// */
+//	private void addlist() {
+//		List<String> mList=JSON.parseArray(	 JSON.parseObject(haiXuanFilter.getGroup()).getString("乐器品牌"),String.class);
+//		List<Label> labelList=new ArrayList<Label>();
+//		for (String string : mList) {
+//		Label label=new Label();
+//		label.setTitle(string);
+//		label.setIscheck(false);
+//		labelList.add(label);
+//		}
+//		cl_content.setList(labelList);
+//
+//	}
 
 
 	private void initViewData() {
@@ -169,10 +159,8 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
  */
 	private void showUpdateVideo() {
 		isShowPic=false;
-		ll_desc.setVisibility(View.GONE);
-		tv_upload.setText("上传参赛视频");
-		tv_titlepic.setText("标题图片");
-		et_desc.setHint("视频描述");
+		tv_upload.setText("上传品牌视频");
+//		tv_titlepic.setText("标题图片");
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_VIDEO,1);
 		gv_pic.setAdapter(adapter);
 	}
@@ -181,10 +169,8 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 	 */
 	private void showUpdatePicture() {
 		isShowPic=true;
-		ll_desc.setVisibility(View.VISIBLE);
-		tv_upload.setText("上传内容图片");
-		tv_titlepic.setText("标题图片");
-		et_desc.setHint("图片描述");
+		tv_upload.setText("上传品牌图片");
+//		tv_titlepic.setText("标题图片");
 		adapter=new PostGridAdapter(context, GalleryActivity.TYPE_PICTURE,9);
 		gv_pic.setAdapter(adapter);
 	}
@@ -197,20 +183,20 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 			case R.id.activity_apply_commit://提交
 				submiitData();
 				break;
-			case R.id.iv_titlepic://标题图片
-				MyIosDialog.ShowBottomDialog(context, "", new String[] { "拍照", "相册" },
-						new DialogItemClickListener() {
-
-							@Override
-							public void itemClick(String result, int position) {
-								if (result.equals("拍照")) {
-									toCamera();
-								} else if (result.equals("相册")) {
-									toAlbum();
-								}
-							}
-						});
-				break;
+//			case R.id.iv_titlepic://标题图片
+//				MyIosDialog.ShowBottomDialog(context, "", new String[] { "拍照", "相册" },
+//						new DialogItemClickListener() {
+//
+//							@Override
+//							public void itemClick(String result, int position) {
+//								if (result.equals("拍照")) {
+//									toCamera();
+//								} else if (result.equals("相册")) {
+//									toAlbum();
+//								}
+//							}
+//						});
+//				break;
 //			case R.id.ll_apply_game_area://乐器分类
 //				  final List<String> mList1=		JSON.parseArray(	 JSON.parseObject(haiXuanFilter.getGroup()).getString("乐器品牌"),String.class);
 //				NormalPopuWindow		popu1 = new NormalPopuWindow(context, mList1,
@@ -251,6 +237,7 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 	protected void submiitData() {
 		String name = et_name.getText().toString().trim();
 		String company = et_company.getText().toString().trim();
+		String phone = et_phone.getText().toString().trim();
 		String desc = et_desc.getText().toString().trim();
 		 fileList = adapter.getList();
 		if (TextUtils.isEmpty(name)) {
@@ -261,22 +248,30 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 			toast("请输入创立国家");
 			return;
 		}
-		List<String> mlist=cl_content.getCheckList();
-		if (mlist==null||mlist.size()==0) {
-			toast("请选择分类");
+//		List<String> mlist=cl_content.getCheckList();
+//		if (mlist==null||mlist.size()==0) {
+//			toast("请选择分类");
+//			return;
+//		}
+		if (TextUtils.isEmpty(phone)) {
+			toast(getResources().getString(R.string.请输入手机号));
 			return;
 		}
-		String game_area=cl_content.getCheckList("|");
+//		String game_area=cl_content.getCheckList("|");
 		if (isShowPic&&TextUtils.isEmpty(desc)) {
-			toast("请填写图片描述");
+			toast("请填写品牌描述");
 			return;
 		}
 		if (fileList.size()==0) {
-			toast(getResources().getString(R.string.请选择上传视频));
+			if (isShowPic){
+				toast("请选择品牌图片");
+			}else {
+				toast(getResources().getString(R.string.请选择上传视频));
+			}
 			return;
 		}
 		 filepass = System.currentTimeMillis() + "";
-		 String [] msg={name,company,game_area,desc};
+		 String [] msg={name,company,phone,desc};
 		updateObjectToOSSUtil= UpdateObjectToOSSUtil.getInstance();
 		pd=new ProgressDialog(context);
 		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -306,14 +301,14 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 		updateMap.put("classid", "104");
 		updateMap.put("bao_type", "3");// 海选
 		updateMap.put("hai_id", id);
-		updateMap.put("hai_name", msg[0]);// 选手姓名
-		updateMap.put("hai_phone",msg[1]);// 联系电话
-		updateMap.put("hai_address", msg[2]);// 详细地址
-		updateMap.put("hai_petition", msg[3]);// 参赛曲目
-		updateMap.put("hai_division", msg[4]);// 比赛赛区
-		updateMap.put("hai_grouping",msg[5]);//选择分组1
-		updateMap.put("hai_grouping2",msg[6]);//选择分组2
-		updateMap.put("smalltext",msg[7]);//图片描述
+		updateMap.put("hai_name", msg[0]);//品牌名称
+		updateMap.put("hai_address", msg[1]);//创立国家
+		updateMap.put("hai_phone",msg[2]);// 联系电话
+//		updateMap.put("hai_petition", msg[2]);// 乐器分类:
+		updateMap.put("hai_division", msg[3]);//品牌描述:
+//		updateMap.put("hai_grouping",msg[5]);//选择分组1
+//		updateMap.put("hai_grouping2",msg[6]);//选择分组2
+//		updateMap.put("smalltext",msg[7]);//图片描述
 		updateMap.put("filepass",filepass);
 		updateMap.put("loginuid", Data.user.getUserid());
 		updateMap.put("logintoken", Data.user.getToken());
@@ -324,13 +319,14 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 	 */
 	private void updatePic() {
 		pd.setMessage("上传第"+(num+1)+"张");
-		String path;
-		if (num==0){
-			path=filePath;
-		}else {
-			path= fileList.get(num-1).getPicUrl();
-		}
-//		String path= fileList.get(num).getPicUrl();
+//		String path;
+//		if (num==0){
+//			path=filePath;
+//		}else {
+//			path= fileList.get(num-1).getPicUrl();
+//		}
+
+		String path= fileList.get(num).getPicUrl();
 		updateObjectToOSSUtil.uploadImage_folder(context,path, new UpdateListener() {
 			@Override
 			public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
@@ -344,10 +340,11 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 				if (num==0){
 					updateMap.put("hai_photo",pic);// 标题图片
 				}else{
-					photos=photos+pic+"::::::";
+//					photos=photos+pic+"::::::";
 				}
+				photos=photos+pic+"::::::";
 				num++;
-				if (num==fileList.size()+1) {
+				if (num==fileList.size()) {
 					post1();
 				}else {
 					Message.obtain(handler,0).sendToTarget();
@@ -417,9 +414,9 @@ String		type = getIntent().getStringExtra("baotype");//报名上传类型
 			.putString("updateHai_petition",  msg[0])//品牌名称
 			.putString("updateHai_address",  msg[1])//创立国家
 			.putString("updateHai_age",   "")//创立年份
-			.putString("updateHai_phone","")//联系电话
+			.putString("updateHai_phone",  msg[2])//联系电话
 			.putString("updateHai_division",   "")//
-			.putString("updatepPintype",   msg[2])//乐器分类
+			.putString("updatepPintype","" )//乐器分类
 			.putString("updateHai_mend",   "")//清空
 			.putString("updateHai_piano",   "")//清空
 			.putString("updateHai_grouping",   "")//清空
@@ -513,27 +510,27 @@ private boolean isHave(String[] s,String str){
 	return false;
 }
 /**获取分组*/
-private void getGroup() {
-MyProgressDialog.show(context);
-HashMap<String, String> localHashMap = new HashMap<String, String>();
-localHashMap.put("api", "extend/haixuanType");
-localHashMap.put("titleid", id);
-addRequest(HttpUtil.httpConnectionByPost(context, localHashMap,
-		new ResponseListener() {
-
-			@Override
-			public void setResponseHandle(Message2 message) {
-				MyProgressDialog.Cancel();
-				try {
-					haiXuanFilter = JSON.parseObject(
-						message.getData(), HaiXuanFilter.class);
-					addlist();
-				} catch (JSONException e) {
-				}
-			}
-		}, null));
-	
-}
+//private void getGroup() {
+//MyProgressDialog.show(context);
+//HashMap<String, String> localHashMap = new HashMap<String, String>();
+//localHashMap.put("api", "extend/haixuanType");
+//localHashMap.put("titleid", id);
+//addRequest(HttpUtil.httpConnectionByPost(context, localHashMap,
+//		new ResponseListener() {
+//
+//			@Override
+//			public void setResponseHandle(Message2 message) {
+//				MyProgressDialog.Cancel();
+//				try {
+//					haiXuanFilter = JSON.parseObject(
+//						message.getData(), HaiXuanFilter.class);
+//					addlist();
+//				} catch (JSONException e) {
+//				}
+//			}
+//		}, null));
+//
+//}
 /***
  * 去拍照
  */
@@ -587,15 +584,22 @@ public void onRequestPermissionsResult(int requestCode, String[] permissions, in
 		}
 	}
 }
-@Override
-public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	super.onActivityResult(requestCode, resultCode, data);
-	if (resultCode == Activity.RESULT_OK) {
-		if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
-			 filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
-		} else if (requestCode == PhotoUtil.ALBUM) {// 相册
-			 filePath = BitmapUtil.getFileFromALBUM(context, data);
-		}
-	}
-}
+//@Override
+//public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//	super.onActivityResult(requestCode, resultCode, data);
+//	if (resultCode == Activity.RESULT_OK) {
+//		if (requestCode == PhotoUtil.PHOTOGRAPH) {// 拍照
+//			 filePath = FileUtil.getLocalImageFile(context) + "/" + "icon.png";
+//		} else if (requestCode == PhotoUtil.ALBUM) {// 相册
+//			 filePath = BitmapUtil.getFileFromALBUM(context, data);
+//		}
+////		String picpath="";
+////		if (Build.VERSION.SDK_INT>Build.VERSION_CODES.N){
+////			picpath=filePath;
+////		}else {
+////
+////		}
+//		ImageLoaderUtil.getInstance().setImagebyurl(filePath,iv_titlepic);
+//	}
+//}
 }
