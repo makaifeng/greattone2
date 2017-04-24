@@ -155,7 +155,11 @@ private TextView tv_WX;
 		// 判断输了的数据是否正确
 		if (textCanUse()) {
 			// Login();
-			new LoginProxy().Login(this, name, password,0);
+			LoginProxy loginProxy=new LoginProxy();
+			loginProxy.setData(getIntent().getStringExtra("type"),getIntent().getIntExtra("id",0)
+					,getIntent().getIntExtra("classid",0),getIntent().getStringExtra("username"));
+			loginProxy.Login(this, name, password,0);
+
 //			Login2();
 		}
 

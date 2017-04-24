@@ -300,8 +300,9 @@ public class MainActivity extends BaseActivity {
 			toast(getResources().getString(R.string.click_again_from_exit));
 			exitTime = System.currentTimeMillis();
 		} else {
-			finish();
 			System.exit(0);// 关闭整个程序
+			finish();
+
 		}
 	}
 

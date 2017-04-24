@@ -194,8 +194,7 @@ public class MyBanner extends RelativeLayout {
 
 			// 给 container 添加一个view
 			try {
-				container
-						.removeView(imageList.get(position % imageList.size()));
+				container.removeView(imageList.get(position % imageList.size()));
 				container.addView(imageList.get(position % imageList.size()));
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -235,8 +235,8 @@ public class BrandDetailActivity extends BaseActivity {
 			focus.setText(getResources().getString(R.string.已关注) );
 		}
 		if (people.getCked()== 1) {
-			Drawable right=context.getResources().getDrawable(R.drawable.icon_v);
-			right.setBounds(0, 0, DisplayUtil.dip2px(context, 15), DisplayUtil.dip2px(context, 15));
+			Drawable right=context.getResources().getDrawable(R.drawable.vip);
+			right.setBounds(0, 0, DisplayUtil.dip2px(context, 55), DisplayUtil.dip2px(context, 20));
 			name.setCompoundDrawablePadding( DisplayUtil.dip2px(context, 5));
 			name.setCompoundDrawables(null, null, right, null);
 		} else {

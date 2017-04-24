@@ -26,6 +26,8 @@ public class MyApplication extends Application {
 public void onCreate() {
 	super.onCreate();
 	myApplication=this;
+	CrashHandler handler = CrashHandler.getInstance();  //异常捕获
+	handler.init(this);
 	if (BuildConfig.TINKER_ENABLE) {
 		// 我们可以从这里获得Tinker加载过程的信息
 		tinkerApplicationLike = TinkerPatchApplicationLike.getTinkerPatchApplicationLike();
@@ -51,8 +53,7 @@ public void onCreate() {
 	AppEventsLogger.activateApp(this);
 	
 	
-	 CrashHandler handler = CrashHandler.getInstance();  //异常捕获
-	    handler.init(this);
+
 }
 
 public static MyApplication getInstance() {

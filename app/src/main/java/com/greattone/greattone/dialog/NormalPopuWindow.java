@@ -1,10 +1,5 @@
 package com.greattone.greattone.dialog;
 
-import java.util.List;
-
-import com.greattone.greattone.R;
-import com.greattone.greattone.adapter.NormalPopuWindowsAdapter;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -13,6 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+
+import com.greattone.greattone.R;
+import com.greattone.greattone.adapter.NormalPopuWindowsAdapter;
+
+import java.util.List;
 
 public class NormalPopuWindow {
 	private NormalPopuWindowsAdapter adapter;
@@ -66,8 +66,8 @@ public class NormalPopuWindow {
 		// localListView.setLayoutParams(localLayoutParams);
 		this.popu = new PopupWindow(localView1, paramView.getWidth(),-2);
 		this.popu.setFocusable(true);
-		this.popu.setBackgroundDrawable(new ColorDrawable(
-				android.R.color.transparent));
+		this.popu.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(
+				android.R.color.transparent)));
 		this.popu.setOutsideTouchable(true);
 
 	}

@@ -443,7 +443,7 @@ public class PersonalCenterFragment extends BaseFragment {
 							});
 				}
 			});
-			TextView sign = (TextView) convertView.findViewById(R.id.tv_sign);// 等级
+			TextView sign = (TextView) convertView.findViewById(R.id.tv_sign);// 认证
 			TextView identity = (TextView) convertView.findViewById(R.id.tv_identity);// 身份
 			TextView level = (TextView) convertView.findViewById(R.id.tv_level);// 等级
 			// ImageView level2 = (ImageView) convertView

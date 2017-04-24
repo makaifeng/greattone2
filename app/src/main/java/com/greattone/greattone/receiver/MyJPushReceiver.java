@@ -14,6 +14,7 @@ import com.greattone.greattone.activity.LoginActivity;
 import com.greattone.greattone.activity.MainActivity;
 import com.greattone.greattone.activity.chat.MyChatActivity;
 import com.greattone.greattone.activity.personal.DirectoryActivity2;
+import com.greattone.greattone.activity.plaza.PlazaMusicDetailsActivity;
 import com.greattone.greattone.activity.qa.MyQAActivity;
 import com.greattone.greattone.data.Constants;
 import com.greattone.greattone.data.Data;
@@ -66,13 +67,14 @@ public class MyJPushReceiver extends BroadcastReceiver {
 			// 用户点击打开了通知
 		} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
 				.getAction())) {
-			// Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
+//			 Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
+//			Log.d(TAG, bundle.getString(JPushInterface.EXTRA_EXTRA));
 			if (bundle.getString(JPushInterface.EXTRA_EXTRA).startsWith("{")) {
 				try {
 					JPushMessage message2 = JSON.parseObject(
                             bundle.getString(JPushInterface.EXTRA_EXTRA),
                             JPushMessage.class);
-					if (islogin(context)) {//是否登录
+					if (islogin(context,message2)) {//是否登录
                         if (message2.getType().equals("chating")) {// 聊天信息
                             toChat(context, message2);
                         } else if (message2.getType().equals("QAAsk")
@@ -86,6 +88,14 @@ public class MyJPushReceiver extends BroadcastReceiver {
                             Intent i = new Intent(context, DirectoryActivity2.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                     | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            context.startActivity(i);
+                        } else if (message2.getType().equals("pinglun")) {// 评论
+                            Intent i = new Intent(context, PlazaMusicDetailsActivity.class);
+							i.putExtra("id",Integer.valueOf(message2.getId()));
+							i.putExtra("classid",Integer.valueOf(message2.getClassid()));
+//							intent.putExtra("videourl", blogsList.get(position).getShipin());
+							i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+									| Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(i);
                         }
                     }
@@ -114,9 +124,13 @@ public class MyJPushReceiver extends BroadcastReceiver {
 	}
 
 
-	private boolean islogin(Context context) {
+	private boolean islogin(Context context, JPushMessage message2) {
 		if (Data.myinfo.getUsername()==null) {
 			Intent i = new Intent(context, LoginActivity.class);
+			i.putExtra("type",message2.getType());
+			i.putExtra("id",Integer.valueOf(message2.getId()));
+			i.putExtra("classid",Integer.valueOf(message2.getClassid()));
+			i.putExtra("username",message2.getUsername());
 //			i.putExtra("class", "");
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 					| Intent.FLAG_ACTIVITY_CLEAR_TOP);

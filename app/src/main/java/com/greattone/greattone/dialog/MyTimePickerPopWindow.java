@@ -131,7 +131,7 @@ public class MyTimePickerPopWindow {
 		wv_hours.setCurrentItem(hours);
 
 		MinutesAdapter adapter =new MinutesAdapter(
-				0, 45,10);
+				0, 45,15);
 
 	int	textSize = (height / 140) * 4;
 		wv_hours.TEXT_SIZE = textSize;

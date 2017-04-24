@@ -70,7 +70,7 @@ public class HaiXuanVoteActivity extends BaseActivity {
 //				startActivityForResult(getIntent().setClass(context, SearchAct.class), 0);
 //			}
 //		});
-		if (!pclassid.equals("33")) {
+		if (pclassid.equals("32")) {
 			setOtherText("筛选", new OnClickListener() {
 	
 				@Override

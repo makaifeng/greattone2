@@ -14,7 +14,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.sdk.android.oss.ClientException;
@@ -57,6 +60,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 注册
@@ -138,6 +143,7 @@ boolean isCommit;
 		iv_icon.setOnClickListener(lis);
 		et_name = (EditText) rootView.findViewById(R.id.et_name);
 		et_name.setOnFocusChangeListener(onFocusChangeListener);
+		et_name.addTextChangedListener(textWatcher);
 		et_password = (EditText) rootView.findViewById(R.id.et_password);
 		et_password.setOnFocusChangeListener(onFocusChangeListener);
 		et_double_password = (EditText) rootView
@@ -168,6 +174,8 @@ boolean isCommit;
 
 		tv_sure = (TextView) rootView.findViewById(R.id.tv_sure);
 		tv_sure.setOnClickListener(lis);
+
+
 		initGroupView();
 	}
 
@@ -176,7 +184,27 @@ boolean isCommit;
 		this.groupid = groupid;
 //		initGroupView();
 	}
+	TextWatcher textWatcher=new TextWatcher() {
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			String regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+			Pattern p = Pattern.compile(regEx);
+			Matcher m = p.matcher(s);
+			if( m.find()){
+				Toast.makeText(context, "姓名不允许输入特殊符号！", Toast.LENGTH_LONG).show();
+			}
+		}
+	};
 	/** 加载各种身份的界面 */
 	private void initGroupView() {
 		et_name.setText("");
@@ -530,7 +558,19 @@ boolean isCommit;
 
 	/** 获取验证码 */
 	protected void getCode() {
-		String str1 = this.et_phone_num.getText().toString();
+		username = this.et_name.getText().toString().trim();
+		String str1 = this.et_phone_num.getText().toString().trim();
+		if (TextUtils.isEmpty(username)) {
+			if (groupid == 4) {
+				toast(getResources().getString(R.string.请输入机构名称));
+			} else if (groupid == 5) {
+				toast("请输入品牌名称");
+			} else {
+				toast(getResources().getString(R.string.请输入真实姓名));
+			}
+			et_name.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));
+			return;
+		}
 		if (TextUtils.isEmpty(str1)) {
 			toast(getResources().getString(R.string.请输入手机号));
 			et_phone_num.setBackgroundDrawable(getResources().getDrawable(R.drawable.login_border_error));

@@ -212,7 +212,7 @@ private void initView() {
 			LocationUtil.stop();
 		}
 	};
-
+boolean isToLogin;
 	/**
 	 * 跳转到主页面
 	 */
@@ -227,7 +227,10 @@ private void initView() {
 				isToMain=true;
 				finishActivity();
 			}else{
-				new LoginProxy().Login(this, name, password,1);
+				if (!isToLogin) {//只进一次登录
+					isToLogin = true;
+					new LoginProxy().Login(this, name, password, 1);
+				}
 			}
 		}
 	

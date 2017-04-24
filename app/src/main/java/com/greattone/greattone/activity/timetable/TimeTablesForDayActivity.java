@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.greattone.greattone.R;
 import com.greattone.greattone.activity.BaseActivity;
+import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.entity.Message2;
 import com.greattone.greattone.entity.TimeTable_Day;
@@ -76,7 +77,15 @@ public class TimeTablesForDayActivity extends BaseActivity {
         courseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                startActivityForResult(new Intent(context,TimeTableDetailAct.class).putExtra("id",courseList.get(position).getId()).putExtra("userid",userid),1);
+                if (userid==null) {
+                    startActivityForResult(new Intent(context, TimeTableDetailAct.class).putExtra("id", courseList.get(position).getId()).putExtra("userid", userid), 1);
+                }else {
+                    if (Data.myinfo.getUsername().equals(courseList.get(position).getStuname())){
+                        startActivityForResult(new Intent(context, TimeTableDetailAct.class).putExtra("id", courseList.get(position).getId()).putExtra("userid", userid), 1);
+                    }else {
+                        toast("不是自己的课程，无法查看");
+                    }
+                }
 //                Toast.makeText(context,courseList.get(position).getCouname(),Toast.LENGTH_SHORT).show();
             }
         });

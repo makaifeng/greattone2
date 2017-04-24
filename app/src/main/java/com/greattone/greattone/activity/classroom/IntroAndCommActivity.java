@@ -1,9 +1,5 @@
 package com.greattone.greattone.activity.classroom;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +23,10 @@ import com.greattone.greattone.entity.TeacherComment;
 import com.greattone.greattone.util.HttpUtil;
 import com.greattone.greattone.util.HttpUtil.ResponseListener;
 import com.greattone.greattone.widget.MyListView;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 /**介绍评论*/
 public class IntroAndCommActivity extends BaseActivity {
 
@@ -94,12 +94,12 @@ public class IntroAndCommActivity extends BaseActivity {
 		if (type.equals("classroom")) {
 //			radioButton1.setText("教室介绍");
 //			radioButton2.setText("教室评论");
-			setHead(getResources().getString(R.string.教室评论), true, true);
+			setHead("琴行介绍", true, true);
 			ll_comment_rating3.setVisibility(View.VISIBLE);
 		} else {
 //			radioButton1.setText("老师介绍");
 //			radioButton2.setText("老师评论");
-			setHead(getResources().getString(R.string.老师评论), true, true);
+			setHead("老师介绍", true, true);
 			ll_comment_rating3.setVisibility(View.GONE);
 		}
 		radiogroup.setOnCheckedChangeListener(listener);

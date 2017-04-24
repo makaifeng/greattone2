@@ -1,7 +1,5 @@
 package com.greattone.greattone.dialog;
 
-import com.greattone.greattone.R;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,6 +10,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.greattone.greattone.R;
 
 public class MyProgressDialog {
 	Dialog dialog;
@@ -47,11 +47,18 @@ public class MyProgressDialog {
 	}
 
 	private static void show() {
-		if (progressDialog.dialog.isShowing()) {
-			return;
-		}
-		progressDialog.isshow=true;
+		try {
+			if (progressDialog.dialog.isShowing()) {
+                return;
+            }
+			if (progressDialog.isshow) {
+                return;
+            }
+			progressDialog.isshow=true;
 			progressDialog.dialog.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static MyProgressDialog show(Context context) {

@@ -237,7 +237,6 @@ import java.util.List;
                         return true;
                     }
                 }
-
         }
         return super.onTouchEvent(event);
     }

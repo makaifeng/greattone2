@@ -36,7 +36,7 @@ public class PayActivity extends BaseActivity {
 	private LinearLayout ll_pay_menth;
 	private String bitype;
 	private TextView tv_hint;
-
+String paytype;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +48,7 @@ public class PayActivity extends BaseActivity {
 		orderId=getIntent().getStringExtra("orderId");
 		bitype=getIntent().getStringExtra("bitype");
 		bitype=bitype==null?"人民币":bitype;
+		paytype=	getIntent().getStringExtra("type");
 		setHead(getResources().getString(R.string.pay), true, true);
 		
 		tv_hint=	(TextView)findViewById(R.id.tv_hint);
@@ -121,8 +122,8 @@ public class PayActivity extends BaseActivity {
 			LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 			map.put("out_trade_no",orderId);
 			String url="";
-			if (getIntent().getStringExtra("type").equals("shangcheng")){//商城订单
-			url=HttpConstants2.SERVER_URL+"/e/appdemo/zhuang2.php";
+			if (paytype!=null&&paytype.equals("shangcheng")){//商城订单
+				url=HttpConstants2.SERVER_URL+"/e/appdemo/zhuang2.php";
 			}else url=HttpConstants2.SERVER_URL+"/e/appdemo/zhuang.php";
 
 
