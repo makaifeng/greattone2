@@ -4,19 +4,22 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.widget.EditText;
 
 import com.greattone.greattone.util.LanguageUtil;
 import com.greattone.greattone.util.Textutil;
 
 
-public class MyEditText extends android.support.v7.widget.AppCompatEditText {
+public class MyEditText extends EditText {
 
 	public MyEditText(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
+
 	}
 
 	private void init() {
+		setEnabled(true);
 		if (LanguageUtil.getLanguage().equals("TW")) {
 			if (getHint()!=null&&getHint()!="") {
 				setHint(Textutil.Sim2Tra(getHint()));
@@ -36,14 +39,6 @@ public class MyEditText extends android.support.v7.widget.AppCompatEditText {
 //			text=Textutil.Sim2Tra(text);
 //		}
 		super.setText(text, type);
-	}
-
-	@Override
-	public Editable getText() {
-//		if (LanguageUtil.getLanguage().equals("TW")) {
-//			return Textutil.Tra2Sim(super.getText());
-//		}
-		return super.getText();
 	}
 
 	TextWatcher mWatcher=new TextWatcher() {

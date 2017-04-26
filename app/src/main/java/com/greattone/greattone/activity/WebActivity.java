@@ -2,6 +2,7 @@ package com.greattone.greattone.activity;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
@@ -15,6 +16,7 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.greattone.greattone.R;
+import com.greattone.greattone.activity.celebrity.CelebrityActivity;
 import com.greattone.greattone.data.Data;
 import com.greattone.greattone.dialog.MyProgressDialog;
 import com.greattone.greattone.dialog.ReplayDialog;
@@ -107,6 +110,7 @@ public class WebActivity extends BaseActivity {
 		// 加载需要显示的网页
 //	 urlPath = "http://www.greattone.net/apple/html/index.html";
 		webview.loadUrl(urlPath);
+		webview.addJavascriptInterface(new JsInteration(this), "android");
 		// 设置Web视图
 		webview.setWebViewClient(new webViewClient());
 //		setWebChromeClient();
@@ -440,5 +444,28 @@ private void getLikes() {
   
         return handleFile;  
   
-    }  
+    }
+
+	public class JsInteration {
+		private Context mContext;
+
+		public JsInteration(Context context) {
+			this.mContext = context;
+		}
+
+		/**
+		 * 在js中调用window.android.toUserCenter(json)，便会触发此方法。
+		 * 此方法名称一定要和js中showInfoFromJava方法一样
+		 *
+		 * @param json
+		 */
+		@JavascriptInterface
+		public void toUserCenter(String json) {
+			String userid = JSON.parseObject(json).getString("userid");
+			Intent intent = new Intent();
+			intent.setClass(context, CelebrityActivity.class);
+			intent.putExtra("id",userid);
+			context.startActivity(intent);
+		}
+	}
 }

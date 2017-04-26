@@ -127,7 +127,7 @@ public class LoginProxy {
 			Intent intent=new Intent(activity, MainActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			activity.startActivity(intent);
-		}
+		}else
 		if (type.equals("chating")) {// 聊天信息
 			Intent i = new Intent(context, MyChatActivity.class);
 			i.putExtra("name", username);

@@ -65,12 +65,12 @@ public class CelebrityActivity extends BaseActivity   {
 
 	private void initView() {
 		setHead(getResources().getString(R.string.personal_space), true, true);//个人空间
-		if (groupid>2||groupid!=5) {
-		ask = (TextView) findViewById(R.id.tv_head_other);
-		ask.setVisibility(View.VISIBLE);
-		ask.setTextSize(13);
-		ask.setText(getResources().getString(R.string.I_need_to_ask_a_question));
-		ask.setOnClickListener(lis);
+		if (groupid>2&&groupid!=5) {
+			ask = (TextView) findViewById(R.id.tv_head_other);
+			ask.setVisibility(View.VISIBLE);
+			ask.setTextSize(13);
+			ask.setText(getResources().getString(R.string.I_need_to_ask_a_question));
+			ask.setOnClickListener(lis);
 		}
 		
 		pull_to_refresh = (PullToRefreshView) findViewById(R.id.pull_to_refresh);//
